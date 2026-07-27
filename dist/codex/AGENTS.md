@@ -169,7 +169,7 @@ Read these when the task touches the stack; do not preload them:
 - API endpoints, services, server code: `agent-rules/reference/backend-api.md`
 - Design, quality, and orchestration references: `agent-rules/reference/`
 
-## Active profile: standard
+The profile below sets the active minimum assurance level. To change it, replace the profile section with the contents of `agent-rules/profiles/prototype.md` or `agent-rules/profiles/regulated.md`.
 
 ## Standard Profile
 
@@ -181,5 +181,3 @@ Use this default for maintained software.
 - Run broad suites only for cross-cutting changes or repository-defined completion gates.
 
 Report verified behavior, checks, compatibility decisions, and remaining risk. A failed, timed-out, skipped, empty, or unavailable relevant check is not a pass.
-
-To change the assurance level, replace the profile section above with the contents of `agent-rules/profiles/prototype.md` or `agent-rules/profiles/regulated.md`.

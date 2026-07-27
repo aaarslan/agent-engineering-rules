@@ -37,8 +37,6 @@ Read these when the task touches the stack; do not preload them:
 - API endpoints, services, server code: `agent-rules/reference/backend-api.md`
 - Design, quality, and orchestration references: `agent-rules/reference/`
 
-## Active profile: standard
+The profile below sets the active minimum assurance level. To change it, replace the profile section with the contents of `agent-rules/profiles/prototype.md` or `agent-rules/profiles/regulated.md`.
 
 {{include:profiles/standard.md}}
-
-To change the assurance level, replace the profile section above with the contents of `agent-rules/profiles/prototype.md` or `agent-rules/profiles/regulated.md`.
