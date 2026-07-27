@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+// DEPRECATED (2.0.0): this 1.x injection hook is no longer part of any
+// install path. Native .claude/rules and .claude/skills replace it; see
+// docs/migration-notes.md. Kept one transition cycle for old setups. It
+// also references the 1.x router layout (AGENTS.md task table), which no
+// longer exists in this repository, so it only works inside a 1.x copy.
+//
 // Mechanical route delivery for Claude Code (UserPromptSubmit hook).
 // Some agents skip routed files even with the router fully in context,
 // especially on small well-specified tasks. This hook removes that

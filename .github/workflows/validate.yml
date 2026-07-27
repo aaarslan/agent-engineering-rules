@@ -1,0 +1,17 @@
+name: validate
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate source corpus
+        run: node tools/validate-source.mjs
+      - name: Validate distributions match source
+        run: node tools/validate-distributions.mjs
