@@ -1,70 +1,48 @@
 # Install
 
-Five minutes, three steps. Works in any repository.
+Copy one generated distribution into your repository root. Both are self-contained; nothing else is required at runtime.
 
-## 1. Get the directory into your repo
+## Claude Code
 
-Any one of these, from your repository root:
+From this repository:
 
-    git clone https://github.com/aaarslan/agent-engineering-rules agent-rules && rm -rf agent-rules/.git
+    cp -R dist/claude/agent-rules dist/claude/.claude <your-repo>/
 
-    git submodule add https://github.com/aaarslan/agent-engineering-rules agent-rules
+Then either use `dist/claude/CLAUDE.md` as your repository's `CLAUDE.md` or append its contents to an existing one.
 
-or download the release zip and unpack it as `agent-rules/`. The folder name is yours to choose; the examples below assume `agent-rules/`.
+What you get, all through native mechanisms:
 
-## 2. Point your agents at it
+- `.claude/rules/core-*.md` — always loaded in every session
+- `.claude/rules/context-*.md` — loaded only when files matching their `paths:` globs are touched; **adjust the globs to your repository's layout**
+- `.claude/rules/profile.md` — the active delivery profile (standard by default; swap the body for `agent-rules/profiles/prototype.md` or `regulated.md`)
+- `.claude/skills/*` — nine task skills, invoked as `/bug-fix` etc. or selected automatically by description
+- `.claude/agents/code-reviewer.md` — read-only review subagent
+- `agent-rules/` — on-demand references, profiles, and utility scripts
 
-Create (or append to) `AGENTS.md` in your repository root:
+Verify: run `/status` and `/context` in a session to confirm the rules loaded, then ask "Which engineering rules apply to a bug fix in this repo?" — the answer should reflect these files, not generic advice.
 
-    ## Agent Engineering Rules
+## Codex (CLI, IDE extension, app)
 
-    Before starting any task, read `agent-rules/AGENTS.md` and load the files its task table routes for the current task. Required context, not optional documentation.
-    Active profile: `agent-rules/profiles/standard.md`.
-    Active canonical contexts: none preselected; select from evidence per the router.
-    Project contexts: none.
-    Treat `agent-rules/` as read-only. Host rules override it except the correctness, security, and data-integrity priorities in `agent-rules/core/priorities.md`.
+From this repository:
 
-Edit two lines to fit your project: the profile (`standard` for maintained software, `prototype` for experiments, `regulated` for compliance-sensitive work) and the contexts line (for example `` `agent-rules/contexts/typescript-react.md` `` for a React app; list what matches your stack, or leave it for the agent to select).
+    cp -R dist/codex/agent-rules dist/codex/.agents <your-repo>/
 
-Codex CLI, Codex Cloud, and other AGENTS.md-reading agents are done at this point.
+Then either use `dist/codex/AGENTS.md` as your repository's `AGENTS.md` or append its contents to an existing one.
 
-## 3. Claude Code wiring
+What you get:
 
-Create (or append to) `CLAUDE.md` in your repository root:
+- `AGENTS.md` — always-loaded root rules, skill index, stack reference pointers, and the active profile (about 10 KB, well under the 32 KiB `project_doc_max_bytes` default)
+- `.agents/skills/*` — nine task skills in the officially documented repo-scoped location, invoked as `$bug-fix` etc. or selected automatically by description
+- `agent-rules/` — on-demand references, profiles, and utility scripts
 
-    @AGENTS.md
-    @agent-rules/AGENTS.md
-
-Recommended: guaranteed delivery. Measurement showed Claude Code often skips rule files even when the router is in context. The included hook injects the routed rules mechanically. Create `.claude/settings.json` in your repository root:
-
-    {
-      "hooks": {
-        "UserPromptSubmit": [
-          {
-            "matcher": "",
-            "hooks": [
-              { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/agent-rules/tools/route-hook.mjs\" 1" },
-              { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/agent-rules/tools/route-hook.mjs\" 2" },
-              { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/agent-rules/tools/route-hook.mjs\" 3" },
-              { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/agent-rules/tools/route-hook.mjs\" 4" }
-            ]
-          }
-        ]
-      }
-    }
-
-## Verify
-
-    node agent-rules/tools/validate-system.mjs
-
-should print `PASS`. Then ask your agent: "Which engineering rules apply to a bug fix in this repo?" It should name files from `agent-rules/`, not generic advice.
+Verify: run `codex --ask-for-approval never "List the instruction sources you loaded."` from your repository root. To disable a skill without deleting it, add a `[[skills.config]]` entry with `enabled = false` in `~/.codex/config.toml`.
 
 ## Agent-driven setup
 
-Alternatively, after step 1, tell your agent: "Adopt the rules in agent-rules/ per its ADOPT.md." It will detect your stack, pick contexts and a profile from evidence, and write the host block itself.
+Alternatively, tell your agent: "Adopt the rules in this repository per its ADOPT.md." See [ADOPT.md](ADOPT.md).
 
-## Troubleshooting
+## Notes
 
-- **The agent ignores the rules.** This is common and measured, not hypothetical. Wire the hook (step 3); prose pointers alone under-deliver on Claude Code.
-- **Too much context loading.** Check that your host block lists only contexts your stack uses; the router is selective by design.
-- **Validator fails after edits.** You edited inside `agent-rules/`; it is read-only by contract. Put project-specific rules in your own files and reference them from your host `AGENTS.md`.
+- Nested instructions: for subdirectories that genuinely need different rules, use nested `CLAUDE.md` (Claude) or `AGENTS.override.md` (Codex). Do not duplicate the root rules there.
+- The 1.x `UserPromptSubmit` route hook is deprecated and no longer part of any install path. It remains at `tools/legacy/route-hook.mjs` for older setups only; native rules and skills replace it.
+- Updating: re-copy only the distribution-owned paths from a newer release, leaving everything else in your repository untouched. Distribution-owned: `agent-rules/`, `.claude/rules/core-*.md`, `.claude/rules/context-*.md`, `.claude/rules/profile.md`, the nine named skill directories under `.claude/skills/` or `.agents/skills/`, and `.claude/agents/code-reviewer.md`. Your own settings, rules, skills, agents, and commands under `.claude/` or `.agents/` are yours; never replace those directories wholesale. Re-apply your glob and profile edits after updating.
