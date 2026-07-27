@@ -12,11 +12,15 @@
 // Wire four hook entries (chunk args 1..4); each stays under the 10k-char
 // context cap. See tools/README.md. Keyword routing is deliberately coarse:
 // wrong matches fall through to the Feature bundle, a superset of Change.
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const CORPUS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+// 1.x installs kept this script at <corpus>/tools/; in the 2.0 repository it
+// lives one level deeper at tools/legacy/. Probe for the corpus root.
+const CORPUS = [path.resolve(HERE, '..'), path.resolve(HERE, '../..')]
+  .find((dir) => existsSync(path.join(dir, 'core'))) ?? path.resolve(HERE, '..');
 const CHUNK_LIMIT = 9000;
 const MAX_CHUNKS = 4;
 const ALWAYS = ['core/priorities.md', 'core/evidence-first.md', 'core/communication.md'];

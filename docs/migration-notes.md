@@ -20,4 +20,4 @@
 | `tools/validate-system.mjs` | Split into `tools/validate-source.mjs` and `tools/validate-distributions.mjs` |
 | Frontmatter `scope` / `load_when` / `related` | Retained in `source/` as internal metadata only; generated outputs use each host's real schema (`paths`, `allowed-tools`, etc.) |
 
-For existing 1.x installs: delete the copied 1.x directory and the hook block, then follow [INSTALL.md](INSTALL.md) for a clean 2.0 copy. The rules your agent follows will read the same; they arrive through native mechanisms instead of injection.
+For existing 1.x installs: delete the copied 1.x directory and the hook block, then follow [INSTALL.md](../INSTALL.md) for a clean 2.0 copy. The rules your agent follows will read the same; they arrive through native mechanisms instead of injection.

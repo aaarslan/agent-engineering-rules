@@ -6,7 +6,7 @@ related: []
 
 # <Technology>
 
-Copy this file when a stack has no context file yet—to `contexts/<technology>.md` when maintaining this system (then add it to the AGENTS context list), or to a host-owned path when adopting per [ADOPT](../../ADOPT.md). Set `scope`, fill `load_when`, and delete this paragraph and the guidance section.
+Copy this file when a stack has no context file yet—to `source/contexts/<technology>.md` when maintaining this system (then add a `MANIFEST.contexts` entry in `tools/build-distributions.mjs` so it ships), or to a host-owned path when adopting per [ADOPT](../../ADOPT.md) (then replace this frontmatter with the host's schema, e.g. Claude `paths:` globs). Set `scope`, fill `load_when`, and delete this paragraph and the guidance section.
 
 ## Writing rules for this stack
 

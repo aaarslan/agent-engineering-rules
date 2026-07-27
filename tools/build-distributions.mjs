@@ -25,9 +25,9 @@ export const MANIFEST = {
     { name: 'feature-implementation', claude: {} },
     { name: 'bug-fix', claude: {} },
     { name: 'refactor', claude: {} },
-    { name: 'pr-review', claude: { allowedTools: 'Read, Grep, Glob, Bash' } },
+    { name: 'pr-review', claude: {} },
     { name: 'database-change', claude: { paths: ['**/migrations/**', 'db/**', 'prisma/**', '**/*.sql'] } },
-    { name: 'security-audit', claude: { allowedTools: 'Read, Grep, Glob, Bash' } },
+    { name: 'security-audit', claude: {} },
     { name: 'autonomous-mission', claude: { disableModelInvocation: true } },
     { name: 'doc-update', claude: {} },
     { name: 'ui-styling', claude: {} },
@@ -56,7 +56,9 @@ export const MANIFEST = {
   profiles: ['profiles/prototype.md', 'profiles/standard.md', 'profiles/regulated.md'],
   tools: ['tools/contrast-check.mjs', 'tools/slop-scan.sh'],
   agents: [
-    { name: 'code-reviewer', template: 'templates/code-reviewer.md', description: 'Evidence-backed read-only code review. Use for reviewing diffs, PRs, or changed code without edit access.', tools: 'Read, Grep, Glob, Bash' },
+    // Read, Grep, Glob only: Bash would grant effective write access through
+    // redirection, defeating the enforced read-only contract.
+    { name: 'code-reviewer', template: 'templates/code-reviewer.md', description: 'Evidence-backed read-only code review. Use for reviewing diffs, PRs, or changed code without edit access.', tools: 'Read, Grep, Glob' },
   ],
 };
 
@@ -108,6 +110,9 @@ const rewrite = (text) => REWRITES.reduce((t, [from, to]) => t.split(from).join(
 
 async function resolveIncludes(text, depth = 0) {
   if (depth > 3) throw new Error('include depth exceeded');
+  // {{core}} expands to the always-active policy so the Codex root can never
+  // drift from MANIFEST.core (the Claude rules are generated from it directly).
+  text = text.replaceAll('{{core}}', MANIFEST.core.map((f) => `{{include:${f}}}`).join('\n\n'));
   const parts = [];
   let last = 0;
   for (const m of text.matchAll(/\{\{include:([^}]+)\}\}/g)) {

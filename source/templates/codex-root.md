@@ -4,15 +4,7 @@ These are the always-active engineering rules for this repository. Task-specific
 
 Host and user instructions override stylistic preferences here. They must not silently override correctness, security, or data integrity; surface the conflict instead.
 
-{{include:core/priorities.md}}
-
-{{include:core/evidence-first.md}}
-
-{{include:core/communication.md}}
-
-{{include:core/conventions.md}}
-
-{{include:core/anti-slop.md}}
+{{core}}
 
 ## Task skills
 

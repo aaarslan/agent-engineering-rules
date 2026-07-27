@@ -1,7 +1,6 @@
 ---
 name: pr-review
 description: Review a diff for evidence-backed correctness, security, integrity, and test risks. Use for review-only work; do not edit unless asked.
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # PR Review

@@ -17,6 +17,10 @@ const rel = (f) => path.relative(src, f);
 // Files allowed to exist without appearing in the manifest or any include.
 const ORPHAN_ALLOWLIST = new Set(['contexts/_template.md']);
 const MAX_LINES = { default: 100, skills: 60, templates: 80 };
+// Internal source metadata schema for rule files (not emitted to dist).
+const SCOPES = new Set(['always', 'any-code-change', 'routed', 'context', 'profile', 'template']);
+// Repository docs outside source/ whose relative links must also resolve.
+const ROOT_DOCS = ['README.md', 'INSTALL.md', 'ADOPT.md', 'CHANGELOG.md', 'AGENTS.md', 'CLAUDE.md', 'tools/README.md', 'docs/capability-matrix.md', 'docs/migration-notes.md'];
 
 async function walk(dir, files = []) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -72,6 +76,20 @@ async function main() {
     const isSkill = name.startsWith('skills/');
     const fields = frontmatter(text, name);
     if (!isTemplate && fields === null) problem(`${name}: missing frontmatter`);
+    if (!isTemplate && !isSkill && fields) {
+      // Rule files keep the internal scope/load_when/related metadata schema.
+      const scope = fields.get('scope') ?? '';
+      const scopeValues = scope.replace(/^\[|\]$/g, '').split(',').map((s) => s.trim()).filter(Boolean);
+      if (!scopeValues.length) problem(`${name}: missing scope`);
+      for (const value of scopeValues) if (!SCOPES.has(value)) problem(`${name}: unknown scope value "${value}"`);
+      if (!fields.get('load_when')) problem(`${name}: missing load_when`);
+      const related = fields.get('related');
+      if (related === undefined) problem(`${name}: missing related (use [] when empty)`);
+      else for (const target of related.replace(/^\[|\]$/g, '').split(',').map((s) => s.trim()).filter(Boolean)) {
+        try { await stat(path.resolve(path.dirname(file), target)); }
+        catch { problem(`${name}: related target missing: ${target}`); }
+      }
+    }
     if (isSkill && fields) {
       const expected = path.basename(name, '.md');
       if (fields.get('name') !== expected) problem(`${name}: frontmatter name must be "${expected}"`);
@@ -108,6 +126,21 @@ async function main() {
   for (const file of files) {
     const name = rel(file);
     if (!used.has(name) && !ORPHAN_ALLOWLIST.has(name)) problem(`${name}: not referenced by the build manifest or any include`);
+  }
+
+  // 7. Repository docs: relative links must resolve (source/ links are
+  // checked above; this covers README, INSTALL, docs/, and friends).
+  for (const doc of ROOT_DOCS) {
+    const file = path.join(repo, doc);
+    let text;
+    try { text = await readFile(file, 'utf8'); }
+    catch { problem(`${doc}: expected repository doc is missing`); continue; }
+    for (const m of text.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+      const target = m[1].trim();
+      if (/^[a-z][a-z0-9+.-]*:/i.test(target) || target.startsWith('#')) continue;
+      try { await stat(path.resolve(path.dirname(file), target.split('#')[0])); }
+      catch { problem(`${doc}: broken relative link: ${target}`); }
+    }
   }
 
   if (errors.length) {

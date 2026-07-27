@@ -1,7 +1,6 @@
 ---
 name: security-audit
 description: Audit a concrete surface for exploitable trust-boundary failures. Use for evidence-based security review, not generic checklists or safety clearance.
-allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # Security Audit
