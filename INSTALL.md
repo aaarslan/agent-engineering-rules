@@ -21,6 +21,31 @@ What you get, all through native mechanisms:
 
 Verify: run `/status` and `/context` in a session to confirm the rules loaded, then ask "Which engineering rules apply to a bug fix in this repo?" — the answer should reflect these files, not generic advice.
 
+### Optional: file-size decomposition guard
+
+`agent-rules/tools/file-size-guard.py` turns the decomposition standard into a mechanical, advisory signal: a PostToolUse hook that nudges the agent when it grows a source file past 500 lines. It compares against the git HEAD baseline (editing an already-large file stays silent), fires at most once per file per session, and always exits 0 — it informs, never blocks. Requires `python3` on PATH.
+
+To enable it for everyone who clones the repo, add to `.claude/settings.json`:
+
+    {
+      "hooks": {
+        "PostToolUse": [
+          {
+            "matcher": "Edit|Write",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "python3 \"$CLAUDE_PROJECT_DIR/agent-rules/tools/file-size-guard.py\"",
+                "timeout": 15
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+Override the threshold per repository with an `env` entry in the same file, e.g. `"env": { "FILE_SIZE_GUARD_THRESHOLD": "800" }`. Skip this section if the same hook is already wired in your user-scope `~/.claude/settings.json`; running both is harmless but redundant.
+
 ## Codex (CLI, IDE extension, app)
 
 From this repository:

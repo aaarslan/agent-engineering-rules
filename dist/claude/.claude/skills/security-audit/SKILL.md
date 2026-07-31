@@ -1,6 +1,7 @@
 ---
 name: security-audit
 description: Audit a concrete surface for exploitable trust-boundary failures. Use for evidence-based security review, not generic checklists or safety clearance.
+disallowed-tools: Edit, Write, NotebookEdit
 ---
 
 # Security Audit

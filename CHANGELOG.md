@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.1.0 - 2026-07-31
+
+Delivery hardening against Claude Code capabilities re-verified 2026-07-31 (v2.1.220). Zero rule-prose changes; the evaluated corpus is untouched.
+
+Claude Code distribution (`dist/claude/`):
+
+- `pr-review` and `security-audit` skills now carry `disallowed-tools: Edit, Write, NotebookEdit`: the review-only contract is enforced mechanically for the invoking turn instead of by prose alone. The restriction clears on the next user message, so "now fix it" still works as a follow-up.
+- New optional tool `agent-rules/tools/file-size-guard.py` (both distributions): an advisory PostToolUse hook that nudges decomposition when the agent grows a source file past a threshold (default 500 lines, `FILE_SIZE_GUARD_THRESHOLD` env override). Git-HEAD baseline, once-per-file-per-session, always exits 0. Opt-in wiring documented in INSTALL.md; nothing is added to any settings file by the build.
+
+Docs:
+
+- `docs/capability-matrix.md` re-verified and re-dated 2026-07-31: extended skill frontmatter (`disallowed-tools`, `user-invocable`, `when_to_use`, `context: fork`, and others), the ~1,536-char description listing cap and ~1% listing budget, recursive `.claude/rules/` and nested-skills discovery, `paths` pattern budgets and v2.1.217 glob fixes, documented `claudeMdExcludes`, and the finding that plugins cannot deliver rules files — which keeps this repository's copy-into-repo model the correct distribution mechanism for rules.
+- INSTALL.md documents the optional size-guard wiring.
+
 ## 2.0.0 - 2026-07-27
 
 Delivery rewrite: one canonical corpus, two generated native distributions. Rule prose is carried over from 1.0.0 with minimal edits; what changed is how it reaches each agent.

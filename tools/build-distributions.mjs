@@ -25,9 +25,12 @@ export const MANIFEST = {
     { name: 'feature-implementation', claude: {} },
     { name: 'bug-fix', claude: {} },
     { name: 'refactor', claude: {} },
-    { name: 'pr-review', claude: {} },
+    // Review-only skills lose edit tools for the invoking turn: the skill
+    // contract says report, not fix, and the restriction clears on the next
+    // user message, so "now fix it" still works as a follow-up.
+    { name: 'pr-review', claude: { disallowedTools: 'Edit, Write, NotebookEdit' } },
     { name: 'database-change', claude: { paths: ['**/migrations/**', 'db/**', 'prisma/**', '**/*.sql'] } },
-    { name: 'security-audit', claude: {} },
+    { name: 'security-audit', claude: { disallowedTools: 'Edit, Write, NotebookEdit' } },
     { name: 'autonomous-mission', claude: { disableModelInvocation: true } },
     { name: 'doc-update', claude: {} },
     { name: 'ui-styling', claude: {} },
@@ -54,7 +57,7 @@ export const MANIFEST = {
     'agents/orchestration.md',
   ],
   profiles: ['profiles/prototype.md', 'profiles/standard.md', 'profiles/regulated.md'],
-  tools: ['tools/contrast-check.mjs', 'tools/slop-scan.sh'],
+  tools: ['tools/contrast-check.mjs', 'tools/slop-scan.sh', 'tools/file-size-guard.py'],
   agents: [
     // Read, Grep, Glob only: Bash would grant effective write access through
     // redirection, defeating the enforced read-only contract.
@@ -69,6 +72,7 @@ const src = path.join(repo, 'source');
 const REWRITES = [
   ['tools/contrast-check.mjs', 'agent-rules/tools/contrast-check.mjs'],
   ['tools/slop-scan.sh', 'agent-rules/tools/slop-scan.sh'],
+  ['tools/file-size-guard.py', 'agent-rules/tools/file-size-guard.py'],
 ];
 
 const read = (rel) => readFile(path.join(src, rel), 'utf8');
@@ -133,6 +137,7 @@ async function composed(rel, siblings) {
 function skillFrontmatter(name, description, extras = {}) {
   const lines = ['---', `name: ${name}`, `description: ${description}`];
   if (extras.allowedTools) lines.push(`allowed-tools: ${extras.allowedTools}`);
+  if (extras.disallowedTools) lines.push(`disallowed-tools: ${extras.disallowedTools}`);
   if (extras.disableModelInvocation) lines.push('disable-model-invocation: true');
   if (extras.paths) { lines.push('paths:'); for (const p of extras.paths) lines.push(`  - "${p}"`); }
   lines.push('---', '');
