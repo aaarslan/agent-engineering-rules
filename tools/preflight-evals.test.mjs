@@ -10,7 +10,7 @@ import {
   experimentTaskCoverage, frozenEvaluationHashErrors, readinessFailureCleanupProbe, portableRelativePathError, taskCaseFixtureErrors,
   taskContractLinkErrors, utf8LfErrors, validateCellArchive, validateNoProviderHarness, writeCellArchive,
 } from './preflight-eval-harness.mjs';
-import { registryEnumErrors, reviewWindowErrors, runRecordSemanticErrors, schemaValidationErrors } from './preflight-evals.mjs';
+import { exactUrlSourceMatch, registryEnumErrors, reviewWindowErrors, runRecordSemanticErrors, schemaValidationErrors } from './preflight-evals.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(repo, 'source/evals');
@@ -123,6 +123,15 @@ test('evaluation schema helper enforces conditional scored and unscored records'
   assert.deepEqual(schemaValidationErrors({ grader_status: 'invalid', score: null }, scoreSchema), []);
   assert.ok(schemaValidationErrors({ grader_status: 'passed', score: null }, scoreSchema).length >= 1);
   assert.ok(schemaValidationErrors({ grader_status: 'invalid', score: 0 }, scoreSchema).length >= 1);
+});
+
+test('compatibility sources require an exact URL in an array', () => {
+  const officialUrl = 'https://code.claude.com/docs/en/commands';
+  assert.equal(exactUrlSourceMatch([officialUrl], officialUrl), true);
+  assert.equal(exactUrlSourceMatch(officialUrl, officialUrl), false);
+  assert.equal(exactUrlSourceMatch([`${officialUrl}.attacker.example`], officialUrl), false);
+  assert.equal(exactUrlSourceMatch([`https://attacker.example/?next=${officialUrl}`], officialUrl), false);
+  assert.equal(exactUrlSourceMatch([null, 42, {}], officialUrl), false);
 });
 
 test('evaluation registries and capability review windows are exact', () => {
