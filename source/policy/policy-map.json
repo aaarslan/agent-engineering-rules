@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "delivery": "consumer-owned",
+  "note": "The distributions describe judgment but do not overwrite a consumer repository's permissions, hooks, sandbox, secrets policy, or CI configuration.",
+  "entries": [
+    {
+      "directive_ids": ["AE-03"],
+      "concern": "external-cost-destructive-and-irreversible-authority",
+      "mechanisms": {
+        "claude": ["permissions", "PreToolUse hooks", "managed settings"],
+        "codex": ["approval policy", "sandbox", "hooks", "managed rules"]
+      }
+    },
+    {
+      "directive_ids": ["AE-12", "AE-13", "AE-14"],
+      "concern": "contract-and-data-integrity",
+      "mechanisms": {
+        "claude": ["repository schemas", "tests", "CI"],
+        "codex": ["repository schemas", "tests", "CI"]
+      }
+    },
+    {
+      "directive_ids": ["AE-15", "AE-23"],
+      "concern": "secrets-sensitive-files-and-security-boundaries",
+      "mechanisms": {
+        "claude": ["permissions", "PreToolUse hooks", "secret scanning", "protected paths", "CI"],
+        "codex": ["sandbox", "approval policy", "managed deny rules", "secret scanning", "protected paths", "CI"]
+      }
+    },
+    {
+      "directive_ids": ["AE-20"],
+      "concern": "failed-or-unavailable-checks",
+      "mechanisms": {
+        "claude": ["process exit status", "CI required checks"],
+        "codex": ["process exit status", "CI required checks"]
+      }
+    }
+  ]
+}

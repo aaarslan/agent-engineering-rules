@@ -28,5 +28,5 @@ Extends [security](../quality/security.md) and [boundaries](../design/boundaries
 
 ## Compatibility
 
-- Preserve backward compatibility of routes, params, response shapes, and event payloads unless the task explicitly changes the contract. Additive changes are safe; removals and type changes need a migration path.
+- Preserve backward compatibility of routes, params, response shapes, and event payloads unless the task explicitly changes the contract. Additive changes are often lower-risk, but strict or generated consumers can still break; verify the affected contracts and consumers. Removals and type changes need a migration path.
 - Update the API's contract artifacts (OpenAPI, generated clients, docs) in the same change that alters behavior.

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "freeze_before_held_out": true,
+  "treatments": [
+    {"id":"host-baseline","kernel":false,"profile":null,"skill":null,"verification":"host-default"},
+    {"id":"compact-kernel","kernel":"current","profile":null,"skill":null,"verification":"risk-based-evidence"},
+    {"id":"compact-task","kernel":"current","profile":"task-selected","skill":"task-matched","verification":"risk-based-evidence"},
+    {"id":"compact-verify","kernel":"current","profile":"task-selected","skill":"aer-verify","verification":"explicit"},
+    {"id":"compact-high-assurance","kernel":"current","profile":"high-assurance","skill":"task-matched","verification":"justified-independent-review"}
+  ]
+}

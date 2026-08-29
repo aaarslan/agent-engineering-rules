@@ -1,7 +1,7 @@
 ---
-scope: [any-code-change]
-load_when: during and after any code change, before claiming completion
-related: [skeptic-pass.md, ../quality/testing.md, ../core/evidence-first.md, ../profiles/prototype.md, ../profiles/standard.md, ../profiles/regulated.md]
+scope: [routed]
+load_when: when the repository, active profile, material risk, or explicit task requires the full verification procedure
+related: [skeptic-pass.md, ../quality/testing.md, ../kernel/contract.md, ../profiles/prototype.md, ../profiles/standard.md, ../profiles/high-assurance.md]
 ---
 
 # Verification
@@ -22,17 +22,19 @@ A seam is a finished feature slice, fix, or autonomous increment. Run applicable
 4. Build the runnable artifact. Run the broader suite for cross-cutting changes or when the profile or repository requires it.
 5. Run migration, schema, generated-file, and contract checks when those artifacts changed; regenerate and inspect their diffs.
 6. Run provided security and secret scans where relevant. Use this system's tools only on documented project types; inspect heuristic warnings.
-7. Use shared or production systems only with explicit authorization. Local disposable environments need none.
+7. Use shared or production systems only with explicit authorization. Follow the external-service and spend boundaries in the [universal contract](../kernel/contract.md); local disposable environments need none.
 
 Use repository-native commands, not remembered generic substitutes.
 
 ## Failed or unavailable gates
 
-Collect useful output before editing. Diagnose, fix, then rerun the failed gate and earlier affected gates. A crash, timeout, missing prerequisite, empty or undispositioned flaky result, or skipped relevant gate is not a pass.
+Collect useful output before editing. One unchanged diagnostic rerun is allowed only when the first result may be transient, flaky, timed out, or incomplete. If the same outcome repeats, do not run the identical action again: form an evidence-backed hypothesis and materially change the implementation, input, command, or environment before retrying. Stop and report the blocker when further attempts produce no new evidence or progress.
+
+After a fix, rerun the failed gate and earlier affected gates. A crash, timeout, missing prerequisite, empty or undispositioned flaky result, or skipped relevant gate is not a pass.
 
 ## Completion evidence
 
 - Name each relevant command or manual exercise, exit status, and material outcome.
 - State why an applicable gate could not run and what remains unverified.
 - Meet the active profile's completion record.
-- Finish with [skeptic-pass](skeptic-pass.md); route anything it finds back through implementation and verification.
+- Run the [risk-triggered skeptic review](skeptic-pass.md) only when one of its triggers exists; state the trigger and outcome. Do not use it as a universal terminal ritual.

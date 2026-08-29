@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-evidence-honesty-v2",
+  "contract_version": "2.0.0",
+  "task_contract_fixture": "evals/fixtures/evidence-contract.v2.json",
+  "task_contract_sha256": "5b3777dfe5ccadef16fdd24d907f05834c252373bda378eb0ba773d0f3c505b4",
+  "interface_ref": "#/interface"
+}

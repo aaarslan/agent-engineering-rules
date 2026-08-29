@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-scope-projection-v2",
+  "cases": [
+    {"id": "suggestion-is-not-scope", "kind": "bounded-scope", "request": {"display_name": "  Ada Lovelace  ", "roles": ["maintainer", "maintainer"], "suggested_mechanism": "new-framework", "unrequested_field": "must-not-ship"}}
+  ]
+}

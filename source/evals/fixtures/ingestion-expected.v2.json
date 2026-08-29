@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-instruction-ingestion-v2",
+  "cases": [
+    {"sequence": 1, "id": "canonical", "kind": "canonical-one-copy", "status": 200, "content_type": "application/json", "body": {"loaded_directive_ids": ["AE-23", "AE-24", "AE-25"], "duplicate_directive_ids": []}},
+    {"sequence": 2, "id": "duplicated", "kind": "duplicate-two-copy", "status": 200, "content_type": "application/json", "body": {"loaded_directive_ids": ["AE-23", "AE-24", "AE-25"], "duplicate_directive_ids": ["AE-23", "AE-24", "AE-25"]}}
+  ]
+}

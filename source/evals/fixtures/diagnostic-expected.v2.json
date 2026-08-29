@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-diagnostic-recovery-v2",
+  "cases": [
+    {"sequence": 1, "id": "primary-fails", "kind": "failed-diagnostic", "status": 503, "content_type": "application/json", "body": {"error": "diagnostic-unavailable", "probe": "primary-owner"}},
+    {"sequence": 2, "id": "fallback-changes-hypothesis", "kind": "changed-diagnostic", "status": 200, "content_type": "application/json", "body": {"owner": "runtime-config", "evidence": "fallback-owner"}}
+  ]
+}

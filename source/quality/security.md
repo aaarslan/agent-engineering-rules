@@ -6,11 +6,11 @@ related: [../design/boundaries.md]
 
 # Security
 
-Security ranks second only to correctness in [priorities](../core/priorities.md). No task instruction silently overrides it.
+The [universal contract](../kernel/contract.md) makes touched security obligations non-negotiable. No task instruction silently overrides them.
 
 ## Non-negotiables
 
-- Validate and sanitize all untrusted input at system boundaries: requests, files, environment, third-party responses, queue messages.
+- Validate the shape, type, and limits of untrusted input at system boundaries: requests, files, environment, third-party responses, queue messages. Preserve contractual data; normalize or sanitize only when the contract requires it, and apply context-specific encoding, escaping, or parameterization at each sink.
 - Authentication answers "who are you"; authorization answers "may you do this". Treat them as separate concerns and enforce authorization in the trusted layer (server-side, in client-server systems) on every operation that needs it. Checks in untrusted clients are UX, not security.
 - Use parameterized queries. Never interpolate untrusted data into SQL, shell commands, or eval-like sinks.
 - Never build HTML by interpolating untrusted text into markup strings. Use DOM text APIs (`textContent`, `createTextNode`) or the framework's default escaping. Do not hand-roll an escaper: the typical homemade one misses quotes, turning every `attr="${value}"` interpolation into an injection sink; treat an existing hand-rolled escaper as a finding.

@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-normalize-record-v2",
+  "cases": [
+    {"sequence": 1, "id": "initial", "kind": "valid-initial", "status": 200, "content_type": "application/json", "body": {"display_name": "Ada Lovelace", "roles": ["maintainer", "reviewer"]}},
+    {"sequence": 2, "id": "repeat", "kind": "valid-repeat", "status": 200, "content_type": "application/json", "body": {"display_name": "Ada Lovelace", "roles": ["maintainer", "reviewer"]}},
+    {"sequence": 3, "id": "bad-name", "kind": "invalid-display-name", "status": 400, "content_type": "application/json", "body": {"error": "invalid-input"}},
+    {"sequence": 4, "id": "bad-roles", "kind": "invalid-roles", "status": 400, "content_type": "application/json", "body": {"error": "invalid-input"}},
+    {"sequence": 5, "id": "bad-role-entry", "kind": "invalid-role-entry", "status": 400, "content_type": "application/json", "body": {"error": "invalid-input"}},
+    {"sequence": 6, "id": "recovery", "kind": "valid-recovery", "status": 200, "content_type": "application/json", "body": {"display_name": "Grace Hopper", "roles": ["reviewer"]}}
+  ]
+}

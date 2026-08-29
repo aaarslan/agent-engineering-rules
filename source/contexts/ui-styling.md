@@ -1,7 +1,7 @@
 ---
 scope: [context]
 load_when: designing or restyling visual UI without a product design system to follow
-related: [web-ui.md, ../core/anti-slop.md]
+related: [web-ui.md, ../kernel/contract.md]
 ---
 
 # UI Styling

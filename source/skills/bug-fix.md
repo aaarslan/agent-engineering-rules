@@ -1,25 +1,15 @@
 ---
 name: bug-fix
-description: Fix a localized incorrect behavior with regression evidence. Use for existing defects, not new features, broad redesign, or review-only diagnosis.
+description: Repair an established defect at its owning cause.
 ---
 
 # Bug Fix
 
-Fix existing incorrect behavior. Reproduce the failure when practical and trace it to a root cause before editing; if your fix does not explain the observed behavior, it is not the fix. Make the smallest complete fix to the failure class, inspect callers and parallel entrypoints, and keep the reproduction as regression protection when the active profile requires it. Do not rewrite adjacent architecture.
+- Reproduce or otherwise establish the defect when practical, then trace it to the owning cause before editing.
+- Repair the failure class rather than only the visible instance; inspect affected callers and parallel entrypoints without redesigning unrelated architecture.
+- Preserve exact contracts outside the authorized correction and remove only paths the fix supersedes or makes unreachable.
+- Keep the reproduction as durable regression protection when its value and the active profile justify it.
 
-When the fix touches a concern below, read the matching reference before editing:
+Read `agent-rules/reference/testing.md`, `agent-rules/reference/errors-and-side-effects.md`, or a stack reference only when implicated.
 
-- Failure handling or I/O: `agent-rules/reference/errors-and-side-effects.md`
-- Untrusted input, auth, secrets, or trust boundaries: `agent-rules/reference/security.md`
-- Data models or state shape: `agent-rules/reference/types-and-state.md`
-- Test strategy for the reproduction: `agent-rules/reference/testing.md`
-
-{{include:workflow/implementation.md}}
-
-{{include:workflow/verification.md}}
-
-{{include:workflow/skeptic-pass.md}}
-
-## Completion
-
-Finish only when evidence connects symptom, cause, and correction; the reproduction passes or its limitation is explicit; applicable checks produce usable results; and the skeptic pass finds no sibling-path regression, contract drift, or self-inflicted change.
+Finish when evidence connects symptom, cause, correction, and usable checks; state any reproduction limitation or unresolved sibling-path risk.

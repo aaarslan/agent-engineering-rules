@@ -1,7 +1,7 @@
 ---
 scope: [context]
 load_when: writing, updating, or auditing documentation
-related: [../core/evidence-first.md, ../workflow/skeptic-pass.md]
+related: [../kernel/contract.md, ../workflow/skeptic-pass.md]
 ---
 
 # Documentation

@@ -1,10 +1,11 @@
 ---
 name: ui-styling
-description: Apply visual design defaults for spacing, typography, color, and hierarchy. Use only when styling UI without a governing product design system.
+description: Create coherent, accessible styling without supplied direction.
 ---
 
 # UI Styling
 
-Apply these defaults only when no product design system governs the surface. If the repository has a design system, follow it and skip this skill. Behavior, accessibility, and focus management are separate concerns and always apply regardless of styling.
-
-{{include:contexts/ui-styling.md}}
+- Follow the repository's design system and tokens when they exist; do not overlay a second visual language.
+- Preserve semantic structure, keyboard behavior, responsive layout, contrast, focus visibility, reduced motion, and content resilience.
+- Use `agent-rules/reference/ui-styling.md` and `agent-rules/reference/web-ui.md` only when their guidance applies to the actual surface.
+- Verify the rendered behavior at representative viewport and interaction states; heuristic contrast output is review input, not proof.

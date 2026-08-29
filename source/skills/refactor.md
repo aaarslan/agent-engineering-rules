@@ -1,20 +1,15 @@
 ---
 name: refactor
-description: Improve existing structure while preserving behavior. Use for behavior-preserving design work, not a new feature or defect correction.
+description: Improve structure while preserving behavior and contracts.
 ---
 
 # Refactor
 
-Improve structure without changing behavior. Baseline existing tests, real-flow behavior, contracts, callers, and stored-data effects before editing. State the structural problem and the smallest improvement that resolves it. Preserve public behavior; add no generalized layer or interface without a current consumer or genuine boundary.
+- Establish the behavior and contracts that must remain unchanged before restructuring.
+- Improve a named problem in ownership, coupling, state, types, boundaries, or comprehension without inventing product behavior.
+- Update affected consumers and remove superseded affected paths so one implementation remains.
+- Compare the relevant real behavior before and after, then run applicable repository gates.
 
-Read `agent-rules/reference/principles.md` before restructuring, and `agent-rules/reference/boundaries.md` when moving responsibilities between layers. For system-level restructuring, read `agent-rules/reference/decision-making.md`.
+Read `agent-rules/reference/principles.md`, `agent-rules/reference/boundaries.md`, `agent-rules/reference/types-and-state.md`, or `agent-rules/reference/testing.md` when applicable.
 
-{{include:workflow/design-checkpoint.md}}
-
-{{include:workflow/verification.md}}
-
-{{include:workflow/skeptic-pass.md}}
-
-## Completion
-
-Finish only when before/after evidence proves preservation, applicable checks pass, callers and artifacts agree, the diff reduces the stated problem without unrelated redesign, and the skeptic pass finds no semantic drift, removed behavior, dead path, or hidden side-effect change.
+Finish when preservation evidence is usable, callers and artifacts agree, and the change reduces the stated problem without unrelated redesign.

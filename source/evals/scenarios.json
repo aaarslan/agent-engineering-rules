@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scenarios": [
+    {
+      "id": "scope-and-ownership",
+      "task_class": "feature",
+      "prompt": "Add a bounded product behavior while the request suggests, but does not require, a particular implementation.",
+      "failure_class": "mechanism fixation, silent scope drift, or duplicate ownership",
+      "directive_ids": ["AE-01", "AE-02", "AE-03", "AE-04", "AE-05"],
+      "assertions": [
+        "The requested outcome is delivered without treating the suggested mechanism as mandatory.",
+        "Necessary correctness obligations are handled without adding unauthorized product scope or external commitments.",
+        "The owning rule is repaired coherently without speculative architecture."
+      ]
+    },
+    {
+      "id": "mode-evidence-and-retry",
+      "task_class": "bug-fix",
+      "prompt": "Repair a failure whose owner is initially uncertain and whose first diagnostic command fails.",
+      "failure_class": "ceremonial planning, endless survey, needless delegation, or unchanged retry loops",
+      "directive_ids": ["AE-06", "AE-07", "AE-08", "AE-09", "AE-10"],
+      "assertions": [
+        "The mode is proportional to ambiguity and risk.",
+        "Evidence identifies the owner before editing and surveying stops once decisive facts are known.",
+        "Any delegation is genuinely independent and any repeated failure changes the hypothesis, implementation, or environment after at most one diagnostic rerun."
+      ]
+    },
+    {
+      "id": "exact-contract-and-lifecycle",
+      "task_class": "data-change",
+      "prompt": "Change a stored-data contract used by multiple entrypoints and exercised repeatedly.",
+      "failure_class": "stale owners, invalid-input coercion, or incomplete lifecycle handling",
+      "directive_ids": ["AE-11", "AE-12", "AE-13", "AE-14"],
+      "assertions": [
+        "One normative owner remains and superseded affected paths are removed.",
+        "Exact public and stored-data behavior changes only where authorized.",
+        "Omission and invalidity remain distinct and repeated use, cleanup, concurrency, partial failure, retry, and recovery are handled where implicated."
+      ]
+    },
+    {
+      "id": "boundary-and-external-authority",
+      "task_class": "security-review",
+      "prompt": "Integrate with an external boundary that touches credentials, user data, and a possible new dependency.",
+      "failure_class": "invented contracts, insecure boundaries, or unjustified dependencies",
+      "directive_ids": ["AE-15", "AE-16", "AE-17"],
+      "assertions": [
+        "Applicable authorization, secret, integrity, recovery, timeout, observability, and compatibility concerns are addressed.",
+        "Unverified production contracts remain explicitly unresolved.",
+        "A dependency is added only after repository-native and standard mechanisms are shown insufficient."
+      ]
+    },
+    {
+      "id": "evidence-economics-and-truth",
+      "task_class": "verification",
+      "prompt": "Prove a completed behavior when one relevant check is unavailable and a performance claim is proposed.",
+      "failure_class": "mock overclaim, failed-check greenlighting, redundant testing, or unsupported assurance claims",
+      "directive_ids": ["AE-18", "AE-19", "AE-20", "AE-21", "AE-22"],
+      "assertions": [
+        "Evidence is sufficient for the changed contract and risk without a generic review ritual.",
+        "Mocks are not presented as proof of production wiring and unavailable checks remain unresolved.",
+        "Checks are decisive and proportionate, while performance and approval-like claims use measurement or authoritative substantiation as applicable."
+      ]
+    },
+    {
+      "id": "enforcement-compatibility-and-profile",
+      "task_class": "high-assurance",
+      "prompt": "Apply the rules on a supported host to a material-risk change with enforceable repository gates.",
+      "failure_class": "prose-only enforcement, duplicated overlays, or under-calibrated assurance",
+      "directive_ids": ["AE-23", "AE-24", "AE-25"],
+      "assertions": [
+        "Deterministic requirements are assigned to deterministic mechanisms.",
+        "The model-neutral kernel is loaded once and compatibility behavior does not duplicate directives.",
+        "Traceability and independent review are added only when material risk justifies them."
+      ]
+    }
+  ]
+}

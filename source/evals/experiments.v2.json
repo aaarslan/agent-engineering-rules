@@ -1,0 +1,102 @@
+{
+  "schema_version": 2,
+  "evaluation_contract_version": "2",
+  "freeze_before_held_out": true,
+  "primary_metrics": ["strict_score", "scope_drift_score", "evidence_truthfulness_score"],
+  "efficiency_metrics": ["tokens", "latency_ms", "tool_calls", "test_runs", "subagents", "cost_usd"],
+  "experiments": [
+    {
+      "id": "opus-final-verification",
+      "hosts": ["claude"],
+      "model_overlay_id": "anthropic-opus-5",
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["mode-evidence-and-retry", "evidence-economics-and-truth"],
+      "design": "paired",
+      "factor": "generic_final_verification",
+      "arms": [
+        {"id":"absent","value":false},
+        {"id":"present","value":true}
+      ],
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision", "effort"]
+    },
+    {
+      "id": "opus-subagent-count",
+      "hosts": ["claude"],
+      "model_overlay_id": "anthropic-opus-5",
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["mode-evidence-and-retry"],
+      "design": "matched-multilevel",
+      "factor": "maximum_subagents",
+      "arms": [
+        {"id":"zero","value":0},
+        {"id":"one","value":1},
+        {"id":"multiple","value":2}
+      ],
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision", "effort"]
+    },
+    {
+      "id": "gpt-instruction-group-removal",
+      "hosts": ["codex"],
+      "model_overlay_id": "openai-gpt-5.6",
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["scope-and-ownership", "evidence-economics-and-truth"],
+      "design": "ordered-ablation",
+      "factor": "loaded_instruction_groups",
+      "arms": [
+        {"id":"all-kernel-groups","value":["authority-and-scope","operating-mode","implementation","evidence-and-completion","enforcement-and-compatibility"]},
+        {"id":"without-enforcement","value":["authority-and-scope","operating-mode","implementation","evidence-and-completion"]},
+        {"id":"without-evidence-or-enforcement","value":["authority-and-scope","operating-mode","implementation"]},
+        {"id":"authority-and-mode-only","value":["authority-and-scope","operating-mode"]},
+        {"id":"authority-only","value":["authority-and-scope"]},
+        {"id":"no-kernel-groups","value":[]}
+      ],
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision", "effort"]
+    },
+    {
+      "id": "gpt-effort-sweep",
+      "hosts": ["codex"],
+      "model_overlay_id": "openai-gpt-5.6",
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["scope-and-ownership", "exact-contract-and-lifecycle", "evidence-economics-and-truth"],
+      "design": "ordered-threshold",
+      "factor": "effort",
+      "arms": [
+        {"id":"low","value":"low"},
+        {"id":"medium","value":"medium"},
+        {"id":"high","value":"high"},
+        {"id":"xhigh","value":"xhigh"}
+      ],
+      "selection_rule": "Report the lowest effort whose strict task and evidence-truthfulness gates pass; retain all attempted arms.",
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision"]
+    },
+    {
+      "id": "duplicate-instruction-ingestion",
+      "hosts": ["claude", "codex"],
+      "model_overlay_id": null,
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["enforcement-compatibility-and-profile"],
+      "design": "paired",
+      "factor": "universal_instruction_copies",
+      "arms": [
+        {"id":"canonical-only","value":1},
+        {"id":"duplicated-root-files","value":2}
+      ],
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision", "effort"]
+    },
+    {
+      "id": "skill-surface-size",
+      "hosts": ["claude", "codex"],
+      "model_overlay_id": null,
+      "base_treatment_id": "compact-task",
+      "scenario_ids": ["scope-and-ownership", "evidence-economics-and-truth"],
+      "design": "ordered-size",
+      "factor": "skill_catalog_and_selected_body_scale",
+      "arms": [
+        {"id":"below-target","value":{"catalog_characters":1000,"selected_skill_estimated_tokens":400}},
+        {"id":"at-target","value":{"catalog_characters":2000,"selected_skill_estimated_tokens":800}},
+        {"id":"above-target","value":{"catalog_characters":4000,"selected_skill_estimated_tokens":1600}}
+      ],
+      "paired_by": ["task_contract_sha256", "repository_revision", "model_revision", "effort"]
+    }
+  ]
+}

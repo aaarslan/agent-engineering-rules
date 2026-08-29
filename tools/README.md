@@ -1,16 +1,27 @@
 # Tools
 
-Dependency-free Node/shell scripts. Build and validation keep `source/` and `dist/` honest; the utilities support review.
+The project CLI and all build, validation, and evaluation tools are dependency-free.
 
 | Script | Role |
 | --- | --- |
-| `build-distributions.mjs` | Generates `dist/claude/` and `dist/codex/` from `source/`. Deterministic; the exported `MANIFEST` constant is the single source-to-host mapping. Run after any source change and commit both. |
-| `validate-source.mjs` | Validates the corpus: frontmatter shape, `{{include:}}` targets, relative links, line budgets, and that every source file is shipped by the manifest or allowlisted. |
-| `validate-distributions.mjs` | Rebuilds into a temp dir and requires the committed `dist/` to match byte for byte, then enforces host contracts: skill frontmatter (name/dir match, description limits), the Codex `AGENTS.md` 32 KiB budget, no unresolved includes, no broken links. |
-| `contrast-check.mjs` | Standalone WCAG contrast checker; shipped inside both distributions under `agent-rules/tools/`. |
-| `slop-scan.sh` | Heuristic scaffold/slop scan for web/TypeScript projects; shipped inside both distributions. Warnings, not proof. |
-| `legacy/route-hook.mjs` | Deprecated 1.x Claude `UserPromptSubmit` injection hook. Not part of any 2.0 install path; kept one transition cycle for old setups. Native rules and skills replace it. |
+| `aer.mjs` | User-facing `init`, `update`, `doctor`, and `uninstall` CLI. Targets the current project by default and emits stable exit codes and optional JSON diagnostics. |
+| `install-distribution.mjs` | Ownership engine behind the CLI. Uses a target lease, portable managed-content hashes, root-boundary provenance, a pending recovery journal, byte-exact mutation snapshots, atomic replacement, bounded retired-path authority, safe customization handling, and Codex root/catalog preflight. |
+| `aer.test.mjs`, `install-distribution.test.mjs` | CLI and lifecycle regressions for greenfield initialization, idempotent updates, drift diagnosis, uninstall, interruption recovery, collisions, concurrent changes, path/link safety, customization preservation, and size-preflight atomicity. |
+| `build-distributions.mjs` | Deterministically generates `dist/claude/` and `dist/codex/` from `source/`. `MANIFEST` is the single source-to-host mapping; its `research` entries are validated but not emitted. |
+| `build-distributions.test.mjs` | Build boundary, manifest, portable-path, collision, symlink, and thin-route regressions. |
+| `validate-source.mjs` | Fast release-source gate for frontmatter, includes, links, budgets, manifest closure, canonical inventory, and thin route adapters. It does not execute research preflight. |
+| `validate-runtime-loads.mjs` | Simulates 36 canonical Claude/Codex load plans, enforcing profile/skill closure, host caps, duplicate IDs, declared conflicts, and the 3,500-token generated-artifact target. |
+| `validate-distributions.mjs` | Requires byte-identical output from a clean temporary build, enforces host/runtime contracts, and runs installer lifecycle tests. |
+| `validate-public-content.mjs` | Rejects machine-specific home-directory paths while allowing explicit portable placeholders. |
+| `preflight-evals.mjs` | Separate, provider-free research gate for directives, scenarios, experiments, frozen cell plans, compatibility review windows, policy records, fixtures, graders, and run provenance. |
+| `preflight-eval-harness.mjs` | Executes five synthetic task fixtures and graders in a contained, credential-scrubbed, loopback-only harness; mechanically closes 47 frozen cells without provider calls. |
+| `preflight-evals.test.mjs` | Negative research regressions for registry, fixture, archive, authorization, spend, topology, evidence, and provenance boundaries. |
+| `live-ab-eval.mjs` | Dormant paired `host-baseline` versus `standard` runner. Preparation and default execution are provider-free; live dispatch snapshots exact inputs and requests and requires every explicit authorization gate documented in `docs/evaluation.md`. |
+| `live-ab-eval.test.mjs` | Uses only a fake adapter to test pairing, order randomization, blinding, hash authorization, frozen inputs, fresh workspaces, host-version evidence, environment filtering, runtime expiry/spend rejection, and credential-free archives. |
+| `contrast-check.mjs` | Standalone WCAG contrast checker shipped under `agent-rules/tools/`. |
+| `slop-scan.sh` | Heuristic web/TypeScript scaffold scan shipped under `agent-rules/tools/`; warnings are not proof. |
+| `file-size-guard.py` | Optional advisory Claude hook shipped under `agent-rules/tools/`; never enabled automatically. |
 
-Result semantics for the utilities: deterministic failures exit non-zero; heuristic warnings exit zero and need inspection; sensitive touchpoints need contextual reasoning, not automation.
+Deterministic failures exit non-zero. Heuristic warnings require inspection, and sensitive behavior still requires contextual review.
 
-CI runs `validate-source.mjs` and `validate-distributions.mjs` on every push and pull request (`.github/workflows/validate.yml`).
+The release workflow runs on Linux and Windows. Research preflight is a separate CI job, and no CI job has provider credentials or permission to make live evaluation calls.
