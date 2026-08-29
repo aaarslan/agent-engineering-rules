@@ -8,7 +8,7 @@ Use this procedure to initialize or update Agent Engineering Rules in another re
 4. Inspect manifests, lockfiles, build files, and source directories. Activate only evidenced contexts: `web-ui`, `typescript-react`, and/or `backend-api`. Fresh installs otherwise use `none`.
 5. Use an immutable tagged or commit-pinned package and preflight the exact target:
 
-       npm exec --yes --package=github:aaarslan/agent-engineering-rules#<tag> -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
+       npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
 
 6. Resolve every reported collision; never force ownership. Rerun without `--dry-run`, then commit the generated payload and `.agent-engineering-rules-state.json` together.
 7. On an already initialized project, use `aer doctor` and `aer update`; do not rerun `init`. Omitted update selections are read from the ledger.

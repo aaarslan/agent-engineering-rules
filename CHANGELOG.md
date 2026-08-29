@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 3.0.0 - 2026-08-29
+
+Release hardening:
+
+- Declared the public v3 package metadata and Node.js 24 minimum.
+- Hardened CI triggers to validate pull requests and default-branch pushes without duplicate feature-branch runs.
+- Added a security policy, contribution guidance, issue forms, pull-request template, citation metadata, and exact immutable-tag installation commands.
+
 Source corpus:
 
 - Replaced five always-on core files with one 25-directive, model-neutral contract using stable `AE-01` through `AE-25` ownership. The kernel is validated against 90-line and 6 KiB product budgets.

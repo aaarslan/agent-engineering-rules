@@ -1,0 +1,69 @@
+name: Bug report
+description: Report a reproducible AER defect
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, proprietary code, or sensitive prompts. Report suspected vulnerabilities through the private security form.
+  - type: input
+    id: version
+    attributes:
+      label: AER version or commit
+      placeholder: v3.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host
+      options:
+        - Claude Code
+        - OpenAI Codex
+        - Both
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system and Node.js version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Use a non-sensitive fixture and include the exact command.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Verification evidence
+      description: Include bounded logs or output with sensitive values removed.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: This report contains no credentials or sensitive project content.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
