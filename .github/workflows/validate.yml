@@ -30,10 +30,8 @@ jobs:
           package-manager-cache: false
       - name: Test release validators
         run: node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs
-      - name: Smoke-test package manifest
-        run: npm pack --dry-run --ignore-scripts
-        env:
-          NPM_CONFIG_CACHE: ${{ runner.temp }}/npm-cache
+      - name: Smoke-test packed global install
+        run: npm run test:packed
       - name: Reject personal filesystem paths
         run: node tools/validate-public-content.mjs
       - name: Validate source corpus
@@ -55,10 +53,8 @@ jobs:
           package-manager-cache: false
       - name: Test release validators
         run: node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs
-      - name: Smoke-test package manifest
-        run: npm pack --dry-run --ignore-scripts
-        env:
-          NPM_CONFIG_CACHE: ${{ runner.temp }}/npm-cache
+      - name: Smoke-test packed global install
+        run: npm run test:packed
       - name: Reject personal filesystem paths
         run: node tools/validate-public-content.mjs
       - name: Validate source corpus

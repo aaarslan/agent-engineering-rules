@@ -15,7 +15,8 @@
 - [ ] `npm test`
 - [ ] `npm run validate`
 - [ ] `npm run validate:research`
-- [ ] `npm pack --dry-run`
+- [ ] `npm run test:packed`
+- [ ] `npm pack --dry-run --json`
 - [ ] No provider call was made
 - [ ] Canonical source and generated distributions are synchronized, or neither changed
 

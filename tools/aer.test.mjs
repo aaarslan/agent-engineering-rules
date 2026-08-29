@@ -18,6 +18,81 @@ const exists = async (file) => {
   try { await stat(file); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; }
 };
 
+test('package metadata defines the public zero-dependency CLI release boundary', async () => {
+  const manifest = JSON.parse(await readFile(path.join(repo, 'package.json'), 'utf8'));
+  assert.equal(manifest.name, '@aaarslan/aer');
+  assert.equal(manifest.version, '3.0.1');
+  assert.equal(Object.hasOwn(manifest, 'private'), false);
+  assert.deepEqual(manifest.bin, { aer: 'tools/aer.mjs' });
+  assert.deepEqual(manifest.engines, { node: '>=24' });
+  assert.equal(manifest.license, 'MIT');
+  assert.deepEqual(manifest.publishConfig, {
+    access: 'public',
+    registry: 'https://registry.npmjs.org/',
+  });
+  assert.equal(manifest.dependencies, undefined);
+  assert.equal(manifest.devDependencies, undefined);
+  for (const lifecycle of ['preinstall', 'install', 'postinstall', 'prepare', 'prepack', 'postpack', 'publish', 'postpublish']) {
+    assert.equal(manifest.scripts[lifecycle], undefined, `unexpected ${lifecycle} lifecycle script`);
+  }
+  assert.equal(manifest.scripts.prepublishOnly, 'npm run release:check');
+  assert.equal(
+    manifest.scripts['release:check'],
+    'npm test && npm run validate && npm run validate:research && npm run test:packed',
+  );
+  assert.doesNotMatch(manifest.scripts.prepublishOnly, /npm\s+(?:pack|publish)\b/);
+  assert.deepEqual(manifest.files, [
+    'LICENSE',
+    'README.md',
+    'INSTALL.md',
+    'ADOPT.md',
+    'dist/**',
+    '!dist/**/agent-rules/metadata/**',
+    'tools/aer.mjs',
+    'tools/install-distribution.mjs',
+    'tools/build-distributions.mjs',
+    'tools/README.md',
+  ]);
+});
+
+test('aer metadata flags and argument failures have deterministic output and exit codes', async () => {
+  const caller = await mkdtemp(path.join(tmpdir(), 'aer-cli-metadata-'));
+  try {
+    const manifest = JSON.parse(await readFile(path.join(repo, 'package.json'), 'utf8'));
+    await writeFile(path.join(caller, 'package.json'), '{"version":"999.0.0"}\n');
+
+    const version = await execFile(process.execPath, [cli, '--version'], { cwd: caller, windowsHide: true });
+    assert.equal(version.stdout, `${manifest.version}\n`);
+    assert.equal(version.stderr, '');
+
+    const help = await execFile(process.execPath, [cli, '--help'], { cwd: caller, windowsHide: true });
+    assert.equal(help.stderr, '');
+    assert.match(help.stdout, /aer --version/);
+    assert.match(help.stdout, /aer init --host <claude\|codex\|both>/);
+
+    const noArguments = await execFile(process.execPath, [cli], { cwd: caller, windowsHide: true });
+    assert.equal(noArguments.stdout, help.stdout);
+    assert.equal(noArguments.stderr, '');
+
+    await assert.rejects(
+      execFile(process.execPath, [cli, '--version', '--help'], { cwd: caller, windowsHide: true }),
+      (error) => error.code === 2
+        && error.stdout === ''
+        && /AER FAILED: --version does not accept arguments/.test(error.stderr)
+        && /Usage:/.test(error.stderr),
+    );
+    await assert.rejects(
+      execFile(process.execPath, [cli, 'unknown-command'], { cwd: caller, windowsHide: true }),
+      (error) => error.code === 2
+        && error.stdout === ''
+        && /AER FAILED: unknown command: unknown-command/.test(error.stderr)
+        && /Usage:/.test(error.stderr),
+    );
+  } finally {
+    await rm(caller, { recursive: true, force: true });
+  }
+});
+
 test('aer CLI supports a project-local init/update/doctor/uninstall lifecycle', async () => {
   const target = await mkdtemp(path.join(tmpdir(), 'aer-cli-'));
   try {
@@ -72,8 +147,8 @@ test('development package exposes only the project-local CLI and excludes eval p
   const npmCache = await mkdtemp(path.join(tmpdir(), 'aer-npm-cache-'));
   const command = process.platform === 'win32' ? process.env.ComSpec : 'npm';
   const args = process.platform === 'win32'
-    ? ['/d', '/s', '/c', 'npm', 'pack', '--dry-run', '--json']
-    : ['pack', '--dry-run', '--json'];
+    ? ['/d', '/s', '/c', 'npm', 'pack', '--dry-run', '--json', '--ignore-scripts']
+    : ['pack', '--dry-run', '--json', '--ignore-scripts'];
   try {
     const { stdout } = await execFile(command, args, {
       cwd: repo,
@@ -93,7 +168,7 @@ test('development package exposes only the project-local CLI and excludes eval p
     assert.equal(files.some((file) => file === 'tools/live-ab-eval.mjs'), false);
     assert.equal(files.some((file) => file.endsWith('.test.mjs')), false);
     const unexpected = files.filter((file) => ![
-      'LICENSE', 'README.md', 'package.json',
+      'ADOPT.md', 'INSTALL.md', 'LICENSE', 'README.md', 'package.json',
       'tools/README.md', 'tools/aer.mjs', 'tools/build-distributions.mjs', 'tools/install-distribution.mjs',
     ].includes(file) && !file.startsWith('dist/'));
     assert.deepEqual(unexpected, []);

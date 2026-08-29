@@ -6,9 +6,9 @@ Use this procedure to initialize or update Agent Engineering Rules in another re
 2. Identify the hosts actually used by the project: `claude`, `codex`, or `both`. Do not install a second instruction root merely because another tool recognizes its filename.
 3. Choose `prototype`, `standard`, or `high-assurance` from explicit requirements. Default to `standard`; never infer assurance or regulatory obligations from an industry label.
 4. Inspect manifests, lockfiles, build files, and source directories. Activate only evidenced contexts: `web-ui`, `typescript-react`, and/or `backend-api`. Fresh installs otherwise use `none`.
-5. Use an immutable tagged or commit-pinned package and preflight the exact target:
+5. Preflight the exact target. Use the installed CLI, or pin the exact npm package version when reproducibility requires it:
 
-       npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
+       npm exec --yes --package=@aaarslan/aer@3.0.1 -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
 
 6. Resolve every reported collision; never force ownership. Rerun without `--dry-run`, then commit the generated payload and `.agent-engineering-rules-state.json` together.
 7. On an already initialized project, use `aer doctor` and `aer update`; do not rerun `init`. Omitted update selections are read from the ledger.
@@ -20,5 +20,7 @@ Use this procedure to initialize or update Agent Engineering Rules in another re
 Initialization is greenfield and refuses existing markers, ledgers, or unowned colliding paths even when their bytes happen to match. Do not delete or overwrite such content unless the repository owner explicitly resolves it.
 
 The first successful initialization owns exact generated paths, not whole `.claude/`, `.agents/`, or `agent-rules/` directories. Existing unrelated configuration remains outside its authority. `update` and `uninstall` act only on cryptographically proven owned content.
+
+Installing `@aaarslan/aer` globally only makes the CLI executable available. It does not create global agent settings, consumer CI, hooks, services, or project content outside the explicitly selected target.
 
 For an unsupported major stack, start from `source/contexts/_template.md`, verify commands and APIs against the target, and add it as a clearly project-owned file outside the generated inventory. Do not duplicate the universal contract.

@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+## 3.0.1 - 2026-08-29
+
+Source corpus:
+
+- No rule prose, profiles, contexts, compatibility inputs, policy inputs, or evaluation inputs changed. This release makes no efficacy claim.
+
+Claude distribution:
+
+- No generated Claude Code payload changed; project-local ownership, collision, recovery, and update behavior remains unchanged.
+
+Codex distribution:
+
+- No generated OpenAI Codex payload changed; the supported-host boundary and project-state schema remain unchanged.
+
+Package and CLI distribution:
+
+- Changed the package metadata from private `agent-engineering-rules` to public scoped `@aaarslan/aer` at version `3.0.1`, retained the zero-dependency `aer` executable and Node.js 24 minimum, and made public publication explicit.
+- Made install-once global npm installation the primary CLI distribution path while keeping all generated content, markers, and ownership state inside the explicitly selected repository.
+- Added exact installed-package version reporting, deterministic command-line help/error coverage, a complete provider-free prepublication gate, and a cross-platform packed-install smoke test using isolated npm prefixes and caches.
+- Kept exact-version npm execution, a pinned development dependency, and the immutable GitHub-tag source form as reproducible alternatives. No telemetry, self-update behavior, install/post-install/download script, consumer CI, hook, service, daemon, account, global agent configuration, publication token, or automatic publishing workflow was added.
+
+Documentation:
+
+- Replaced the cumbersome GitHub-tag quick start with `npm install --global @aaarslan/aer` and separated CLI installation and upgrades from repository initialization, payload updates, diagnosis, and removal.
+- Documented that `aer update` updates a managed repository with the installed CLI version rather than upgrading the CLI, and recommended a Node.js version manager instead of `sudo` for npm-prefix permission problems.
+
 ## 3.0.0 - 2026-08-29
 
 Release hardening:

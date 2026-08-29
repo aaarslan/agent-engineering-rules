@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import path from 'node:path';
-import { realpathSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   DEFAULT_CODEX_MAX_BYTES,
@@ -16,8 +16,11 @@ import {
 const HOSTS = new Set(['claude', 'codex']);
 const PROFILES = new Set(SUPPORTED_PROFILES);
 const CONTEXTS = new Set(SUPPORTED_CONTEXTS);
+const PACKAGE_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 
 const usage = () => `Usage:
+  aer --help
+  aer --version
   aer init --host <claude|codex|both> [options]
   aer update [--host <claude|codex|both>] [options]
   aer doctor [--json] [options]
@@ -51,6 +54,10 @@ function argumentError(message) {
 function parseArguments(argv) {
   const command = argv[0];
   if (!command || command === '--help' || command === '-h') return { help: true };
+  if (command === '--version') {
+    if (argv.length !== 1) throw argumentError('--version does not accept arguments');
+    return { version: true };
+  }
   if (!['init', 'update', 'doctor', 'uninstall'].includes(command)) throw argumentError(`unknown command: ${command}`);
   const takesValue = new Set(['--host', '--target', '--profile', '--contexts', '--distribution-root', '--codex-max-bytes']);
   const flags = new Set(['--dry-run', '--json', '--keep-modified', '--help']);
@@ -108,6 +115,10 @@ export async function runCli(argv = process.argv.slice(2), io = console) {
     args = parseArguments(argv);
     if (args.help || args['--help']) {
       io.log(usage());
+      return 0;
+    }
+    if (args.version) {
+      io.log(PACKAGE_VERSION);
       return 0;
     }
     const common = commonOptions(args);

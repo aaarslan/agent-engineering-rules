@@ -29,10 +29,11 @@ Use Node.js 24 or newer.
 npm test
 npm run validate
 npm run validate:research
-npm pack --dry-run
+npm run test:packed
+npm pack --dry-run --json
 ```
 
-Research validation is provider-free. Do not supply provider credentials for repository validation.
+Research validation and the packed-install smoke test are provider-free. Do not supply provider credentials for repository validation. `npm run release:check` runs the complete release-readiness suite and is also enforced before publication.
 
 ## Pull requests
 
