@@ -1,16 +1,44 @@
 # Install and update
 
-Agent Engineering Rules is installed per repository by the zero-dependency `aer` CLI. It does not require a global package, plugin, hook, daemon, or user-home configuration. Node.js 24 or newer is required.
+Agent Engineering Rules is installed per repository by the zero-dependency `aer` CLI. Installing the CLI globally is a distribution convenience: AER-managed configuration, generated content, ownership state, and markers remain exclusively inside the explicitly selected target repository. AER does not install consumer CI, hooks, services, daemons, accounts, global agent settings, or user-home agent configuration, and it does not write to unrelated repositories. Node.js 24 or newer is required.
 
-Use an immutable release tag or commit for reproducible installs:
+## Install the CLI
 
-    npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- aer <command>
+    npm install --global @aaarslan/aer
 
-You can instead pin the package as a development dependency and use `npm exec -- aer <command>`. Contributors to this repository can use `node tools/aer.mjs <command>`.
+Do not use `sudo npm install -g`. If the npm global prefix has permission problems, use a Node.js version manager so the prefix is owned by your user.
+
+## Upgrade the CLI
+
+    npm install --global @aaarslan/aer@latest
+
+Upgrading the CLI changes the installed `aer` program. It does not modify any managed repository until you explicitly run `aer update` against that repository.
+
+## Reproducible alternatives
+
+Run an exact npm version without installing it globally:
+
+    npm exec --yes --package=@aaarslan/aer@3.0.1 -- aer init --host claude --dry-run
+
+A project may instead pin the package as a development dependency:
+
+    npm install --save-dev --save-exact @aaarslan/aer@3.0.1
+    npm exec -- aer init --host claude --dry-run
+
+The immutable GitHub tag remains available as a source-install fallback, not the primary quick start:
+
+    npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.1 -- aer init --host claude --dry-run
+
+Contributors to this repository can use `node tools/aer.mjs <command>`.
 
 ## Initialize
 
-Choose only the hosts used by the target repository:
+Install AER into the current repository after reviewing the preview:
+
+    aer init --host claude --dry-run
+    aer init --host claude
+
+Choose only the hosts used by the target repository. Use `--target` when the target is not the current directory:
 
     aer init --host claude --target <project> --dry-run
     aer init --host claude --target <project>
@@ -37,12 +65,17 @@ Initialization is deliberately greenfield. Existing managed markers, an ownershi
 
 ## Update
 
-Fetch the desired immutable version, then update the target:
+Update an already managed current repository with the installed CLI version:
+
+    aer update --dry-run
+    aer update
+
+Use `--target` when the target is not the current directory:
 
     aer update --target <project> --dry-run
     aer update --target <project>
 
-The ledger supplies the configured hosts and preserves each host's profile and contexts when options are omitted. Pass `--host`, `--profile`, or `--contexts` only to make an explicit selection change. Reapplying the same version is byte-idempotent.
+`aer update` updates the managed project payload; it does not upgrade the globally installed CLI. Use `npm install --global @aaarslan/aer@latest` separately when you want a newer CLI. The ledger supplies the configured hosts and preserves each host's profile and contexts when options are omitted. Pass `--host`, `--profile`, or `--contexts` only to make an explicit selection change. Reapplying the same version is byte-idempotent.
 
 An update changes only proven-owned content. It rejects unrecognized collisions and modified non-customizable files, preserves supported Claude context/profile customizations, replaces one verified managed root block instead of appending another, and removes a retired path only when the ledger hash or the tool's cumulative retired-path authority proves ownership. The current retired-path list is empty and can grow only through reviewed releases.
 
@@ -50,6 +83,7 @@ An update changes only proven-owned content. It rejects unrecognized collisions 
 
 `doctor` is read-only:
 
+    aer doctor
     aer doctor --target <project>
     aer doctor --target <project> --json
 
@@ -59,10 +93,21 @@ Use it in CI or before an update to distinguish a current install from drift or 
 
 Preview first:
 
+    aer uninstall --dry-run
+    aer uninstall
+
+Use `--target` when the target is not the current directory:
+
     aer uninstall --target <project> --dry-run
     aer uninstall --target <project>
 
 Limit removal with `--host claude` or `--host codex`. Uninstall removes only owned files and a managed root block whose recorded portable hash still matches. It restores the pre-install root-file boundary exactly, including a missing, empty, blank, or unterminated root, and writes or removes the state ledger last. Modified owned content stops the operation; use `--keep-modified` only when you intentionally want those files left in place and reported. An interrupted update must be recovered with `aer update` before uninstall can proceed.
+
+## Remove the global CLI
+
+    npm uninstall --global @aaarslan/aer
+
+Removing the global CLI does not remove managed content from repositories. Run `aer uninstall` in each selected repository before removing the CLI when you also want that project-local content removed.
 
 ## Ownership and recovery
 

@@ -6,27 +6,24 @@
 
 **Compact, tested engineering rules for more reliable AI-assisted software development.**
 
-Agent Engineering Rules (AER) installs a project-local, model-neutral engineering contract for Claude Code and OpenAI Codex. It adds bounded instructions, task-specific skills, and mechanical ownership checks without installing a daemon, global plugin, account-wide configuration, or runtime dependency.
+Agent Engineering Rules (AER) installs a project-local, model-neutral engineering contract for Claude Code and OpenAI Codex. It adds bounded instructions, task-specific skills, and mechanical ownership checks without installing a daemon, global agent configuration, account-wide settings, or a project runtime dependency.
 
 ## Quick start
 
 Requirements: Node.js 24 or newer and a Git repository.
 
-Preview a Claude Code installation:
+Install the CLI once, then preview and initialize the current repository:
 
 ```bash
-npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- \
-  aer init --host claude --target . --dry-run
-```
+npm install --global @aaarslan/aer
 
-Install after reviewing the preview:
-
-```bash
-npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- \
-  aer init --host claude --target .
+aer init --host claude --dry-run
+aer init --host claude
 ```
 
 Use `--host codex` or `--host both` when those hosts are actually used by the project. The default profile is `standard`; fresh installations enable no stack contexts unless explicitly selected.
+
+The global npm installation is only a way to make the `aer` command available. AER-managed configuration, generated content, ownership state, and markers remain inside the explicitly selected target repository. AER does not modify user-home agent configuration or unrelated repositories.
 
 See [INSTALL.md](INSTALL.md) for initialization, updates, `doctor`, uninstall, profiles, contexts, ownership, and recovery.
 
@@ -42,7 +39,7 @@ See [INSTALL.md](INSTALL.md) for initialization, updates, `doctor`, uninstall, p
 | Verification | Provides deterministic build, source, distribution, lifecycle, and research-preflight checks |
 | Security boundary | Leaves permissions, sandboxes, hooks, tests, and CI under project-owner control |
 
-AER does not silently create consumer CI, hooks, branch rules, services, accounts, or global configuration. Prose instructions are not represented as a substitute for deterministic enforcement.
+AER does not silently create consumer CI, hooks, branch rules, services, daemons, accounts, or global agent configuration. Prose instructions are not represented as a substitute for deterministic enforcement.
 
 ## Runtime model
 
@@ -79,10 +76,11 @@ This repository contains provider-free fixtures and a dormant paired live A/B pa
 npm test
 npm run validate
 npm run validate:research
-npm pack --dry-run
+npm run test:packed
+npm pack --dry-run --json
 ```
 
-The release path covers Linux and Windows. Research preflight is provider-free and does not dispatch model calls.
+The release path covers Linux and Windows. Research preflight and packed-install validation are provider-free and do not dispatch model calls.
 
 ## Repository structure
 
