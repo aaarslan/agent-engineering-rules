@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a bounded improvement
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete failure or friction should AER address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Provide examples, measurements, or reproducible cases when available.
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Trust-boundary impact
+      description: Does this change installation ownership, supported hosts, automatic instructions, or deterministic enforcement?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: I am not asking AER to silently create consumer CI, hooks, services, or account-wide configuration.
+          required: true

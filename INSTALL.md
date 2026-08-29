@@ -1,10 +1,10 @@
 # Install and update
 
-Agent Engineering Rules is installed per repository by the zero-dependency `aer` CLI. It does not require a global package, plugin, hook, daemon, or user-home configuration. Node.js 20 or newer is required.
+Agent Engineering Rules is installed per repository by the zero-dependency `aer` CLI. It does not require a global package, plugin, hook, daemon, or user-home configuration. Node.js 24 or newer is required.
 
 Use an immutable release tag or commit for reproducible installs:
 
-    npm exec --yes --package=github:aaarslan/agent-engineering-rules#<tag> -- aer <command>
+    npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.0.0 -- aer <command>
 
 You can instead pin the package as a development dependency and use `npm exec -- aer <command>`. Contributors to this repository can use `node tools/aer.mjs <command>`.
 

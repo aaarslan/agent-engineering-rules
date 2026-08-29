@@ -1,6 +1,6 @@
 {
   "name": "agent-engineering-rules",
-  "version": "0.0.0-development",
+  "version": "3.0.0",
   "private": true,
   "description": "Project-local engineering rules for Claude Code and OpenAI Codex",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "bugs": "https://github.com/aaarslan/agent-engineering-rules/issues",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "bin": {
     "aer": "tools/aer.mjs"

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: If you use Agent Engineering Rules in research, please cite this software.
+title: Agent Engineering Rules
+type: software
+authors:
+  - family-names: Arslan
+    given-names: Abdallah
+repository-code: https://github.com/aaarslan/agent-engineering-rules
+url: https://github.com/aaarslan/agent-engineering-rules
+license: MIT
+version: 3.0.0
+date-released: 2026-08-29
