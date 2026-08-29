@@ -416,6 +416,11 @@ export function runRecordSemanticErrors(record, context = {}) {
   return errors;
 }
 
+export function exactUrlSourceMatch(sources, expectedUrl) {
+  return Array.isArray(sources)
+    && sources.some((source) => typeof source === 'string' && source === expectedUrl);
+}
+
 export async function validateEvalPreflight() {
   const errors = [];
   const problem = (message) => errors.push(message);
@@ -518,7 +523,10 @@ export async function validateEvalPreflight() {
   if (!Array.isArray(protectedClaudeEntryPoints) || protectedClaudeEntryPoints.join(',') !== 'security-review,verify') {
     problem('Claude compatibility metadata must protect the native security-review and verify entrypoints');
   }
-  if (!(hostsDoc.supported_hosts?.claude?.sources ?? []).includes('https://code.claude.com/docs/en/commands')) {
+  if (!exactUrlSourceMatch(
+    hostsDoc.supported_hosts?.claude?.sources,
+    'https://code.claude.com/docs/en/commands',
+  )) {
     problem('Claude compatibility metadata must cite the official native-command registry');
   }
 
