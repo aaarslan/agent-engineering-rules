@@ -186,6 +186,7 @@ async function run(command, args, options, label) {
       maxBuffer: MAX_BUFFER,
       windowsHide: true,
       ...options,
+      shell: false,
     });
   } catch (error) {
     const output = [error.stdout, error.stderr].filter(Boolean).join('\n').trim();
