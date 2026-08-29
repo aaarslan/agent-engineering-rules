@@ -229,17 +229,24 @@ function environmentWithInstalledBin(environment, prefix) {
   return result;
 }
 
-async function runAer(executable, args, { cwd, environment, prefix }, label) {
+async function runAer(args, { cwd, environment, prefix }, label) {
+  const installedEnvironment = environmentWithInstalledBin(environment, prefix);
   if (process.platform === 'win32') {
-    const commandProcessor = process.env.ComSpec ?? 'cmd.exe';
-    return run(
-      commandProcessor,
-      ['/d', '/s', '/c', 'aer.cmd', ...args],
-      { cwd, env: environmentWithInstalledBin(environment, prefix) },
-      label,
-    );
+    try {
+      return await execFile('cmd.exe', ['/d', '/s', '/c', 'aer.cmd', ...args], {
+        cwd,
+        encoding: 'utf8',
+        env: installedEnvironment,
+        maxBuffer: MAX_BUFFER,
+        shell: false,
+        windowsHide: true,
+      });
+    } catch (error) {
+      const output = [error.stdout, error.stderr].filter(Boolean).join('\n').trim();
+      throw new Error(`${label} failed with exit code ${error.code}${output ? `\n${output}` : ''}`, { cause: error });
+    }
   }
-  return run(executable, args, { cwd, env: environment }, label);
+  return run('aer', args, { cwd, env: installedEnvironment }, label);
 }
 
 async function assertDirectoryEmpty(directory, label) {
@@ -394,7 +401,7 @@ async function main() {
       'isolated npm global install',
     );
 
-    const executable = await locateExecutable(prefix);
+    await locateExecutable(prefix);
     const installedPackage = await locateInstalledPackage(prefix);
     await inspectInstalledContents(installedPackage, expectedFiles, expectedDistributionInventory);
     const installedManifest = JSON.parse(await readFile(path.join(installedPackage, 'package.json'), 'utf8'));
@@ -410,23 +417,21 @@ async function main() {
     const targetBeforeCli = await fileInventory(target);
     const commandOptions = { cwd: target, environment, prefix };
 
-    const version = await runAer(executable, ['--version'], commandOptions, 'aer --version');
+    const version = await runAer(['--version'], commandOptions, 'aer --version');
     assert.equal(version.stdout, `${packageJson.version}\n`, 'aer --version must print exactly the installed package version');
     assert.equal(version.stderr, '', 'aer --version must not write to stderr');
 
-    const help = await runAer(executable, ['--help'], commandOptions, 'aer --help');
+    const help = await runAer(['--help'], commandOptions, 'aer --help');
     assert.match(help.stdout, /^Usage:\r?\n  aer --help\r?\n  aer --version/m, 'aer --help omitted the CLI usage');
     assert.equal(help.stderr, '', 'aer --help must not write to stderr');
 
     const claudeDryRun = await runAer(
-      executable,
       ['init', '--host', 'claude', '--dry-run'],
       commandOptions,
       'Claude init dry-run',
     );
     assert.match(claudeDryRun.stdout, /WOULD INSTALL claude/);
     const codexDryRun = await runAer(
-      executable,
       ['init', '--host', 'codex', '--dry-run'],
       commandOptions,
       'Codex init dry-run',
@@ -435,7 +440,6 @@ async function main() {
     assert.deepEqual(await fileInventory(target), targetBeforeCli, 'help, version, or init dry-runs modified the target');
 
     const initialized = await runAer(
-      executable,
       ['init', '--host', 'both'],
       commandOptions,
       'both-host init',
@@ -447,11 +451,11 @@ async function main() {
     assert.ok(await exists(path.join(target, 'AGENTS.md')), 'both-host init omitted AGENTS.md');
 
     const targetAfterInit = await fileInventory(target);
-    const doctor = await runAer(executable, ['doctor'], commandOptions, 'aer doctor');
+    const doctor = await runAer(['doctor'], commandOptions, 'aer doctor');
     assert.match(doctor.stdout, /^AER doctor: current\r?\n$/);
-    const update = await runAer(executable, ['update', '--dry-run'], commandOptions, 'aer update --dry-run');
+    const update = await runAer(['update', '--dry-run'], commandOptions, 'aer update --dry-run');
     assert.match(update.stdout, /WOULD (?:INSTALL|UPDATE) claude\+codex/);
-    const uninstall = await runAer(executable, ['uninstall', '--dry-run'], commandOptions, 'aer uninstall --dry-run');
+    const uninstall = await runAer(['uninstall', '--dry-run'], commandOptions, 'aer uninstall --dry-run');
     assert.match(uninstall.stdout, /WOULD UNINSTALL claude\+codex/);
     assert.deepEqual(await fileInventory(target), targetAfterInit, 'doctor, update dry-run, or uninstall dry-run modified the target');
 
