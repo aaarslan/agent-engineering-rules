@@ -1,12 +1,46 @@
 # Changelog
 
+## Unreleased
+
+Source corpus:
+
+- Replaced five always-on core files with one 25-directive, model-neutral contract using stable `AE-01` through `AE-25` ownership. The kernel is validated against 90-line and 6 KiB product budgets.
+- Made design, verification, retries, delegation, cleanup, external authority, and long-run stopping proportional to scope and material risk. Generic final skeptic review and verifier subagents are no longer universal defaults.
+- Rewrote task skills as ten canonical thin deltas without recursive workflow expansion. Namespaced `aer-security-review` and `aer-verify` preserve host-native command names; all compatibility aliases were removed.
+- Reduced profiles to the canonical `prototype`, `standard`, and `high-assurance` set, with `standard` as the single declared default.
+- Kept compatibility, policy, and evaluation inputs repository-only. They remain validated research authorities but are no longer copied into target distributions.
+- Enforced thin context adapters mechanically: one heading, one routing paragraph, strict byte/line budgets, and no duplicated `AE-*` authority or composed rule prose.
+
+Claude distribution:
+
+- Generates one compact always-on contract rule, the selected profile, selected path-scoped pointers to full on-demand stack references, ten canonical skills, and explicit review skills that pass a bounded `$ARGUMENTS` packet to the `Read`/`Grep`/`Glob`-only `code-reviewer` fork.
+- Keeps model-specific guidance out of the static prompt and reserves independent review for explicit or material high-assurance risk.
+
+Codex distribution:
+
+- Generates one compact root contract with the selected profile, selected on-demand stack pointers, and ten canonical skills.
+- Validates the composed managed root against the 32 KiB project instruction default and simulates representative root-to-working-directory loads without injecting model-overlay text.
+
+Tooling and documentation:
+
+- Added the zero-dependency `aer` project CLI with `init`, `update`, read-only `doctor`, and ownership-safe `uninstall`. It is packaged for immutable GitHub/npm execution without a global install or runtime dependency.
+- Made initialization strictly greenfield: pre-existing ledgers, markers, and even byte-identical unowned collisions are rejected. Removed frozen legacy inventories, migration artifacts, route hooks, aliases, and state-less adoption code.
+- Upgraded the ownership ledger to schema 3 with portable managed-file/block hashes, root-boundary provenance, and pending old/new hashes. Git CRLF conversion no longer creates false drift; updates refuse substantive edits inside managed markers; uninstall first requires interrupted-update recovery and then restores missing, empty, blank, and unterminated host roots exactly.
+- Retained cross-platform leases, collision and link preflight, mutation-time snapshot checks, atomic replacement, pending-hash recovery, UTF-8/BOM preservation, safe Claude customization handling, bounded retired-path authority, and Codex root/catalog checks.
+- Hardened distribution builds before any output deletion: every source and recursive include must be a readable contained regular file without symlink traversal; portable destination validation rejects path escapes and Windows aliases; output roots are type-checked; and NFC/case-insensitive collision detection covers every generated path. Added Linux/Windows CI coverage and adversarial regressions for these boundaries.
+- Reduced runtime simulation to 36 canonical, installed-marker-aware plans with exact active-profile and public-skill closure. The 3,500-token target excludes subsequent references and consumer/host context.
+- Separated release validation from research preflight in CI. Both are provider-free; Linux and Windows release jobs use least-privilege permissions, timeouts, and concurrency cancellation.
+- Added a dormant, paired and blinded `host-baseline` versus `standard` live A/B runner with randomized arm order, exact plan/adapter hash authorization, expiry, provider/model/call/spend caps, shell-free adapters, fake-only tests, and zero provider calls by default or in CI.
+- The compact corpus and new delivery path make no efficacy claim until representative authorized live evaluation is completed; predecessor results are historical context only.
+- Reworked README, INSTALL, and ADOPT around the greenfield project CLI and refreshed the official capability matrix on 2026-08-29.
+
 ## 2.1.0 - 2026-07-31
 
 Delivery hardening against Claude Code capabilities re-verified 2026-07-31 (v2.1.220). Zero rule-prose changes; the evaluated corpus is untouched.
 
 Claude Code distribution (`dist/claude/`):
 
-- `pr-review` and `security-audit` skills now carry `disallowed-tools: Edit, Write, NotebookEdit`: the review-only contract is enforced mechanically for the invoking turn instead of by prose alone. The restriction clears on the next user message, so "now fix it" still works as a follow-up.
+- `pr-review` and `security-audit` skills added `disallowed-tools: Edit, Write, NotebookEdit`, blocking those direct edit tools for the invoking turn. Shell and other mutation paths remained available, so this was not a complete read-only boundary; the compact release corrects it with the custom reviewer tool allowlist above.
 - New optional tool `agent-rules/tools/file-size-guard.py` (both distributions): an advisory PostToolUse hook that nudges decomposition when the agent grows a source file past a threshold (default 500 lines, `FILE_SIZE_GUARD_THRESHOLD` env override). Git-HEAD baseline, once-per-file-per-session, always exits 0. Opt-in wiring documented in INSTALL.md; nothing is added to any settings file by the build.
 
 Docs:

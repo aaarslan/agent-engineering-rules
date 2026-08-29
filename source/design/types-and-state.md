@@ -1,7 +1,7 @@
 ---
 scope: [routed]
 load_when: modeling data, state, or domain concepts
-related: [errors-and-side-effects.md, ../core/anti-slop.md]
+related: [errors-and-side-effects.md, ../kernel/contract.md]
 ---
 
 # Types and State

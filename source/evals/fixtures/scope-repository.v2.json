@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-scope-projection-v2",
+  "contract_version": "2.0.0",
+  "task_contract_fixture": "evals/fixtures/scope-contract.v2.json",
+  "task_contract_sha256": "d7bb625057caaf383c4098df09b32daf565c7088b41747e8f03d5e74190628f9",
+  "interface_ref": "#/interface"
+}

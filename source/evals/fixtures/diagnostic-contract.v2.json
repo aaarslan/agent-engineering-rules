@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-diagnostic-recovery-v2",
+  "scenario_id": "mode-evidence-and-retry",
+  "contract_version": "2.0.0",
+  "operation": "diagnose-owner",
+  "interface": {
+    "transport": "http", "method": "POST", "path": "/diagnose-owner", "request_content_type": "application/json", "response_content_type": "application/json",
+    "errors": {"diagnostic-unavailable": {"predicates": ["probe:primary-owner"], "status": 503, "body": {"error": "diagnostic-unavailable", "probe": "primary-owner"}}}
+  },
+  "required_case_kinds": ["failed-diagnostic", "changed-diagnostic"],
+  "artifact_capture": "The harness captures ordered HTTP results in case-results.json; the runtime writes no files."
+}

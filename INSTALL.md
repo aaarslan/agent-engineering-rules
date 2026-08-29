@@ -1,73 +1,106 @@
-# Install
+# Install and update
 
-Copy one generated distribution into your repository root. Both are self-contained; nothing else is required at runtime.
+Agent Engineering Rules is installed per repository by the zero-dependency `aer` CLI. It does not require a global package, plugin, hook, daemon, or user-home configuration. Node.js 20 or newer is required.
 
-## Claude Code
+Use an immutable release tag or commit for reproducible installs:
 
-From this repository:
+    npm exec --yes --package=github:aaarslan/agent-engineering-rules#<tag> -- aer <command>
 
-    cp -R dist/claude/agent-rules dist/claude/.claude <your-repo>/
+You can instead pin the package as a development dependency and use `npm exec -- aer <command>`. Contributors to this repository can use `node tools/aer.mjs <command>`.
 
-Then either use `dist/claude/CLAUDE.md` as your repository's `CLAUDE.md` or append its contents to an existing one.
+## Initialize
 
-What you get, all through native mechanisms:
+Choose only the hosts used by the target repository:
 
-- `.claude/rules/core-*.md` — always loaded in every session
-- `.claude/rules/context-*.md` — loaded only when files matching their `paths:` globs are touched; **adjust the globs to your repository's layout**
-- `.claude/rules/profile.md` — the active delivery profile (standard by default; swap the body for `agent-rules/profiles/prototype.md` or `regulated.md`)
-- `.claude/skills/*` — nine task skills, invoked as `/bug-fix` etc. or selected automatically by description
-- `.claude/agents/code-reviewer.md` — read-only review subagent
-- `agent-rules/` — on-demand references, profiles, and utility scripts
+    aer init --host claude --target <project> --dry-run
+    aer init --host claude --target <project>
 
-Verify: run `/status` and `/context` in a session to confirm the rules loaded, then ask "Which engineering rules apply to a bug fix in this repo?" — the answer should reflect these files, not generic advice.
+    aer init --host codex --target <project>
 
-### Optional: file-size decomposition guard
+    aer init --host both --target <project>
 
-`agent-rules/tools/file-size-guard.py` turns the decomposition standard into a mechanical, advisory signal: a PostToolUse hook that nudges the agent when it grows a source file past 500 lines. It compares against the git HEAD baseline (editing an already-large file stays silent), fires at most once per file per session, and always exits 0 — it informs, never blocks. Requires `python3` on PATH.
+`--target` defaults to the current directory. `--dry-run` performs the same ownership, collision, filesystem, and budget checks without writing.
 
-To enable it for everyone who clones the repo, add to `.claude/settings.json`:
+The default profile is `standard`. The canonical alternatives are `prototype` and `high-assurance`:
 
-    {
-      "hooks": {
-        "PostToolUse": [
-          {
-            "matcher": "Edit|Write",
-            "hooks": [
-              {
-                "type": "command",
-                "command": "python3 \"$CLAUDE_PROJECT_DIR/agent-rules/tools/file-size-guard.py\"",
-                "timeout": 15
-              }
-            ]
-          }
-        ]
-      }
-    }
+    aer init --host both --profile high-assurance
 
-Override the threshold per repository with an `env` entry in the same file, e.g. `"env": { "FILE_SIZE_GUARD_THRESHOLD": "800" }`. Skip this section if the same hook is already wired in your user-scope `~/.claude/settings.json`; running both is harmless but redundant.
+Fresh installs activate no stack contexts. Enable only contexts supported by repository evidence:
 
-## Codex (CLI, IDE extension, app)
+    aer init --host codex --contexts backend-api
+    aer init --host claude --contexts web-ui,typescript-react
+    aer init --host both --contexts all
 
-From this repository:
+The context names are `web-ui`, `typescript-react`, and `backend-api`. Selecting either web context activates both because they reference each other. All full references are installed regardless; selection controls only automatic Claude routes and Codex root pointers.
 
-    cp -R dist/codex/agent-rules dist/codex/.agents <your-repo>/
+Initialization is deliberately greenfield. Existing managed markers, an ownership ledger, or any colliding generated path—including a byte-identical but unowned file—causes a refusal. The CLI never guesses that pre-existing files belong to it.
 
-Then either use `dist/codex/AGENTS.md` as your repository's `AGENTS.md` or append its contents to an existing one.
+## Update
 
-What you get:
+Fetch the desired immutable version, then update the target:
 
-- `AGENTS.md` — always-loaded root rules, skill index, stack reference pointers, and the active profile (about 10 KB, well under the 32 KiB `project_doc_max_bytes` default)
-- `.agents/skills/*` — nine task skills in the officially documented repo-scoped location, invoked as `$bug-fix` etc. or selected automatically by description
-- `agent-rules/` — on-demand references, profiles, and utility scripts
+    aer update --target <project> --dry-run
+    aer update --target <project>
 
-Verify: run `codex --ask-for-approval never "List the instruction sources you loaded."` from your repository root. To disable a skill without deleting it, add a `[[skills.config]]` entry with `enabled = false` in `~/.codex/config.toml`.
+The ledger supplies the configured hosts and preserves each host's profile and contexts when options are omitted. Pass `--host`, `--profile`, or `--contexts` only to make an explicit selection change. Reapplying the same version is byte-idempotent.
 
-## Agent-driven setup
+An update changes only proven-owned content. It rejects unrecognized collisions and modified non-customizable files, preserves supported Claude context/profile customizations, replaces one verified managed root block instead of appending another, and removes a retired path only when the ledger hash or the tool's cumulative retired-path authority proves ownership. The current retired-path list is empty and can grow only through reviewed releases.
 
-Alternatively, tell your agent: "Adopt the rules in this repository per its ADOPT.md." See [ADOPT.md](ADOPT.md).
+## Inspect with `doctor`
 
-## Notes
+`doctor` is read-only:
 
-- Nested instructions: for subdirectories that genuinely need different rules, use nested `CLAUDE.md` (Claude) or `AGENTS.override.md` (Codex). Do not duplicate the root rules there.
-- The 1.x `UserPromptSubmit` route hook is deprecated and no longer part of any install path. It remains at `tools/legacy/route-hook.mjs` for older setups only; native rules and skills replace it.
-- Updating: re-copy only the distribution-owned paths from a newer release, leaving everything else in your repository untouched. Distribution-owned: `agent-rules/`, `.claude/rules/core-*.md`, `.claude/rules/context-*.md`, `.claude/rules/profile.md`, the nine named skill directories under `.claude/skills/` or `.agents/skills/`, and `.claude/agents/code-reviewer.md`. Your own settings, rules, skills, agents, and commands under `.claude/` or `.agents/` are yours; never replace those directories wholesale. Re-apply your glob and profile edits after updating.
+    aer doctor --target <project>
+    aer doctor --target <project> --json
+
+Use it in CI or before an update to distinguish a current install from drift or invalid ownership state. It validates the state schema, configured hosts, expected inventory, content hashes, managed root-block hashes, pending recovery data, and filesystem boundaries without repairing anything.
+
+## Uninstall
+
+Preview first:
+
+    aer uninstall --target <project> --dry-run
+    aer uninstall --target <project>
+
+Limit removal with `--host claude` or `--host codex`. Uninstall removes only owned files and a managed root block whose recorded portable hash still matches. It restores the pre-install root-file boundary exactly, including a missing, empty, blank, or unterminated root, and writes or removes the state ledger last. Modified owned content stops the operation; use `--keep-modified` only when you intentionally want those files left in place and reported. An interrupted update must be recovered with `aer update` before uninstall can proceed.
+
+## Ownership and recovery
+
+Commit `.agent-engineering-rules-state.json` with the generated payload. Schema version 3 records only repository-relative paths, host/profile/context selections, portable generated-file and managed-block hashes, root-boundary provenance, and a bounded pending-install journal. It contains no machine-specific paths. Ownership hashing normalizes CRLF to LF so a normal Git checkout remains valid across platforms; all other bytes remain significant, while mutation-time concurrency checks remain byte-exact. Do not edit the ledger or root markers by hand.
+
+Each mutation holds a target-scoped lease from before ownership is read until the final ledger write. Atomic sibling replacements and mutation-time snapshot checks prevent a successful run from silently overwriting concurrent edits. The pending journal records old and planned hashes before payload changes, allowing a later invocation to classify an interrupted operation safely.
+
+If the CLI reports an unverifiable lock or abandoned recovery guard, follow the filename-specific diagnostic and remove it only after confirming no installer is running for that target. Symlinked, hard-linked, malformed, or otherwise unverifiable locks and owned files are preserved for inspection.
+
+The CLI preserves valid UTF-8 host content outside the managed root block, including a UTF-8 BOM. It rejects path escapes, symbolic-link traversal, duplicate/case-aliased destinations, invalid state, and unsafe output roots before mutation; atomic replacement does not mutate other hard links to the prior inode. For Codex it also checks the composed root against the configured project-instruction limit and checks this package's contribution to the skill catalog.
+
+## Installed payloads
+
+Claude receives:
+
+- one managed block in `CLAUDE.md`;
+- `.claude/rules/core-*.md` and the active `.claude/rules/profile.md`;
+- selected thin `.claude/rules/context-*.md` route files;
+- ten `.claude/skills/*` task skills;
+- `.claude/agents/code-reviewer.md`; and
+- `agent-rules/` references, profiles, and utilities.
+
+Codex receives:
+
+- one managed block in `AGENTS.md` containing the contract, selected profile, skill index, and selected context pointers;
+- ten `.agents/skills/*` task skills; and
+- `agent-rules/` references, profiles, and utilities.
+
+Research, compatibility records, policy maps, evaluation fixtures, live-evaluation tooling, source files, and repository documentation are not installed into target projects.
+
+For Claude, edit only selected context-rule `paths:` globs when the generated patterns do not match the project. The ledger preserves the complete customized file and reports when upstream prose cannot be merged automatically. Use CLI options for normal profile/context changes. For Codex, put repository-owned instructions outside the managed markers and use CLI options instead of editing inside them.
+
+## Optional Claude size guard
+
+`agent-rules/tools/file-size-guard.py` is an advisory `PostToolUse` hook that reports when an edited source file grows beyond 500 lines. It is shipped but never enabled automatically. Projects that choose to use it must wire it into their own repository-scoped Claude settings and can set `FILE_SIZE_GUARD_THRESHOLD` to a different limit. It always exits zero and is not an enforcement boundary.
+
+## Verify
+
+For Claude, inspect `/status` and `/context`, then ask which project rules apply to a bounded task. For Codex, start from the target root and ask it to list loaded instruction sources; confirm the project-root `AGENTS.md` is present. Run `aer doctor` for the mechanical ownership check.
+
+For agent-driven adoption, use [ADOPT.md](ADOPT.md).

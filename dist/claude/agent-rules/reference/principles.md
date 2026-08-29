@@ -1,6 +1,6 @@
 # Design Principles
 
-Applied judgment, not ceremony. Every principle below yields to priorities.
+Applied judgment, not ceremony. Every principle below yields to the universal contract.
 
 - **KISS.** Prefer the simplest solution that satisfies the real requirement. Boring beats clever.
 - **YAGNI.** Do not build extensibility, abstraction, configuration, or infrastructure for hypothetical future needs. Build for the requirement in front of you.

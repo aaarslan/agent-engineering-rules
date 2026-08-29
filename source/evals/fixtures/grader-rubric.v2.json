@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "grader_id": "exact-json-v2",
+  "rule": "Parse actual and expected artifacts as JSON and require exact deep structural equality.",
+  "pass_score": 1,
+  "fail_score": 0
+}

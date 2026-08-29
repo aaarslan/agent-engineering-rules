@@ -7,7 +7,7 @@ The active profile decides which new tests are required. This file owns timing a
 - For features, write profile-required tests after behavior and contracts stabilize. During construction, keep the static rail green instead of testing scaffolding repeatedly.
 - For a bug fix, reproduce the failure before editing when practical. Keep the reproduction as regression protection when the active profile requires or permits it.
 - Before a refactor, run the baseline and exercise the flow before and after. Add characterization coverage only when needed to prove preservation.
-- Under prototype, do not add tests outside the exceptions defined by the profile. Under regulated, map required tests and inspections to the traceability record defined by the profile.
+- Under prototype, use the profile's narrower default; repository gates or material exposure, data, or regression risk can still require durable coverage under AE-21. Under high assurance, map required tests and inspections to the traceability record defined by the profile.
 
 ## What
 
@@ -20,7 +20,7 @@ The active profile decides which new tests are required. This file owns timing a
 
 ## Execution discipline
 
-- Prefer targeted tests after stabilization; failures follow verification.
+- Prefer targeted tests after stabilization; failures follow [verification](verification.md).
 - Run the full suite when the change is cross-cutting, the active profile requires it, or the repository defines it as a completion gate. Re-run a green test only when a later fix could affect it.
 - Use quiet, failures-only output where the runner supports it.
 - Match the repo's framework and neighboring test patterns. Keep tests deterministic and independent.

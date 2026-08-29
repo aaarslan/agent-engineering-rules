@@ -1,21 +1,24 @@
 # Adopt Agent Engineering Rules
 
-Agent-driven adoption: give your agent this file and let it wire the distribution into the host repository from evidence. Copy semantics: the generated files become the host's own; regenerate from a newer release to update.
+Use this procedure to initialize or update Agent Engineering Rules in another repository. The surrounding task still defines the objective; this file defines only adoption mechanics.
 
-## Integrate
+1. Resolve the target root from version control or the nearest directory that owns the build manifests. Stop on genuine ambiguity.
+2. Identify the hosts actually used by the project: `claude`, `codex`, or `both`. Do not install a second instruction root merely because another tool recognizes its filename.
+3. Choose `prototype`, `standard`, or `high-assurance` from explicit requirements. Default to `standard`; never infer assurance or regulatory obligations from an industry label.
+4. Inspect manifests, lockfiles, build files, and source directories. Activate only evidenced contexts: `web-ui`, `typescript-react`, and/or `backend-api`. Fresh installs otherwise use `none`.
+5. Use an immutable tagged or commit-pinned package and preflight the exact target:
 
-1. Resolve the host root from VCS or the nearest directory owning manifests and build configuration; record ambiguity.
-2. Identify the host agent. Claude Code uses `dist/claude/`; Codex surfaces use `dist/codex/`. Install both distributions when both agents are in use; they share `agent-rules/` content and do not conflict.
-3. Copy the distribution into the host root: the `.claude/` or `.agents/` directory, the `agent-rules/` directory, and the root instruction file (`CLAUDE.md` or `AGENTS.md`). If the host already has a root instruction file, append the distribution root's contents instead of replacing, preserving existing instructions.
-4. Inspect manifests, lockfiles, build files, and source directories. For Claude, edit the `paths:` globs in `.claude/rules/context-*.md` to match the host's actual layout, and delete context rules for stacks the host does not use. For Codex, delete unused stack references from `agent-rules/reference/` and their pointer lines in `AGENTS.md`.
-5. Select one profile from evidence: an explicit host selection wins; otherwise default to standard. Never infer regulatory obligations from industry labels. For Claude, set `.claude/rules/profile.md`; for Codex, replace the profile section of `AGENTS.md`.
-6. For an uncovered major stack, use `source/contexts/_template.md` as a starting structure, fill it from verified commands and APIs, and install it host-natively: for Claude, save it under `.claude/rules/` and replace the template's internal frontmatter with `paths:` globs verified against the host layout (internal `scope`/`load_when`/`related` keys are this repository's source metadata, not Claude schema); for Codex, save the body without frontmatter under `agent-rules/reference/` and add a pointer line to `AGENTS.md`.
-7. Use existing linters, typecheckers, hooks, or CI for hard requirements. Do not add infrastructure merely to complete adoption.
+       npm exec --yes --package=github:aaarslan/agent-engineering-rules#<tag> -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
 
-## Verify and report
+6. Resolve every reported collision; never force ownership. Rerun without `--dry-run`, then commit the generated payload and `.agent-engineering-rules-state.json` together.
+7. On an already initialized project, use `aer doctor` and `aer update`; do not rerun `init`. Omitted update selections are read from the ledger.
+8. For Claude, adjust only selected context-rule `paths:` globs when verified project layout requires it. Use CLI options for normal profile/context changes.
+9. For Codex, keep repository-owned instructions outside the managed `AGENTS.md` markers. Never hand-edit the managed block or state ledger.
+10. Keep deterministic requirements in the project's permissions, linters, typecheckers, hooks, tests, or CI. The installed prose is not a security boundary.
+11. Run the target's relevant checks plus `aer doctor`. Report the selected host, profile, contexts, files changed, and verification evidence.
 
-- Claude Code: run `/status` and `/context`; confirm the core rules and profile loaded. Ask "Which engineering rules apply to a bug fix in this repo?" and confirm the answer reflects the installed skills and rules.
-- Codex: run `codex --ask-for-approval never "List the instruction sources you loaded."` and confirm the root `AGENTS.md` appears.
-- For supported web/TypeScript hosts, `bash agent-rules/tools/slop-scan.sh <host-root>` supplies warnings, not proof.
+Initialization is greenfield and refuses existing markers, ledgers, or unowned colliding paths even when their bytes happen to match. Do not delete or overwrite such content unless the repository owner explicitly resolves it.
 
-Report the host root, host agent(s), files copied, glob and profile decisions with evidence, deleted or added contexts, enforcement gaps, and unresolved uncertainty.
+The first successful initialization owns exact generated paths, not whole `.claude/`, `.agents/`, or `agent-rules/` directories. Existing unrelated configuration remains outside its authority. `update` and `uninstall` act only on cryptographically proven owned content.
+
+For an unsupported major stack, start from `source/contexts/_template.md`, verify commands and APIs against the target, and add it as a clearly project-owned file outside the generated inventory. Do not duplicate the universal contract.

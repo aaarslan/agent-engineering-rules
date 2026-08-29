@@ -1,12 +1,12 @@
 # Performance
 
-Correct and clear first. Performance ranks below simplicity and maintainability in priorities; a measurement showing a violated requirement makes the fix a correctness matter, not a reordering of the hierarchy.
+Correct and clear first. Performance work requires measurement under the universal contract; a violated requirement makes the fix a correctness matter, not speculative optimization.
 
 ## Rules
 
 - No premature optimization. Do not complicate code for speed without a measurement showing the cost and a requirement it violates.
 - Measure before and after. An optimization without a benchmark, profile, or production metric is a guess; report the numbers.
-- Fix the algorithm and the I/O pattern before micro-tuning. An O(n²) loop or a query-per-item beats any amount of caching cleverness.
+- Fix the algorithm and the I/O pattern before micro-tuning. Eliminating an O(n²) loop or a query-per-item beats any amount of caching cleverness.
 
 ## Cheap habits that are always worth it
 

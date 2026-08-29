@@ -1,41 +1,28 @@
 ---
 scope: [routed]
-load_when: before implementing any non-trivial change
+load_when: when a change requires a design decision or implementation plan
 related: [../design/principles.md, ../design/boundaries.md, implementation.md]
 ---
 
-# Design Checkpoint
+# Proportional Design
 
-Before implementation, write a concise design assessment. For small changes this is a few lines; skip it only for trivial mechanical edits.
+Choose the direct path or plan path before editing. Do not produce a design artifact merely to satisfy a ritual.
 
-## Assessment
+## Direct path
 
-- Current behavior (evidence-based, with file references)
-- Desired behavior
-- Smallest safe change that fully achieves it
-- Existing project pattern to follow
-- Correct architectural layer for the change
-- Invariants that must hold
-- Type or data-model changes
-- Error-handling strategy
-- Security considerations
-- Test strategy
-- Compatibility risks (contracts, callers, stored data)
-- What deliberately stays unchanged
+Proceed directly when the change is localized and reversible, desired behavior is clear, an existing pattern applies, and it does not introduce a boundary, alter a public or stored-data contract, or create a material security or external-effect decision. State the intended outcome, affected area, and verification approach; trivial mechanical edits need no written checkpoint.
 
-## Self-check
+## Plan path
 
-Answer honestly before writing code:
+Write a concise plan when the change crosses components or contracts, changes state or persistence, introduces a dependency or boundary, has irreversible or security-sensitive effects, carries meaningful ambiguity, or needs multiple independently verifiable increments.
 
-- [ ] Is this the simplest viable solution, not just the first one found?
-- [ ] Is the responsibility in the correct module or layer?
-- [ ] Is every abstraction real (second consumer, genuine boundary, or testability need per [principles](../design/principles.md)), not speculative?
-- [ ] Are business rules centralized, not duplicated?
-- [ ] Are invalid states prevented where practical?
-- [ ] Are errors explicit rather than swallowed or implied by null?
-- [ ] Are side effects isolated from deterministic logic?
-- [ ] Is it testable without excessive mocking?
-- [ ] Does it preserve existing contracts?
-- [ ] Does it match repository conventions?
+Include only applicable decisions:
 
-A "no" on any item means redesign or an explicit, stated justification. Do not proceed silently.
+- evidence for current and desired behavior
+- smallest complete change and existing pattern to follow
+- affected boundaries, contracts, invariants, callers, and stored data
+- error, security, compatibility, migration, and recovery behavior
+- verification for each meaningful increment
+- what deliberately stays unchanged
+
+If the user or host already supplied a current accepted plan, validate it against repository evidence and continue from it. Do not write a second plan unless new evidence invalidates a decision. During implementation, return here only when evidence changes the chosen path or plan.

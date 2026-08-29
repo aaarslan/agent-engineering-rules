@@ -1,7 +1,7 @@
 ---
 scope: [routed]
 load_when: writing tests or deciding what and when to test
-related: [../workflow/verification.md, ../design/errors-and-side-effects.md, ../profiles/prototype.md, ../profiles/standard.md, ../profiles/regulated.md]
+related: [../workflow/verification.md, ../design/errors-and-side-effects.md, ../profiles/prototype.md, ../profiles/standard.md, ../profiles/high-assurance.md]
 ---
 
 # Testing
@@ -13,7 +13,7 @@ The active profile decides which new tests are required. This file owns timing a
 - For features, write profile-required tests after behavior and contracts stabilize. During construction, keep the static rail green instead of testing scaffolding repeatedly.
 - For a bug fix, reproduce the failure before editing when practical. Keep the reproduction as regression protection when the active profile requires or permits it.
 - Before a refactor, run the baseline and exercise the flow before and after. Add characterization coverage only when needed to prove preservation.
-- Under prototype, do not add tests outside the exceptions defined by [the profile](../profiles/prototype.md). Under regulated, map required tests and inspections to the traceability record defined by [the profile](../profiles/regulated.md).
+- Under prototype, use the profile's narrower default; repository gates or material exposure, data, or regression risk can still require durable coverage under AE-21. Under high assurance, map required tests and inspections to the traceability record defined by [the profile](../profiles/high-assurance.md).
 
 ## What
 

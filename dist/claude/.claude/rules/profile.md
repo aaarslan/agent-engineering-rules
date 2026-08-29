@@ -1,4 +1,4 @@
-<!-- Active profile: standard. To switch, replace the body below with agent-rules/profiles/prototype.md or agent-rules/profiles/regulated.md. -->
+<!-- Active profile: standard. Change it with aer update --profile; do not edit this managed file for a normal profile switch. -->
 
 # Standard Profile
 

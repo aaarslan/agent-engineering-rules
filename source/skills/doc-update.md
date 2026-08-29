@@ -1,14 +1,13 @@
 ---
 name: doc-update
-description: Write, update, or audit documentation with every factual claim verified against the repository. Use for README, guides, API docs, and doc audits.
+description: Write or audit documentation against current evidence.
 ---
 
 # Documentation Update
 
-Documentation is a claim about the system; wrong docs are worse than no docs. Verify every command, flag, path, and behavior claim against the current repository before writing it. For material factual or compatibility claims, finish with a skeptic pass over the changed text.
+- Treat documentation as a contract: verify commands, flags, paths, versions, examples, and behavior before writing them.
+- Use current repository evidence for local claims and current authoritative primary sources for platform or compatibility claims; date unstable claims.
+- Separate current behavior from proposals, limitations, and pending work. Never promote an assumption or unavailable check into fact.
+- Keep examples public and repository-relative; do not commit personal paths, credentials, private hosts, or machine-specific output.
 
-{{include:contexts/documentation.md}}
-
-## Completion
-
-Finish only when every command shown was executed or verified against repository scripts, every claim maps to a current file, and nothing aspirational is stated as fact.
+Finish when shown commands and links resolve, factual claims have applicable evidence, and generated or related docs agree.

@@ -1,0 +1,108 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-normalize-record-v2",
+  "scenario_id": "exact-contract-and-lifecycle",
+  "treatment_id": "host-baseline",
+  "experiment_id": null,
+  "experiment_arm_id": null,
+  "experiment_factor_value": null,
+  "cell_id": null,
+  "host": "codex",
+  "host_version": "example-not-executed",
+  "model": "example-not-executed",
+  "model_revision": "example-not-executed",
+  "provider": "openai",
+  "effort": "not-recorded",
+  "instructions": {
+    "expanded_artifact": {
+      "name": "expanded-instructions.txt",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "text/plain"
+    },
+    "components": {
+      "kernel": {},
+      "profile": {},
+      "skill": {},
+      "plugin": {},
+      "hook": {},
+      "policy": {}
+    }
+  },
+  "instruction_assembly": {
+    "name": "instruction-assembly.json",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "content_type": "application/json"
+  },
+  "execution_config": {
+    "name": "execution-config.json",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "content_type": "application/json"
+  },
+  "repository_revision": "0000000000000000000000000000000000000000",
+  "task_contract_sha256": "337684cb08724963cae6eac31bc4224c53186dd94bac2d24c4d79d17f4eee4fd",
+  "permissions": "not-recorded",
+  "sandbox": "not-recorded",
+  "network": "not-recorded",
+  "approval_mode": "not-recorded",
+  "provider_authorization": {
+    "authorized": false,
+    "reference": null,
+    "spend_cap_usd": 0
+  },
+  "subagents": {
+    "count": 0,
+    "max_depth": 0,
+    "spend_usd": 0,
+    "nodes": []
+  },
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "latency_ms": 0,
+  "tool_calls": [],
+  "test_runs": [],
+  "retries": [],
+  "cost_usd": 0,
+  "raw_output": {
+    "name": "raw-model-output.txt",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "content_type": "text/plain"
+  },
+  "artifacts": {
+    "expanded-instructions.txt": {
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "text/plain"
+    },
+    "instruction-assembly.json": {
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "application/json"
+    },
+    "execution-config.json": {
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "application/json"
+    },
+    "raw-model-output.txt": {
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "text/plain"
+    },
+    "grader-output.json": {
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_type": "application/json"
+    }
+  },
+  "grader": {
+    "id": "exact-json-v2",
+    "version": "2.0.0",
+    "rubric_sha256": "a7b78b8c1cb26e7624d1dcf0a6ad4fa1ace183d2fa17df0bfb6969a61cbe87b8",
+    "output_artifact": "grader-output.json",
+    "output_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "execution_status": "invalid",
+  "artifact_status": "invalid",
+  "grader_status": "invalid",
+  "strict_score": null,
+  "scope_drift_score": null,
+  "evidence_truthfulness_score": null
+}

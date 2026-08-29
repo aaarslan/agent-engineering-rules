@@ -1,12 +1,12 @@
 ---
 scope: [routed]
 load_when: designing or reviewing code structure
-related: [boundaries.md, ../architecture/decision-making.md, ../core/anti-slop.md]
+related: [boundaries.md, ../architecture/decision-making.md, ../kernel/contract.md]
 ---
 
 # Design Principles
 
-Applied judgment, not ceremony. Every principle below yields to [priorities](../core/priorities.md).
+Applied judgment, not ceremony. Every principle below yields to the [universal contract](../kernel/contract.md).
 
 - **KISS.** Prefer the simplest solution that satisfies the real requirement. Boring beats clever.
 - **YAGNI.** Do not build extensibility, abstraction, configuration, or infrastructure for hypothetical future needs. Build for the requirement in front of you.

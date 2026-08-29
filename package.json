@@ -1,0 +1,36 @@
+{
+  "name": "agent-engineering-rules",
+  "version": "0.0.0-development",
+  "private": true,
+  "description": "Project-local engineering rules for Claude Code and OpenAI Codex",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaarslan/agent-engineering-rules.git"
+  },
+  "homepage": "https://github.com/aaarslan/agent-engineering-rules#readme",
+  "bugs": "https://github.com/aaarslan/agent-engineering-rules/issues",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "aer": "tools/aer.mjs"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/**",
+    "!dist/**/agent-rules/metadata/**",
+    "tools/aer.mjs",
+    "tools/install-distribution.mjs",
+    "tools/build-distributions.mjs",
+    "tools/README.md"
+  ],
+  "scripts": {
+    "test": "node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs",
+    "test:cli": "node --test tools/aer.test.mjs tools/install-distribution.test.mjs",
+    "validate": "node tools/validate-public-content.mjs && node tools/validate-source.mjs && node tools/build-distributions.mjs && node tools/validate-distributions.mjs",
+    "validate:research": "node --test tools/preflight-evals.test.mjs tools/live-ab-eval.test.mjs && node tools/preflight-evals.mjs && node tools/validate-runtime-loads.mjs --json"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-instruction-ingestion-v2",
+  "contract_version": "2.0.0",
+  "task_contract_fixture": "evals/fixtures/ingestion-contract.v2.json",
+  "task_contract_sha256": "c95b7537c98c286ac89e77d9cd0484aa2006907e094b10660b5236f197c8f3a5",
+  "interface_ref": "#/interface"
+}

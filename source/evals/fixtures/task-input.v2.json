@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-normalize-record-v2",
+  "cases": [
+    {"id": "initial", "kind": "valid-initial", "request": {"display_name": "  Ada Lovelace  ", "roles": ["maintainer", "reviewer", "maintainer"]}},
+    {"id": "repeat", "kind": "valid-repeat", "request": {"display_name": "  Ada Lovelace  ", "roles": ["maintainer", "reviewer", "maintainer"]}},
+    {"id": "bad-name", "kind": "invalid-display-name", "request": {"display_name": 42, "roles": ["maintainer"]}},
+    {"id": "bad-roles", "kind": "invalid-roles", "request": {"display_name": "Ada Lovelace", "roles": "maintainer"}},
+    {"id": "bad-role-entry", "kind": "invalid-role-entry", "request": {"display_name": "Ada Lovelace", "roles": ["maintainer", 42]}},
+    {"id": "recovery", "kind": "valid-recovery", "request": {"display_name": "  Grace Hopper ", "roles": ["reviewer", "reviewer"]}}
+  ]
+}

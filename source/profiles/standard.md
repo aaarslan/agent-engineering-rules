@@ -1,7 +1,7 @@
 ---
 scope: [profile]
-load_when: ordinary maintained software without an explicit prototype or regulated profile
-related: [../workflow/verification.md, ../quality/testing.md]
+load_when: ordinary maintained software without an explicit prototype or high-assurance profile
+related: [../kernel/contract.md, ../workflow/verification.md, ../quality/testing.md]
 ---
 
 # Standard Profile

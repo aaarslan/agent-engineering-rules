@@ -1,13 +1,11 @@
 # Engineering rules for Claude Code
 
-Always-active engineering rules load from `.claude/rules/` (core rules unconditionally, stack rules when matching files are touched). Task-specific workflows are skills; invoke them directly or let Claude select them by description:
+The contract and profile load from `.claude/rules/`; stack rules are path-scoped. Task deltas load from `.claude/skills/` when invoked or selected by description.
 
-/feature-implementation, /bug-fix, /refactor, /pr-review, /database-change, /security-audit, /doc-update, /ui-styling
+`/autonomous-mission` is explicit-only for a broad objective.
 
-Exception: /autonomous-mission is invoke-only by design; Claude never selects it automatically. Use it explicitly when handing over one large objective.
+Invoke `/pr-review` only with changed paths and the complete diff for that bounded path scope; invoke `/aer-security-review` with a trust boundary and entrypoints. They fork into `.claude/agents/code-reviewer` without conversation history and with only `Read`, `Grep`, and `Glob`; never use one to repeat routine checks. Use `/aer-verify` for the explicit risk-triggered workflow; the native `/verify` remains available.
 
-For review-only passes, the `code-reviewer` subagent in `.claude/agents/` reviews without edit access.
+Read `agent-rules/reference/` only when a skill or touched concern calls for it. Put hard requirements in permissions, sandboxes, hooks, schemas, tests, and CI—not prose.
 
-Deeper design, quality, and orchestration references live in `agent-rules/reference/`; read them when a skill or rule points there. Hard requirements belong in linters, typecheckers, tests, hooks, and CI, not in prose.
-
-User and project instructions override stylistic preferences in these rules. They must not silently override correctness, security, or data integrity; surface the conflict instead.
+User and project instructions override style preferences; they cannot silently override correctness, security, or integrity. Surface conflicts.

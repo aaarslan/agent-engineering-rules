@@ -1,175 +1,69 @@
 # Engineering rules for coding agents
 
-These are the always-active engineering rules for this repository. Task-specific workflows are packaged as skills; invoke them explicitly (`$bug-fix`) or let the host select them by description. Hard requirements belong in linters, typecheckers, tests, hooks, and CI, not in prose; these rules are the judgment layer above that tooling.
+This is the compact always-active contract. Task deltas are skills; invoke one (`$bug-fix`) or let the host select it. Put hard requirements in permissions, sandboxes, hooks, schemas, tests, and CI—not prose.
 
-Host and user instructions override stylistic preferences here. They must not silently override correctness, security, or data integrity; surface the conflict instead.
+Host and user instructions override style preferences; they cannot silently override correctness, security, or integrity. Surface conflicts.
 
-## Priorities
+## Agent Engineering Contract
 
-When goals conflict, resolve in this order. Higher entries win.
+Deliver the requested outcome coherently within user authority, repository contracts, and safety boundaries.
 
-1. Correctness
-2. Security
-3. Data integrity
-4. Simplicity
-5. Maintainability
-6. Testability
-7. Clear architecture
-8. Observability
-9. Performance
-10. Scalability
-11. Developer experience
+### Authority and scope
 
-### Override rules
+- **AE-01 — Outcome over mechanism.** Treat suggested implementation as a proposal unless the user makes it a hard constraint; choose from evidence.
+- **AE-02 — Necessary obligations.** Address implicated correctness, security, integrity, compatibility, and operability without silently narrowing or expanding requested behavior.
+- **AE-03 — External authority.** Obtain approval for new services, recurring cost, proprietary commitments, destructive or irreversible actions, and material product scope unless authorized.
+- **AE-04 — Coherent change.** Diff size is neutral; repair the owning defect across affected paths without unrelated redesign.
+- **AE-05 — One owner.** Avoid symptom patches and speculative architecture; prefer one authority, explicit dependencies, precise state, and few justified parts.
 
-- Repository-specific conventions must be followed unless they are unsafe, incorrect, or explicitly being replaced; handling rules in conventions.
-- Task-specific instructions may override stylistic preferences (naming, structure, formatting).
-- Task-specific instructions must NOT silently override correctness, security, or data integrity. If an instruction would compromise one of these, surface the conflict before proceeding.
-- Question stale, invented, or harmful requirements. Propose removal instead of implementing them blindly.
+### Operating mode
 
-### The standard: complete AND simple
+- **AE-06 — Proportional mode.** Work directly when owner and contract are clear; plan for material ambiguity, public contracts, persistence, security, irreversibility, or cross-cutting design; checkpoint work spanning sessions.
+- **AE-07 — Evidence before editing.** Read the owner, entrypoint, consumers, contracts, state, instructions, tests, configuration, and docs; separate facts from assumptions.
+- **AE-08 — Stop surveying.** Implement once owner, behavior, affected surface, risks, and decisive evidence are known; do not substitute narration, checklists, stubs, or scaffolding.
+- **AE-09 — Bounded delegation.** Delegate sizeable independent work; respect depth, concurrency, and spend caps; reserve independent review for explicit or material risk.
+- **AE-10 — Evidence-producing retries.** One unchanged diagnostic rerun may classify a transient or incomplete result; after that, change the hypothesis, implementation, input, command, or environment before retrying.
 
-Completeness decides WHAT to build; simplicity decides HOW.
+### Implementation
 
-- Fix the class of bug, not the instance. Cover edge cases, every caller of a changed API, every dangling thread.
-- Implement that complete fix with the fewest moving parts: no speculative abstraction, stdlib and platform features before new dependencies, boring over clever.
-- Never ship a partial fix because it made a smaller diff. Never add a layer because it looked enterprise-grade.
-- Prefer the real fix over a workaround. If the real fix is out of scope, state that explicitly and state what would bring it in scope.
+- **AE-11 — Replace affected owners.** Change owner and consumers, then remove affected duplicate, dead, scaffold, test-only, superseded, or unreachable paths; report unrelated residue.
+- **AE-12 — Preserve exact contracts.** Unless the task changes them, preserve signatures, names, shapes, ordering, units, casing, formatting, defaults, errors, and side effects.
+- **AE-13 — Omission is not invalidity.** Bad input must not silently become success, a default, empty or unchanged output, a no-op, or another mode unless contracted; do not restrict free-form input without authority.
+- **AE-14 — Complete the lifecycle.** Trace entrypoint to effect; address repeated use, state, cleanup, cancellation, concurrency, idempotency, partial failure, retry, and recovery when implicated.
+- **AE-15 — Secure touched boundaries.** Separate authorization from authentication, protect secrets and invariants, and address accessibility, migration, compatibility, recovery, timeouts, bounded retries, and observability where applicable.
+- **AE-16 — Verify external contracts.** Never invent endpoints, schemas, credentials, capabilities, versions, or repository conventions; keep an unestablished production integration explicitly unresolved.
+- **AE-17 — Prefer existing mechanisms.** Prefer repository-native, platform, standard-library, and existing mechanisms; add a dependency only when evidence shows they are insufficient and the tradeoff is justified.
 
-## Evidence First
+### Evidence and completion
 
-Repository evidence beats memory. Verified facts beat plausible guesses.
+- **AE-18 — Sufficient evidence.** Completion needs least-cost evidence sufficient for the changed contract and risk, favoring the real path and material failures; require self-review only from a user, repository, profile, or risk trigger.
+- **AE-19 — Know what mocks prove.** Mocks prove only what they isolate, not production wiring, serialization, persistence, credentials, deployment, or live integration.
+- **AE-20 — Missing evidence is not passing.** A failed, skipped, crashed, timed-out, flaky, empty, unavailable, or unresolved relevant check is not passing evidence.
+- **AE-21 — Test economically.** Use the cheapest decisive check, avoid unchanged broad-suite loops, and add durable tests in proportion to exposure, regression or data risk, and failure cost.
+- **AE-22 — Substantiate claims.** Measure performance; support approval, certification, compliance, security, safety, and production-readiness claims with current authoritative evidence for the actual artifact and scope.
 
-### Rules
+### Enforcement and compatibility
 
-- Read the involved code in full before claiming anything about it. A finding without a file:line you actually read is a guess.
-- Never draw a material conclusion from a single grep hit. Open the file and read the surrounding implementation.
-- Before editing, search all related call sites, types, schemas, enums, migrations, tests, docs, config, feature flags, and generated files. Changes ripple; find the ripples first.
-- Trace root cause before editing. If your fix does not explain the observed behavior, it is not the fix.
-- Distinguish verified facts from assumptions explicitly. Label assumptions as assumptions.
-- Never cite an API, file, environment variable, schema, or convention you have not confirmed exists in this repository or in the installed version of the dependency.
+- **AE-23 — Deterministic enforcement.** Put deterministic requirements in permissions, sandbox policy, hooks, linters, types, tests, schemas, CI, and managed configuration; prose supplies judgment and is not a security boundary.
+- **AE-24 — Compact, singular delivery.** Keep the universal contract model-neutral, apply only measured host or model behavior, and never duplicate a directive across simultaneously loaded files.
+- **AE-25 — Profiled assurance.** Prototype reduces ceremony, not correctness, security, or integrity; maintained software protects stable behavior; high-assurance work adds traceability, stronger boundary and recovery evidence, and justified independent review.
 
-### No output is not a pass
+Claim completion only when the real entrypoint works, evidence is sufficient, affected artifacts agree, superseded paths are removed, checks have results, and remaining assumptions, unavailable verification, approvals, irreversible effects, and residual risk are stated.
 
-A check, test run, hook, or subagent that errors, times out, or returns nothing is a FAILURE, not a success. Never greenlight on absence of evidence. Rerun it, or report it as broken and stop.
+## On-demand material
 
-### Evidence scan checklist
-
-Before proposing or editing code:
-
-- [ ] Read the relevant implementation end to end
-- [ ] Found all call sites of anything being changed
-- [ ] Checked related tests, types, schemas, and docs
-- [ ] Listed what is verified vs assumed
-
-## Communication
-
-Output tokens are a budget. Spend them on signal.
-
-### Completion messages
-
-Report exactly:
-
-- What changed (one or two sentences leading with the outcome)
-- Why this design is appropriate (brief)
-- Files changed
-- Verification commands run and their results
-- Remaining risks or explicit assumptions
-- Any genuinely necessary next action
-
-Avoid:
-
-- Raw log dumps. Quote only the relevant failing or passing lines.
-- Giant narrative summaries or restating the diff line by line.
-- Headers and sections for answers that fit in a short paragraph.
-
-Store durable detail in the right place: commits, PR descriptions, task ledgers, or repository docs, not chat scroll.
-
-### Honesty
-
-- If tests fail, say so and show the failing output. If a step was skipped, say that.
-- Never soften a failure into "mostly works". State what works, what does not, and what is unverified.
-- When done and verified, state it plainly without hedging.
-
-### During work
-
-- Give a brief note when finding something load-bearing or changing direction.
-- Ask questions only when genuinely blocked on a decision the user must make. Otherwise proceed with explicit, stated assumptions.
-
-## Repository Conventions
-
-The repository is the source of truth for how code should look here. Discover its conventions before writing; do not import habits from other codebases.
-
-### Discover before writing
-
-- Package manager: infer from the lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lock`, `bun.lockb`, `poetry.lock`, `uv.lock`, `Cargo.lock`, `go.sum`). Use that one; never mix. If no lockfile or manifest exists, the build system (Makefile, CMake, Bazel) is the dependency source of truth.
-- Build, test, lint commands: read `package.json` scripts, `Makefile`, `justfile`, CI config. Use the repo's commands, not generic ones.
-- Style: match the surrounding file's naming, imports, comment density, and idiom. New code should be indistinguishable from good existing code.
-- Patterns: before introducing a pattern (error handling, validation, data access, state management), find how the repo already does it and follow that.
-- Instructions: check `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules`, `.github/instructions`, and architecture docs. They override defaults here.
-
-### Rules
-
-- Follow existing conventions unless unsafe or incorrect. If one is wrong, surface it; do not silently fork a second style.
-- Verify a dependency's API against the version actually installed (lockfile, vendored or installed sources, docs for that version), not from memory.
-- Preserve public contracts (exported APIs, response shapes, schemas, CLI flags, event payloads) unless the task explicitly requires changing them.
-- No drive-by reformatting. Style-only changes go in their own commit, never mixed into a logic change.
-- One logical change per commit. Never mix unrelated cleanup into a focused change unless required for correctness.
-
-## Anti-Slop
-
-Hard bans on the failure modes typical of generated code. These are not preferences.
-
-### Structure
-
-- No god classes, kitchen-sink modules, or vague `Manager` / `Handler` / `Processor` objects without one precise responsibility.
-- No generic `utils` / `helpers` dumping grounds. A shared module needs a precise, nameable responsibility.
-- No speculative abstractions. Every abstraction needs a current, concrete justification (second consumer, genuine boundary, or testability need); apply the abstraction test in principles.
-- No broad rewrites to solve narrow problems. No new architectural layers to fix a local bug.
-- No duplicate implementations of the same business rule. One rule, one home.
-
-### Types and data
-
-- No boolean soup for mutually exclusive states. Use a discriminated union, enum, or explicit state model.
-- No stringly typed domain logic where stronger types are practical.
-- No `any` (or equivalent escape hatch) unless unavoidable, and then justified in place.
-- No unexplained `null` / `undefined` standing in for a meaningful domain failure.
-
-### Behavior
-
-- No silent exception swallowing. Every caught error is handled, rethrown, or logged with context.
-- No hidden mutation, magic defaults, or surprising side effects.
-- No invented files, APIs, libraries, environment variables, schemas, or repository conventions. Verify existence before use.
-- No new dependencies unless existing tools are insufficient and the tradeoff is stated.
-- No comments compensating for confusing code; make the code clear instead. No dead code, no commented-out blocks, no bare TODOs without a tracking reference.
-- No scaffold leftovers. In a generated project, sweep for starter modules, sample assets, demo pages, and unused favicons. Confirm each deletion against repository and framework reachability; unused-variable lint does not catch unused modules. `agent-rules/tools/slop-scan.sh` surfaces candidates but cannot prove they are unreachable.
-- No fabricated behavior to satisfy a checklist: no artificial delays to make a spinner visible, no UI states or code paths the flow can never enter.
-- No success claims without verification evidence.
-
-## Task skills
-
-Use the matching skill instead of loading broad instruction bundles:
-
-- `$feature-implementation` — new behavior, end to end
-- `$bug-fix` — existing incorrect behavior
-- `$refactor` — behavior-preserving structural work
-- `$pr-review` — evidence-backed diff review
-- `$database-change` — schemas, migrations, persistence contracts
-- `$security-audit` — trust-boundary audit of a concrete surface
-- `$autonomous-mission` — one large objective through verified increments
-- `$doc-update` — documentation with verified claims
-- `$ui-styling` — visual defaults when no design system governs
+Task skills live in `.agents/skills/`.
 
 ## Stack references
 
-Read these when the task touches the stack; do not preload them:
+Read only for the touched stack:
 
 - Browser UI behavior and accessibility: `agent-rules/reference/web-ui.md`
 - TypeScript or React: `agent-rules/reference/typescript-react.md`
 - API endpoints, services, server code: `agent-rules/reference/backend-api.md`
 - Design, quality, and orchestration references: `agent-rules/reference/`
 
-The profile below sets the active minimum assurance level. To change it, replace the profile section with the contents of `agent-rules/profiles/prototype.md` or `agent-rules/profiles/regulated.md`.
+The profile below sets minimum assurance. Switch it with `aer update --profile`; do not edit the managed block.
 
 ## Standard Profile
 
