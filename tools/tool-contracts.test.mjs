@@ -14,11 +14,40 @@ const guard = path.join(root, 'tools', 'file-size-guard.mjs');
 const contrast = path.join(root, 'tools', 'contrast-check.mjs');
 const slop = path.join(root, 'tools', 'slop-scan.mjs');
 
+function mergeEnvironment(base, overrides, caseInsensitive = process.platform === 'win32') {
+  if (!caseInsensitive) return { ...base, ...overrides };
+  const environment = {};
+  const canonicalKeys = new Map();
+  for (const [key, value] of Object.entries(base)) {
+    const folded = key.toLowerCase();
+    const existing = canonicalKeys.get(folded);
+    if (existing === undefined) {
+      canonicalKeys.set(folded, key);
+      environment[key] = value;
+    } else if (folded === 'path') {
+      const segments = `${environment[existing]}${path.delimiter}${value}`
+        .split(path.delimiter)
+        .filter(Boolean);
+      environment[existing] = [...new Set(segments)].join(path.delimiter);
+    } else {
+      environment[existing] = value;
+    }
+  }
+  for (const [key, value] of Object.entries(overrides)) {
+    const folded = key.toLowerCase();
+    const existing = canonicalKeys.get(folded);
+    if (existing !== undefined) delete environment[existing];
+    canonicalKeys.set(folded, key);
+    environment[key] = value;
+  }
+  return environment;
+}
+
 function run(command, arguments_, { cwd = root, env = {}, input } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, arguments_, {
       cwd,
-      env: { ...process.env, ...env },
+      env: mergeEnvironment(process.env, env),
       windowsHide: true,
       stdio: [input === undefined ? 'ignore' : 'pipe', 'pipe', 'pipe'],
     });
@@ -79,6 +108,20 @@ async function commitAll(directory) {
 function combined(result) {
   return `${result.stdout}${result.stderr}`;
 }
+
+test('test subprocess environments preserve Windows path and override semantics', () => {
+  const environment = mergeEnvironment(
+    { Path: 'first-path', PATH: 'second-path', Temp: 'old-temp' },
+    { TEMP: 'new-temp' },
+    true,
+  );
+  const pathKeys = Object.keys(environment).filter((key) => key.toLowerCase() === 'path');
+  const tempKeys = Object.keys(environment).filter((key) => key.toLowerCase() === 'temp');
+  assert.equal(pathKeys.length, 1);
+  assert.deepEqual(environment[pathKeys[0]].split(path.delimiter), ['first-path', 'second-path']);
+  assert.deepEqual(tempKeys, ['TEMP']);
+  assert.equal(environment.TEMP, 'new-temp');
+});
 
 test('tool help, host inventory, and retired paths use the Node-only contract', async (t) => {
   for (const script of [guard, contrast, slop]) {

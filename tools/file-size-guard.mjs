@@ -38,6 +38,7 @@ const GENERATED_NAMES = [
   /(?:^|[._-])generated(?:[._-]|$)/i,
 ];
 const PERMISSION_MODES = new Set(['default', 'acceptEdits', 'plan', 'dontAsk', 'bypassPermissions']);
+const GIT_COMMAND = process.platform === 'win32' ? 'git.exe' : 'git';
 
 class InputError extends Error {}
 
@@ -150,21 +151,18 @@ function summaryFor(results) {
 }
 
 async function gitHeadLines(file) {
-  let root;
   const directory = path.dirname(file);
   try {
-    ({ stdout: root } = await execFile('git', ['rev-parse', '--show-toplevel'], {
+    const { stdout } = await execFile(GIT_COMMAND, ['rev-parse', '--is-inside-work-tree'], {
       cwd: directory, encoding: 'utf8', windowsHide: true, timeout: 2_000,
-    }));
+    });
+    if (stdout.trim() !== 'true') return null;
   } catch {
     return null;
   }
-  root = root.trim();
-  const relative = path.relative(root, file);
-  if (!relative || relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) return null;
   try {
-    const { stdout } = await execFile('git', ['show', `HEAD:${relative.split(path.sep).join('/')}`], {
-      cwd: root, encoding: 'buffer', windowsHide: true, timeout: 2_000, maxBuffer: 32 * 1024 * 1024,
+    const { stdout } = await execFile(GIT_COMMAND, ['show', `HEAD:./${path.basename(file)}`], {
+      cwd: directory, encoding: 'buffer', windowsHide: true, timeout: 2_000, maxBuffer: 32 * 1024 * 1024,
     });
     return physicalLines(stdout.toString('utf8'));
   } catch {
