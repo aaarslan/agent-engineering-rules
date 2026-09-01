@@ -29,7 +29,7 @@ jobs:
           node-version: 24
           package-manager-cache: false
       - name: Test release validators
-        run: node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs tools/tool-contracts.test.mjs tools/guidance-regressions.test.mjs
+        run: npm test
       - name: Smoke-test packed global install
         run: npm run test:packed
       - name: Reject personal filesystem paths
@@ -52,7 +52,7 @@ jobs:
           node-version: 24
           package-manager-cache: false
       - name: Test release validators
-        run: node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs tools/tool-contracts.test.mjs tools/guidance-regressions.test.mjs
+        run: npm test
       - name: Smoke-test packed global install
         run: npm run test:packed
       - name: Reject personal filesystem paths

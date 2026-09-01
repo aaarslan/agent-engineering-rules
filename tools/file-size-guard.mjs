@@ -310,8 +310,10 @@ Usage:
   node agent-rules/tools/file-size-guard.mjs --check FILE...
   node agent-rules/tools/file-size-guard.mjs --help
 
-Examples:
+Canonical invocation:
   node agent-rules/tools/file-size-guard.mjs --check src/app.js src/view.tsx
+
+Alternate APIs:
   PowerShell: $env:FILE_SIZE_GUARD_THRESHOLD='650'; node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
   POSIX: FILE_SIZE_GUARD_THRESHOLD=650 node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
 
@@ -326,7 +328,8 @@ The density signal uses authored UTF-8 bytes and an approximate four-bytes-per-
 token metric; declaration and decision counts are lexical hints, not complexity
 measurements. Generated, bundled, vendor/build, and non-source declarative files
 are not applicable. Git HEAD supplies the baseline; FILE_SIZE_GUARD_THRESHOLD is
-the repository/CI override. No strict mode is enabled by default.`;
+the repository/CI override. No strict mode is enabled by default.
+Unchanged retries add no evidence; rerun after an edit or a changed hypothesis.`;
 }
 
 async function readStandardInput() {

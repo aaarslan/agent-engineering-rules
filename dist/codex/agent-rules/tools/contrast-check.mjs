@@ -151,10 +151,13 @@ Usage:
   node agent-rules/tools/contrast-check.mjs --batch -
   node agent-rules/tools/contrast-check.mjs --help
 
-Examples:
+Canonical invocation:
+  node agent-rules/tools/contrast-check.mjs --batch contrast-pairs.json
+
+Alternate APIs:
   node agent-rules/tools/contrast-check.mjs '#667085' '#ffffff' 14 400
   node agent-rules/tools/contrast-check.mjs 'oklch(48% 0.03 260)' 'rgb(255 255 255)' 18 bold
-  node agent-rules/tools/contrast-check.mjs --batch contrast-pairs.json
+  node agent-rules/tools/contrast-check.mjs --batch -
 
 Batch input is a non-empty JSON array of named objects:
   [{"name":"muted label","foreground":"#667085","background":"#fff","fontSize":14,"fontWeight":400}]
@@ -164,7 +167,8 @@ pair fails accessibility contrast; exit 2 means input error. Stylesheet paths,
 alpha/transparency, gradients, and compositing are not parsed. Supply selected
 opaque foreground/background pairs only. A pass does not establish whole-page
 accessibility, computed backgrounds, alpha compositing, gradients, hover/focus
-states, or general WCAG conformance. Rerun every failed named pair after edits.`;
+states, or general WCAG conformance. Rerun every failed named pair after edits.
+Unchanged retries add no evidence; rerun after an edit or a changed hypothesis.`;
 }
 
 async function readStandardInput() {

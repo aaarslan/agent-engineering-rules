@@ -124,10 +124,18 @@ test('test subprocess environments preserve Windows path and override semantics'
 });
 
 test('tool help, host inventory, and retired paths use the Node-only contract', async (t) => {
-  for (const script of [guard, contrast, slop]) {
+  const helpCases = [
+    [guard, 'node agent-rules/tools/file-size-guard.mjs --check src/app.js src/view.tsx'],
+    [contrast, 'node agent-rules/tools/contrast-check.mjs --batch contrast-pairs.json'],
+    [slop, 'node agent-rules/tools/slop-scan.mjs --root .'],
+  ];
+  for (const [script, canonical] of helpCases) {
     const result = await runNode(script, ['--help']);
     assert.equal(result.code, 0, `${path.basename(script)} help failed: ${combined(result)}`);
     assert.ok(result.stdout.trim().length > 80, `${path.basename(script)} help was empty`);
+    assert.equal(result.stdout.match(/^Canonical invocation:$/gm)?.length, 1);
+    assert.equal(result.stdout.split(canonical).length - 1, 1);
+    assert.match(result.stdout, /Unchanged\s+retries add no evidence/);
   }
   assert.match((await runNode(guard, ['--help'])).stdout, /^NOT-APPLICABLE mode=help/m);
   assert.match((await runNode(slop, ['--help'])).stdout, /^NOT-APPLICABLE mode=help/m);
@@ -148,6 +156,35 @@ test('tool help, host inventory, and retired paths use the Node-only contract', 
     assert.deepEqual(names, ['contrast-check.mjs', 'file-size-guard.mjs', 'slop-scan.mjs']);
     assert.equal(names.some((name) => name.endsWith('.py') || name.endsWith('.sh')), false);
   }
+
+  const codexRoot = path.join(output, 'codex');
+  await fixture(codexRoot, 'index.html', '<!doctype html>\n<script type="module" src="src/app.js"></script>\n');
+  await fixture(codexRoot, 'src/app.js', "import './view.js';\ndocument.body.textContent = 'ready';\n");
+  await fixture(codexRoot, 'src/view.tsx', "const viewState = 'ready';\n");
+  await fixture(codexRoot, 'contrast-pairs.json', JSON.stringify([
+    { name: 'body', foreground: '#000', background: '#fff', fontSize: 16, fontWeight: 400 },
+  ]));
+  let result = await runNode(
+    path.join(codexRoot, 'agent-rules', 'tools', 'slop-scan.mjs'),
+    ['--root', '.'],
+    { cwd: codexRoot },
+  );
+  assert.equal(result.code, 0, combined(result));
+  assert.match(result.stdout, /APPLICABLE-PASS summary .*scope=full-root/);
+  result = await runNode(
+    path.join(codexRoot, 'agent-rules', 'tools', 'contrast-check.mjs'),
+    ['--batch', 'contrast-pairs.json'],
+    { cwd: codexRoot },
+  );
+  assert.equal(result.code, 0, combined(result));
+  assert.match(result.stdout, /summary checked=1 passed=1 failed=0/);
+  result = await runNode(
+    path.join(codexRoot, 'agent-rules', 'tools', 'file-size-guard.mjs'),
+    ['--check', 'src/app.js', 'src/view.tsx'],
+    { cwd: codexRoot },
+  );
+  assert.equal(result.code, 0, combined(result));
+  assert.match(result.stdout, /APPLICABLE-PASS summary checked=2/);
 });
 
 test('file-size CLI handles valid, ignored, dense, malformed, and override inputs explicitly', async (t) => {
@@ -542,12 +579,35 @@ test('slop scan handles root-level static projects with categorized file-line ev
   ].join('\n'));
   result = await runNode(slop, ['--root', '.'], { cwd: risky });
   assert.equal(result.code, 1, combined(result));
-  assert.match(result.stdout, /DETERMINISTIC-FINDING category=unsafe-html-sink evidence="app\.js:1"/);
+  const originalFingerprint = result.stdout.match(/DETERMINISTIC-FINDING category=unsafe-html-sink evidence="app\.js:1" fingerprint="([^"]+)"/);
+  assert.ok(originalFingerprint, result.stdout);
   assert.match(result.stdout, /HEURISTIC-WARNING category=custom-escaper evidence="app\.js:2"/);
   assert.match(result.stdout, /MANUAL-REVIEW category=timer evidence="app\.js:3"/);
   assert.match(result.stdout, /MANUAL-REVIEW category=storage evidence="app\.js:4"/);
   assert.match(result.stdout, /MANUAL-REVIEW category=todo-without-inline-reference evidence="app\.js:5"/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=full-root/);
   assert.match(result.stdout, /ADVISORY summary .*deterministic-findings=1 heuristic-warnings=1 manual-review=3/);
+
+  await fixture(risky, 'app.js', [
+    '// harmless line insertion',
+    "target.innerHTML = externalText;",
+    'function escapeHtml(value) { return value; }',
+    'setTimeout(render, 250);',
+    "localStorage.setItem('draft', value);",
+    '// TODO: finish recovery',
+  ].join('\n'));
+  result = await runNode(slop, ['--root', '.'], { cwd: risky });
+  assert.equal(result.code, 1, combined(result));
+  const movedFingerprint = result.stdout.match(/DETERMINISTIC-FINDING category=unsafe-html-sink evidence="app\.js:2" fingerprint="([^"]+)"/);
+  assert.ok(movedFingerprint, result.stdout);
+  assert.equal(movedFingerprint[1], originalFingerprint[1]);
+
+  await fixture(risky, 'app.js', 'target.innerHTML = externalText;\ntarget.innerHTML = externalText;\n');
+  result = await runNode(slop, ['--root', '.'], { cwd: risky });
+  assert.equal(result.code, 1, combined(result));
+  const duplicateFingerprints = [...result.stdout.matchAll(/DETERMINISTIC-FINDING category=unsafe-html-sink .*? fingerprint="([^"]+)"/g)];
+  assert.equal(duplicateFingerprints.length, 2, result.stdout);
+  assert.equal(duplicateFingerprints[0][1], duplicateFingerprints[1][1]);
 });
 
 test('slop scan detects possibly dead TypeScript exports in src projects', async (t) => {
@@ -566,6 +626,9 @@ test('slop selectors exclude generated artifacts and distinguish errors from not
   await fixture(directory, 'app.js', "document.querySelector('p').textContent = 'safe';\n");
   await fixture(directory, 'dist/bad.js', 'target.innerHTML = value;\n');
   await fixture(directory, 'vendor/bad.js', 'target.innerHTML = value;\n');
+  await fixture(directory, 'node_modules/bad.js', 'target.innerHTML = value;\n');
+  await fixture(directory, 'agent-rules/bad.js', 'target.innerHTML = value;\n');
+  await fixture(directory, '.agents/bad.js', 'target.innerHTML = value;\n');
   await fixture(directory, 'fixture.test.js', 'target.innerHTML = value;\n');
   await fixture(directory, 'marker-only.js', '// Generated by fixture\ntarget.innerHTML = value;\n');
   await fixture(directory, 'client.generated.js', 'target.innerHTML = value;\n');
@@ -574,25 +637,44 @@ test('slop selectors exclude generated artifacts and distinguish errors from not
 
   let result = await runNode(slop, ['--root', '.'], { cwd: directory });
   assert.equal(result.code, 0, combined(result));
-  assert.match(result.stdout, /APPLICABLE-PASS/);
+  assert.match(result.stdout, /APPLICABLE-PASS summary .*scope=full-root/);
   assert.doesNotMatch(result.stdout, /unsafe-html-sink/);
 
   result = await runNode(slop, ['--file', 'dist/bad.js'], { cwd: directory });
-  assert.equal(result.code, 3);
-  assert.match(result.stdout, /NOT-APPLICABLE/);
+  assert.equal(result.code, 1, combined(result));
+  assert.match(result.stdout, /DETERMINISTIC-FINDING category=unsafe-html-sink evidence="dist\/bad\.js:1" fingerprint="slop-v1-[a-f0-9]{16}"/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=partial-selector/);
   assert.doesNotMatch(result.stdout, /APPLICABLE-PASS/);
+  result = await runNode(slop, ['--file', 'marker-only.js'], { cwd: directory });
+  assert.equal(result.code, 1, combined(result));
+  assert.match(result.stdout, /DETERMINISTIC-FINDING category=unsafe-html-sink/);
+  for (const targetedRoot of ['vendor', 'node_modules', 'generated', 'agent-rules', '.agents']) {
+    result = await runNode(slop, ['--root', targetedRoot], { cwd: directory });
+    assert.equal(result.code, 1, `${targetedRoot}: ${combined(result)}`);
+    assert.match(result.stdout, /DETERMINISTIC-FINDING category=unsafe-html-sink/);
+    assert.match(result.stdout, /ADVISORY summary .*scope=full-root/);
+  }
+  result = await runNode(slop, ['--glob', '**/*.js'], { cwd: directory });
+  assert.equal(result.code, 1, combined(result));
+  assert.doesNotMatch(result.stdout, /unsafe-html-sink/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=partial-selector/);
+  result = await runNode(slop, ['--glob', 'vendor/**/*.js'], { cwd: directory });
+  assert.equal(result.code, 1, combined(result));
+  assert.match(result.stdout, /DETERMINISTIC-FINDING category=unsafe-html-sink evidence="vendor\/bad\.js:1"/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=partial-selector/);
   result = await runNode(slop, ['--file', 'notes.txt'], { cwd: directory });
   assert.equal(result.code, 3);
+  assert.match(result.stdout, /NOT-APPLICABLE summary .*scope=partial-selector/);
   assert.match(result.stdout, /unsupported extension/);
   result = await runNode(slop, ['--file', 'index.html'], { cwd: directory });
   assert.equal(result.code, 1);
-  assert.match(result.stdout, /NOT-APPLICABLE category=project-wide-reference-checks/);
-  assert.match(result.stdout, /ADVISORY summary/);
+  assert.match(result.stdout, /NOT-APPLICABLE category=project-wide-reference-checks scope=partial-selector/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=partial-selector/);
   assert.doesNotMatch(result.stdout, /APPLICABLE-PASS/);
   result = await runNode(slop, ['--glob', '*.html'], { cwd: directory });
   assert.equal(result.code, 1);
-  assert.match(result.stdout, /NOT-APPLICABLE category=project-wide-reference-checks/);
-  assert.match(result.stdout, /ADVISORY summary/);
+  assert.match(result.stdout, /NOT-APPLICABLE category=project-wide-reference-checks scope=partial-selector/);
+  assert.match(result.stdout, /ADVISORY summary .*scope=partial-selector/);
   assert.doesNotMatch(result.stdout, /APPLICABLE-PASS/);
   result = await runNode(slop, ['--glob', 'missing/**/*.js'], { cwd: directory });
   assert.equal(result.code, 3);

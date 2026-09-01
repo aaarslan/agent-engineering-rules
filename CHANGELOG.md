@@ -2,6 +2,36 @@
 
 ## Unreleased
 
+## 3.1.1 - 2026-09-01
+
+Source corpus:
+
+- Made each applicable UI action prove a named visible destination state in prompt vocabulary; acknowledgements alone no longer qualify. Required destinations must remain discoverable, keyboard/pointer reachable, and correctly activated at relevant narrow breakpoints, with document overflow assessed separately from intentional local scrolling.
+- Required a clean applicable full-root rerun or explicit fingerprint disposition for residual slop findings. Remaining rendering sinks must be absent after removal, safely escaped by a named mechanism, bounded trusted static data, or disclosed as unresolved; unresolved sinks block clean claims.
+- Tightened verification stopping and truthfulness: ordinary standard-profile greenfield UI work prefers one full-root slop scan and one contrast batch, unchanged help/check retries stop after usable evidence, component failures cannot be masked by later successes, and known residual defects remain disclosed.
+- Required direct enumeration and validation of untracked authored output, a retained lockfile or repository exact-pin policy for introduced dependencies, and bounded terminating builds that produce their declared output rather than leave a development server running.
+- Kept the universal contract and profiles unchanged. UI completion remains progressively disclosed and now reports composition/form factor, functional/responsive behavior, and engineering/accessibility/safety in three concise outcome lines without treating framework choice, file count, LOC, ARIA quantity, or validation volume as a verdict.
+
+Claude distribution:
+
+- Regenerated the feature and UI-styling skills plus the Web UI and verification references from the canonical routed source. The always-active Claude contract and profile remain unchanged.
+
+Codex distribution:
+
+- Regenerated the matching skills and on-demand references without expanding the managed `AGENTS.md` universal contract.
+
+Tools, package, and validation:
+
+- Made normal slop root scans exclude co-located managed `agent-rules/` and `.agents/` trees as well as generated, dependency, and vendor material while preserving explicit targeting; findings now carry stable fingerprints and results distinguish full-root from partial-selector scope.
+- Gave each shipped utility one canonical documented invocation while retaining compatible focused forms and the contrast checker's existing pass/fail calculation and file guard's advisory behavior.
+- Added deterministic regressions for prompt-state versus acknowledgement, a 390×844 sidebar transformation, managed/static/generated/partial slop scopes, stable sink fingerprints and dispositions, untracked authored files, masked command failures, valid and nonterminating builds, and lockfile/exact-pin dependency policy. Existing seeded contrast and slop defects remain covered.
+- Bumped the public package, citation metadata, exact-version examples, and issue template to `@aaarslan/aer` 3.1.1.
+
+Evaluation and migration:
+
+- This patch responds to supplied independent post-3.1.0 replication evidence, which remained read-only. No OneShotBench evidence was changed or copied into the package, and the expensive full matrix was not rerun.
+- The expected effects—fewer malformed invocations, self-scan findings, unchanged retries, and unsupported clean/completion claims without losing seeded-defect detection—are hypotheses grounded in that evaluation. This release makes no statistical or general efficacy claim.
+
 ## 3.1.0 - 2026-08-31
 
 Source corpus:

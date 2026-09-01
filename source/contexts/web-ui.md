@@ -12,7 +12,8 @@ Use [TypeScript and React](typescript-react.md) for React specifics and [UI Styl
 
 - Render user or external text with DOM text APIs or framework escaping. Never interpolate it into HTML strings.
 - Trace untrusted values reaching `innerHTML`, `insertAdjacentHTML`, or `dangerouslySetInnerHTML`; exercise quotes, tags, whitespace-only input, and contractual length limits.
-- Use `tools/slop-scan.mjs` only when supported web files and relevant risks such as unsafe sinks, timers, storage, dead exports, or TODO residue are present; inspect its categorized evidence rather than inferring quality from completion.
+- Use `tools/slop-scan.mjs` only when supported web files and relevant risks such as unsafe sinks, timers, storage, dead exports, or TODO residue are present. A partial-selector result is advisory for that selection, not a whole-app or clean result.
+- Completion after a scan requires either a clean applicable full-root rerun or an explicit disposition for every residual finding fingerprint. Classify each remaining rendering sink as removed (absent on rerun), safely escaped by a named mechanism, trusted static data inside a defined immutable boundary that never receives user, server, or external data, or unresolved. An unresolved sink blocks a clean claim.
 
 ## Updates and focus
 
@@ -27,13 +28,14 @@ Use [TypeScript and React](typescript-react.md) for React specifics and [UI Styl
 
 ## Prompt-critical behavior
 
-- Exercise the promised state transition, not an acknowledgement: a saved note or log becomes visible, hydration changes observable state, and search or filters change visible results when requested.
-- Confirm required navigation remains reachable, keyboard activation opens the correct row, and Escape closes modal or drawer patterns and returns focus to their trigger.
+- For each applicable requested action, name and exercise `action → named visible destination state` in the prompt's vocabulary. Exercise the promised state transition, not an acknowledgement: save note → note appears in the named notes region; submit a log → entry appears in the named log; add hydration → displayed hydration state changes; search or filter → visible results change; activate navigation → intended named destination opens.
+- A toast, form reset, command exit code, or success message alone is acknowledgement, not proof of the destination state.
+- Confirm keyboard activation opens the correct row, and Escape closes modal or drawer patterns and returns focus to their trigger.
 
 ## Responsive and honest controls
 
-- Check representative desktop and narrow-mobile viewports. At the target mobile viewport compare `document.documentElement.scrollWidth` with `document.documentElement.clientWidth`; bound intentional table or component scrollers locally and treat page-level overflow as a defect.
-- Preserve prompt-mandated navigation and form factors across breakpoints.
+- Check representative desktop and narrow-mobile viewports. At the target mobile viewport compare `document.documentElement.scrollWidth` with `document.documentElement.clientWidth`; record document overflow separately from intentional local table or chart scrolling, bound local scrollers to their component, and treat page-level overflow as a defect.
+- At every relevant narrow breakpoint, enumerate prompt-required destination names and verify each remains discoverable, keyboard- and pointer-reachable, and activates its intended target. A containment fix that hides required navigation fails validation; a menu is evidence only when it reveals and activates every required route.
 - Do not add an inert hamburger, export, navigation, or action control merely for polish. If an optional concept control is intentionally nonfunctional, label or disable it honestly.
 
 ## Resources
