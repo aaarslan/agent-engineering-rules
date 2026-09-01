@@ -14,13 +14,13 @@ const guard = path.join(root, 'tools', 'file-size-guard.mjs');
 const contrast = path.join(root, 'tools', 'contrast-check.mjs');
 const slop = path.join(root, 'tools', 'slop-scan.mjs');
 
-function run(command, arguments_, { cwd = root, env = {}, input = '' } = {}) {
+function run(command, arguments_, { cwd = root, env = {}, input } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, arguments_, {
       cwd,
       env: { ...process.env, ...env },
       windowsHide: true,
-      stdio: ['pipe', 'pipe', 'pipe'],
+      stdio: [input === undefined ? 'ignore' : 'pipe', 'pipe', 'pipe'],
     });
     let stdout = '';
     let stderr = '';
@@ -30,7 +30,10 @@ function run(command, arguments_, { cwd = root, env = {}, input = '' } = {}) {
     child.stderr.on('data', (chunk) => { stderr += chunk; });
     child.on('error', reject);
     child.on('close', (code, signal) => resolve({ code, signal, stdout, stderr }));
-    child.stdin.end(input);
+    if (input !== undefined) {
+      child.stdin.on('error', reject);
+      child.stdin.end(input);
+    }
   });
 }
 
@@ -120,6 +123,7 @@ test('file-size CLI handles valid, ignored, dense, malformed, and override input
   assert.equal(result.code, 0);
   assert.match(result.stdout, /APPLICABLE-PASS/);
   assert.match(result.stdout, /pre-existing large file/);
+  assert.match(result.stdout, /head-lines=510/);
 
   await fixture(directory, 'legacy.js', sourceLines(612, 'legacy'));
   result = await runNode(guard, ['--check', 'legacy.js'], { cwd: directory });

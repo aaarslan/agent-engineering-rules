@@ -151,9 +151,10 @@ function summaryFor(results) {
 
 async function gitHeadLines(file) {
   let root;
+  const directory = path.dirname(file);
   try {
-    ({ stdout: root } = await execFile('git', ['-C', path.dirname(file), 'rev-parse', '--show-toplevel'], {
-      encoding: 'utf8', windowsHide: true, timeout: 2_000,
+    ({ stdout: root } = await execFile('git', ['rev-parse', '--show-toplevel'], {
+      cwd: directory, encoding: 'utf8', windowsHide: true, timeout: 2_000,
     }));
   } catch {
     return null;
@@ -162,8 +163,8 @@ async function gitHeadLines(file) {
   const relative = path.relative(root, file);
   if (!relative || relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) return null;
   try {
-    const { stdout } = await execFile('git', ['-C', root, 'show', `HEAD:${relative.split(path.sep).join('/')}`], {
-      encoding: 'buffer', windowsHide: true, timeout: 2_000, maxBuffer: 32 * 1024 * 1024,
+    const { stdout } = await execFile('git', ['show', `HEAD:${relative.split(path.sep).join('/')}`], {
+      cwd: root, encoding: 'buffer', windowsHide: true, timeout: 2_000, maxBuffer: 32 * 1024 * 1024,
     });
     return physicalLines(stdout.toString('utf8'));
   } catch {
