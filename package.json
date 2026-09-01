@@ -1,6 +1,6 @@
 {
   "name": "@aaarslan/aer",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Project-local engineering rules for Claude Code and OpenAI Codex",
   "keywords": [
     "ai-agents",
@@ -40,7 +40,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs",
+    "test": "node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs tools/tool-contracts.test.mjs tools/guidance-regressions.test.mjs",
     "test:cli": "node --test tools/aer.test.mjs tools/install-distribution.test.mjs",
     "test:packed": "node tools/packed-install-smoke.mjs",
     "validate": "node tools/validate-public-content.mjs && node tools/validate-source.mjs && node tools/build-distributions.mjs && node tools/validate-distributions.mjs",

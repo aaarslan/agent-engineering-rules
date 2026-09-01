@@ -6,7 +6,7 @@ related: [../design/types-and-state.md, ../design/boundaries.md, web-ui.md]
 
 # TypeScript and React
 
-Extends [types-and-state](../design/types-and-state.md) and [boundaries](../design/boundaries.md) with stack specifics. For anything rendered in a browser, load [web-ui](web-ui.md) alongside this file.
+Extends [types-and-state](../design/types-and-state.md) and [boundaries](../design/boundaries.md) with stack specifics. For browser rendering, load [web-ui](web-ui.md) alongside it.
 
 ## TypeScript
 

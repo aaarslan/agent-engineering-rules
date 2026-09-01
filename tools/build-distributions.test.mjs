@@ -55,10 +55,16 @@ test('repository-only research inputs are validated but never emitted', async (c
   const output = await mkdtemp(path.join(tmpdir(), 'aer-research-boundary-'));
   context.after(() => rm(output, { recursive: true, force: true }));
   assert.ok(MANIFEST.research.includes('evals/run.schema.json'));
+  assert.ok(MANIFEST.research.includes('evals/components.v2.json'));
+  assert.ok(MANIFEST.research.includes('evals/components/v2/kernel/contract.txt'));
   await build(output);
   for (const host of ['claude', 'codex']) {
     await assert.rejects(
       () => lstat(path.join(output, host, 'agent-rules', 'metadata')),
+      (error) => error.code === 'ENOENT',
+    );
+    await assert.rejects(
+      () => lstat(path.join(output, host, 'evals')),
       (error) => error.code === 'ENOENT',
     );
   }
@@ -114,20 +120,20 @@ test('build frontmatter helpers accept CRLF and normalize the emitted body', () 
 test('tool-path rewrites are token-boundary-aware and idempotent', () => {
   const source = [
     'tools/contrast-check.mjs',
-    './tools/slop-scan.sh',
-    '`tools/file-size-guard.py`',
+    './tools/slop-scan.mjs',
+    '`tools/file-size-guard.mjs`',
     'agent-rules/tools/contrast-check.mjs',
-    'mytools/slop-scan.sh',
-    'tools/file-size-guard.py.backup',
+    'mytools/slop-scan.mjs',
+    'tools/file-size-guard.mjs.backup',
     '/tools/contrast-check.mjs',
   ].join('\n');
   const rewritten = rewriteToolPaths(source);
   assert.equal(rewritten.split('\n')[0], 'agent-rules/tools/contrast-check.mjs');
-  assert.equal(rewritten.split('\n')[1], './agent-rules/tools/slop-scan.sh');
-  assert.equal(rewritten.split('\n')[2], '`agent-rules/tools/file-size-guard.py`');
+  assert.equal(rewritten.split('\n')[1], './agent-rules/tools/slop-scan.mjs');
+  assert.equal(rewritten.split('\n')[2], '`agent-rules/tools/file-size-guard.mjs`');
   assert.match(rewritten, /^agent-rules\/tools\/contrast-check\.mjs$/m);
-  assert.match(rewritten, /^mytools\/slop-scan\.sh$/m);
-  assert.match(rewritten, /^tools\/file-size-guard\.py\.backup$/m);
+  assert.match(rewritten, /^mytools\/slop-scan\.mjs$/m);
+  assert.match(rewritten, /^tools\/file-size-guard\.mjs\.backup$/m);
   assert.match(rewritten, /^\/tools\/contrast-check\.mjs$/m);
   assert.equal(rewriteToolPaths(rewritten), rewritten);
 });

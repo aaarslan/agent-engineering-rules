@@ -7,7 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  experimentTaskCoverage, frozenEvaluationHashErrors, readinessFailureCleanupProbe, portableRelativePathError, taskCaseFixtureErrors,
+  experimentTaskCoverage, frozenComponentSnapshotErrors, frozenEvaluationHashErrors, readinessFailureCleanupProbe, portableRelativePathError, taskCaseFixtureErrors,
   taskContractLinkErrors, utf8LfErrors, validateCellArchive, validateNoProviderHarness, writeCellArchive,
 } from './preflight-eval-harness.mjs';
 import { exactUrlSourceMatch, registryEnumErrors, reviewWindowErrors, runRecordSemanticErrors, schemaValidationErrors } from './preflight-evals.mjs';
@@ -163,11 +163,48 @@ test('provider-disabled harness executes every task and grader with six frozen e
   assert.equal(harness.metrics.cell_archives_validated, 47);
 });
 
-test('version-2 experiment, cell, and executable fixture bytes are independently frozen', () => {
+test('version-2 experiment, cell, component, and executable fixture bytes are independently frozen', () => {
   assert.deepEqual(frozenEvaluationHashErrors({ cells: '0'.repeat(64) }), [
     'cells bytes changed after the version-2 freeze; create a new evaluation version for intentional changes',
   ]);
   assert.deepEqual(frozenEvaluationHashErrors({ unknown: '0'.repeat(64) }), ['unknown frozen evaluation document unknown']);
+  assert.deepEqual(frozenEvaluationHashErrors({ components: '0'.repeat(64) }), [
+    'components bytes changed after the version-2 freeze; create a new evaluation version for intentional changes',
+  ]);
+});
+
+test('frozen component snapshots are closed, hash-pinned final composed bodies', () => {
+  const bytes = Buffer.from('# Frozen component\n');
+  const digest = createHash('sha256').update(bytes).digest('hex');
+  const snapshotFile = 'evals/components/v2/kernel/contract.txt';
+  const record = {
+    logical_name: 'kernel/contract.md', snapshot_file: snapshotFile, sha256: digest, content_type: 'text/markdown',
+  };
+  const registry = { schema_version: 2, evaluation_contract_version: '2', components: [record] };
+  const snapshots = new Map([[snapshotFile, { bytes, sha256: digest }]]);
+  const required = new Set(['kernel/contract.md']);
+  assert.deepEqual(frozenComponentSnapshotErrors(registry, required, snapshots), []);
+
+  const duplicate = clone(registry);
+  duplicate.components.push(clone(record));
+  assert.ok(frozenComponentSnapshotErrors(duplicate, required, snapshots).some((error) => error.includes('logical names must be unique')));
+  const missing = { ...clone(registry), components: [] };
+  assert.ok(frozenComponentSnapshotErrors(missing, required, new Map()).some((error) => error.includes('logical names must be exactly')));
+  const extra = clone(registry);
+  extra.components.push({ ...clone(record), logical_name: 'skills/extra.md', snapshot_file: 'evals/components/v2/skills/extra.md' });
+  assert.ok(frozenComponentSnapshotErrors(extra, required, snapshots).some((error) => error.includes('logical names must be exactly')));
+  const wrongHash = clone(registry);
+  wrongHash.components[0].sha256 = zero;
+  assert.ok(frozenComponentSnapshotErrors(wrongHash, required, snapshots).some((error) => error.includes('hash does not match')));
+
+  for (const invalidText of ['---\nname: leaked\n---\n# Body\n', '# Body\n{{include:kernel/contract.md}}\n']) {
+    const invalidBytes = Buffer.from(invalidText);
+    const invalidDigest = createHash('sha256').update(invalidBytes).digest('hex');
+    const invalidRegistry = clone(registry);
+    invalidRegistry.components[0].sha256 = invalidDigest;
+    const invalidSnapshots = new Map([[snapshotFile, { bytes: invalidBytes, sha256: invalidDigest }]]);
+    assert.ok(frozenComponentSnapshotErrors(invalidRegistry, required, invalidSnapshots).some((error) => error.includes('final composed body')));
+  }
 });
 
 test('experiment task coverage rejects missing scenario and arm cells', async () => {

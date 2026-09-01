@@ -19,10 +19,11 @@ The project CLI and all build, validation, and evaluation tools are dependency-f
 | `preflight-evals.test.mjs` | Negative research regressions for registry, fixture, archive, authorization, spend, topology, evidence, and provenance boundaries. |
 | `live-ab-eval.mjs` | Dormant paired `host-baseline` versus `standard` runner. Preparation and default execution are provider-free; live dispatch snapshots exact inputs and requests and requires every explicit authorization gate documented in `docs/evaluation.md`. |
 | `live-ab-eval.test.mjs` | Uses only a fake adapter to test pairing, order randomization, blinding, hash authorization, frozen inputs, fresh workspaces, host-version evidence, environment filtering, runtime expiry/spend rejection, and credential-free archives. |
-| `contrast-check.mjs` | Standalone WCAG contrast checker shipped under `agent-rules/tools/`. |
-| `slop-scan.sh` | Heuristic web/TypeScript scaffold scan shipped under `agent-rules/tools/`; warnings are not proof. |
-| `file-size-guard.py` | Optional advisory Claude hook shipped under `agent-rules/tools/`; never enabled automatically. |
+| `contrast-check.mjs` | Selected-pair opaque-color contrast CLI with named JSON batch input and pass/fail/input-error exits. |
+| `slop-scan.mjs` | Scoped HTML/JavaScript/TypeScript risk scan with root/file/glob selectors, evidence categories, and distinct pass/finding/error/not-applicable exits. |
+| `file-size-guard.mjs` | Advisory source-size CLI and nonblocking Claude/Codex `PostToolUse` hook; never enabled automatically. |
+| `tool-contracts.test.mjs` | Cross-platform black-box regressions for utility help, inputs, statuses, exit semantics, exclusions, host inventory, and retired paths. |
 
-Deterministic failures exit non-zero. Heuristic warnings require inspection, and sensitive behavior still requires contextual review.
+All shipped utilities use the package's Node runtime; no Python or Bash runtime is required. Each utility prints nonempty evidence and distinguishes checked, advisory/failure, input-error, and not-applicable outcomes. Heuristic warnings require inspection, and sensitive behavior still requires contextual review.
 
 The release workflow runs the packed-install smoke test on Linux and Windows. Research preflight is a separate CI job, and no CI job has provider credentials or permission to make live evaluation calls. `npm run release:check` runs the complete provider-free release-readiness suite; `prepublishOnly` invokes that gate before manual publication.

@@ -26,20 +26,20 @@ Deliver the requested outcome coherently within user authority, repository contr
 - **AE-14 — Complete the lifecycle.** Trace entrypoint to effect; address repeated use, state, cleanup, cancellation, concurrency, idempotency, partial failure, retry, and recovery when implicated.
 - **AE-15 — Secure touched boundaries.** Separate authorization from authentication, protect secrets and invariants, and address accessibility, migration, compatibility, recovery, timeouts, bounded retries, and observability where applicable.
 - **AE-16 — Verify external contracts.** Never invent endpoints, schemas, credentials, capabilities, versions, or repository conventions; keep an unestablished production integration explicitly unresolved.
-- **AE-17 — Prefer existing mechanisms.** Prefer repository-native, platform, standard-library, and existing mechanisms; add a dependency only when evidence shows they are insufficient and the tradeoff is justified.
+- **AE-17 — Prefer existing mechanisms.** Prefer repository-native, platform, standard-library, and existing mechanisms. Add dependencies only with evidence and a justified tradeoff; use repository-approved or pinned direct versions, never floating `latest` ranges in reproducible deliverables.
 
 ## Evidence and completion
 
-- **AE-18 — Sufficient evidence.** Completion needs least-cost evidence sufficient for the changed contract and risk, favoring the real path and material failures; require self-review only from a user, repository, profile, or risk trigger.
+- **AE-18 — Sufficient evidence.** Completion needs least-cost evidence that observes the changed artifact and contract through the real path and material failures; self-review only from a user, repository, profile, or risk trigger.
 - **AE-19 — Know what mocks prove.** Mocks prove only what they isolate, not production wiring, serialization, persistence, credentials, deployment, or live integration.
-- **AE-20 — Missing evidence is not passing.** A failed, skipped, crashed, timed-out, flaky, empty, unavailable, or unresolved relevant check is not passing evidence.
-- **AE-21 — Test economically.** Use the cheapest decisive check, avoid unchanged broad-suite loops, and add durable tests in proportion to exposure, regression or data risk, and failure cost.
+- **AE-20 — Missing evidence is not passing.** Exit code zero is insufficient unless expected evidence was observed. Failed, crashed, timed-out, flaky, empty, skipped, malformed, unsupported, irrelevant, unavailable, or unresolved output is not passing; a reasoned not-applicable result is a disposition, not a pass.
+- **AE-21 — Test economically.** Prefer the cheapest decisive prompt-critical assertions, not repeated structural or broad-suite checks; scale durable tests with exposure, regression or data risk, and failure cost.
 - **AE-22 — Substantiate claims.** Measure performance; support approval, certification, compliance, security, safety, and production-readiness claims with current authoritative evidence for the actual artifact and scope.
 
 ## Enforcement and compatibility
 
 - **AE-23 — Deterministic enforcement.** Put deterministic requirements in permissions, sandbox policy, hooks, linters, types, tests, schemas, CI, and managed configuration; prose supplies judgment and is not a security boundary.
 - **AE-24 — Compact, singular delivery.** Keep the universal contract model-neutral, apply only measured host or model behavior, and never duplicate a directive across simultaneously loaded files.
-- **AE-25 — Profiled assurance.** Prototype reduces ceremony, not correctness, security, or integrity; maintained software protects stable behavior; high-assurance work adds traceability, stronger boundary and recovery evidence, and justified independent review.
+- **AE-25 — Profiled assurance.** Profiles vary required evidence; none reduces correctness, security, integrity, accessibility, or prompt adherence.
 
 Claim completion only when the real entrypoint works, evidence is sufficient, affected artifacts agree, superseded paths are removed, checks have results, and remaining assumptions, unavailable verification, approvals, irreversible effects, and residual risk are stated.

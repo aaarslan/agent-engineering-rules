@@ -23,8 +23,14 @@ export const CODEX_SKILL_CATALOG_FALLBACK_CHARACTERS = 8000;
 export const CODEX_SKILL_CATALOG_PRODUCT_TARGET_CHARACTERS = 2000;
 export const DEFAULT_PROFILE = MANIFEST.defaultProfile;
 export const RETIRED_MANAGED_PATHS = Object.freeze({
-  claude: Object.freeze([]),
-  codex: Object.freeze([]),
+  claude: Object.freeze([
+    'agent-rules/tools/file-size-guard.py',
+    'agent-rules/tools/slop-scan.sh',
+  ]),
+  codex: Object.freeze([
+    'agent-rules/tools/file-size-guard.py',
+    'agent-rules/tools/slop-scan.sh',
+  ]),
 });
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
