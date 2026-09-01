@@ -19,14 +19,16 @@ A seam is a finished feature slice, fix, or autonomous increment. Run applicable
 1. Exercise the changed behavior through its real entrypoint, including the most relevant failure case and keyboard behavior for UI. If unavailable, use the closest executable proxy and state the limitation.
 2. Run or add targeted tests when required by the active profile and [testing](../quality/testing.md).
 3. Run configured format, lint, typecheck, and aggregate checks. Do not invent tooling solely to fill a missing gate.
-4. Build the runnable artifact. Run the broader suite for cross-cutting changes or when the profile or repository requires it.
+4. Build the runnable artifact. A declared build command must terminate successfully within a bounded check and produce its declared output; a command that starts or leaves a development server running is a development command and fails build validation. Run the broader suite for cross-cutting changes or when the profile or repository requires it.
 5. Run migration, schema, generated-file, and contract checks when those artifacts changed; regenerate and inspect their diffs.
 6. Run provided security and secret scans where relevant. Use this system's tools only on documented project and file types; inspect heuristic warnings.
 7. Use shared or production systems only with explicit authorization. Follow the external-service and spend boundaries in the [universal contract](../kernel/contract.md); local disposable environments need none.
 
-Use repository-native commands, not remembered generic substitutes.
+Use repository-native commands, not remembered generic substitutes. Preserve each component command's exit status and material output so a later success cannot mask an earlier failure; do not cite the aggregate as clean unless every applicable component is clean.
 
-Before first use of a shipped CLI, inspect its `--help` and require a nonempty classified outcome from a documented invocation; apply AE-20. `tools/file-size-guard.mjs --check FILE...` is optional and advisory unless repository or CI policy explicitly opts into strict enforcement.
+Before first use of a shipped CLI, inspect its `--help` once and require a nonempty classified outcome; after the contract produces a usable result, do not repeat help discovery or an unchanged check. The canonical shipped-tool invocations are `node tools/slop-scan.mjs --root .`, `node tools/contrast-check.mjs --batch contrast-pairs.json`, and the optional advisory `node tools/file-size-guard.mjs --check src/app.js src/view.tsx`. Keep not applicable, advisory, failure, and clean distinct.
+
+For ordinary standard-profile greenfield UI work, prefer one applicable full-root slop scan and one batched contrast check after behavior stabilizes. Additional validation must address a new hypothesis, changed behavior, or newly uncovered risk; preserve correctness and seeded-defect detection rather than optimizing command count alone.
 
 ## Failed or unavailable gates
 
@@ -38,5 +40,6 @@ After a fix, rerun the failed gate and earlier affected gates. Apply AE-20 to th
 
 - Name each relevant command or manual exercise, exit status, and material outcome.
 - State why an applicable gate could not run and what remains unverified.
+- Disclose every known residual defect; neither an advisory nor a reasoned not-applicable disposition is a clean result.
 - Meet the active profile's completion record.
 - Run the [risk-triggered skeptic review](skeptic-pass.md) only when one of its triggers exists; state the trigger and outcome. Do not use it as a universal terminal ritual.

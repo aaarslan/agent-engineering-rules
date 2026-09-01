@@ -18,16 +18,16 @@ Upgrading the CLI changes the installed `aer` program. It does not modify any ma
 
 Run an exact npm version without installing it globally:
 
-    npm exec --yes --package=@aaarslan/aer@3.1.0 -- aer init --host claude --dry-run
+    npm exec --yes --package=@aaarslan/aer@3.1.1 -- aer init --host claude --dry-run
 
 A project may instead pin the package as a development dependency:
 
-    npm install --save-dev --save-exact @aaarslan/aer@3.1.0
+    npm install --save-dev --save-exact @aaarslan/aer@3.1.1
     npm exec -- aer init --host claude --dry-run
 
 The immutable GitHub tag remains available as a source-install fallback, not the primary quick start:
 
-    npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.1.0 -- aer init --host claude --dry-run
+    npm exec --yes --package=github:aaarslan/agent-engineering-rules#v3.1.1 -- aer init --host claude --dry-run
 
 Contributors to this repository can use `node tools/aer.mjs <command>`.
 
@@ -142,15 +142,15 @@ For Claude, edit only selected context-rule `paths:` globs when the generated pa
 
 ## Optional shipped quality tools
 
-The distributions include three Node utilities, but installation never enables hooks or runs checks automatically. Use each tool's `--help` before wiring it into a repository contract.
+The distributions include three Node utilities, but installation never enables hooks or runs checks automatically. Each help page identifies one canonical invocation; inspect it once before wiring the tool, then use the classified result instead of repeating unchanged help or checks.
 
-`node agent-rules/tools/file-size-guard.mjs --check FILE...` is an advisory CLI. It reports `APPLICABLE-PASS`, `ADVISORY`, `NOT-APPLICABLE` with a reason, or `ERROR`; CLI exits are 0 for a completed applicable check (including an advisory), 2 for malformed input or tool failure, and 3 when every input is not applicable. `FILE_SIZE_GUARD_THRESHOLD` overrides the 500-line signal. Git HEAD supplies the baseline, generated/vendor/declarative exceptions remain not applicable, and a cheap authored-byte density signal catches some formatting-resistant cases. These lexical signals are not maintainability or complexity verdicts.
+`node agent-rules/tools/file-size-guard.mjs --check src/app.js src/view.tsx` is the canonical advisory check. It reports `APPLICABLE-PASS`, `ADVISORY`, `NOT-APPLICABLE` with a reason, or `ERROR`; CLI exits are 0 for a completed applicable check (including an advisory), 2 for malformed input or tool failure, and 3 when every input is not applicable. `FILE_SIZE_GUARD_THRESHOLD` overrides the 500-line signal. Git HEAD supplies the baseline, generated/vendor/declarative exceptions remain not applicable, and a cheap authored-byte density signal catches some formatting-resistant cases. These lexical signals are not maintainability or complexity verdicts.
 
 With no arguments, the same file-size utility accepts one `PostToolUse` JSON object on stdin. It recognizes Claude `tool_input.file_path` and Codex `apply_patch` paths in `tool_input.command`, emits explicit JSON context, and re-notifies after at least 20% additional line or byte growth. Hook mode is deliberately nonblocking even for malformed input, but emits `ERROR` rather than silent success. A repository may wire this optional hook using current host documentation and trust controls; it is not an enforcement boundary.
 
-`node agent-rules/tools/contrast-check.mjs --help` documents single-pair and named JSON `--batch` input. Exit 0 means all selected opaque pairs pass the applicable AA threshold, 1 means at least one pair fails, and 2 means invalid or unsupported input. Stylesheet paths, alpha, gradients, and compositing are not parsed. The tool checks only the named foreground/background/font pair supplied; it does not establish whole-page or general WCAG conformance. Rerun failed named pairs after editing.
+`node agent-rules/tools/contrast-check.mjs --batch contrast-pairs.json` is the canonical named batch; the focused single-pair API remains supported. Exit 0 means all selected opaque pairs pass the applicable AA threshold, 1 means at least one pair fails, and 2 means invalid or unsupported input. Stylesheet paths, alpha, gradients, and compositing are not parsed. The tool checks only the named foreground/background/font pairs supplied; it does not establish whole-page or general WCAG conformance. Rerun failed named pairs after editing.
 
-`node agent-rules/tools/slop-scan.mjs --help` documents explicit `--root`, `--file`, and `--glob` selectors for root-level or `src/`-based HTML/JavaScript/TypeScript projects. It excludes generated, vendor, dependency, test, coverage, and build artifacts and prints category plus `file:line` evidence. Exit 0 is a complete applicable root scan without findings; exit 1 reports findings or a file/glob scope where project-wide reference checks are explicitly not applicable; exit 2 is input/tool failure, and exit 3 means no supported authored input was applicable. Completion alone is not evidence that quality improved.
+`node agent-rules/tools/slop-scan.mjs --root .` is the canonical full-root scan for root-level or `src/`-based HTML/JavaScript/TypeScript projects. Normal root scans exclude managed `agent-rules/` and `.agents/` trees plus generated, vendor, dependency, test, coverage, and build artifacts; an explicit root, file, or glob can target excluded material. Findings include a stable fingerprint and `file:line` evidence, and results label full-root versus partial-selector scope. Exit 0 is a complete applicable root scan without findings; exit 1 reports findings or a partial selector where project-wide checks are not applicable; exit 2 is input/tool failure, and exit 3 means no supported authored input was applicable. A partial result is not whole-app evidence. Completion needs either a clean full-root rerun or an explicit disposition for every residual fingerprint, and an unresolved rendering sink blocks a clean claim.
 
 ## Verify
 
