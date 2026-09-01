@@ -21,7 +21,7 @@ const exists = async (file) => {
 test('package metadata defines the public zero-dependency CLI release boundary', async () => {
   const manifest = JSON.parse(await readFile(path.join(repo, 'package.json'), 'utf8'));
   assert.equal(manifest.name, '@aaarslan/aer');
-  assert.equal(manifest.version, '3.0.1');
+  assert.equal(manifest.version, '3.1.0');
   assert.equal(Object.hasOwn(manifest, 'private'), false);
   assert.deepEqual(manifest.bin, { aer: 'tools/aer.mjs' });
   assert.deepEqual(manifest.engines, { node: '>=24' });

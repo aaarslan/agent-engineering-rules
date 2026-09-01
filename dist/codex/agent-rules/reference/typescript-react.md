@@ -1,6 +1,6 @@
 # TypeScript and React
 
-Extends [types-and-state](types-and-state.md) and [boundaries](boundaries.md) with stack specifics. For anything rendered in a browser, load [web-ui](web-ui.md) alongside this file.
+Extends [types-and-state](types-and-state.md) and [boundaries](boundaries.md) with stack specifics. For browser rendering, load [web-ui](web-ui.md) alongside it.
 
 ## TypeScript
 

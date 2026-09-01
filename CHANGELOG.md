@@ -2,6 +2,41 @@
 
 ## Unreleased
 
+## 3.1.0 - 2026-08-31
+
+Source corpus:
+
+- Tightened evidence semantics so empty, skipped, malformed, unsupported, irrelevant, or unobserved output cannot support a pass; exit zero is insufficient without the expected evidence, and greenfield work must enumerate and validate untracked authored output without staging it merely to obtain a diff.
+- Redirected feature and UI verification toward decisive prompt-critical state transitions, representative desktop and narrow-mobile behavior, page-versus-component overflow, reachable navigation, keyboard/focus lifecycle, and honest treatment of optional nonfunctional concept controls.
+- Separated UI completion into composition and requested form factor, functional/responsive behavior, and accessibility/safety/recovery. Retained safe text rendering, visible corrupt-storage recovery without overwrite, keyboard equivalents, focus return, reduced motion, focus visibility, and reachable states only.
+- Made empty single-screen prototypes prefer platform-native HTML/CSS/JS unless a concrete framework benefit exists, required concise justification and minimal scaffolding when a framework is introduced, and required repository-approved or exactly pinned direct dependency versions for reproducible deliverables.
+- Kept progressive disclosure while tightening React/TypeScript, testing, security, and verification triggers. Clarified that prototype assurance reduces ceremony rather than correctness, security, integrity, accessibility, or prompt adherence, and that self-contained prototypes default to system/local resources unless remote use is requested or justified.
+- These changes address directly observed failure modes from a one-observation-per-cell UI benchmark. This release makes no statistical or general efficacy claim.
+
+Claude distribution:
+
+- Regenerated task skills, profiles, routes, and on-demand references from the canonical source with the revised evidence, UI, framework, resource, and assurance guidance.
+- Replaced the optional Python file-size hook and shell slop scan with supported Node utilities. AER still does not enable hooks or deterministic policy automatically; consumer repository settings remain authoritative.
+
+Codex distribution:
+
+- Regenerated the managed `AGENTS.md`, skills, profiles, and references with sharper conditional routing and the same canonical behavior changes.
+- Added a Codex-compatible non-silent file-size interface: the Node utility provides `--check FILE...` and can parse current `PostToolUse` stdin for `apply_patch`. Official Codex hook behavior was reverified on 2026-08-31. Hook trust and wiring remain consumer-owned and opt-in.
+
+Tools, package, and validation:
+
+- Kept the contrast calculation and added help, named JSON batch input, exact checked-pair output, rerun guidance, unsupported stylesheet/alpha/gradient errors, and explicit pass/accessibility-failure/input-error exit semantics.
+- Made file-size results explicitly classify `APPLICABLE-PASS`, `ADVISORY`, `NOT-APPLICABLE`, or `ERROR`; preserved Git baselines, generated/vendor/declarative exceptions, threshold overrides, and re-notification behavior; and added cheap authored-density signals without treating 500 lines as a maintainability verdict. It remains advisory by default and has no implicit strict mode.
+- Replaced the `src/`-only shell scan with a cross-platform Node slop scan that accepts roots, files, and globs, supports root-level static and source-tree projects, excludes generated/vendor/build artifacts, reports category plus `file:line` evidence, and distinguishes findings, manual review, not-applicable input, and tool failure.
+- Added deterministic tool and guidance regressions for help, valid and malformed invocation, nonempty classification, exit semantics, generated-host inventory, distribution placement, selected single-owner directives, and retained UI protections. Existing fresh-build, link, manifest, budget, skill-metadata, runtime-load, packaging, and ownership checks remain release gates.
+- Bumped the public package and citation metadata to `@aaarslan/aer` 3.1.0.
+
+Evaluation and migration:
+
+- Documented the complete follow-up randomized A/B design: repeated trials, opaque arm labels, matched concurrency and retries, blinded three-dimension ratings, and evaluator-owned functional assertions. The paid repeated benchmark was not run as part of this release.
+- Kept the byte-frozen version-2 arms, cells, tasks, and graders unchanged. Added the missing hash-pinned final composed-component snapshots so research preflight reconstructs v2 independently of later live-corpus edits; this is a storage correction, not a changed experiment or result. Browser-UI outcome fixtures require a new registry version rather than rewriting inspected research inputs.
+- Manual invocations and hook settings must replace `file-size-guard.py` with `file-size-guard.mjs` and `slop-scan.sh` with `slop-scan.mjs`, invoked with Node. `aer update` retires the old managed paths. `contrast-check.mjs` keeps its single-pair form; batch callers must supply the documented JSON format. `NOT-APPLICABLE` is a disposition, not a passing check.
+
 ## 3.0.1 - 2026-08-29
 
 Source corpus:

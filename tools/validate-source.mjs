@@ -4,6 +4,7 @@
 // build manifest covers every source file. Run: node tools/validate-source.mjs
 
 import { readdir, readFile, stat } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MANIFEST, contextManifestErrors, contextRuleSourceErrors } from './build-distributions.mjs';
@@ -30,6 +31,56 @@ const ROOT_DOCS = ['README.md', 'INSTALL.md', 'ADOPT.md', 'CHANGELOG.md', 'AGENT
 const FORKED_REVIEW_SKILLS = new Set(MANIFEST.skills
   .filter((skill) => skill.claude?.context === 'fork' && skill.claude?.agent === 'code-reviewer')
   .map((skill) => skill.name));
+const FROZEN_COMPONENT_REGISTRY = 'evals/components.v2.json';
+const FROZEN_COMPONENT_PREFIX = 'evals/components/v2/';
+
+function exactObjectKeys(value, expected) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  return Object.keys(value).sort().join(',') === [...expected].sort().join(',');
+}
+
+function frozenComponentRegistryRecords(document) {
+  const records = new Map();
+  if (!exactObjectKeys(document, ['schema_version', 'evaluation_contract_version', 'components'])) {
+    problem(`${FROZEN_COMPONENT_REGISTRY}: registry keys must be exactly components, evaluation_contract_version, schema_version`);
+  }
+  if (document?.schema_version !== 2 || document?.evaluation_contract_version !== '2') {
+    problem(`${FROZEN_COMPONENT_REGISTRY}: expected frozen evaluation contract version 2`);
+  }
+  if (!Array.isArray(document?.components)) {
+    problem(`${FROZEN_COMPONENT_REGISTRY}: components must be an array`);
+    return records;
+  }
+
+  const logicalNames = new Set();
+  for (const [index, record] of document.components.entries()) {
+    const label = `${FROZEN_COMPONENT_REGISTRY}: component ${index}`;
+    if (!exactObjectKeys(record, ['logical_name', 'snapshot_file', 'sha256', 'content_type'])) {
+      problem(`${label} keys must be exactly content_type, logical_name, sha256, snapshot_file`);
+      continue;
+    }
+    if (typeof record.logical_name !== 'string' || !record.logical_name || record.logical_name.includes('\\') || path.posix.normalize(record.logical_name) !== record.logical_name || record.logical_name.startsWith('../')) {
+      problem(`${label} logical_name must be a portable source-relative path`);
+    } else if (logicalNames.has(record.logical_name)) {
+      problem(`${label} duplicates logical_name ${record.logical_name}`);
+    } else {
+      logicalNames.add(record.logical_name);
+    }
+    const snapshot = record.snapshot_file;
+    if (typeof snapshot !== 'string' || !snapshot.startsWith(FROZEN_COMPONENT_PREFIX) || !snapshot.endsWith('.txt') || snapshot.includes('\\') || path.posix.normalize(snapshot) !== snapshot || snapshot.includes('/../')) {
+      problem(`${label} snapshot_file must be a portable .txt path under ${FROZEN_COMPONENT_PREFIX}`);
+      continue;
+    }
+    if (records.has(snapshot)) {
+      problem(`${label} duplicates snapshot_file ${snapshot}`);
+      continue;
+    }
+    if (!/^[a-f0-9]{64}$/.test(record.sha256 ?? '')) problem(`${label} sha256 must be lowercase hex`);
+    if (record.content_type !== 'text/markdown') problem(`${label} content_type must be text/markdown`);
+    records.set(snapshot, record);
+  }
+  return records;
+}
 
 export function protectedClaudeSkillCollisions(skillNames, protectedEntryPoints) {
   const protectedNames = new Set(protectedEntryPoints);
@@ -127,6 +178,23 @@ async function main() {
     .map((file) => ({ file, name: normalizeRepoRelativePath(path.relative(src, file)) }))
     .sort((a, b) => a.name.localeCompare(b.name));
   const fileNames = new Set(files.map(({ name }) => name));
+  let componentRegistry;
+  try {
+    componentRegistry = JSON.parse(await readFile(path.join(src, FROZEN_COMPONENT_REGISTRY), 'utf8'));
+  } catch (error) {
+    problem(`${FROZEN_COMPONENT_REGISTRY}: invalid or missing JSON: ${error.message}`);
+    componentRegistry = null;
+  }
+  const componentSnapshotRecords = frozenComponentRegistryRecords(componentRegistry);
+  const researchPaths = new Set(MANIFEST.research.map(normalizeRepoRelativePath));
+  for (const snapshot of componentSnapshotRecords.keys()) {
+    if (!researchPaths.has(snapshot)) problem(`${snapshot}: frozen component snapshot is missing from MANIFEST.research`);
+  }
+  for (const researchPath of researchPaths) {
+    if (researchPath.startsWith(FROZEN_COMPONENT_PREFIX) && researchPath.endsWith('.txt') && !componentSnapshotRecords.has(researchPath)) {
+      problem(`${researchPath}: MANIFEST.research snapshot is absent from ${FROZEN_COMPONENT_REGISTRY}`);
+    }
+  }
   const includesBySource = new Map();
   const referenceSources = new Set(MANIFEST.reference.map(normalizeRepoRelativePath));
   const referenceBasenames = new Set([...referenceSources].map((file) => path.posix.basename(file)));
@@ -171,12 +239,29 @@ async function main() {
   for (const { file, name } of files) {
     const isMarkdown = name.endsWith('.md');
     const isJson = name.endsWith('.json');
-    if (!isMarkdown && !isJson) {
+    const componentRecord = componentSnapshotRecords.get(name);
+    if (!isMarkdown && !isJson && !componentRecord) {
       problem(`${name}: unsupported source file type; add it to an explicit source schema or move it outside source/`);
       continue;
     }
-    const text = await readFile(file, 'utf8');
+    const bytes = await readFile(file);
+    let text;
+    try { text = new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
+    catch { problem(`${name}: is not valid UTF-8`); continue; }
     if (!text.trim()) { problem(`${name}: empty file`); continue; }
+    if (componentRecord) {
+      if (bytes.length >= 3 && bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf) problem(`${name}: frozen snapshot has a UTF-8 BOM`);
+      if (bytes.includes(0)) problem(`${name}: frozen snapshot contains NUL`);
+      if (text.includes('\r')) problem(`${name}: frozen snapshot must use LF line endings only`);
+      if (!text.endsWith('\n')) problem(`${name}: frozen snapshot must end with LF`);
+      if (text.startsWith('---\n') || text.includes('{{include:') || text.includes('{{core}}')) {
+        problem(`${name}: frozen snapshot must be a final composed body without frontmatter or include tokens`);
+      }
+      const digest = createHash('sha256').update(bytes).digest('hex');
+      if (digest !== componentRecord.sha256) problem(`${name}: frozen snapshot hash does not match ${FROZEN_COMPONENT_REGISTRY}`);
+      includesBySource.set(name, []);
+      continue;
+    }
     if (isJson) {
       try { JSON.parse(text); }
       catch (error) { problem(`${name}: invalid JSON: ${error.message}`); }

@@ -6,7 +6,7 @@ Use these defaults only without a governing design system. [Web UI](web-ui.md) o
 
 - Give each region one dominant purpose. Order adjacent actions strongest to weakest.
 - Align elements to a grid, edge, baseline, or related element. Prefer optical alignment when mathematical centering looks wrong.
-- Reflow content at narrow widths without horizontal scrolling.
+- Build the prompt's content hierarchy directly. Do not replace a requested mobile-first design with an unsolicited desktop shell.
 
 ## Spacing and shape
 

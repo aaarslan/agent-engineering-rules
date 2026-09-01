@@ -124,7 +124,10 @@ export async function runInstallLifecycleTests({ distributionRoot = defaultDistr
       installDistribution({ targetRoot: path.join(repo, 'dist'), distributionRoot, hosts: ['codex'], log: false }),
       (error) => error.code === 'TARGET' && /source repository or one of its descendants/.test(error.message),
     );
-    assert.deepEqual(validateRetiredManagedPaths(), { claude: [], codex: [] });
+    assert.deepEqual(validateRetiredManagedPaths(), {
+      claude: ['agent-rules/tools/file-size-guard.py', 'agent-rules/tools/slop-scan.sh'],
+      codex: ['agent-rules/tools/file-size-guard.py', 'agent-rules/tools/slop-scan.sh'],
+    });
     for (const invalid of [
       { claude: ['../escape'], codex: [] },
       { claude: ['.claude/settings.json'], codex: [] },

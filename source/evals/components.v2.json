@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "evaluation_contract_version": "2",
+  "components": [
+    {
+      "logical_name": "kernel/contract.md",
+      "snapshot_file": "evals/components/v2/kernel/contract.txt",
+      "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "profiles/high-assurance.md",
+      "snapshot_file": "evals/components/v2/profiles/high-assurance.txt",
+      "sha256": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "profiles/standard.md",
+      "snapshot_file": "evals/components/v2/profiles/standard.txt",
+      "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "skills/aer-security-review.md",
+      "snapshot_file": "evals/components/v2/skills/aer-security-review.txt",
+      "sha256": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "skills/aer-verify.md",
+      "snapshot_file": "evals/components/v2/skills/aer-verify.txt",
+      "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "skills/bug-fix.md",
+      "snapshot_file": "evals/components/v2/skills/bug-fix.txt",
+      "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "skills/data-change.md",
+      "snapshot_file": "evals/components/v2/skills/data-change.txt",
+      "sha256": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade",
+      "content_type": "text/markdown"
+    },
+    {
+      "logical_name": "skills/feature.md",
+      "snapshot_file": "evals/components/v2/skills/feature.txt",
+      "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+      "content_type": "text/markdown"
+    }
+  ]
+}

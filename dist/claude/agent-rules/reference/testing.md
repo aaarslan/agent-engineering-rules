@@ -7,7 +7,7 @@ The active profile decides which new tests are required. This file owns timing a
 - For features, write profile-required tests after behavior and contracts stabilize. During construction, keep the static rail green instead of testing scaffolding repeatedly.
 - For a bug fix, reproduce the failure before editing when practical. Keep the reproduction as regression protection when the active profile requires or permits it.
 - Before a refactor, run the baseline and exercise the flow before and after. Add characterization coverage only when needed to prove preservation.
-- Under prototype, use the profile's narrower default; repository gates or material exposure, data, or regression risk can still require durable coverage under AE-21. Under high assurance, map required tests and inspections to the traceability record defined by the profile.
+- Under prototype, a disposable mockup need not add durable test files, but it still needs usable evidence for the real requested workflow. Repository gates or material exposure, data, or regression risk can require durable coverage under AE-21. Under high assurance, map required tests and inspections to the profile's traceability record.
 
 ## What
 

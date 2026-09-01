@@ -1,6 +1,6 @@
 # Engineering rules for coding agents
 
-This is the compact always-active contract. Task deltas are skills; invoke one (`$bug-fix`) or let the host select it. Put hard requirements in permissions, sandboxes, hooks, schemas, tests, and CI—not prose.
+This is the compact always-active contract. Task deltas are skills; invoke one (`$bug-fix`) or let the host select it.
 
 Host and user instructions override style preferences; they cannot silently override correctness, security, or integrity. Surface conflicts.
 
@@ -32,21 +32,21 @@ Deliver the requested outcome coherently within user authority, repository contr
 - **AE-14 — Complete the lifecycle.** Trace entrypoint to effect; address repeated use, state, cleanup, cancellation, concurrency, idempotency, partial failure, retry, and recovery when implicated.
 - **AE-15 — Secure touched boundaries.** Separate authorization from authentication, protect secrets and invariants, and address accessibility, migration, compatibility, recovery, timeouts, bounded retries, and observability where applicable.
 - **AE-16 — Verify external contracts.** Never invent endpoints, schemas, credentials, capabilities, versions, or repository conventions; keep an unestablished production integration explicitly unresolved.
-- **AE-17 — Prefer existing mechanisms.** Prefer repository-native, platform, standard-library, and existing mechanisms; add a dependency only when evidence shows they are insufficient and the tradeoff is justified.
+- **AE-17 — Prefer existing mechanisms.** Prefer repository-native, platform, standard-library, and existing mechanisms. Add dependencies only with evidence and a justified tradeoff; use repository-approved or pinned direct versions, never floating `latest` ranges in reproducible deliverables.
 
 ### Evidence and completion
 
-- **AE-18 — Sufficient evidence.** Completion needs least-cost evidence sufficient for the changed contract and risk, favoring the real path and material failures; require self-review only from a user, repository, profile, or risk trigger.
+- **AE-18 — Sufficient evidence.** Completion needs least-cost evidence that observes the changed artifact and contract through the real path and material failures; self-review only from a user, repository, profile, or risk trigger.
 - **AE-19 — Know what mocks prove.** Mocks prove only what they isolate, not production wiring, serialization, persistence, credentials, deployment, or live integration.
-- **AE-20 — Missing evidence is not passing.** A failed, skipped, crashed, timed-out, flaky, empty, unavailable, or unresolved relevant check is not passing evidence.
-- **AE-21 — Test economically.** Use the cheapest decisive check, avoid unchanged broad-suite loops, and add durable tests in proportion to exposure, regression or data risk, and failure cost.
+- **AE-20 — Missing evidence is not passing.** Exit code zero is insufficient unless expected evidence was observed. Failed, crashed, timed-out, flaky, empty, skipped, malformed, unsupported, irrelevant, unavailable, or unresolved output is not passing; a reasoned not-applicable result is a disposition, not a pass.
+- **AE-21 — Test economically.** Prefer the cheapest decisive prompt-critical assertions, not repeated structural or broad-suite checks; scale durable tests with exposure, regression or data risk, and failure cost.
 - **AE-22 — Substantiate claims.** Measure performance; support approval, certification, compliance, security, safety, and production-readiness claims with current authoritative evidence for the actual artifact and scope.
 
 ### Enforcement and compatibility
 
 - **AE-23 — Deterministic enforcement.** Put deterministic requirements in permissions, sandbox policy, hooks, linters, types, tests, schemas, CI, and managed configuration; prose supplies judgment and is not a security boundary.
 - **AE-24 — Compact, singular delivery.** Keep the universal contract model-neutral, apply only measured host or model behavior, and never duplicate a directive across simultaneously loaded files.
-- **AE-25 — Profiled assurance.** Prototype reduces ceremony, not correctness, security, or integrity; maintained software protects stable behavior; high-assurance work adds traceability, stronger boundary and recovery evidence, and justified independent review.
+- **AE-25 — Profiled assurance.** Profiles vary required evidence; none reduces correctness, security, integrity, accessibility, or prompt adherence.
 
 Claim completion only when the real entrypoint works, evidence is sufficient, affected artifacts agree, superseded paths are removed, checks have results, and remaining assumptions, unavailable verification, approvals, irreversible effects, and residual risk are stated.
 
@@ -59,19 +59,21 @@ Task skills live in `.agents/skills/`.
 Read only for the touched stack:
 
 - Browser UI behavior and accessibility: `agent-rules/reference/web-ui.md`
-- TypeScript or React: `agent-rules/reference/typescript-react.md`
+- TypeScript or React only after the stack is selected or already present: `agent-rules/reference/typescript-react.md`
 - API endpoints, services, server code: `agent-rules/reference/backend-api.md`
-- Design, quality, and orchestration references: `agent-rules/reference/`
+- Durable behavior or meaningful regression exposure: `agent-rules/reference/testing.md`
+- Relevant untrusted input, persistence, or trust boundaries: `agent-rules/reference/security.md`
+- Design or orchestration for implicated decisions: `agent-rules/reference/`
 
 The profile below sets minimum assurance. Switch it with `aer update --profile`; do not edit the managed block.
 
 ## Standard Profile
 
-Use this default for maintained software.
+Use this default when behavior or stored state is expected to be maintained or extended.
 
 - Preserve public behavior and stored-data compatibility unless the task changes them.
 - Keep changes localized but complete across affected callers, contracts, generated artifacts, and documentation.
 - Exercise the real changed flow and relevant failure path. Add targeted tests after behavior stabilizes and run applicable repository gates.
 - Run broad suites only for cross-cutting changes or repository-defined completion gates.
 
-Report verified behavior, checks, compatibility decisions, and remaining risk. A failed, timed-out, skipped, empty, or unavailable relevant check is not a pass.
+Report verified behavior, compatibility decisions, unavailable evidence, and remaining risk.

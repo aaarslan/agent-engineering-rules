@@ -78,6 +78,15 @@ export const MANIFEST = {
     'evals/treatments.json',
     'evals/experiments.v2.json',
     'evals/cells.v2.json',
+    'evals/components.v2.json',
+    'evals/components/v2/kernel/contract.txt',
+    'evals/components/v2/profiles/high-assurance.txt',
+    'evals/components/v2/profiles/standard.txt',
+    'evals/components/v2/skills/aer-security-review.txt',
+    'evals/components/v2/skills/aer-verify.txt',
+    'evals/components/v2/skills/bug-fix.txt',
+    'evals/components/v2/skills/data-change.txt',
+    'evals/components/v2/skills/feature.txt',
     'evals/tasks.v2.json',
     'evals/graders.v2.json',
     'evals/run.schema.json',
@@ -104,7 +113,7 @@ export const MANIFEST = {
     'evals/fixtures/ingestion-expected.v2.json',
     'evals/fixtures/grader-rubric.v2.json',
   ],
-  tools: ['tools/contrast-check.mjs', 'tools/slop-scan.sh', 'tools/file-size-guard.py'],
+  tools: ['tools/contrast-check.mjs', 'tools/slop-scan.mjs', 'tools/file-size-guard.mjs'],
   agents: [
     // Read, Grep, Glob only: Bash would grant effective write access through
     // redirection, defeating the enforced read-only contract.
@@ -118,8 +127,8 @@ const src = path.join(repo, 'source');
 // dist-relative paths that exist in the installed layout.
 const REWRITES = [
   ['tools/contrast-check.mjs', 'agent-rules/tools/contrast-check.mjs'],
-  ['tools/slop-scan.sh', 'agent-rules/tools/slop-scan.sh'],
-  ['tools/file-size-guard.py', 'agent-rules/tools/file-size-guard.py'],
+  ['tools/slop-scan.mjs', 'agent-rules/tools/slop-scan.mjs'],
+  ['tools/file-size-guard.mjs', 'agent-rules/tools/file-size-guard.mjs'],
 ];
 
 const read = (rel) => readFile(path.join(src, rel), 'utf8');

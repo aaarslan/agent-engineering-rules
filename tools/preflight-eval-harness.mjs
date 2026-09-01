@@ -12,7 +12,6 @@ import { createServer, request as httpRequest } from 'node:http';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { composeEvaluationComponent } from './build-distributions.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceRoot = path.join(repo, 'source');
@@ -20,10 +19,12 @@ const TASKS = 'evals/tasks.v2.json';
 const GRADERS = 'evals/graders.v2.json';
 const EXPERIMENTS = 'evals/experiments.v2.json';
 const CELLS = 'evals/cells.v2.json';
+const COMPONENTS = 'evals/components.v2.json';
 const DIRECTIVES = 'evals/directives.json';
 const FROZEN_EXPERIMENTS_V2_SHA256 = '00e62acc062da76c8fe84e072bdb308ed79dda0a75141f545718397543f79a46';
 const FROZEN_CELLS_V2_SHA256 = '42961ae4befff0de91825dcbab43e522aa1c5b5847befb80d3821ff2f48a6f0e';
 const FROZEN_EXECUTABLE_FIXTURES_V2_SHA256 = '2083458d5dbdbf1397423a81ab501eb08859aa8cbd6125783e8042a035b19c10';
+const FROZEN_COMPONENT_SNAPSHOTS_V2_SHA256 = 'c423e62fd02179cdede1409522b1de5e99b7707498b4506588c09c7432b92a2d';
 const MAX_TEXT_BYTES = 1_048_576;
 const MAX_STREAM_BYTES = 65_536;
 const EXPECTED_EXPERIMENTS = [
@@ -54,6 +55,7 @@ export function frozenEvaluationHashErrors(actual) {
     experiments: FROZEN_EXPERIMENTS_V2_SHA256,
     cells: FROZEN_CELLS_V2_SHA256,
     executable_fixtures: FROZEN_EXECUTABLE_FIXTURES_V2_SHA256,
+    components: FROZEN_COMPONENT_SNAPSHOTS_V2_SHA256,
   };
   const errors = [];
   for (const [name, digest] of Object.entries(actual)) {
@@ -126,6 +128,76 @@ async function safeSourceFile(relative, errors, { parseJson = true } = {}) {
     catch (error) { errors.push(`${relative}: invalid JSON: ${error.message}`); value = null; }
   }
   return { relative, file: current, bytes, value, sha256: sha256(bytes) };
+}
+
+export function frozenComponentSnapshotErrors(document, requiredLogicalNames, snapshots) {
+  const errors = [];
+  closedKeys(document, ['schema_version', 'evaluation_contract_version', 'components'], 'frozen component registry', errors);
+  if (document?.schema_version !== 2 || document?.evaluation_contract_version !== '2') {
+    errors.push('frozen component registry must use evaluation contract version 2');
+  }
+  const records = Array.isArray(document?.components) ? document.components : [];
+  if (!Array.isArray(document?.components)) errors.push('frozen component registry components must be an array');
+  const logicalNames = records.map((record) => record?.logical_name).filter((name) => typeof name === 'string');
+  const expected = [...requiredLogicalNames].sort();
+  if (!sameValue([...new Set(logicalNames)].sort(), expected)) {
+    errors.push(`frozen component logical names must be exactly ${expected.join(', ')}`);
+  }
+  if (new Set(logicalNames).size !== logicalNames.length) errors.push('frozen component logical names must be unique');
+  const snapshotFiles = records.map((record) => record?.snapshot_file).filter((name) => typeof name === 'string');
+  if (new Set(snapshotFiles).size !== snapshotFiles.length) errors.push('frozen component snapshot files must be unique');
+
+  for (const [index, record] of records.entries()) {
+    const label = `frozen component ${record?.logical_name ?? index}`;
+    closedKeys(record, ['logical_name', 'snapshot_file', 'sha256', 'content_type'], label, errors);
+    if (portableRelativePathError(record?.logical_name)) errors.push(`${label} logical_name must be a portable source-relative path`);
+    const snapshotPathError = portableRelativePathError(record?.snapshot_file);
+    if (snapshotPathError || !record.snapshot_file.startsWith('evals/components/v2/')) {
+      errors.push(`${label} snapshot_file must be a portable path under evals/components/v2/`);
+      continue;
+    }
+    if (!/^[a-f0-9]{64}$/.test(record?.sha256 ?? '')) errors.push(`${label} sha256 must be lowercase hex`);
+    if (record?.content_type !== 'text/markdown') errors.push(`${label} content_type must be text/markdown`);
+    const snapshot = snapshots.get(record.snapshot_file);
+    if (!snapshot) {
+      errors.push(`${label} snapshot was not loaded`);
+      continue;
+    }
+    for (const error of utf8LfErrors(snapshot.bytes, record.snapshot_file)) errors.push(error);
+    if (snapshot.sha256 !== record.sha256) errors.push(`${label} snapshot hash does not match the registry`);
+    const text = snapshot.bytes.toString('utf8');
+    if (text.startsWith('---\n') || text.includes('{{include:') || text.includes('{{core}}')) {
+      errors.push(`${label} snapshot must be a final composed body without frontmatter or include tokens`);
+    }
+  }
+  return errors;
+}
+
+async function loadFrozenComponentAssets(tasks, componentsFile, errors) {
+  const required = new Set();
+  for (const task of tasks) {
+    required.add(task.instruction_contract?.kernel_logical_name);
+    required.add(task.instruction_contract?.profile_logical_name);
+    for (const logicalName of task.instruction_contract?.skill_logical_names ?? []) {
+      if (logicalName !== 'skills/catalog.txt') required.add(logicalName);
+    }
+  }
+  required.delete(undefined);
+  const snapshots = new Map();
+  for (const record of componentsFile.value?.components ?? []) {
+    const relative = record?.snapshot_file;
+    if (portableRelativePathError(relative) || !relative.startsWith('evals/components/v2/') || snapshots.has(relative)) continue;
+    const loaded = await safeSourceFile(relative, errors, { parseJson: false });
+    if (loaded) snapshots.set(relative, loaded);
+  }
+  errors.push(...frozenComponentSnapshotErrors(componentsFile.value, required, snapshots));
+  const assets = new Map();
+  for (const record of componentsFile.value?.components ?? []) {
+    const loaded = snapshots.get(record.snapshot_file);
+    if (loaded) assets.set(record.logical_name, loaded);
+  }
+  const digestFiles = new Map([[COMPONENTS, componentsFile], ...snapshots]);
+  return { assets, digest: executableFixtureDigest(digestFiles) };
 }
 
 function experimentErrors(document, { hosts, overlays, scenarios, treatments }) {
@@ -392,35 +464,20 @@ function materializeCell(cell, task, experiment, arm, assets, overlays) {
 
 export async function generateFrozenCellPlan() {
   const errors = [];
-  const [tasksFile, experimentsFile, modelsFile] = await Promise.all([
+  const [tasksFile, experimentsFile, modelsFile, componentsFile] = await Promise.all([
     safeSourceFile(TASKS, errors), safeSourceFile(EXPERIMENTS, errors), safeSourceFile('compatibility/models.json', errors),
+    safeSourceFile(COMPONENTS, errors),
   ]);
-  if (errors.length || !tasksFile || !experimentsFile || !modelsFile) return { errors, document: null, fixtures: new Map() };
+  if (errors.length || !tasksFile || !experimentsFile || !modelsFile || !componentsFile) {
+    return { errors, document: null, fixtures: new Map(), componentDigest: null };
+  }
   const tasks = tasksFile.value.tasks ?? [];
   const experiments = experimentsFile.value.experiments ?? [];
   const coverage = experimentTaskCoverage(tasks, experiments);
   errors.push(...coverage.errors);
-  const assets = new Map();
-  const logicalNames = new Set();
-  for (const task of tasks) {
-    logicalNames.add(task.instruction_contract?.kernel_logical_name);
-    logicalNames.add(task.instruction_contract?.profile_logical_name);
-    for (const logicalName of task.instruction_contract?.skill_logical_names ?? []) if (logicalName !== 'skills/catalog.txt') logicalNames.add(logicalName);
-  }
-  for (const logicalName of logicalNames) {
-    if (!logicalName) { errors.push('task instruction contract contains an empty logical name'); continue; }
-    const loaded = await safeSourceFile(logicalName, errors, { parseJson: false });
-    if (loaded) {
-      try {
-        const bytes = await composeEvaluationComponent(logicalName);
-        for (const error of utf8LfErrors(bytes, `${logicalName} composed evaluation body`)) errors.push(error);
-        const text = bytes.toString('utf8');
-        if (text.startsWith('---\n') || text.includes('{{include:') || text.includes('{{core}}')) errors.push(`${logicalName}: composed evaluation body retained source frontmatter or include tokens`);
-        assets.set(logicalName, { ...loaded, bytes, sha256: sha256(bytes) });
-      } catch (error) { errors.push(`${logicalName}: evaluation composition failed: ${error.message}`); }
-    }
-  }
-  if (errors.length) return { errors, document: null, fixtures: new Map() };
+  const frozenComponents = await loadFrozenComponentAssets(tasks, componentsFile, errors);
+  const assets = frozenComponents.assets;
+  if (errors.length) return { errors, document: null, fixtures: new Map(), componentDigest: frozenComponents.digest };
   const tasksById = new Map(tasks.map((task) => [task.id, task]));
   const experimentsById = new Map(experiments.map((experiment) => [experiment.id, experiment]));
   const overlays = new Map((modelsFile.value.overlays ?? []).map((overlay) => [overlay.id, overlay]));
@@ -447,7 +504,7 @@ export async function generateFrozenCellPlan() {
     archive_before_provider: true,
     cells,
   };
-  return { errors, document, fixtures };
+  return { errors, document, fixtures, componentDigest: frozenComponents.digest };
 }
 
 export async function writeCellArchive(directory, files) {
@@ -1041,7 +1098,7 @@ async function captureArtifact(directory, name, bytes) {
 
 export async function validateNoProviderHarness() {
   const errors = [];
-  const required = [TASKS, GRADERS, EXPERIMENTS, CELLS, DIRECTIVES, 'evals/scenarios.json', 'evals/treatments.json', 'compatibility/models.json', 'compatibility/hosts.json'];
+  const required = [TASKS, GRADERS, EXPERIMENTS, CELLS, COMPONENTS, DIRECTIVES, 'evals/scenarios.json', 'evals/treatments.json', 'compatibility/models.json', 'compatibility/hosts.json'];
   const documents = new Map();
   for (const relative of required) {
     const loaded = await safeSourceFile(relative, errors);
@@ -1069,6 +1126,7 @@ export async function validateNoProviderHarness() {
   }));
   const generatedPlan = await generateFrozenCellPlan();
   errors.push(...generatedPlan.errors);
+  if (generatedPlan.componentDigest) errors.push(...frozenEvaluationHashErrors({ components: generatedPlan.componentDigest }));
   const declaredPlan = documents.get(CELLS).value;
   const declaredCellIds = (declaredPlan?.cells ?? []).map((cell) => cell.cell_id);
   if (new Set(declaredCellIds).size !== declaredCellIds.length) errors.push('frozen cell plan cell_id values must be unique');

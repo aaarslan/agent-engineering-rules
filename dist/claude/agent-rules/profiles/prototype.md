@@ -1,6 +1,6 @@
 # Prototype Profile
 
-Deliver a coherent runnable slice quickly; reduce ceremony, not correctness, security, or integrity.
+Deliver a coherent runnable slice quickly; avoid maintained-software ceremony that does not protect this slice.
 
 - Prefer replaceable code and simple boundaries. Remove starter, demo, or placeholder behavior only when the slice supersedes it; report unrelated residue.
 - Add no CI, deployment or production operations, or generalized extension systems unless requested or materially required.
