@@ -6,9 +6,9 @@ Use this procedure to initialize or update Agent Engineering Rules in another re
 2. Identify the hosts actually used by the project: `claude`, `codex`, or `both`. Do not install a second instruction root merely because another tool recognizes its filename.
 3. Choose `prototype`, `standard`, or `high-assurance` from explicit requirements. Default to `standard`; never infer assurance or regulatory obligations from an industry label.
 4. Inspect manifests, lockfiles, build files, and source directories. Activate only evidenced contexts: `web-ui`, `typescript-react`, and/or `backend-api`. Fresh installs otherwise use `none`.
-5. Preflight the exact target. Use the installed CLI, or pin the exact npm package version when reproducibility requires it:
+5. Preflight the exact target. Pin the npm version when reproducibility requires it; from a source checkout, use `node tools/aer.mjs` instead:
 
-       npm exec --yes --package=@aaarslan/aer@3.1.1 -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
+       npm exec --yes --package=@aaarslan/aer@5.0.0 -- aer init --host <claude|codex|both> --target <target> --profile <profile> --contexts <none|all|comma-list> --dry-run
 
 6. Resolve every reported collision; never force ownership. Rerun without `--dry-run`, then commit the generated payload and `.agent-engineering-rules-state.json` together.
 7. On an already initialized project, use `aer doctor` and `aer update`; do not rerun `init`. Omitted update selections are read from the ledger.

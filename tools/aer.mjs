@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
@@ -16,7 +17,20 @@ import {
 const HOSTS = new Set(['claude', 'codex']);
 const PROFILES = new Set(SUPPORTED_PROFILES);
 const CONTEXTS = new Set(SUPPORTED_CONTEXTS);
-const PACKAGE_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
+const PACKAGE_MANIFEST = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+const PACKAGE_VERSION = PACKAGE_MANIFEST.version;
+const VERIFY_SCRIPT = fileURLToPath(new URL('./aer-verify.mjs', import.meta.url));
+
+export function nodeFloorMajor(range = PACKAGE_MANIFEST.engines?.node) {
+  const match = /(\d+)/.exec(String(range ?? ''));
+  return match ? Number(match[1]) : null;
+}
+
+export function unsupportedRuntimeMessage(version = process.versions.node, floor = nodeFloorMajor()) {
+  const major = Number.parseInt(String(version), 10);
+  if (!Number.isFinite(floor) || !Number.isFinite(major) || major >= floor) return null;
+  return `AER requires Node >= ${floor} (found v${version}); upgrade Node and try again.`;
+}
 
 const usage = () => `Usage:
   aer --help
@@ -25,6 +39,7 @@ const usage = () => `Usage:
   aer update [--host <claude|codex|both>] [options]
   aer doctor [--json] [options]
   aer uninstall [--host <claude|codex|both>] [options]
+  aer verify <contrast|slop|size> [...]      Run exactly one optional diagnostic
 
 Common options:
   --target <repo>                           Default: current directory
@@ -58,6 +73,7 @@ function parseArguments(argv) {
     if (argv.length !== 1) throw argumentError('--version does not accept arguments');
     return { version: true };
   }
+  if (command === 'verify') return { command, delegated: argv.slice(1) };
   if (!['init', 'update', 'doctor', 'uninstall'].includes(command)) throw argumentError(`unknown command: ${command}`);
   const takesValue = new Set(['--host', '--target', '--profile', '--contexts', '--distribution-root', '--codex-max-bytes']);
   const flags = new Set(['--dry-run', '--json', '--keep-modified', '--help']);
@@ -109,7 +125,15 @@ function commonOptions(args) {
   };
 }
 
-export async function runCli(argv = process.argv.slice(2), io = console) {
+export async function runCli(argv = process.argv.slice(2), io = console, {
+  nodeVersion = process.versions.node,
+  spawn = spawnSync,
+} = {}) {
+  const unsupported = unsupportedRuntimeMessage(nodeVersion);
+  if (unsupported) {
+    io.error(unsupported);
+    return 2;
+  }
   let args;
   try {
     args = parseArguments(argv);
@@ -120,6 +144,16 @@ export async function runCli(argv = process.argv.slice(2), io = console) {
     if (args.version) {
       io.log(PACKAGE_VERSION);
       return 0;
+    }
+    if (args.delegated) {
+      const result = spawn(process.execPath, [VERIFY_SCRIPT, ...args.delegated], {
+        cwd: process.cwd(), stdio: 'inherit', windowsHide: true,
+      });
+      if (result.error) {
+        io.error(`AER FAILED: ${result.error.message}`);
+        return 2;
+      }
+      return Number.isInteger(result.status) ? result.status : 2;
     }
     const common = commonOptions(args);
     if (args.command === 'init') {

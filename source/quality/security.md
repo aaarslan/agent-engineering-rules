@@ -23,7 +23,7 @@ The [universal contract](../kernel/contract.md) makes touched security obligatio
 When reviewing or auditing, check for:
 
 - [ ] Injection sinks reachable from untrusted input
-- [ ] Missing or client-only authorization on any state-changing operation
+- [ ] Missing or client-only authorization on protected reads or writes
 - [ ] IDs from the client used without ownership checks (object-level authorization)
 - [ ] Secrets in code, config, logs, or error output
 - [ ] Unsafe deserialization or unvalidated redirects and file paths

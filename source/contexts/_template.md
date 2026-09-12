@@ -6,7 +6,7 @@ related: []
 
 # <Technology>
 
-Copy this file when a stack has no context file yet—to `source/contexts/<technology>.md` when maintaining this system (then add a `MANIFEST.contexts` entry in `tools/build-distributions.mjs` so it ships), or to a host-owned path when adopting per [ADOPT](../../ADOPT.md) (then replace this frontmatter with the host's schema, e.g. Claude `paths:` globs). Set `scope`, fill `load_when`, and delete this paragraph and the guidance section.
+Repository-specific stack instructions belong in a host-owned path per [ADOPT](../../ADOPT.md); use the host's schema, such as Claude `paths:` globs. A justified universal context added to this corpus needs a `MANIFEST.contexts` entry in `tools/manifest.mjs`. Set `scope`, fill `load_when`, and delete this paragraph and the guidance section.
 
 ## Writing rules for this stack
 

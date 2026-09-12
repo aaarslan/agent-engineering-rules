@@ -1,15 +1,15 @@
 ---
 name: aer-verify
-description: Falsify material completion claims when a matching verification contract applies.
+description: Inspect a specific completion claim or diagnostic uncertainty when explicitly requested; not a routine final step.
+disable-model-invocation: true
 ---
 
-# Agent Engineering Verify
+# Focused Verification
 
-Identify the applicable verification contract and material risk or unresolved uncertainty. Do not add this as a generic terminal ritual.
+- Identify the claim, changed artifact, available evidence, and remaining uncertainty.
+- Inspect relevant implementation and existing results before selecting any new check; do not repeat valid evidence simply because another agent produced it.
+- Exercise the real boundary when the uncertainty is behavioral; use an isolated check only for what it can establish.
+- Optional diagnostics use `aer verify`: `node agent-rules/tools/aer-verify.mjs <check> <args>`. Select a documented check for a concrete concern; do not run the diagnostic inventory by default.
+- Separate observed behavior, heuristic findings, and unavailable verification. Falsify candidate findings before reporting them.
 
-- Name the claims and risk that justify verification; inspect only the affected surface and relevant consumers.
-- Exercise the real changed path and material invalid or failure behavior, then use the cheapest decisive repository gates.
-- Attempt to falsify contract consistency, repeated-use and recovery behavior, authorization and integrity, generated artifacts, and reported evidence where applicable.
-- Use one independent reviewer only when material risk requires independence; do not spawn verifier chains or repeat deterministic gates.
-
-Report the trigger, claims, inspected surface, evidence, outcome, and remaining uncertainty.
+Read `agent-rules/reference/verification.md` only when the remaining uncertainty needs its procedure. Finish with the supported conclusion, evidence, and limitations; no repeated verifier or report gate.

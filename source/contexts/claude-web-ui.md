@@ -6,4 +6,6 @@ related: [web-ui.md, typescript-react.md]
 
 # Web UI Route
 
-Before changing a matching browser UI file, read `agent-rules/reference/web-ui.md`; for TypeScript or React, also read `agent-rules/reference/typescript-react.md`.
+{{include:contexts/web-interaction.md}}
+
+For uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/web-ui.md`; selected stack: `agent-rules/reference/typescript-react.md`.

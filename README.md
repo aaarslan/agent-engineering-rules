@@ -1,103 +1,74 @@
 # Agent Engineering Rules
 
 [![Validate](https://github.com/aaarslan/agent-engineering-rules/actions/workflows/validate.yml/badge.svg)](https://github.com/aaarslan/agent-engineering-rules/actions/workflows/validate.yml)
-[![Latest release](https://img.shields.io/github/v/release/aaarslan/agent-engineering-rules)](https://github.com/aaarslan/agent-engineering-rules/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Compact, tested engineering rules for more reliable AI-assisted software development.**
+**Complete engineering, simple implementation, proportionate verification.**
 
-Agent Engineering Rules (AER) installs a project-local, model-neutral engineering contract for Claude Code and OpenAI Codex. It adds bounded instructions, task-specific skills, and mechanical ownership checks without installing a daemon, global agent configuration, account-wide settings, or a project runtime dependency.
+AER installs a compact, model-neutral engineering contract for Claude Code and Codex in one selected repository. The contract asks agents to repair owning defects, preserve exact behavior, complete real integrations, supply missing technical judgment, and support completion claims with relevant evidence.
 
-## Quick start
+V5 succeeds v3.1.1 directly. V4 is skipped; its branch remains historical evidence. Read the [release notes](CHANGELOG.md), [review and implementation plan](docs/decisions/5.0.0-review-and-plan.md), and [grievance inventory](source/evals/grievances.json) for the requirements and decisions. V5 makes no general efficacy claim.
 
-Requirements: Node.js 24 or newer and a Git repository.
+## Install
 
-Install the CLI once, then preview and initialize the current repository:
-
-```bash
-npm install --global @aaarslan/aer
-
-aer init --host claude --dry-run
-aer init --host claude
-```
-
-Use `--host codex` or `--host both` when those hosts are actually used by the project. The default profile is `standard`; fresh installations enable no stack contexts unless explicitly selected.
-
-The global npm installation is only a way to make the `aer` command available. AER-managed configuration, generated content, ownership state, and markers remain inside the explicitly selected target repository. AER does not modify user-home agent configuration or unrelated repositories.
-
-See [INSTALL.md](INSTALL.md) for initialization, updates, `doctor`, uninstall, profiles, contexts, ownership, and recovery.
-
-## What AER changes
-
-| Concern | AER behavior |
-| --- | --- |
-| Instruction loading | Installs one compact contract and an explicit active profile |
-| Task guidance | Keeps task-specific detail behind ten on-demand skills |
-| Host delivery | Generates native Claude Code and Codex project layouts from one canonical source |
-| Existing files | Refuses unowned collisions and preserves content outside managed root markers |
-| Updates | Changes only content proven by the project ledger to be AER-owned |
-| Verification | Provides deterministic build, source, distribution, lifecycle, and research-preflight checks |
-| Security boundary | Leaves permissions, sandboxes, hooks, tests, and CI under project-owner control |
-
-AER does not silently create consumer CI, hooks, branch rules, services, daemons, accounts, or global agent configuration. Prose instructions are not represented as a substitute for deterministic enforcement.
-
-## Runtime model
-
-1. **Always loaded:** one compact universal contract and one selected profile.
-2. **Conditionally routed:** thin host-native pointers for explicitly selected stack contexts.
-3. **On demand:** task skills and full references for design, verification, security, databases, documentation, and autonomous work.
-
-The product target bounds generated automatic instructions plus one selected skill to an estimated 3,500 tokens. Full references are loaded only when relevant.
-
-## Supported hosts
-
-| Host | Native project surface |
-| --- | --- |
-| Claude Code | `CLAUDE.md`, `.claude/rules/`, `.claude/skills/`, and a read-only review agent |
-| OpenAI Codex | `AGENTS.md`, `.agents/skills/`, and on-demand references |
-
-Unsupported hosts are not given compatibility aliases or implied support.
-
-## Trust and safety
-
-The zero-dependency installer validates repository boundaries, path safety, symbolic links, collisions, ownership hashes, concurrent changes, and interrupted updates before modifying managed content. `aer doctor` performs a read-only integrity inspection.
-
-Report suspected vulnerabilities privately through GitHub's [security advisory form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new). Do not include credentials or sensitive project content in public issues. See [SECURITY.md](SECURITY.md).
-
-## Evidence and limits
-
-The predecessor corpus passed 35 of 36 guardrail runs versus 27 of 36 without rules in a preregistered 108-run study (Fisher exact `p = 0.014`). AER v3 materially changes the corpus, delivery layout, and installer and therefore does **not** inherit that efficacy result.
-
-This repository contains provider-free fixtures and a dormant paired live A/B path. CI never calls a model provider. Comparative v3 claims require representative paid-model and held-out evaluation. See [docs/evaluation.md](docs/evaluation.md).
-
-## Validate this repository
+Use Node.js 24 or newer and a Git repository:
 
 ```bash
-npm test
-npm run validate
-npm run validate:research
-npm run test:packed
-npm pack --dry-run --json
+npm install --global @aaarslan/aer@5.0.0
+aer init --host claude --target <project> --dry-run
+aer init --host claude --target <project>
 ```
 
-The release path covers Linux and Windows. Research preflight and packed-install validation are provider-free and do not dispatch model calls.
+Select `codex` or `both` only when the project uses those hosts. The default assurance profile is `standard`; alternatives are `prototype` and `high-assurance`. No stack context is selected by default.
 
-## Repository structure
+Global installation only makes the executable available. Managed content and ownership records stay in the selected project. From a source checkout, use `node tools/aer.mjs` instead of `aer`. See [INSTALL.md](INSTALL.md) for updates, profiles, contexts, collisions, recovery and uninstall.
 
-| Path | Authority |
+## Engineering contract
+
+Completeness determines what must work; simplicity determines how it is built. A large refactor or subsystem replacement is appropriate when evidence supports it. Small patches, large diffs, added layers and test counts are not quality signals.
+
+The kernel uses stable directives, normative strength, an explicit execution order and a completion predicate. It keeps universal responsibilities in the initial contract: ownership, exact input/output behavior, lifecycle, authorization, secrets, data integrity, migration, recovery, accessibility and operations. User product constraints remain authoritative; proposed mechanisms still require engineering judgment.
+
+| Layer | Purpose |
 | --- | --- |
-| `source/kernel/` | Universal 25-directive engineering contract |
-| `source/profiles/` | Prototype, standard, and high-assurance deltas |
-| `source/skills/` | Ten canonical task skills |
-| `source/contexts/` | Thin stack-context routes |
-| `dist/claude/`, `dist/codex/` | Generated host-native payloads; never edit manually |
-| `tools/` | CLI, deterministic generation, validation, and gated research utilities |
-| `docs/` | Capability evidence and evaluation protocol |
+| Kernel | Always-active engineering obligations and completion conditions |
+| Assurance profile | Evidence investment suited to lifespan, exposure, contract stability and failure cost |
+| Task skill | Concern-specific guidance when the task calls for it |
+| Reference | Design, security, data, UI or verification detail read only when relevant |
+| Optional diagnostic | A selected calculation or heuristic with a bounded, explicit result |
 
-After changing `source/` or its manifest, run `node tools/build-distributions.mjs` and commit the matching `dist/` output.
+Every implementation needs enough evidence of its real behavior. It does not automatically need permanent test infrastructure. Durable coverage protects stable contracts; relevant production regressions and repository gates still apply. Reuse passing evidence unless a change or unresolved concern invalidates it.
 
-## Contributing
+Completion requires working behavior, coherent consumers and artifacts, relevant evidence, and honest limits. Reports distinguish direct exercises, regression coverage, existing checks and material omissions. V5 imposes no report parser, mandatory verifier run, command ledger, automatic broad-suite loop or hook-based completion gate.
 
-Small, evidence-backed improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Use GitHub Discussions only for open design exploration once enabled; use issues for bounded defects and proposals.
+## Optional diagnostics
 
-MIT licensed. See [LICENSE](LICENSE).
+`aer verify` selects one diagnostic; it neither runs a project test suite nor certifies completion:
+
+```bash
+aer verify contrast '#ffffff' '#000000'
+aer verify slop --root <project>
+aer verify size --check <file>
+```
+
+After installation, the equivalent entrypoint is `node agent-rules/tools/aer-verify.mjs <check> <args>`. Contrast checks only supplied opaque color pairs; slop and size findings require contextual review. See [the diagnostic contracts](INSTALL.md#optional-diagnostics).
+
+## Delivery and trust
+
+Claude receives a managed `CLAUDE.md` block, native rules and skills, and an optional read-only reviewer. Codex receives a managed `AGENTS.md` block and native skills. Both receive on-demand references and diagnostic files. [Current host documentation](docs/capability-matrix.md) supports the layouts; installation is not proof of model adherence.
+
+The dependency-free installer checks boundaries, symbolic links, collisions, ownership hashes and interrupted updates. It preserves consumer-owned text and configuration. `aer doctor` inspects integrity without repair. AER does not install permissions, hooks, consumer CI, global agent settings, services or accounts; prose is not a security boundary.
+
+## Evidence and contribution
+
+[Evaluation policy](docs/evaluation.md) distinguishes structural checks, historical outcomes and future paid research. Frozen history remains intact. The dormant execution harnesses are removed, and CI never dispatches a provider.
+
+Run the provider-free release gate at a meaningful integration boundary:
+
+```bash
+npm run release:check
+```
+
+Edit rules in `source/`, update the shared `MANIFEST` in `tools/manifest.mjs` when paths change, and regenerate `dist/` with `node tools/build-distributions.mjs`. Runtime tools ship once at package root; the installer copies the required files into the selected project.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), [CHANGELOG.md](CHANGELOG.md), and [tools/README.md](tools/README.md). Report vulnerabilities through the private [security advisory form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new). MIT licensed.

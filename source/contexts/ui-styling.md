@@ -1,45 +1,17 @@
 ---
 scope: [context]
-load_when: designing or restyling visual UI without a product design system to follow
+load_when: designing or restyling a requested visual interface
 related: [web-ui.md, ../kernel/contract.md]
 ---
 
 # UI Styling
 
-Use these defaults only without a governing design system. [Web UI](web-ui.md) owns behavior and accessibility.
+The requested product, reference, and repository design system own visual decisions. [Web UI](web-ui.md) owns behavior and accessibility.
 
-## Hierarchy and layout
+- Preserve the requested composition, hierarchy, content, and form factor; do not add an unsolicited application shell or product feature.
+- Use existing tokens and components. If none exist, choose a coherent local visual system suited to the brief, without imposing a universal palette, typeface, spacing scale, or aesthetic.
+- Check alignment, readable text, related grouping, and action hierarchy in the rendered interface at relevant viewport sizes.
+- Use real content and labels where known; fabricated badges, statistics, delays, and unreachable states do not improve fidelity.
+- Evaluate appearance, functional behavior, and accessibility separately; a visual improvement may still introduce a functional regression.
 
-- Give each region one dominant purpose. Order adjacent actions strongest to weakest.
-- Align elements to a grid, edge, baseline, or related element. Prefer optical alignment when mathematical centering looks wrong.
-- Build the prompt's content hierarchy directly. Do not replace a requested mobile-first design with an unsolicited desktop shell.
-
-## Spacing and shape
-
-- Use a 4px scale: `4, 8, 12, 16, 24, 32, 48, 64`. Reuse a small set of gaps, radii, and control heights.
-- Put related elements closer than unrelated ones. Container padding should not be smaller than gaps between child groups.
-- Set nested radii from the inset: `innerRadius = max(0, outerRadius - inset)`. Do not default to pills.
-
-## Typography
-
-- Keep body text 16–18px, prose 60–80ch, and line height 1.45–1.65. Tighten display text, not body copy.
-- Use at most two typefaces, a restrained scale, and few weights. Left-align paragraphs, forms, and dense data.
-
-## Color and depth
-
-- Use near-black and near-white. Tint neutrals toward one restrained hue and keep distinct lightness steps.
-- Separate adjacent surfaces with one technique: lightness, border, or shadow. Do not stack them at one boundary.
-- Use one elevation model. Raised dark surfaces become slightly lighter; shadows stay soft and low-opacity.
-
-## Controls and restraint
-
-- Make horizontal button padding about twice vertical padding. Keep targets at least 24px square and key touch controls near 44px.
-- Use one loud primary action per region. Label unfamiliar icons and keep supporting icons quieter than text.
-- Avoid card grids by default, decorative gradients, glass effects, giant radii, heavy shadows, invented badges or stats, and placeholder copy where the real label is known.
-
-## Checklist
-
-- [ ] Values come from the chosen spacing, type, and radius scales
-- [ ] No boundary stacks separation effects
-- [ ] Body is at least 16px; prose stays within 80ch
-- [ ] Every decoration improves comprehension
+Choose frameworks and tools from repository evidence and task requirements. File counts, framework sophistication, styling volume, and automated contrast output do not establish design quality.

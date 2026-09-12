@@ -5,7 +5,7 @@ description: Improve structure while preserving behavior and contracts.
 
 # Refactor
 
-- Establish the behavior and contracts that must remain unchanged before restructuring.
+- Establish behavior and contracts to preserve; use a runnable baseline when available, otherwise state the gap and choose decisive characterization or contract evidence.
 - Improve a named problem in ownership, coupling, state, types, boundaries, or comprehension without inventing product behavior.
 - Update affected consumers and remove superseded affected paths so one implementation remains.
 - Compare the relevant real behavior before and after, then run applicable repository gates.

@@ -1,39 +1,34 @@
 # Verification
 
-The active profile defines minimum assurance. Add gates for security, integrity, compatibility, accessibility, migrations, or performance as touched. Profiles never reduce correctness.
+Select evidence for the changed contract and actual risk. This procedure is concern-triggered, not an extra mandatory contract.
 
-## Static rail during construction
+## During implementation
 
-Keep configured typecheck, incremental compile, and fast lint green while building. Do not run broad suites against incomplete scaffolding. A bug fix begins with one reproduction when practical, per [testing](testing.md).
+Use the cheapest check that resolves the current uncertainty: direct execution, targeted assertions, incremental compile, or relevant existing coverage. Do not test scaffolding repeatedly or rerun all tooling after each edit.
 
-## Dynamic rail at a complete seam
+## At a complete behavior or integration boundary
 
-A seam is a finished feature slice, fix, or autonomous increment. Run applicable gates in order:
+- Exercise the real entrypoint through its actual effect, including material failure and recovery cases. For UI, observe rendered interaction and keyboard/focus behavior.
+- If the real boundary is unavailable, use the strongest useful proxy and state what it cannot establish; a mock never becomes proof of production wiring.
+- Run relevant established regressions and repository-required gates. Use broader checks when the integration risk warrants them; preserve valid prior results.
+- Build when the changed deliverable requires it; inspect the declared output. A development server is not evidence of a completed production build.
+- Regenerate changed schemas, contracts, and generated artifacts; inspect their consumers and final diffs.
+- New permanent tests follow [testing](testing.md), independently of the need to verify behavior now.
 
-1. Exercise the changed behavior through its real entrypoint, including the most relevant failure case and keyboard behavior for UI. If unavailable, use the closest executable proxy and state the limitation.
-2. Run or add targeted tests when required by the active profile and [testing](testing.md).
-3. Run configured format, lint, typecheck, and aggregate checks. Do not invent tooling solely to fill a missing gate.
-4. Build the runnable artifact. A declared build command must terminate successfully within a bounded check and produce its declared output; a command that starts or leaves a development server running is a development command and fails build validation. Run the broader suite for cross-cutting changes or when the profile or repository requires it.
-5. Run migration, schema, generated-file, and contract checks when those artifacts changed; regenerate and inspect their diffs.
-6. Run provided security and secret scans where relevant. Use this system's tools only on documented project and file types; inspect heuristic warnings.
-7. Use shared or production systems only with explicit authorization. Follow the external-service and spend boundaries in the universal contract; local disposable environments need none.
+Use the repository's actual commands. Record component exit status and material output; later success cannot hide earlier failure. Keep pass, failure, advisory, not-applicable, and unavailable distinct.
 
-Use repository-native commands, not remembered generic substitutes. Preserve each component command's exit status and material output so a later success cannot mask an earlier failure; do not cite the aggregate as clean unless every applicable component is clean.
+Optional diagnostics use `aer verify`, invoked in an installed project as `node agent-rules/tools/aer-verify.mjs <check> <args>`. Select one only when its documented scope addresses a concrete uncertainty. There is no automatic scan or help-discovery gate, and heuristic warnings require inspection.
 
-Before first use of a shipped CLI, inspect its `--help` once and require a nonempty classified outcome; after the contract produces a usable result, do not repeat help discovery or an unchanged check. The canonical shipped-tool invocations are `node agent-rules/tools/slop-scan.mjs --root .`, `node agent-rules/tools/contrast-check.mjs --batch contrast-pairs.json`, and the optional advisory `node agent-rules/tools/file-size-guard.mjs --check src/app.js src/view.tsx`. Keep not applicable, advisory, failure, and clean distinct.
+## Failed or unavailable evidence
 
-For ordinary standard-profile greenfield UI work, prefer one applicable full-root slop scan and one batched contrast check after behavior stabilizes. Additional validation must address a new hypothesis, changed behavior, or newly uncovered risk; preserve correctness and seeded-defect detection rather than optimizing command count alone.
+Collect useful output and diagnose before repairing. A diagnostic rerun may classify a transient; repeating the same failure needs a changed hypothesis, implementation, input, command, or environment. Stop an identical no-progress loop and continue independent work. State the exact missing input or unresolved boundary when further progress requires it.
 
-## Failed or unavailable gates
+After repair, rerun the failed check and checks whose evidence the repair invalidates. An unchanged relevant pass remains evidence; agent boundaries and final-message timing alone do not invalidate it.
 
-Collect useful output before editing. One unchanged diagnostic rerun is allowed only when the first result may be transient, flaky, timed out, or incomplete. If the same outcome repeats, do not run the identical action again: form an evidence-backed hypothesis and materially change the implementation, input, command, or environment before retrying. Stop and report the blocker when further attempts produce no new evidence or progress.
+## Completion
 
-After a fix, rerun the failed gate and earlier affected gates. Apply AE-20 to the result and disposition unavailable evidence explicitly.
+Inspect the final diff and repository state, including authored untracked files, consumers, generated artifacts, docs, duplicate/superseded/dead paths, scaffolds, unsafe defaults, side effects, and self-introduced regressions.
 
-## Completion evidence
+Map each completion claim to relevant observed evidence and its limitations. Report substantive results, permanent coverage added, existing checks rerun, material omitted checks and why, and unresolved risk. No fixed report layout is required.
 
-- Name each relevant command or manual exercise, exit status, and material outcome.
-- State why an applicable gate could not run and what remains unverified.
-- Disclose every known residual defect; neither an advisory nor a reasoned not-applicable disposition is a clean result.
-- Meet the active profile's completion record.
-- Run the [risk-triggered skeptic review](skeptic-pass.md) only when one of its triggers exists; state the trigger and outcome. Do not use it as a universal terminal ritual.
+Use [skeptic review](skeptic-pass.md) only for an actual material-risk or uncertainty trigger; it should settle a claim, not repeat successful deterministic commands.

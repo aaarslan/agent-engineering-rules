@@ -4,10 +4,11 @@
 // build manifest covers every source file. Run: node tools/validate-source.mjs
 
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MANIFEST, contextManifestErrors, contextRuleSourceErrors } from './build-distributions.mjs';
+import { contextManifestErrors, contextRuleSourceErrors } from './build-distributions.mjs';
+import { MANIFEST } from './manifest.mjs';
+import { loadThresholds, requiredThreshold } from './lib/thresholds.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const src = path.join(repo, 'source');
@@ -21,9 +22,25 @@ export function normalizeRepoRelativePath(value) {
   return value.replaceAll('\\', '/');
 }
 
+export function sourceBudgetErrors({ name, text, bytesLength, isSkill, isTemplate, thresholds }) {
+  const errors = [];
+  const lines = text.length ? text.split(/\r?\n/).length - (text.endsWith('\n') ? 1 : 0) : 0;
+  const lineKey = isSkill
+    ? 'SKILL_MAX_PHYSICAL_LINES'
+    : isTemplate ? 'TEMPLATE_MAX_PHYSICAL_LINES' : 'DEFAULT_RULE_MAX_PHYSICAL_LINES';
+  const lineLimit = requiredThreshold(thresholds, lineKey);
+  if (lines > lineLimit) errors.push(`${name}: ${lines} lines exceeds budget of ${lineLimit}`);
+  if (name === 'kernel/contract.md') {
+    const kernelLineLimit = requiredThreshold(thresholds, 'KERNEL_MAX_PHYSICAL_LINES');
+    const kernelByteLimit = requiredThreshold(thresholds, 'KERNEL_MAX_BYTES');
+    if (lines > kernelLineLimit) errors.push(`${name}: ${lines} physical lines exceeds kernel budget of ${kernelLineLimit}`);
+    if (bytesLength > kernelByteLimit) errors.push(`${name}: ${bytesLength} bytes exceeds kernel budget of ${kernelByteLimit}`);
+  }
+  return errors;
+}
+
 // Files allowed to exist without appearing in the manifest or any include.
 const ORPHAN_ALLOWLIST = new Set(['contexts/_template.md']);
-const MAX_LINES = { default: 100, skills: 60, templates: 80 };
 // Internal source metadata schema for rule files (not emitted to dist).
 const SCOPES = new Set(['always', 'any-code-change', 'routed', 'context', 'profile', 'template']);
 // Repository docs outside source/ whose relative links must also resolve.
@@ -31,57 +48,6 @@ const ROOT_DOCS = ['README.md', 'INSTALL.md', 'ADOPT.md', 'CHANGELOG.md', 'AGENT
 const FORKED_REVIEW_SKILLS = new Set(MANIFEST.skills
   .filter((skill) => skill.claude?.context === 'fork' && skill.claude?.agent === 'code-reviewer')
   .map((skill) => skill.name));
-const FROZEN_COMPONENT_REGISTRY = 'evals/components.v2.json';
-const FROZEN_COMPONENT_PREFIX = 'evals/components/v2/';
-
-function exactObjectKeys(value, expected) {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
-  return Object.keys(value).sort().join(',') === [...expected].sort().join(',');
-}
-
-function frozenComponentRegistryRecords(document) {
-  const records = new Map();
-  if (!exactObjectKeys(document, ['schema_version', 'evaluation_contract_version', 'components'])) {
-    problem(`${FROZEN_COMPONENT_REGISTRY}: registry keys must be exactly components, evaluation_contract_version, schema_version`);
-  }
-  if (document?.schema_version !== 2 || document?.evaluation_contract_version !== '2') {
-    problem(`${FROZEN_COMPONENT_REGISTRY}: expected frozen evaluation contract version 2`);
-  }
-  if (!Array.isArray(document?.components)) {
-    problem(`${FROZEN_COMPONENT_REGISTRY}: components must be an array`);
-    return records;
-  }
-
-  const logicalNames = new Set();
-  for (const [index, record] of document.components.entries()) {
-    const label = `${FROZEN_COMPONENT_REGISTRY}: component ${index}`;
-    if (!exactObjectKeys(record, ['logical_name', 'snapshot_file', 'sha256', 'content_type'])) {
-      problem(`${label} keys must be exactly content_type, logical_name, sha256, snapshot_file`);
-      continue;
-    }
-    if (typeof record.logical_name !== 'string' || !record.logical_name || record.logical_name.includes('\\') || path.posix.normalize(record.logical_name) !== record.logical_name || record.logical_name.startsWith('../')) {
-      problem(`${label} logical_name must be a portable source-relative path`);
-    } else if (logicalNames.has(record.logical_name)) {
-      problem(`${label} duplicates logical_name ${record.logical_name}`);
-    } else {
-      logicalNames.add(record.logical_name);
-    }
-    const snapshot = record.snapshot_file;
-    if (typeof snapshot !== 'string' || !snapshot.startsWith(FROZEN_COMPONENT_PREFIX) || !snapshot.endsWith('.txt') || snapshot.includes('\\') || path.posix.normalize(snapshot) !== snapshot || snapshot.includes('/../')) {
-      problem(`${label} snapshot_file must be a portable .txt path under ${FROZEN_COMPONENT_PREFIX}`);
-      continue;
-    }
-    if (records.has(snapshot)) {
-      problem(`${label} duplicates snapshot_file ${snapshot}`);
-      continue;
-    }
-    if (!/^[a-f0-9]{64}$/.test(record.sha256 ?? '')) problem(`${label} sha256 must be lowercase hex`);
-    if (record.content_type !== 'text/markdown') problem(`${label} content_type must be text/markdown`);
-    records.set(snapshot, record);
-  }
-  return records;
-}
-
 export function protectedClaudeSkillCollisions(skillNames, protectedEntryPoints) {
   const protectedNames = new Set(protectedEntryPoints);
   return skillNames.filter((name) => protectedNames.has(name)).sort();
@@ -146,8 +112,11 @@ export function contextRouteReferenceErrors(text, context, referenceSources) {
   for (const destination of found) if (!expected.has(destination)) errors.push(`Claude route names undeclared installed reference \`${destination}\``);
   const primaryDestination = `agent-rules/reference/${path.posix.basename(normalizedSource)}`;
   const escaped = primaryDestination.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  if (!new RegExp(`\\bread\\s+\`${escaped}\``, 'i').test(text)) {
-    errors.push(`Claude route must explicitly direct the agent to read the installed full reference \`${primaryDestination}\``);
+  if (!new RegExp(`\\bconsult\\s+\`${escaped}\``, 'i').test(text)) {
+    errors.push(`Claude route must name its primary installed reference as optional detail with "consult \`${primaryDestination}\`"`);
+  }
+  if (!/\buncertainty\s+beyond\s+(?:the\s+)?kernel\/repository contracts?\b/i.test(text)) {
+    errors.push('Claude route must limit full-reference consultation to uncertainty beyond kernel/repository contracts');
   }
   return errors;
 }
@@ -174,27 +143,11 @@ function frontmatter(text, name) {
 }
 
 async function main() {
+  const thresholds = await loadThresholds();
   const files = (await walkSourceFiles(src))
     .map((file) => ({ file, name: normalizeRepoRelativePath(path.relative(src, file)) }))
     .sort((a, b) => a.name.localeCompare(b.name));
   const fileNames = new Set(files.map(({ name }) => name));
-  let componentRegistry;
-  try {
-    componentRegistry = JSON.parse(await readFile(path.join(src, FROZEN_COMPONENT_REGISTRY), 'utf8'));
-  } catch (error) {
-    problem(`${FROZEN_COMPONENT_REGISTRY}: invalid or missing JSON: ${error.message}`);
-    componentRegistry = null;
-  }
-  const componentSnapshotRecords = frozenComponentRegistryRecords(componentRegistry);
-  const researchPaths = new Set(MANIFEST.research.map(normalizeRepoRelativePath));
-  for (const snapshot of componentSnapshotRecords.keys()) {
-    if (!researchPaths.has(snapshot)) problem(`${snapshot}: frozen component snapshot is missing from MANIFEST.research`);
-  }
-  for (const researchPath of researchPaths) {
-    if (researchPath.startsWith(FROZEN_COMPONENT_PREFIX) && researchPath.endsWith('.txt') && !componentSnapshotRecords.has(researchPath)) {
-      problem(`${researchPath}: MANIFEST.research snapshot is absent from ${FROZEN_COMPONENT_REGISTRY}`);
-    }
-  }
   const includesBySource = new Map();
   const referenceSources = new Set(MANIFEST.reference.map(normalizeRepoRelativePath));
   const referenceBasenames = new Set([...referenceSources].map((file) => path.posix.basename(file)));
@@ -204,8 +157,8 @@ async function main() {
     problem(`Claude project skill ${name} would replace a protected native entrypoint`);
   }
   const canonicalSkills = new Set(MANIFEST.skills.map((skill) => skill.name));
-  if (canonicalSkills.size !== 10 || canonicalSkills.size !== MANIFEST.skills.length) {
-    problem(`skill inventory must contain exactly 10 unique canonical skills, found ${canonicalSkills.size}`);
+  if (!canonicalSkills.size || canonicalSkills.size !== MANIFEST.skills.length) {
+    problem(`skill inventory must contain unique canonical skills, found ${canonicalSkills.size} unique of ${MANIFEST.skills.length}`);
   }
   const profileNames = new Set(MANIFEST.profiles.map((source) => path.posix.basename(source, '.md')));
   const expectedProfiles = ['prototype', 'standard', 'high-assurance'];
@@ -215,10 +168,11 @@ async function main() {
 
   // 1. Manifest closure: every manifest path must exist.
   const manifestPaths = [
-    ...MANIFEST.core, ...MANIFEST.reference, ...MANIFEST.profiles,
+    ...MANIFEST.core, ...MANIFEST.reference, ...MANIFEST.profiles, ...MANIFEST.config,
     ...MANIFEST.contexts.flatMap((c) => [
       ...(typeof c.source === 'string' ? [c.source] : []),
       ...(typeof c.ruleSource === 'string' ? [c.ruleSource] : []),
+      ...(typeof c.obligationSource === 'string' ? [c.obligationSource] : []),
     ]),
     ...MANIFEST.skills.map((s) => `skills/${s.name}.md`),
     ...MANIFEST.agents.map((a) => a.template),
@@ -239,8 +193,8 @@ async function main() {
   for (const { file, name } of files) {
     const isMarkdown = name.endsWith('.md');
     const isJson = name.endsWith('.json');
-    const componentRecord = componentSnapshotRecords.get(name);
-    if (!isMarkdown && !isJson && !componentRecord) {
+    const isResearchText = name.endsWith('.txt') && MANIFEST.research.includes(name);
+    if (!isMarkdown && !isJson && !isResearchText) {
       problem(`${name}: unsupported source file type; add it to an explicit source schema or move it outside source/`);
       continue;
     }
@@ -249,16 +203,7 @@ async function main() {
     try { text = new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
     catch { problem(`${name}: is not valid UTF-8`); continue; }
     if (!text.trim()) { problem(`${name}: empty file`); continue; }
-    if (componentRecord) {
-      if (bytes.length >= 3 && bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf) problem(`${name}: frozen snapshot has a UTF-8 BOM`);
-      if (bytes.includes(0)) problem(`${name}: frozen snapshot contains NUL`);
-      if (text.includes('\r')) problem(`${name}: frozen snapshot must use LF line endings only`);
-      if (!text.endsWith('\n')) problem(`${name}: frozen snapshot must end with LF`);
-      if (text.startsWith('---\n') || text.includes('{{include:') || text.includes('{{core}}')) {
-        problem(`${name}: frozen snapshot must be a final composed body without frontmatter or include tokens`);
-      }
-      const digest = createHash('sha256').update(bytes).digest('hex');
-      if (digest !== componentRecord.sha256) problem(`${name}: frozen snapshot hash does not match ${FROZEN_COMPONENT_REGISTRY}`);
+    if (isResearchText) {
       includesBySource.set(name, []);
       continue;
     }
@@ -293,8 +238,10 @@ async function main() {
       if (fields.get('name') !== expected) problem(`${name}: frontmatter name must be "${expected}"`);
       const description = fields.get('description') ?? '';
       if (!description) problem(`${name}: missing description`);
-      if (description.length > 1024) problem(`${name}: description exceeds 1024 characters`);
-      if (!/^[a-z0-9-]{1,64}$/.test(expected)) problem(`${name}: skill name must be lowercase alphanumeric/hyphen, max 64 chars`);
+      const descriptionMax = requiredThreshold(thresholds, 'SKILL_DESCRIPTION_MAX_CHARACTERS');
+      const nameMax = requiredThreshold(thresholds, 'SKILL_NAME_MAX_CHARACTERS');
+      if (description.length > descriptionMax) problem(`${name}: description exceeds ${descriptionMax} characters`);
+      if (!new RegExp(`^[a-z0-9-]{1,${nameMax}}$`).test(expected)) problem(`${name}: skill name must be lowercase alphanumeric/hyphen, max ${nameMax} chars`);
       if (FORKED_REVIEW_SKILLS.has(expected)) {
         if (!text.includes('$ARGUMENTS')) problem(`${name}: forked review skill must inject an explicit caller scope with $ARGUMENTS`);
         if (manifestSkill?.claude?.context !== 'fork' || manifestSkill.claude.agent !== 'code-reviewer' || manifestSkill.claude.background !== false || !manifestSkill.claude.disableModelInvocation) {
@@ -330,9 +277,7 @@ async function main() {
     }
 
     // 5. Budgets: rules stay short by contract.
-    const lineCount = text.split('\n').length;
-    const limit = isSkill ? MAX_LINES.skills : isTemplate ? MAX_LINES.templates : MAX_LINES.default;
-    if (lineCount > limit) problem(`${name}: ${lineCount} lines exceeds budget of ${limit}`);
+    for (const error of sourceBudgetErrors({ name, text, bytesLength: bytes.length, isSkill, isTemplate, thresholds })) problem(error);
   }
 
   // 6. Orphans: every source file must be reachable from a declared build or

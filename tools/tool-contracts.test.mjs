@@ -1,18 +1,19 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdir, mkdtemp, readdir, rm, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { MANIFEST, build } from './build-distributions.mjs';
-import { RETIRED_MANAGED_PATHS } from './install-distribution.mjs';
+import { RETIRED_MANAGED_PATHS, installDistribution } from './install-distribution.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const guard = path.join(root, 'tools', 'file-size-guard.mjs');
 const contrast = path.join(root, 'tools', 'contrast-check.mjs');
 const slop = path.join(root, 'tools', 'slop-scan.mjs');
+const verifier = path.join(root, 'tools', 'aer-verify.mjs');
 
 function mergeEnvironment(base, overrides, caseInsensitive = process.platform === 'win32') {
   if (!caseInsensitive) return { ...base, ...overrides };
@@ -141,7 +142,13 @@ test('tool help, host inventory, and retired paths use the Node-only contract', 
   assert.match((await runNode(slop, ['--help'])).stdout, /^NOT-APPLICABLE mode=help/m);
   assert.match((await runNode(contrast, ['--help'])).stdout, /^HELP /m);
 
-  const expected = ['tools/contrast-check.mjs', 'tools/slop-scan.mjs', 'tools/file-size-guard.mjs'];
+  const expected = [
+    'tools/aer-verify.mjs',
+    'tools/contrast-check.mjs',
+    'tools/slop-scan.mjs',
+    'tools/file-size-guard.mjs',
+    'tools/lib/thresholds.mjs',
+  ];
   assert.deepEqual(MANIFEST.tools, expected);
   assert.deepEqual(RETIRED_MANAGED_PATHS, {
     claude: ['agent-rules/tools/file-size-guard.py', 'agent-rules/tools/slop-scan.sh'],
@@ -152,39 +159,94 @@ test('tool help, host inventory, and retired paths use the Node-only contract', 
   await build(output);
   for (const host of ['claude', 'codex']) {
     const directory = path.join(output, host, 'agent-rules', 'tools');
-    const names = (await readdir(directory)).sort();
-    assert.deepEqual(names, ['contrast-check.mjs', 'file-size-guard.mjs', 'slop-scan.mjs']);
-    assert.equal(names.some((name) => name.endsWith('.py') || name.endsWith('.sh')), false);
+    assert.deepEqual(await readdir(directory), ['config']);
   }
 
-  const codexRoot = path.join(output, 'codex');
+  const codexRoot = await makeTemporary(t);
+  await installDistribution({
+    targetRoot: codexRoot,
+    distributionRoot: output,
+    hosts: ['codex'],
+    profile: 'standard',
+    contexts: [],
+    mode: 'init',
+    log: false,
+  });
+  const installedNames = (await readdir(path.join(codexRoot, 'agent-rules', 'tools'))).sort();
+  assert.deepEqual(installedNames, ['aer-verify.mjs', 'config', 'contrast-check.mjs', 'file-size-guard.mjs', 'lib', 'slop-scan.mjs']);
+  assert.equal(await stat(path.join(codexRoot, 'agent-rules', 'tools', 'lib', 'thresholds.mjs')).then((value) => value.isFile()), true);
   await fixture(codexRoot, 'index.html', '<!doctype html>\n<script type="module" src="src/app.js"></script>\n');
   await fixture(codexRoot, 'src/app.js', "import './view.js';\ndocument.body.textContent = 'ready';\n");
   await fixture(codexRoot, 'src/view.tsx', "const viewState = 'ready';\n");
   await fixture(codexRoot, 'contrast-pairs.json', JSON.stringify([
     { name: 'body', foreground: '#000', background: '#fff', fontSize: 16, fontWeight: 400 },
   ]));
+  const installedVerifier = path.join(codexRoot, 'agent-rules', 'tools', 'aer-verify.mjs');
   let result = await runNode(
-    path.join(codexRoot, 'agent-rules', 'tools', 'slop-scan.mjs'),
-    ['--root', '.'],
+    installedVerifier,
+    ['slop', '--root', '.'],
     { cwd: codexRoot },
   );
   assert.equal(result.code, 0, combined(result));
   assert.match(result.stdout, /APPLICABLE-PASS summary .*scope=full-root/);
   result = await runNode(
-    path.join(codexRoot, 'agent-rules', 'tools', 'contrast-check.mjs'),
-    ['--batch', 'contrast-pairs.json'],
+    installedVerifier,
+    ['contrast', '--batch', 'contrast-pairs.json'],
     { cwd: codexRoot },
   );
   assert.equal(result.code, 0, combined(result));
   assert.match(result.stdout, /summary checked=1 passed=1 failed=0/);
   result = await runNode(
-    path.join(codexRoot, 'agent-rules', 'tools', 'file-size-guard.mjs'),
-    ['--check', 'src/app.js', 'src/view.tsx'],
+    installedVerifier,
+    ['size', '--check', 'src/app.js', 'src/view.tsx'],
     { cwd: codexRoot },
   );
   assert.equal(result.code, 0, combined(result));
   assert.match(result.stdout, /APPLICABLE-PASS summary checked=2/);
+});
+
+test('aer verify requires one exact diagnostic and preserves its result', async () => {
+  let result = await runNode(verifier, ['--help']);
+  assert.equal(result.code, 0, combined(result));
+  assert.match(result.stdout, /aer verify <contrast\|slop\|size>/);
+
+  result = await runNode(verifier);
+  assert.equal(result.code, 2, combined(result));
+  assert.match(result.stderr, /a diagnostic check is required/);
+
+  result = await runNode(verifier, ['unknown']);
+  assert.equal(result.code, 2, combined(result));
+  assert.match(result.stderr, /unknown diagnostic check: unknown/);
+
+  result = await runNode(verifier, ['size']);
+  assert.equal(result.code, 2, combined(result));
+  assert.match(result.stderr, /size requires diagnostic arguments/);
+
+  result = await runNode(verifier, ['contrast', '#000', '#fff']);
+  assert.equal(result.code, 0, combined(result));
+  assert.match(result.stdout, /PASS/);
+
+  result = await runNode(verifier, ['contrast', '#777', '#fff']);
+  assert.equal(result.code, 1, combined(result));
+  assert.match(result.stdout, /FAIL/);
+});
+
+test('threshold loader resolves packed config when repository source is absent', async (t) => {
+  const packageRoot = await makeTemporary(t);
+  const helper = path.join(packageRoot, 'tools', 'lib', 'thresholds.mjs');
+  const packedConfig = path.join(
+    packageRoot, 'dist', 'codex', 'agent-rules', 'tools', 'config', 'thresholds.json',
+  );
+  await mkdir(path.dirname(helper), { recursive: true });
+  await mkdir(path.dirname(packedConfig), { recursive: true });
+  await copyFile(path.join(root, 'tools', 'lib', 'thresholds.mjs'), helper);
+  await copyFile(path.join(root, 'source', 'config', 'thresholds.json'), packedConfig);
+
+  const { loadThresholds } = await import(`${pathToFileURL(helper).href}?packed-layout`);
+  assert.deepEqual(
+    await loadThresholds(),
+    JSON.parse(await readFile(path.join(root, 'source', 'config', 'thresholds.json'), 'utf8')),
+  );
 });
 
 test('file-size CLI handles valid, ignored, dense, malformed, and override inputs explicitly', async (t) => {

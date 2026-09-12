@@ -8,8 +8,8 @@ related: [design-checkpoint.md, verification.md, ../kernel/contract.md, ../quali
 
 ## Rules
 
-- Make the smallest safe change that fully solves the problem. Small means localized, not partial.
-- Follow the existing naming, structure, and patterns of the surrounding code unless the task deliberately changes them.
+- Make the complete coherent change at the owning boundary. Use a larger refactor or replacement when evidence shows it removes the defect or structural debt; change size alone is neither a cost proxy nor a quality verdict.
+- Follow sound repository conventions; repair a broken abstraction when the requested outcome requires it, without introducing a parallel convention.
 - Place each responsibility in its correct architectural layer. See [boundaries](../design/boundaries.md).
 - Preserve public contracts unless the task explicitly changes them. When changing one, update every caller and consumer in the same change.
 - At any trust boundary, apply the [security](../quality/security.md) non-negotiables.

@@ -74,9 +74,5 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - name: Test research harnesses
-        run: node --test tools/preflight-evals.test.mjs tools/live-ab-eval.test.mjs
-      - name: Validate frozen evaluation inputs
-        run: node tools/preflight-evals.mjs
-      - name: Validate runtime load plans
-        run: node tools/validate-runtime-loads.mjs --json
+      - name: Validate corpus, frozen history, and instruction loads without providers
+        run: npm run validate:research

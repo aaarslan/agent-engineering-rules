@@ -21,7 +21,7 @@ Try to falsify the risky or uncertain claims. Inspect the affected diff and its 
 - Duplicate code paths now implementing the same rule twice
 - Inconsistent parsing or validation between entry points
 - Drift: enums, schemas, contracts, generated files, localization, and docs that no longer match the code
-- Missing tests for the changed behavior and its failure cases
+- Missing behavioral evidence or risk-justified regression protection
 - Dead paths, stubs, flags, or scaffold files introduced, superseded, or made unreachable within the affected surface
 - A failure class guarded in one place but hit bare in another (the same resource accessed unguarded elsewhere)
 - Failures surfaced only to the console: the user never learns, gets no recovery path, and the next write may destroy recoverable data

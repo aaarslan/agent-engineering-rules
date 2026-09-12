@@ -9,6 +9,8 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 
+import { runCli, unsupportedRuntimeMessage } from './aer.mjs';
+
 const execFile = promisify(execFileCallback);
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cli = path.join(repo, 'tools', 'aer.mjs');
@@ -21,7 +23,7 @@ const exists = async (file) => {
 test('package metadata defines the public zero-dependency CLI release boundary', async () => {
   const manifest = JSON.parse(await readFile(path.join(repo, 'package.json'), 'utf8'));
   assert.equal(manifest.name, '@aaarslan/aer');
-  assert.equal(manifest.version, '3.1.1');
+  assert.equal(manifest.version, '5.0.0');
   assert.equal(Object.hasOwn(manifest, 'private'), false);
   assert.deepEqual(manifest.bin, { aer: 'tools/aer.mjs' });
   assert.deepEqual(manifest.engines, { node: '>=24' });
@@ -49,10 +51,23 @@ test('package metadata defines the public zero-dependency CLI release boundary',
     'dist/**',
     '!dist/**/agent-rules/metadata/**',
     'tools/aer.mjs',
+    'tools/aer-verify.mjs',
     'tools/install-distribution.mjs',
-    'tools/build-distributions.mjs',
+    'tools/manifest.mjs',
+    'tools/contrast-check.mjs',
+    'tools/slop-scan.mjs',
+    'tools/file-size-guard.mjs',
+    'tools/lib/thresholds.mjs',
     'tools/README.md',
   ]);
+});
+
+test('runtime preflight names the Node engine requirement before dispatch', async () => {
+  assert.equal(unsupportedRuntimeMessage('23.9.0'), 'AER requires Node >= 24 (found v23.9.0); upgrade Node and try again.');
+  assert.equal(unsupportedRuntimeMessage('24.0.0'), null);
+  const messages = [];
+  assert.equal(await runCli(['--help'], { log: (message) => messages.push(message), error: (message) => messages.push(message) }, { nodeVersion: '23.9.0' }), 2);
+  assert.deepEqual(messages, ['AER requires Node >= 24 (found v23.9.0); upgrade Node and try again.']);
 });
 
 test('aer metadata flags and argument failures have deterministic output and exit codes', async () => {
@@ -69,6 +84,7 @@ test('aer metadata flags and argument failures have deterministic output and exi
     assert.equal(help.stderr, '');
     assert.match(help.stdout, /aer --version/);
     assert.match(help.stdout, /aer init --host <claude\|codex\|both>/);
+    assert.match(help.stdout, /aer verify <contrast\|slop\|size>/);
 
     const noArguments = await execFile(process.execPath, [cli], { cwd: caller, windowsHide: true });
     assert.equal(noArguments.stdout, help.stdout);
@@ -87,6 +103,20 @@ test('aer metadata flags and argument failures have deterministic output and exi
         && error.stdout === ''
         && /AER FAILED: unknown command: unknown-command/.test(error.stderr)
         && /Usage:/.test(error.stderr),
+    );
+    const verifyHelp = await execFile(process.execPath, [cli, 'verify', '--help'], { cwd: caller, windowsHide: true });
+    assert.match(verifyHelp.stdout, /Runs exactly one optional diagnostic/);
+    await assert.rejects(
+      execFile(process.execPath, [cli, 'verify'], { cwd: caller, windowsHide: true }),
+      (error) => error.code === 2 && /a diagnostic check is required/.test(error.stderr),
+    );
+    await assert.rejects(
+      execFile(process.execPath, [cli, 'verify', 'size'], { cwd: caller, windowsHide: true }),
+      (error) => error.code === 2 && /size requires diagnostic arguments/.test(error.stderr),
+    );
+    await assert.rejects(
+      execFile(process.execPath, [cli, 'verify', 'contrast', '#777', '#fff'], { cwd: caller, windowsHide: true }),
+      (error) => error.code === 1 && /FAIL/.test(error.stdout),
     );
   } finally {
     await rm(caller, { recursive: true, force: true });
@@ -159,7 +189,9 @@ test('development package exposes only the project-local CLI and excludes eval p
     const report = JSON.parse(stdout);
     const files = report[0].files.map((entry) => entry.path.replaceAll('\\', '/'));
     assert.ok(files.includes('tools/aer.mjs'));
+    assert.ok(files.includes('tools/aer-verify.mjs'));
     assert.ok(files.includes('tools/install-distribution.mjs'));
+    assert.ok(files.includes('tools/manifest.mjs'));
     assert.ok(files.some((file) => file === 'dist/codex/AGENTS.md'));
     assert.ok(files.some((file) => file === 'dist/claude/.claude/rules/core-contract.md'));
     assert.equal(files.some((file) => file.startsWith('source/')), false);
@@ -169,7 +201,9 @@ test('development package exposes only the project-local CLI and excludes eval p
     assert.equal(files.some((file) => file.endsWith('.test.mjs')), false);
     const unexpected = files.filter((file) => ![
       'ADOPT.md', 'INSTALL.md', 'LICENSE', 'README.md', 'package.json',
-      'tools/README.md', 'tools/aer.mjs', 'tools/build-distributions.mjs', 'tools/install-distribution.mjs',
+      'tools/README.md', 'tools/aer.mjs', 'tools/aer-verify.mjs', 'tools/install-distribution.mjs',
+      'tools/manifest.mjs', 'tools/contrast-check.mjs', 'tools/slop-scan.mjs', 'tools/file-size-guard.mjs',
+      'tools/lib/thresholds.mjs',
     ].includes(file) && !file.startsWith('dist/'));
     assert.deepEqual(unexpected, []);
 

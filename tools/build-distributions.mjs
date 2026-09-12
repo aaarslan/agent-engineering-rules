@@ -1,128 +1,25 @@
 #!/usr/bin/env node
 // Generates the Claude Code and Codex distributions in dist/ from source/.
 // Dependency-free and deterministic: same source in, byte-identical dist out.
-// The MANIFEST below is the single mapping authority from source files to
-// host-native locations. Edit source/, edit MANIFEST if the mapping changes,
-// then run: node tools/build-distributions.mjs [outputRoot]
+// Source-to-host mappings live in manifest.mjs, which is also read by the
+// installer for the separately packaged runtime payload.
 
-import { lstat, mkdir, readFile, realpath, rm, writeFile, copyFile } from 'node:fs/promises';
+import { lstat, mkdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  MANIFEST, contextManifestErrors, contextRuleSourcePathErrors, destinationBasename, runtimeDestination,
+} from './manifest.mjs';
+import { loadThresholds, requiredThreshold } from './lib/thresholds.mjs';
 
-export const MANIFEST = {
-  defaultProfile: 'standard',
-  // Always-active policy, in order. Claude: one rule file each (always loaded).
-  // Codex: concatenated into the generated AGENTS.md via the root template.
-  core: [
-    'kernel/contract.md',
-  ],
-  // Task skills. Frames live in source/skills/<name>.md (frontmatter: name,
-  // description). `claude` holds Claude-only frontmatter extras.
-  skills: [
-    { name: 'feature', claude: {} },
-    { name: 'bug-fix', claude: {} },
-    { name: 'refactor', claude: {} },
-    // Review-only skills fork into the custom read-only reviewer. Its explicit
-    // tool allowlist excludes shells, delegation, MCP tools, and write tools.
-    { name: 'pr-review', claude: { disableModelInvocation: true, context: 'fork', agent: 'code-reviewer', background: false } },
-    { name: 'data-change', claude: { paths: ['**/migrations/**', 'db/**', 'prisma/**', '**/*.sql'] } },
-    { name: 'aer-security-review', claude: { disableModelInvocation: true, context: 'fork', agent: 'code-reviewer', background: false } },
-    { name: 'aer-verify', claude: {} },
-    { name: 'autonomous-mission', claude: { disableModelInvocation: true } },
-    { name: 'doc-update', claude: {} },
-    { name: 'ui-styling', claude: {} },
-  ],
-  // Stack contexts. Claude: path-scoped pointer rules (adjust globs to the
-  // host repo). Both hosts receive the full on-demand reference authority.
-  contexts: [
-    { name: 'web-ui', source: 'contexts/web-ui.md', ruleSource: 'contexts/claude-web-ui.md', references: ['contexts/web-ui.md', 'contexts/typescript-react.md'], requires: ['typescript-react'], rule: 'context-web-ui.md', paths: ['**/*.tsx', '**/*.jsx', '**/*.html', '**/*.css', '**/*.vue', '**/*.svelte'] },
-    { name: 'typescript-react', source: 'contexts/typescript-react.md', ruleSource: 'contexts/claude-typescript-react.md', references: ['contexts/typescript-react.md', 'contexts/web-ui.md'], requires: ['web-ui'], rule: 'context-typescript-react.md', paths: ['**/*.ts', '**/*.tsx', '**/*.jsx'] },
-    { name: 'backend-api', source: 'contexts/backend-api.md', ruleSource: 'contexts/claude-backend-api.md', references: ['contexts/backend-api.md', 'quality/security.md'], requires: [], rule: 'context-backend-api.md', paths: ['**/api/**', '**/server/**', '**/routes/**', '**/controllers/**', '**/handlers/**', '**/services/**'] },
-  ],
-  // On-demand references shipped in both distributions under agent-rules/reference/.
-  reference: [
-    'design/principles.md',
-    'design/boundaries.md',
-    'design/types-and-state.md',
-    'design/errors-and-side-effects.md',
-    'architecture/decision-making.md',
-    'quality/testing.md',
-    'quality/security.md',
-    'quality/observability.md',
-    'quality/performance.md',
-    'workflow/review-ledger.md',
-    'workflow/design-checkpoint.md',
-    'workflow/implementation.md',
-    'workflow/verification.md',
-    'workflow/skeptic-pass.md',
-    'workflow/autonomous-execution.md',
-    'agents/orchestration.md',
-    'contexts/web-ui.md',
-    'contexts/typescript-react.md',
-    'contexts/backend-api.md',
-    'contexts/database-migrations.md',
-    'contexts/pr-review.md',
-    'contexts/documentation.md',
-    'contexts/ui-styling.md',
-  ],
-  profiles: ['profiles/prototype.md', 'profiles/standard.md', 'profiles/high-assurance.md'],
-  // Repository-only research inputs. They are validated and used by the
-  // provider-free evaluation harness, but are never copied into installs.
-  research: [
-    'compatibility/hosts.json',
-    'compatibility/models.json',
-    'compatibility/conflicts.json',
-    'policy/policy-map.json',
-    'evals/scenarios.json',
-    'evals/directives.json',
-    'evals/treatments.json',
-    'evals/experiments.v2.json',
-    'evals/cells.v2.json',
-    'evals/components.v2.json',
-    'evals/components/v2/kernel/contract.txt',
-    'evals/components/v2/profiles/high-assurance.txt',
-    'evals/components/v2/profiles/standard.txt',
-    'evals/components/v2/skills/aer-security-review.txt',
-    'evals/components/v2/skills/aer-verify.txt',
-    'evals/components/v2/skills/bug-fix.txt',
-    'evals/components/v2/skills/data-change.txt',
-    'evals/components/v2/skills/feature.txt',
-    'evals/tasks.v2.json',
-    'evals/graders.v2.json',
-    'evals/run.schema.json',
-    'evals/run.example.json',
-    'evals/fixtures/repository.v2.json',
-    'evals/fixtures/scope-repository.v2.json',
-    'evals/fixtures/diagnostic-repository.v2.json',
-    'evals/fixtures/evidence-repository.v2.json',
-    'evals/fixtures/ingestion-repository.v2.json',
-    'evals/fixtures/task-contract.v2.json',
-    'evals/fixtures/scope-contract.v2.json',
-    'evals/fixtures/diagnostic-contract.v2.json',
-    'evals/fixtures/evidence-contract.v2.json',
-    'evals/fixtures/ingestion-contract.v2.json',
-    'evals/fixtures/task-input.v2.json',
-    'evals/fixtures/scope-cases.v2.json',
-    'evals/fixtures/diagnostic-cases.v2.json',
-    'evals/fixtures/evidence-cases.v2.json',
-    'evals/fixtures/ingestion-cases.v2.json',
-    'evals/fixtures/expected-artifact.v2.json',
-    'evals/fixtures/scope-expected.v2.json',
-    'evals/fixtures/diagnostic-expected.v2.json',
-    'evals/fixtures/evidence-expected.v2.json',
-    'evals/fixtures/ingestion-expected.v2.json',
-    'evals/fixtures/grader-rubric.v2.json',
-  ],
-  tools: ['tools/contrast-check.mjs', 'tools/slop-scan.mjs', 'tools/file-size-guard.mjs'],
-  agents: [
-    // Read, Grep, Glob only: Bash would grant effective write access through
-    // redirection, defeating the enforced read-only contract.
-    { name: 'code-reviewer', template: 'templates/code-reviewer.md', description: 'Evidence-backed read-only code review. Use for reviewing diffs, PRs, or changed code without edit access.', tools: 'Read, Grep, Glob' },
-  ],
-};
+export { MANIFEST, contextManifestErrors, contextRuleSourcePathErrors } from './manifest.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const src = path.join(repo, 'source');
+const thresholds = await loadThresholds();
+const COMPACT_OBLIGATION_MAX_BYTES = requiredThreshold(thresholds, 'COMPACT_OBLIGATION_MAX_BYTES');
+const THIN_CONTEXT_ROUTE_MAX_BYTES = requiredThreshold(thresholds, 'THIN_CONTEXT_ROUTE_MAX_BYTES');
+const THIN_CONTEXT_ROUTE_MAX_PHYSICAL_LINES = requiredThreshold(thresholds, 'THIN_CONTEXT_ROUTE_MAX_PHYSICAL_LINES');
 // Text rewrites applied everywhere: source-relative utility paths become
 // dist-relative paths that exist in the installed layout.
 const REWRITES = [
@@ -175,9 +72,8 @@ export function rewriteToolPaths(text) {
   }, text);
 }
 
-const manifestLists = ['core', 'skills', 'contexts', 'reference', 'profiles', 'research', 'tools', 'agents'];
+const manifestLists = ['core', 'skills', 'contexts', 'reference', 'profiles', 'config', 'research', 'tools', 'agents'];
 const windowsDevice = /^(?:con|prn|aux|nul|clock\$|conin\$|conout\$|com[1-9\u00b9\u00b2\u00b3]|lpt[1-9\u00b9\u00b2\u00b3])(?:\..*)?$/i;
-const destinationBasename = (value) => typeof value === 'string' ? path.posix.basename(value) : '<invalid>';
 const compareText = (left, right) => left < right ? -1 : left > right ? 1 : 0;
 
 function portableRelativePathError(value) {
@@ -202,7 +98,8 @@ function buildDestinationClaims(manifest = MANIFEST) {
   for (const host of ['claude', 'codex']) {
     list('reference').forEach((source, index) => claim(host, `agent-rules/reference/${destinationBasename(source)}`, `reference[${index}] ${source}`));
     list('profiles').forEach((source, index) => claim(host, `agent-rules/profiles/${destinationBasename(source)}`, `profiles[${index}] ${source}`));
-    list('tools').forEach((source, index) => claim(host, `agent-rules/tools/${destinationBasename(source)}`, `tools[${index}] ${source}`));
+    list('config').forEach((source, index) => claim(host, `agent-rules/tools/config/${destinationBasename(source)}`, `config[${index}] ${source}`));
+    list('tools').forEach((source, index) => claim(host, runtimeDestination(source), `tools[${index}] ${source}`));
     list('skills').forEach((skill, index) => {
       const name = skill?.name;
       const relative = host === 'claude' ? `.claude/skills/${name}/SKILL.md` : `.agents/skills/${name}/SKILL.md`;
@@ -227,12 +124,14 @@ function buildSourceClaims(manifest = MANIFEST) {
   list('core').forEach((relative, index) => claim('source', relative, `core[${index}]`, true));
   list('reference').forEach((relative, index) => claim('source', relative, `reference[${index}]`, true));
   list('profiles').forEach((relative, index) => claim('source', relative, `profiles[${index}]`, true));
+  list('config').forEach((relative, index) => claim('source', relative, `config[${index}]`));
   list('research').forEach((relative, index) => claim('source', relative, `research[${index}]`));
   list('tools').forEach((relative, index) => claim('repository', relative, `tools[${index}]`));
   list('skills').forEach((skill, index) => claim('source', `skills/${skill?.name}.md`, `skills[${index}] derived source`, true));
   list('contexts').forEach((context, index) => {
     claim('source', context?.source, `contexts[${index}].source`, true);
     claim('source', context?.ruleSource, `contexts[${index}].ruleSource`, true);
+    if (context?.obligationSource !== undefined) claim('source', context.obligationSource, `contexts[${index}].obligationSource`, true);
   });
   list('agents').forEach((agent, index) => claim('source', agent?.template, `agents[${index}].template`, true));
   claim('source', `profiles/${manifest.defaultProfile}.md`, 'active default profile', true);
@@ -250,6 +149,11 @@ export function buildDestinationPathErrors(manifest = MANIFEST) {
   for (const claim of buildSourceClaims(manifest)) {
     const reason = portableRelativePathError(claim.relative);
     if (reason) errors.push(`${claim.origin} path ${JSON.stringify(claim.relative)} ${reason}`);
+  }
+  for (const [index, source] of (Array.isArray(manifest?.tools) ? manifest.tools : []).entries()) {
+    if (typeof source === 'string' && !source.startsWith('tools/')) {
+      errors.push(`tools[${index}] path ${JSON.stringify(source)} must stay under tools/`);
+    }
   }
   for (const [kind, entries] of [
     ['skill', Array.isArray(manifest?.skills) ? manifest.skills : []],
@@ -436,102 +340,60 @@ function resolveBuildOutput(root, relative) {
   return file;
 }
 
-export function contextRuleSourcePathErrors(manifest = MANIFEST) {
+const occurrences = (text, token) => token ? text.split(token).length - 1 : 0;
+
+export function compiledObligationErrors(root, obligations) {
+  return obligations.filter(({ body }) => !body || occurrences(root, body) !== 1)
+    .map(({ name }) => `fully composed Codex root must contain the canonical ${name} obligation exactly once`);
+}
+
+export function compactContextObligationErrors(text) {
   const errors = [];
-  for (const [index, context] of (manifest.contexts ?? []).entries()) {
-    const value = context.ruleSource;
-    if (typeof value !== 'string' || !value) {
-      errors.push(`contexts[${index}] ruleSource is missing; expected a repository-relative Markdown path under contexts/`);
-      continue;
-    }
-    const segments = value.split('/');
-    const unsafe = value.includes('\\')
-      || value.includes('\0')
-      || path.posix.isAbsolute(value)
-      || path.win32.isAbsolute(value)
-      || /^[A-Za-z]:/.test(value)
-      || segments.some((segment) => !segment || segment === '.' || segment === '..')
-      || !value.startsWith('contexts/')
-      || !value.endsWith('.md');
-    if (unsafe) errors.push(`contexts[${index}] ruleSource "${value}" is unsafe; use a canonical repository-relative Markdown path under contexts/`);
-  }
+  const body = stripFrontmatter(text).trim();
+  const ids = body.match(/\bUI-\d{2}\b/g) ?? [];
+  if (!body || body.split(/\r?\n/).length !== 1) errors.push('compact obligation body must contain exactly one physical-line paragraph');
+  if (/^\s*(?:#{1,6}\s|[-*+]\s|\d+\.\s|>|```|~~~)/m.test(body)) errors.push('compact obligation must be a paragraph without headings, lists, quotes, or fences');
+  if (/\{\{(?:include|core)\b/i.test(body)) errors.push('compact obligation must not contain nested includes or core expansion');
+  if (/agent-rules\/reference\//.test(body)) errors.push('compact obligation must not name installed full-reference paths');
+  if (/\bAE-\d{2}\b/.test(body)) errors.push('compact obligation must not duplicate kernel AE directive IDs');
+  if (ids.length !== 1 || ids[0] !== 'UI-01') errors.push('compact obligation must declare stable directive UI-01 exactly once');
+  if (!/\bMUST\b/.test(body)) errors.push('compact obligation UI-01 must have normative MUST strength');
+  if (Buffer.byteLength(body, 'utf8') > COMPACT_OBLIGATION_MAX_BYTES) errors.push(`compact obligation body exceeds ${COMPACT_OBLIGATION_MAX_BYTES} bytes`);
   return errors;
 }
 
-const contextName = (context) => typeof context.name === 'string' ? context.name : '';
-const canonicalSourcePath = (value, prefix) => typeof value === 'string'
-  && value.length > prefix.length
-  && value.startsWith(prefix)
-  && value.endsWith('.md')
-  && !value.includes('\\')
-  && !value.includes('\0')
-  && !path.posix.isAbsolute(value)
-  && !path.win32.isAbsolute(value)
-  && !/^[A-Za-z]:/.test(value)
-  && !value.split('/').some((segment) => !segment || segment === '.' || segment === '..');
-
-export function contextManifestErrors(manifest = MANIFEST) {
+export function thinContextRouteErrors(text, { obligationSource, obligationText } = {}) {
   const errors = [];
-  const contexts = manifest.contexts ?? [];
-  const references = new Set(manifest.reference ?? []);
-  const names = contexts.map(contextName);
-  const nameSet = new Set(names);
-  const duplicateNames = names.filter((name, index) => name && names.indexOf(name) !== index);
-  if (duplicateNames.length) errors.push(`context names must be unique: ${[...new Set(duplicateNames)].sort().join(', ')}`);
-  const ruleSources = contexts.map((context) => context.ruleSource).filter((value) => typeof value === 'string');
-  const duplicateRuleSources = ruleSources.filter((value, index) => ruleSources.indexOf(value) !== index);
-  if (duplicateRuleSources.length) errors.push(`context ruleSource paths must be unique: ${[...new Set(duplicateRuleSources)].sort().join(', ')}`);
-  if (manifest.defaultProfile !== 'standard') errors.push('defaultProfile must be the canonical standard profile');
-
-  for (const [index, context] of contexts.entries()) {
-    const name = names[index];
-    if (!/^[a-z0-9-]{1,64}$/.test(name)) errors.push(`contexts[${index}] name must be a stable lowercase alphanumeric-hyphen identifier`);
-    if (!canonicalSourcePath(context.source, 'contexts/')) errors.push(`contexts[${index}] source is unsafe; use a canonical repository-relative Markdown path under contexts/`);
-    else if (!references.has(context.source)) errors.push(`contexts[${index}] source "${context.source}" is not shipped in MANIFEST.reference`);
-    if (references.has(context.ruleSource)) errors.push(`contexts[${index}] ruleSource "${context.ruleSource}" must remain a thin Claude route, not a full on-demand reference`);
-    if (typeof context.rule !== 'string' || path.posix.basename(context.rule) !== context.rule || !/^context-[a-z0-9-]+\.md$/.test(context.rule)) {
-      errors.push(`contexts[${index}] rule is unsafe; use one flat context-*.md filename`);
-    }
-    if (!Array.isArray(context.paths) || !context.paths.length || context.paths.some((pattern) => typeof pattern !== 'string' || !pattern || /[\x00-\x1f\x7f"\\]/.test(pattern))) {
-      errors.push(`contexts[${index}] paths must be non-empty portable single-line glob strings without controls, backslashes, or double quotes`);
-    }
-    if (!Array.isArray(context.requires) || context.requires.some((required) => typeof required !== 'string') || new Set(context.requires).size !== context.requires.length) {
-      errors.push(`contexts[${index}] requires must be an array of unique context names`);
-    } else {
-      for (const required of context.requires) {
-        if (!nameSet.has(required)) errors.push(`contexts[${index}] requires unknown context ${required}`);
-        if (required === name) errors.push(`contexts[${index}] must not require itself`);
-      }
-    }
-    if (!Array.isArray(context.references) || !context.references.length || context.references.some((reference) => typeof reference !== 'string') || new Set(context.references).size !== context.references.length) {
-      errors.push(`contexts[${index}] references must be a non-empty array of unique MANIFEST.reference sources`);
-    } else {
-      for (const reference of context.references) if (!references.has(reference)) errors.push(`contexts[${index}] references unshipped source ${reference}`);
-      if (!context.references.includes(context.source)) errors.push(`contexts[${index}] references must include its full source ${context.source}`);
-      for (const required of Array.isArray(context.requires) ? context.requires : []) {
-        const requiredSource = contexts.find((candidate) => contextName(candidate) === required)?.source;
-        if (requiredSource && !context.references.includes(requiredSource)) errors.push(`contexts[${index}] references must include required context source ${requiredSource}`);
-      }
-    }
-  }
-  return errors;
-}
-
-export function thinContextRouteErrors(text) {
-  const errors = [];
-  const bytes = Buffer.byteLength(text, 'utf8');
-  const lines = text.split(/\r?\n/).length;
   const body = stripFrontmatter(text).trim();
   const bodyLines = body.split(/\r?\n/).filter((line) => line.trim());
-  if (bytes > 1024) errors.push(`thin route is ${bytes} bytes; maximum is 1024`);
-  if (lines > 12) errors.push(`thin route is ${lines} lines; maximum is 12`);
-  if (bodyLines.length !== 2 || !/^# [^#]/.test(bodyLines[0]) || /^\s*(?:[-*+]|\d+\.)\s/.test(bodyLines[1])) {
-    errors.push('thin route body must contain one level-one heading and one routing paragraph');
+  const declaredInclude = obligationSource ? `{{include:${obligationSource}}}` : null;
+  const obligationBody = typeof obligationText === 'string' ? stripFrontmatter(obligationText).trim() : '';
+  const expanded = declaredInclude && typeof obligationText === 'string'
+    ? text.replace(declaredInclude, obligationBody)
+    : text;
+  const bytes = Buffer.byteLength(expanded, 'utf8');
+  const lines = expanded.split(/\r?\n/).length;
+  const routingParagraph = bodyLines[obligationSource ? 2 : 1] ?? '';
+  if (bytes > THIN_CONTEXT_ROUTE_MAX_BYTES) errors.push(`thin route is ${bytes} bytes; maximum is ${THIN_CONTEXT_ROUTE_MAX_BYTES}`);
+  if (lines > THIN_CONTEXT_ROUTE_MAX_PHYSICAL_LINES) errors.push(`thin route is ${lines} lines; maximum is ${THIN_CONTEXT_ROUTE_MAX_PHYSICAL_LINES}`);
+  if (bodyLines.length !== (obligationSource ? 3 : 2) || !/^# [^#]/.test(bodyLines[0]) || /^\s*(?:[-*+]|\d+\.)\s/.test(routingParagraph)) {
+    errors.push(`thin route body must contain one level-one heading, ${obligationSource ? 'one declared compact obligation include, and ' : ''}one routing paragraph`);
   }
-  if (!/\bread\b/i.test(bodyLines[1] ?? '')) errors.push('thin route paragraph must direct the host to read its full reference');
-  if (/\bAE-\d{2}\b|\{\{(?:include|core)\b/i.test(text)) {
-    errors.push('thin route must not duplicate rule authorities or include composed rule prose');
+  if (obligationSource && (occurrences(text, declaredInclude) !== 1 || bodyLines[1] !== declaredInclude)) {
+    errors.push(`thin route must contain exactly one standalone declared include ${declaredInclude}`);
   }
+  if (obligationSource && obligationBody && occurrences(expanded, obligationBody) !== 1) errors.push('thin route must compile the canonical compact obligation exactly once');
+  const includeTokens = [...text.matchAll(/\{\{(?:include:([^}]+)|core)\}\}/g)].map((match) => match[0]);
+  if (includeTokens.some((token) => token !== declaredInclude) || (!obligationSource && includeTokens.length)) {
+    errors.push('thin route must not contain arbitrary includes or core expansion');
+  }
+  if (!/\bconsult\s+`[^`\r\n]+\.md`/i.test(routingParagraph)) {
+    errors.push('thin route paragraph must name its full reference as optional detail with "consult"');
+  }
+  if (!/\buncertainty\s+beyond\s+(?:the\s+)?kernel\/repository contracts?\b/i.test(routingParagraph)) {
+    errors.push('thin route paragraph must limit consultation to uncertainty beyond kernel/repository contracts');
+  }
+  if (/\bAE-\d{2}\b/i.test(text)) errors.push('thin route must not duplicate kernel rule authorities');
   return errors;
 }
 
@@ -541,8 +403,20 @@ export async function contextRuleSourceErrors(manifest = MANIFEST, sourceDirecto
   let sourceReal;
   try { sourceReal = await realpath(sourceDirectory); }
   catch { sourceReal = path.resolve(sourceDirectory); }
+  const validationRoot = { absolute: path.resolve(sourceDirectory), real: sourceReal, label: 'source' };
+  const obligationTexts = new Map();
   for (const [index, context] of (manifest.contexts ?? []).entries()) {
     if (unsafeIndexes.has(index)) continue;
+    let obligationText;
+    if (context.obligationSource) {
+      try {
+        obligationText = (await checkedSourceFile(validationRoot, context.obligationSource, `contexts[${index}].obligationSource`)).toString('utf8');
+        obligationTexts.set(index, obligationText);
+        for (const error of compactContextObligationErrors(obligationText)) errors.push(`contexts[${index}] obligationSource "${context.obligationSource}" ${error}`);
+      } catch (error) {
+        errors.push(`contexts[${index}] obligationSource "${context.obligationSource}" ${error.message}`);
+      }
+    }
     try {
       let current = sourceDirectory;
       let info;
@@ -559,7 +433,7 @@ export async function contextRuleSourceErrors(manifest = MANIFEST, sourceDirecto
         errors.push(`contexts[${index}] ruleSource "${context.ruleSource}" is missing; expected a source file`);
       } else {
         const route = await readFile(current, 'utf8');
-        for (const error of thinContextRouteErrors(route)) errors.push(`contexts[${index}] ruleSource "${context.ruleSource}" ${error}`);
+        for (const error of thinContextRouteErrors(route, { obligationSource: context.obligationSource, obligationText })) errors.push(`contexts[${index}] ruleSource "${context.ruleSource}" ${error}`);
       }
     } catch {
       const candidate = path.join(sourceDirectory, context.ruleSource);
@@ -576,6 +450,53 @@ export async function contextRuleSourceErrors(manifest = MANIFEST, sourceDirecto
         else errors.push(`contexts[${index}] ruleSource "${context.ruleSource}" is missing; expected a source file`);
       }
     }
+  }
+
+  let codexRoot;
+  if ((manifest.contexts ?? []).some((context) => context.obligationSource)) {
+    try { codexRoot = (await checkedSourceFile(validationRoot, 'templates/codex-root.md', 'Codex root')).toString('utf8'); }
+    catch (error) { errors.push(`Codex root ${error.message}`); }
+  }
+  if (codexRoot !== undefined) {
+    const allowedRootIncludes = new Set([
+      '{{core}}',
+      `{{include:profiles/${manifest.defaultProfile}.md}}`,
+      ...(manifest.contexts ?? []).filter((context) => context.obligationSource).map((context) => `{{include:${context.obligationSource}}}`),
+    ]);
+    const rootIncludes = [...codexRoot.matchAll(/\{\{(?:include:[^}]+|core)\}\}/g)].map((match) => match[0]);
+    for (const include of rootIncludes) if (!allowedRootIncludes.has(include)) errors.push(`Codex root contains undeclared composed source ${include}`);
+    for (const include of allowedRootIncludes) if (occurrences(codexRoot, include) !== 1) errors.push(`Codex root must contain declared composed source ${include} exactly once`);
+  }
+  for (const [index, context] of (manifest.contexts ?? []).entries()) {
+    if (!context.obligationSource) continue;
+    const include = `{{include:${context.obligationSource}}}`;
+    const obligationBody = obligationTexts.has(index) ? stripFrontmatter(obligationTexts.get(index)).trim() : '';
+    try {
+      const fullReference = (await checkedSourceFile(validationRoot, context.source, `contexts[${index}].source`)).toString('utf8');
+      if (occurrences(fullReference, include) !== 1) errors.push(`contexts[${index}] source "${context.source}" must include ${include} exactly once`);
+      const referenceIncludes = [...fullReference.matchAll(/\{\{(?:include:[^}]+|core)\}\}/g)].map((match) => match[0]);
+      if (referenceIncludes.length !== 1 || referenceIncludes[0] !== include) errors.push(`contexts[${index}] source "${context.source}" must contain only its declared compact obligation include`);
+      const expandedReference = fullReference.replace(include, obligationBody);
+      if (obligationBody && occurrences(expandedReference, obligationBody) !== 1) errors.push(`contexts[${index}] source "${context.source}" must compile the canonical compact obligation exactly once`);
+    } catch (error) {
+      errors.push(`contexts[${index}] source "${context.source}" ${error.message}`);
+    }
+    if (codexRoot === undefined) continue;
+    const primaryReference = `agent-rules/reference/${destinationBasename(context.source)}`;
+    if (occurrences(codexRoot, include) !== 1) errors.push(`Codex root must include ${include} exactly once`);
+    if (occurrences(codexRoot, primaryReference) !== 1) errors.push(`Codex root must name ${primaryReference} exactly once`);
+    const expandedCodexRoot = codexRoot.replace(include, obligationBody);
+    if (obligationBody && occurrences(expandedCodexRoot, obligationBody) !== 1) errors.push(`Codex root must compile the canonical compact obligation for ${context.name} exactly once`);
+    const deliveryRows = expandedCodexRoot.split(/\r?\n/).filter((row) => row.includes(obligationBody) || row.includes(primaryReference));
+    if (deliveryRows.length !== 1 || !deliveryRows[0].includes(obligationBody) || !deliveryRows[0].includes(primaryReference)) {
+      errors.push(`Codex root must keep ${include} and ${primaryReference} together on exactly one physical row`);
+    } else {
+      for (const other of (manifest.contexts ?? []).filter((candidate) => candidate !== context)) {
+        const otherReference = `agent-rules/reference/${destinationBasename(other.source)}`;
+        if (deliveryRows[0].includes(otherReference)) errors.push(`Codex root obligation row for ${context.name} must not name other context reference ${otherReference}`);
+      }
+    }
+    if (!obligationTexts.has(index)) errors.push(`contexts[${index}] obligationSource "${context.obligationSource}" cannot be validated for shared delivery`);
   }
   return errors;
 }
@@ -643,6 +564,11 @@ export async function build(outRoot = path.join(repo, 'dist')) {
   await assertContextManifest();
   assertBuildDestinations();
   await assertBuildSourcePaths();
+  const codexRootBody = await composed('templates/codex-root.md', new Set());
+  const obligations = await Promise.all(MANIFEST.contexts.filter((context) => context.obligationSource)
+    .map(async (context) => ({ name: context.name, body: stripFrontmatter(await read(context.obligationSource)).trim() })));
+  const compositionErrors = compiledObligationErrors(codexRootBody, obligations);
+  if (compositionErrors.length) throw new Error(compositionErrors.join('\n'));
   outRoot = await assertSafeOutputRoots(outRoot);
   const claude = path.join(outRoot, 'claude'), codex = path.join(outRoot, 'codex');
   await rm(claude, { recursive: true, force: true });
@@ -650,7 +576,8 @@ export async function build(outRoot = path.join(repo, 'dist')) {
 
   const refBasenames = new Set(MANIFEST.reference.map(destinationBasename));
 
-  // Shared payload: reference, profiles, tools under agent-rules/.
+  // Shared generated payload. Runtime tools are package-root sources installed
+  // directly by install-distribution.mjs and never duplicated in dist/.
   for (const host of [claude, codex]) {
     for (const rel of MANIFEST.reference) {
       await emit(host, `agent-rules/reference/${destinationBasename(rel)}`, await composedReference(rel, refBasenames));
@@ -658,10 +585,8 @@ export async function build(outRoot = path.join(repo, 'dist')) {
     for (const rel of MANIFEST.profiles) {
       await emit(host, `agent-rules/profiles/${destinationBasename(rel)}`, await composed(rel, new Set()));
     }
-    for (const rel of MANIFEST.tools) {
-      const dest = resolveBuildOutput(host, `agent-rules/tools/${destinationBasename(rel)}`);
-      await mkdir(path.dirname(dest), { recursive: true });
-      await copyFile(path.join(repo, rel), dest);
+    for (const rel of MANIFEST.config) {
+      await emit(host, `agent-rules/tools/config/${destinationBasename(rel)}`, await read(rel));
     }
   }
   // Skills for both hosts from one frame.
@@ -693,7 +618,7 @@ export async function build(outRoot = path.join(repo, 'dist')) {
 
   // Roots.
   await emit(claude, 'CLAUDE.md', await composed('templates/claude-root.md', new Set()));
-  await emit(codex, 'AGENTS.md', await composed('templates/codex-root.md', new Set()));
+  await emit(codex, 'AGENTS.md', codexRootBody);
 }
 
 async function composedReference(rel, siblings) {

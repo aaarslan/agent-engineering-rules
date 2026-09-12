@@ -1,0 +1,887 @@
+{
+  "schema_version": 1,
+  "coverage_kind": "design-traceability-not-efficacy",
+  "origin": "User product requirements supplied 2026-09-12; concise restatements preserve the supplied IDs.",
+  "grievances": [
+    {
+      "id": 1,
+      "requirement": "Optimize the complete production result, not the smallest diff.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 2,
+      "requirement": "Repair the owning defect rather than patching a symptom.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 3,
+      "requirement": "Prevent accumulating duplicate rules, hidden coupling, inconsistent conventions and dead paths.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 4,
+      "requirement": "A visible test pass is insufficient evidence of architecture, completeness or production readiness.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 5,
+      "requirement": "Replace a broken abstraction when coherent repair requires it.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 6,
+      "requirement": "Permit justified large refactors, subsystem redesigns and complete rewrites.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 7,
+      "requirement": "Treat diff size as neutral; justify structural changes by the requested outcome.",
+      "owner": "kernel/contract.md#AE-04",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 8,
+      "requirement": "Evaluate a human-suggested mechanism for technical soundness.",
+      "owner": "kernel/contract.md#AE-01",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 9,
+      "requirement": "Compensate for the user's missing technical or domain knowledge.",
+      "owner": "kernel/contract.md#AE-01",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 10,
+      "requirement": "Derive and implement necessary technical obligations omitted from the request.",
+      "owner": "kernel/contract.md#AE-02",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 11,
+      "requirement": "The user owns product behavior and constraints; the agent supplies engineering judgment.",
+      "owner": "kernel/contract.md#AE-01",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 12,
+      "requirement": "Do not invent product requirements while supplying technical expertise.",
+      "owner": "kernel/contract.md#AE-02",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 13,
+      "requirement": "Do not introduce abstractions, infrastructure, dependencies or layers for appearance.",
+      "owner": "kernel/contract.md#AE-05",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 14,
+      "requirement": "Avoid both local band-aids and speculative over-engineering.",
+      "owner": "kernel/contract.md#AE-05",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 15,
+      "requirement": "Clean code includes precise names, coherent responsibilities, explicit dependencies, low coupling and clear state.",
+      "owner": "kernel/contract.md#AE-05",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 16,
+      "requirement": "Do not spend the implementation budget surveying, narrating, restating, planning or polishing reports.",
+      "owner": "kernel/contract.md#AE-08",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 17,
+      "requirement": "Stop analysis when sufficient design evidence exists.",
+      "owner": "kernel/contract.md#AE-08",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 18,
+      "requirement": "Produce working behavior before exhausting time or context on preparation.",
+      "owner": "kernel/contract.md#AE-08",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 19,
+      "requirement": "Task difficulty, context length, large changes and rewrites are not reasons to abandon work.",
+      "owner": "kernel/contract.md#AE-08",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 20,
+      "requirement": "Begin implementation as soon as the design is sufficiently supported.",
+      "owner": "kernel/contract.md#AE-08",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 21,
+      "requirement": "Do not call TODOs, stubs, no-ops, disconnected controls, happy paths or test-only shortcuts complete.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 22,
+      "requirement": "Cover implicated interactions, repetition, state transitions, cleanup, cancellation, retries, idempotency, concurrency and recovery.",
+      "owner": "kernel/contract.md#AE-14",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 23,
+      "requirement": "Trace real entrypoints to their actual durable effects.",
+      "owner": "kernel/contract.md#AE-14",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 24,
+      "requirement": "Persist through ordinary difficulty while preventing identical failure loops and blind patch-forward.",
+      "owner": "kernel/contract.md#AE-10",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 25,
+      "requirement": "Implement exactly the required behavior rather than an approximation.",
+      "owner": "kernel/contract.md#AE-12",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 26,
+      "requirement": "Preserve required signatures, fields, types, shapes, ordering, units, casing, punctuation, whitespace, blank lines, final newlines, errors, defaults and effects.",
+      "owner": "kernel/contract.md#AE-12",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 27,
+      "requirement": "Treat finite vocabularies as closed contracts without silent unsupported-value fallback.",
+      "owner": "kernel/contract.md#AE-13",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 28,
+      "requirement": "Unsupported, malformed or out-of-range input must not silently become success, default, empty, unchanged output, a no-op or another mode.",
+      "owner": "kernel/contract.md#AE-13",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 29,
+      "requirement": "Distinguish omitted optional input from invalid supplied input.",
+      "owner": "kernel/contract.md#AE-13",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 30,
+      "requirement": "Do not restrict free-form input without a requirement.",
+      "owner": "kernel/contract.md#AE-13",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 31,
+      "requirement": "Give each business rule one owning boundary and update every affected consumer.",
+      "owner": "kernel/contract.md#AE-05",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 32,
+      "requirement": "Do not substitute a reasonable-looking approximate result for an exact contract.",
+      "owner": "kernel/contract.md#AE-12",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 33,
+      "requirement": "Do not equate self-selected happy-path checks with full requirement satisfaction.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 34,
+      "requirement": "Self-authored tests establish only the cases exercised.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 35,
+      "requirement": "Try relevant invalid, boundary, omitted, interaction, state, authorization, failure and recovery cases.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 36,
+      "requirement": "Use verification to try to disprove the implementation.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 37,
+      "requirement": "Mocks and doubles do not establish production wiring, serialization, persistence, credentials or live integration.",
+      "owner": "kernel/contract.md#AE-19",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 38,
+      "requirement": "Never present failed, skipped, crashed, timed-out, unavailable, empty, flaky or unresolved checks as passing.",
+      "owner": "kernel/contract.md#AE-20",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 39,
+      "requirement": "Do not say implemented, verified, satisfied or done while important behavior is unsupported.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 40,
+      "requirement": "Map completion claims to specific relevant evidence.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 41,
+      "requirement": "Inspect the final diff and repository state for missed consumers, duplicates, dead paths, artifacts, residue and regressions.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 42,
+      "requirement": "Do not invent external endpoints, request or response schemas, credentials or capabilities.",
+      "owner": "kernel/contract.md#AE-16",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 43,
+      "requirement": "Code volume around a guessed contract does not validate an integration.",
+      "owner": "kernel/contract.md#AE-16",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 44,
+      "requirement": "Do not substitute in-process fakes for requested production integrations and claim completion.",
+      "owner": "kernel/contract.md#AE-19",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 45,
+      "requirement": "Keep an unestablished external contract explicitly unresolved.",
+      "owner": "kernel/contract.md#AE-16",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 46,
+      "requirement": "Require explicit user authority for a new hosted service, external API, recurring cost, proprietary dependency or operational system.",
+      "owner": "kernel/contract.md#AE-03",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 47,
+      "requirement": "New dependencies need evidence existing repository, standard-library or platform mechanisms are insufficient.",
+      "owner": "kernel/contract.md#AE-17",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 48,
+      "requirement": "Prefer repository-owned, replaceable designs over unnecessary vendor dependence.",
+      "owner": "kernel/contract.md#AE-17",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 49,
+      "requirement": "Address implicated trust boundaries, authorization, data invariants, migration, compatibility, rollback, recovery, observability, accessibility and operational failures.",
+      "owner": "kernel/contract.md#AE-15",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 50,
+      "requirement": "Authentication does not authorize every action; authorize protected reads and writes at the trusted boundary.",
+      "owner": "kernel/contract.md#AE-15",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 51,
+      "requirement": "Never expose secrets or sensitive data in commits, logs or diagnostics.",
+      "owner": "kernel/contract.md#AE-15",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 52,
+      "requirement": "Persistent changes require old-data meaning, transactions, locking, backfill, mixed-version, rollback and roll-forward reasoning.",
+      "owner": "kernel/contract.md#AE-15",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 53,
+      "requirement": "Process and network boundaries require timeouts, bounded retry, partial-failure handling and appropriate observability.",
+      "owner": "kernel/contract.md#AE-15",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 54,
+      "requirement": "Performance claims require a baseline and measured before/after evidence.",
+      "owner": "kernel/contract.md#AE-22",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 55,
+      "requirement": "Documentation must agree with implemented behavior.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 56,
+      "requirement": "Never invent compliance, certification, approval, safety or security claims.",
+      "owner": "kernel/contract.md#AE-22",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 57,
+      "requirement": "Reduce the attention burden of the predecessor's reported roughly 201–202-line contract.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 58,
+      "requirement": "Account for reported first-pass attention loss without asserting a universal model truncation rule.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 59,
+      "requirement": "Keep important obligations inside a compact first-pass contract.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 60,
+      "requirement": "Prioritize machine comprehension in the installed contract.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 61,
+      "requirement": "Optimize installed wording for coding-model comprehension and adherence.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 62,
+      "requirement": "Keep human-facing explanation in README and supporting documentation.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 63,
+      "requirement": "Provide stable directive IDs, normative strength, authority boundaries, an optimization target, execution order and an objective completion gate.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 64,
+      "requirement": "Add context or process only when justified by behavioral value.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 65,
+      "requirement": "Do not concatenate all profiles, skills, references and routing machinery into one prompt.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 66,
+      "requirement": "Keep universal engineering judgment in the kernel and repository-specific frameworks, workflows, styles and tools repository-owned.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 67,
+      "requirement": "Front-load important rules and enforce the complete kernel below the physical-line ceiling.",
+      "owner": "kernel/contract.md#AE-24",
+      "validation": "deterministic",
+      "evidence": "tools/validate-source.mjs",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 68,
+      "requirement": "Prioritize product improvements over repairing harnesses and repeatedly rerunning evaluations.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 69,
+      "requirement": "Avoid slow low-signal Deep-SWE work as the default repair workflow.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 70,
+      "requirement": "Keep harness failures separate from model and contract outcomes.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 71,
+      "requirement": "Do not spend product work on avoidable platform and execution-environment harness complexity.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 72,
+      "requirement": "Future reports must make results informative and actionable.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 73,
+      "requirement": "Expose treatment, task, model, execution status, strict score, timeouts, tokens, cost, artifact integrity and paired comparisons.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 74,
+      "requirement": "Do not grade undisclosed requirements.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 75,
+      "requirement": "Disclose every graded interface, formatting rule, failure behavior and editable file.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 76,
+      "requirement": "Exclude or repair already-passing, dependent, unavailable-file and incomplete-contract tasks before evaluation.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 77,
+      "requirement": "Do not tune and rerun AER to obtain an attractive percentage.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 78,
+      "requirement": "Do not optimize the initiative for a predetermined benchmark improvement claim.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 79,
+      "requirement": "Freeze prior evidence and interpret it honestly without rewriting or selective filtering.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "deterministic",
+      "evidence": "tools/validate-corpus.mjs",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 80,
+      "requirement": "Prefer faster auditable established evaluation methods where they fit the product question.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 81,
+      "requirement": "Preserve the original question of same-model official baseline versus AER v3; v5 requires a separately versioned treatment, not relabeling v3.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 82,
+      "requirement": "Isolate baseline, original-rules and AER sessions to avoid treatment contamination.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 83,
+      "requirement": "Record provider configuration, exact model identity, task contract, prompt, treatment hash, repository revision, execution budget and scoring method.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 84,
+      "requirement": "Run paid providers only with explicit intent; do not substitute Claude or Codex when ZAI, DeepSeek and Meta are intended.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 85,
+      "requirement": "Complete product repair before further expensive efficacy evaluation.",
+      "owner": "docs/evaluation.md#future-evaluation",
+      "validation": "design-review",
+      "evidence": "docs/evaluation.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 86,
+      "requirement": "Do not reflexively create permanent tests for every change.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 87,
+      "requirement": "Avoid code-test-micro-edit-full-rerun loops.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 88,
+      "requirement": "Account for context, tokens, time and money consumed by low-information testing.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 89,
+      "requirement": "Test architecture must not displace completion of real product behavior.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 90,
+      "requirement": "Distinguish verification from permanent automated-test creation.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 91,
+      "requirement": "Every implementation needs sufficient real-behavior evidence; a build, smoke check or direct exercise may suffice.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 92,
+      "requirement": "Scale durable tests by maturity, lifespan, production exposure, users, regression/security/data risk, failure cost and contract stability.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 93,
+      "requirement": "Prioritize complete working vertical implementations for demos, experiments, proofs of concept and single-use tools.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 94,
+      "requirement": "For disposable projects, add test infrastructure only when requested, materially risky or faster than direct development.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 95,
+      "requirement": "Do not build durable test architecture around substantially changing behavior.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 96,
+      "requirement": "Use the cheapest decisive check for the current uncertainty.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 97,
+      "requirement": "Do not rerun an unchanged broad suite after every micro-edit.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 98,
+      "requirement": "Rerun only when relevant behavior changed, evidence was invalidated or an integration/completion checkpoint warrants it.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 99,
+      "requirement": "Prefer targeted checks while implementing and broad regression at meaningful integration or required final gates.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 100,
+      "requirement": "A failed check requires diagnosis and a changed hypothesis, implementation, input, environment or evidence before repeated execution.",
+      "owner": "kernel/contract.md#AE-10",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 101,
+      "requirement": "For durable features, complete real behavior first and add useful boundary or end-to-end regression coverage once the contract stabilizes.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 102,
+      "requirement": "Durable end-to-end coverage protects completed behavior against future changes to the same workflow.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 103,
+      "requirement": "When extending existing production behavior, run the relevant established regressions.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 104,
+      "requirement": "Real users, persisted data, security, finances and operational risk justify stronger earlier verification.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 105,
+      "requirement": "Test quantity is not a quality metric; protect meaningful behavior and failure boundaries.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 106,
+      "requirement": "Mock, fixture and harness complexity needs justification relative to the behavior protected.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 107,
+      "requirement": "Tests added are not substantive completion when requested behavior remains incomplete.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 108,
+      "requirement": "Distinguish direct exercises, permanent regression coverage, existing checks rerun and intentional cost-based omissions.",
+      "owner": "kernel/contract.md#AE-26",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 109,
+      "requirement": "Optimize verification for information gained per time, context, execution cost and complexity.",
+      "owner": "kernel/contract.md#AE-18",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    },
+    {
+      "id": 110,
+      "requirement": "Prevent wasteful retesting without speculating about model, harness or provider motives.",
+      "owner": "kernel/contract.md#AE-21",
+      "validation": "design-review",
+      "evidence": "source/kernel/contract.md",
+      "efficacy": "unmeasured"
+    }
+  ]
+}

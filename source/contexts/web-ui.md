@@ -6,31 +6,33 @@ related: [typescript-react.md, ui-styling.md, ../quality/security.md, ../design/
 
 # Web UI
 
-Use [TypeScript and React](typescript-react.md) for React specifics and [UI Styling](ui-styling.md) for visual defaults when no product design system applies.
+Use [TypeScript and React](typescript-react.md) only for that selected stack and [UI Styling](ui-styling.md) for the requested visual design.
 
 ## Safe rendering
 
 - Render user or external text with DOM text APIs or framework escaping. Never interpolate it into HTML strings.
 - Trace untrusted values reaching `innerHTML`, `insertAdjacentHTML`, or `dangerouslySetInnerHTML`; exercise quotes, tags, whitespace-only input, and contractual length limits.
-- Use `tools/slop-scan.mjs` only when supported web files and relevant risks such as unsafe sinks, timers, storage, dead exports, or TODO residue are present. A partial-selector result is advisory for that selection, not a whole-app or clean result.
-- Completion after a scan requires either a clean applicable full-root rerun or an explicit disposition for every residual finding fingerprint. Classify each remaining rendering sink as removed (absent on rerun), safely escaped by a named mechanism, trusted static data inside a defined immutable boundary that never receives user, server, or external data, or unresolved. An unresolved sink blocks a clean claim.
+- An optional `aer verify slop` diagnostic may identify unsafe sinks or scaffold residue in supported files. Inspect findings in context; a partial scan is not evidence about the whole application.
+- Establish how each implicated rendering sink is escaped, removed, or confined to trusted immutable data; report unresolved exposure. A clean heuristic scan does not establish safety or require a full-root rerun.
 
 ## Updates and focus
 
-- Update the smallest DOM region that changed. Rebuilding a focused input loses caret, selection, and screen-reader context; refocusing does not restore them.
-- When an action closes a dialog or drawer, or removes or rebuilds the focused element, move focus deliberately to the initiating control or logical neighbor. Focus falling to `<body>` strands keyboard users.
+{{include:contexts/web-interaction.md}}
+
+Retaining interactive DOM nodes preserves their editing and screen-reader context. Rebuilding a focused input loses caret and selection; calling `focus()` alone does not restore them.
+
+Exercise implicated toggle, save, Cancel/Escape, removal and filter transitions. Immediately after an action, inspect the focused element and continue with the next keyboard action. Focus falling to `<body>` after an active control disappears exposes a missing transition; an unchanged screenshot or a working click does not settle it. Reuse this evidence for completion.
 
 ## States and recovery
 
 - Implement only reachable loading, empty, error, success, and disabled states. Never add artificial delay or unreachable behavior to complete a checklist.
 - Distinguish no data from no filter matches.
-- Treat unreadable stored data as an error: show it, offer an explicit reset, and block persistence until recovery. Exercise corrupt input when persistence is in scope; an enabled write path can destroy recoverable data.
+- Treat unreadable stored data as an error and preserve it until deliberate recovery. Exercise corruption when persistence is in scope; follow the product's recovery contract without silently resetting recoverable data.
 
 ## Prompt-critical behavior
 
 - For each applicable requested action, name and exercise `action → named visible destination state` in the prompt's vocabulary. Exercise the promised state transition, not an acknowledgement: save note → note appears in the named notes region; submit a log → entry appears in the named log; add hydration → displayed hydration state changes; search or filter → visible results change; activate navigation → intended named destination opens.
 - A toast, form reset, command exit code, or success message alone is acknowledgement, not proof of the destination state.
-- Confirm keyboard activation opens the correct row, and Escape closes modal or drawer patterns and returns focus to their trigger.
 
 ## Responsive and honest controls
 
@@ -40,11 +42,10 @@ Use [TypeScript and React](typescript-react.md) for React specifics and [UI Styl
 
 ## Resources
 
-- For a self-contained prototype, prefer system fonts and local assets. Use remote resources only when requested or concretely justified; retain local or system fallbacks and exercise and report relevant offline behavior.
+- Choose resources from the brief and repository. External dependencies need justification; preserve required offline and failure behavior without inventing an offline product requirement.
 
 ## Accessibility
 
-- Give every pointer interaction an equivalent keyboard path.
-- Give every control an accessible, item-specific name. Use meaningful alt text, `alt=""` for decoration, a document language, a valid favicon, and a live region for asynchronous outcomes.
-- For faint or small semantic text, run `tools/contrast-check.mjs` on selected named opaque foreground/background pairs with their font size and weight; do not pass stylesheet paths or check every color token. Rerun failed pairs after editing. The result does not cover alpha, gradients, computed backgrounds, interaction states, whole-page accessibility, or general WCAG conformance.
+- Use meaningful alt text, `alt=""` for decoration, a document language, and appropriate announcements for asynchronous outcomes.
+- Check applicable contrast using rendered evidence or selected named color pairs. Optional `aer verify contrast` handles documented opaque pairs; it does not establish alpha, gradient, computed-background, interaction-state, whole-page accessibility, or general conformance.
 - Preserve `:focus-visible` and honor `prefers-reduced-motion`.

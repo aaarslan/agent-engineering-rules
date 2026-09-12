@@ -1,26 +1,30 @@
 # Testing
 
-The active profile decides which new tests are required. This file owns timing and quality.
+Verification establishes current behavior. Permanent tests protect stable behavior against future regression. They are separate investments.
 
-## When
+## Choose the investment
 
-- For features, write profile-required tests after behavior and contracts stabilize. During construction, keep the static rail green instead of testing scaffolding repeatedly.
-- For a bug fix, reproduce the failure before editing when practical. Keep the reproduction as regression protection when the active profile requires or permits it.
-- Before a refactor, run the baseline and exercise the flow before and after. Add characterization coverage only when needed to prove preservation.
-- Under prototype, a disposable mockup need not add durable test files, but it still needs usable evidence for the real requested workflow. Repository gates or material exposure, data, or regression risk can require durable coverage under AE-21. Under high assurance, map required tests and inspections to the profile's traceability record.
+- Scale effort with project maturity, expected lifespan, real users and exposure, contract stability, regression/security/privacy/data risk, and failure cost.
+- Demos, experiments, single-use tools, and changing prototypes need a complete working path first. Add permanent tests only when requested, materially risk-reducing, or faster than direct development and verification.
+- For durable features, finish the real vertical behavior and stabilize its user/caller contract before investing in end-to-end or boundary regression coverage. High-consequence behavior warrants earlier checks.
+- When extending existing production behavior, run relevant established coverage to protect current customers alongside the new behavior.
+- Do not construct test architecture around substantially changing behavior. Tests added are not progress toward an unfinished feature.
 
-## What
+## Choose the evidence
 
-- Test contracts and boundaries, not implementation details.
-- One real end-to-end exercise of the changed flow outranks a pile of unit tests: it catches miswiring, invented APIs, and wrong-layer integration.
-- Reserve unit tests for dense decisions: business rules, parsers, state machines, boundaries, and failure paths. Cover glue through the real-flow exercise.
-- Boundary adapters are dense logic, not glue: test storage, serialization, and parsing failure paths (bad JSON, wrong shape, write failure), not just round-trips.
-- Cover each material failure path through the strongest practical contract or real-flow exercise required by the profile.
-- Prefer real objects. Heavy mocking signals poorly isolated side effects.
+- Use the cheapest decisive check for the uncertainty: direct execution, build, focused assertion, targeted existing test, or manual vertical-path exercise.
+- Reproduce bugs before repair when practical; retain a regression only when its future value warrants it.
+- Before restructuring, establish the behavior to preserve from executable evidence or a reliable contract. If no runnable baseline exists, state the gap and use characterization only where it resolves preservation uncertainty.
+- Protect observable contracts and meaningful failure boundaries, not implementation shape, framework behavior, fixture counts, or line counts.
+- Test dense decisions, parsing, state machines, serialization, and storage failure boundaries where isolated checks are decisive; exercise glue through its real integration.
+- Mocks prove isolated behavior. Their size and complexity need justification when they exceed the behavior protected.
 
-## Execution discipline
+## Timing and reuse
 
-- Prefer targeted tests after stabilization; failures follow [verification](verification.md).
-- Run the full suite when the change is cross-cutting, the active profile requires it, or the repository defines it as a completion gate. Re-run a green test only when a later fix could affect it.
-- Use quiet, failures-only output where the runner supports it.
-- Match the repo's framework and neighboring test patterns. Keep tests deterministic and independent.
+- During implementation, target relevant uncertainty. Do not rerun an unchanged broad suite after every edit.
+- Rerun when relevant behavior changed, prior evidence was invalidated, integration creates a new risk, or a repository completion gate requires current evidence.
+- Reserve broad regression suites for meaningful integration boundaries and required final gates; a final report alone does not invalidate a passing result.
+- Failure calls for diagnosis and a relevant repair, not identical reruns. Follow [verification](verification.md).
+- Match existing repository tooling and deterministic test patterns; introduce no framework merely to appear rigorous.
+
+Report direct behavior exercised, permanent regressions added, existing checks rerun, and material checks omitted with their cost/value reason. Optimize information gained per time, context, execution cost, and complexity; do not infer provider incentives from repeated testing behavior.

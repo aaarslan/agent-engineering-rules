@@ -1,29 +1,31 @@
 #!/usr/bin/env node
-// Simulates the generated Claude and Codex instruction loads that this project
-// claims to support. Token counts use a documented bytes/4 approximation.
+// Simulates generated Claude and Codex instruction loads. Automatic plans
+// include matched pointers; optional full-reference accumulation is reported.
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MANIFEST, frontmatterFields } from './build-distributions.mjs';
+import { frontmatterFields } from './build-distributions.mjs';
+import { MANIFEST } from './manifest.mjs';
 import { ROOT_END, ROOT_START } from './install-distribution.mjs';
+import { loadThresholds, requiredThreshold } from './lib/thresholds.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceRoot = path.join(repo, 'source');
 const committedDist = path.join(repo, 'dist');
-const CODEX_DEFAULT_BYTES = 32768;
-const EXPECTED_RUNTIME_PLAN_COUNT = 36;
 const EXPECTED_PROFILES = ['prototype', 'standard', 'high-assurance'];
+const THRESHOLDS = await loadThresholds();
 const BUDGETS = {
-  profile_lines: 20,
-  profile_estimated_tokens: 400,
-  skill_lines: 40,
-  skill_estimated_tokens: 800,
-  skill_catalog_intrinsic_characters: 2000,
-  skill_catalog_representative_characters: 2000,
-  always_on_estimated_tokens: 2000,
-  kernel_profile_skill_estimated_tokens: 3500,
+  profile_lines: requiredThreshold(THRESHOLDS, 'PROFILE_MAX_PHYSICAL_LINES'),
+  profile_estimated_tokens: requiredThreshold(THRESHOLDS, 'PROFILE_MAX_ESTIMATED_TOKENS'),
+  skill_lines: requiredThreshold(THRESHOLDS, 'SELECTED_SKILL_MAX_PHYSICAL_LINES'),
+  skill_estimated_tokens: requiredThreshold(THRESHOLDS, 'SELECTED_SKILL_MAX_ESTIMATED_TOKENS'),
+  skill_catalog_intrinsic_characters: requiredThreshold(THRESHOLDS, 'SKILL_CATALOG_MAX_CHARACTERS'),
+  skill_catalog_representative_characters: requiredThreshold(THRESHOLDS, 'SKILL_CATALOG_MAX_CHARACTERS'),
+  always_on_estimated_tokens: requiredThreshold(THRESHOLDS, 'ALWAYS_ON_MAX_ESTIMATED_TOKENS'),
+  routed_load_estimated_tokens: requiredThreshold(THRESHOLDS, 'ROUTED_LOAD_MAX_ESTIMATED_TOKENS'),
 };
+const ESTIMATED_TOKEN_BYTES = requiredThreshold(THRESHOLDS, 'ESTIMATED_TOKEN_BYTES');
 
 const posix = (value) => value.replaceAll('\\', '/');
 const unique = (values) => [...new Set(values)];
@@ -37,8 +39,8 @@ function metrics(entries) {
   return {
     physical_lines: combined.trimEnd() ? combined.trimEnd().split(/\r?\n/).length : 0,
     bytes: Buffer.byteLength(combined, 'utf8'),
-    estimated_tokens: Math.ceil(Buffer.byteLength(combined, 'utf8') / 4),
-    estimator: 'ceil(UTF-8 bytes / 4)',
+    estimated_tokens: Math.ceil(Buffer.byteLength(combined, 'utf8') / ESTIMATED_TOKEN_BYTES),
+    estimator: `ceil(UTF-8 bytes / ${ESTIMATED_TOKEN_BYTES})`,
   };
 }
 
@@ -56,7 +58,7 @@ function asInstalledRoot(entry) {
   return { ...entry, content: `${ROOT_START}\n${entry.content.trimEnd()}\n${ROOT_END}\n` };
 }
 
-function plan(id, host, entries, conflictPairs, extras = {}) {
+function plan(id, host, entries, conflictPairs, hostCapBytes, extras = {}) {
   const ids = entries.flatMap((entry) => entry.content.match(/\bAE-\d{2}\b/g) ?? []);
   const idSet = new Set(ids);
   const conflicts = conflictPairs.filter(([left, right]) => idSet.has(left) && idSet.has(right));
@@ -70,7 +72,8 @@ function plan(id, host, entries, conflictPairs, extras = {}) {
     ...measured,
     duplicate_directive_ids: repeated(ids),
     contradictory_directive_pairs: conflicts,
-    omitted_due_to_host_cap: host === 'codex' && measured.bytes > CODEX_DEFAULT_BYTES ? ['tail beyond project_doc_max_bytes'] : [],
+    host_cap_bytes: host === 'codex' ? hostCapBytes : null,
+    omitted_due_to_host_cap: host === 'codex' && measured.bytes > hostCapBytes ? ['tail beyond project_doc_max_bytes'] : [],
     deterministic_policy_delivery: 'consumer-owned',
     ...extras,
   };
@@ -85,11 +88,25 @@ async function buildEntries(distributionRoot) {
     ...claudeCore,
     await artifact(claudeRoot, '.claude/rules/profile.md', 'profiles/standard.md'),
   ];
-  const codexBase = [asInstalledRoot(await artifact(codexRoot, 'AGENTS.md', ['templates/codex-root.md', ...MANIFEST.core, 'profiles/standard.md']))];
+  const codexGeneratedRoot = await artifact(codexRoot, 'AGENTS.md', ['templates/codex-root.md', ...MANIFEST.core, 'profiles/standard.md']);
+  const codexContexts = (selectedNames) => {
+    const selected = new Set(selectedNames);
+    const content = codexGeneratedRoot.content.split('\n').filter((row) => !MANIFEST.contexts.some((context) =>
+      !selected.has(context.name) && row.includes(`agent-rules/reference/${path.basename(context.source)}`))).join('\n');
+    const obligationSources = MANIFEST.contexts
+      .filter((context) => selected.has(context.name) && context.obligationSource)
+      .map((context) => context.obligationSource);
+    return [asInstalledRoot({ ...codexGeneratedRoot, sources: [...codexGeneratedRoot.sources, ...obligationSources], content })];
+  };
+  const codexEmptyBase = codexContexts([]);
+  const codexBase = codexContexts(MANIFEST.contexts.map((context) => context.name));
   const claudeReviewer = await artifact(claudeRoot, '.claude/agents/code-reviewer.md', ['templates/code-reviewer.md', 'contexts/pr-review.md']);
 
   const claudeContexts = new Map();
-  for (const context of MANIFEST.contexts) claudeContexts.set(context.name, await artifact(claudeRoot, `.claude/rules/${context.rule}`, context.ruleSource));
+  for (const context of MANIFEST.contexts) {
+    claudeContexts.set(context.name, await artifact(claudeRoot, `.claude/rules/${context.rule}`,
+      [context.ruleSource, ...(context.obligationSource ? [context.obligationSource] : [])]));
+  }
 
   const skill = async (host, name) => {
     const root = host === 'claude' ? claudeRoot : codexRoot;
@@ -97,7 +114,14 @@ async function buildEntries(distributionRoot) {
     return artifact(root, rel, `skills/${name}.md`);
   };
 
-  return { claudeRoot, codexRoot, claudeBase, codexBase, claudeContexts, claudeReviewer, skill };
+  const reference = async (host, source) => {
+    const root = host === 'claude' ? claudeRoot : codexRoot;
+    const context = MANIFEST.contexts.find((candidate) => candidate.source === source);
+    return artifact(root, `agent-rules/reference/${path.basename(source)}`,
+      [source, ...(context?.obligationSource ? [context.obligationSource] : [])]);
+  };
+
+  return { claudeRoot, codexRoot, claudeBase, codexBase, codexEmptyBase, codexContexts, claudeContexts, claudeReviewer, reference, skill };
 }
 
 async function selectedProfileEntries(host, entries, distributionRoot, selectedProfile) {
@@ -117,8 +141,13 @@ async function selectedProfileEntries(host, entries, distributionRoot, selectedP
 }
 
 export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
-  const conflictsDoc = JSON.parse(await text(path.join(sourceRoot, 'compatibility/conflicts.json')));
-  const modelsDoc = JSON.parse(await text(path.join(sourceRoot, 'compatibility/models.json')));
+  const [conflictsDoc, modelsDoc, hostsDoc] = await Promise.all([
+    text(path.join(sourceRoot, 'compatibility/conflicts.json')).then((value) => JSON.parse(value)),
+    text(path.join(sourceRoot, 'compatibility/models.json')).then((value) => JSON.parse(value)),
+    text(path.join(sourceRoot, 'compatibility/hosts.json')).then((value) => JSON.parse(value)),
+  ]);
+  const codexHostCap = hostsDoc.supported_hosts?.codex?.combined_project_instruction_bytes;
+  if (!Number.isInteger(codexHostCap) || codexHostCap <= 0) throw new Error('Codex compatibility record needs combined_project_instruction_bytes');
   const conflictPairs = (conflictsDoc.directive_conflicts ?? []).map((entry) => entry.directive_ids);
   const built = await buildEntries(distributionRoot);
   const plans = [];
@@ -126,6 +155,7 @@ export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
   const canonicalSkillNames = MANIFEST.skills.map((skill) => skill.name);
   const reviewSkillNames = MANIFEST.skills.filter((skill) => skill.claude?.context === 'fork' && skill.claude?.agent === 'code-reviewer').map((skill) => skill.name);
   const profileEntries = {};
+  const selectedCodexContexts = { selected_contexts: MANIFEST.contexts.map((context) => context.name) };
 
   for (const host of ['claude', 'codex']) {
     const base = host === 'claude' ? built.claudeBase : built.codexBase;
@@ -142,13 +172,33 @@ export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
 
   for (const host of ['claude', 'codex']) {
     const base = host === 'claude' ? built.claudeBase : built.codexBase;
-    plans.push(plan(`${host}:repository-root`, host, base, conflictPairs, { scenario: 'repository root', selected_profile: 'standard', budget_class: 'always-on' }));
-    plans.push(plan(`${host}:deepest-source`, host, base, conflictPairs, { scenario: 'deepest representative source directory; no generated nested root', budget_class: 'always-on' }));
-    const frontend = host === 'claude' ? [...base, built.claudeContexts.get('web-ui'), built.claudeContexts.get('typescript-react')] : base;
-    plans.push(plan(`${host}:frontend-path`, host, frontend, conflictPairs, { scenario: 'frontend path' }));
-    const backend = host === 'claude' ? [...base, built.claudeContexts.get('backend-api')] : base;
-    plans.push(plan(`${host}:backend-path`, host, backend, conflictPairs, { scenario: 'backend path' }));
-    plans.push(plan(`${host}:migration-path`, host, base, conflictPairs, { scenario: 'migration path; task detail remains on demand', budget_class: 'always-on' }));
+    plans.push(plan(`${host}:repository-root`, host, base, conflictPairs, codexHostCap, { scenario: 'repository root; Codex includes all selected contexts', selected_profile: 'standard', budget_class: 'always-on', ...(host === 'codex' ? selectedCodexContexts : {}) }));
+    if (host === 'codex') plans.push(plan('codex:contexts:none', host, built.codexEmptyBase, conflictPairs, codexHostCap, { scenario: 'repository root with no selected contexts', selected_profile: 'standard', selected_contexts: [], budget_class: 'always-on' }));
+    plans.push(plan(`${host}:deepest-source`, host, base, conflictPairs, codexHostCap, { scenario: 'deepest representative source directory; no generated nested root', budget_class: 'always-on' }));
+    const frontendContexts = ['web-ui', 'typescript-react'];
+    const frontend = host === 'claude'
+      ? [...base, ...frontendContexts.map((name) => built.claudeContexts.get(name))]
+      : built.codexContexts(frontendContexts);
+    plans.push(plan(`${host}:frontend-path`, host, frontend, conflictPairs, codexHostCap, {
+      scenario: 'frontend path with compact UI obligation and optional-reference pointers', budget_class: 'routed',
+      routed_reference_reads: [],
+      selected_contexts: frontendContexts,
+      optional_reference_candidates: ['contexts/web-ui.md', 'contexts/typescript-react.md'],
+    }));
+    const backendContexts = ['backend-api'];
+    const backend = host === 'claude'
+      ? [...base, ...backendContexts.map((name) => built.claudeContexts.get(name))]
+      : built.codexContexts(backendContexts);
+    plans.push(plan(`${host}:backend-path`, host, backend, conflictPairs, codexHostCap, {
+      scenario: 'backend path with an automatically matched optional-reference pointer', budget_class: 'routed',
+      routed_reference_reads: [],
+      selected_contexts: backendContexts,
+      optional_reference_candidates: ['contexts/backend-api.md', 'quality/security.md'],
+    }));
+    plans.push(plan(`${host}:migration-path`, host, base, conflictPairs, codexHostCap, {
+      scenario: 'persistent-data migration before an optional full-reference consultation', budget_class: 'always-on',
+      optional_reference_candidates: ['contexts/database-migrations.md', 'quality/testing.md', 'quality/security.md'],
+    }));
     const [largestProfileName, largestProfileEntries] = largestProfile[host];
     for (const skillDefinition of MANIFEST.skills) {
       const skillName = skillDefinition.name;
@@ -158,30 +208,46 @@ export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
       const isClaudeReview = host === 'claude'
         && skillDefinition.claude?.context === 'fork'
         && skillDefinition.claude?.agent === 'code-reviewer';
-      if (isClaudeReview) selected.push(built.claudeReviewer);
-      plans.push(plan(`${host}:skill:${skillName}`, host, selected, conflictPairs, {
+      plans.push(plan(`${host}:skill:${skillName}`, host, selected, conflictPairs, codexHostCap, {
         scenario: host === 'claude'
-          ? `${skillName} on api/**/*.tsx with largest active profile ${largestProfileName}; all three generated path routes match${isClaudeReview ? ' and the review fork adds code-reviewer' : ''}; subsequent reference reads are excluded`
-          : `${skillName} selected with largest active profile ${largestProfileName}; on-demand skill body included`,
+          ? `${skillName} on api/**/*.tsx with largest active profile ${largestProfileName}; all three generated path pointers and one selected skill load`
+          : `${skillName} selected with largest active profile ${largestProfileName}; one selected skill body loads`,
         selected_skill: skillName,
         selected_profile: largestProfileName,
+        selected_contexts: MANIFEST.contexts.map((context) => context.name),
         skill_kind: 'canonical',
-        review_fork: isClaudeReview,
+        dispatches_review_fork: isClaudeReview,
+        budget_class: 'routed',
+        routed_reference_reads: [],
         ...(host === 'claude' ? {
           matched_path: 'api/**/*.tsx',
           dynamically_matched_contexts: [...built.claudeContexts.keys()],
-          automatic_route_sources: MANIFEST.contexts.map((context) => context.ruleSource),
-          on_demand_reference_reads_excluded: true,
+          automatic_route_sources: MANIFEST.contexts.flatMap((context) => [context.ruleSource, ...(context.obligationSource ? [context.obligationSource] : [])]),
         } : {}),
       }));
+      if (isClaudeReview) {
+        plans.push(plan(`${host}:review-fork:${skillName}`, host, [...selected, built.claudeReviewer], conflictPairs, codexHostCap, {
+          scenario: `${skillName} read-only fork with the selected skill task prompt, all possible path pointers, its agent prompt, and no parent conversation history`,
+          forked_skill: skillName,
+          selected_profile: largestProfileName,
+          skill_kind: 'review-fork',
+          review_fork: true,
+          budget_class: 'routed',
+          routed_reference_reads: [],
+        }));
+      }
     }
     for (const profileName of activeProfileNames.filter((name) => name !== 'standard')) {
-      plans.push(plan(`${host}:profile:${profileName}`, host, profileEntries[host].get(profileName), conflictPairs, { scenario: `${profileName} profile selected`, selected_profile: profileName, budget_class: 'always-on' }));
+      plans.push(plan(`${host}:profile:${profileName}`, host, profileEntries[host].get(profileName), conflictPairs, codexHostCap, { scenario: `${profileName} profile selected`, selected_profile: profileName, budget_class: 'always-on', ...(host === 'codex' ? selectedCodexContexts : {}) }));
     }
   }
   for (const overlay of modelsDoc.overlays ?? []) {
     const entries = overlay.host === 'claude' ? built.claudeBase : built.codexBase;
-    plans.push(plan(`${overlay.host}:model:${overlay.id}`, overlay.host, entries, conflictPairs, { scenario: `${overlay.id} compatibility record`, model_overlay: overlay.id, overlay_prompt_bytes: 0, budget_class: 'always-on' }));
+    plans.push(plan(`${overlay.host}:model:${overlay.id}`, overlay.host, entries, conflictPairs, codexHostCap, {
+      scenario: `${overlay.id} compatibility record`, model_overlay: overlay.id,
+      evaluation_model: overlay.evaluation_model, evaluation_effort: overlay.evaluation_effort,
+      overlay_prompt_bytes: 0, budget_class: 'always-on',
+    }));
   }
 
   const skillMetrics = {};
@@ -204,22 +270,64 @@ export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
     const profile = await artifact(path.join(distributionRoot, 'codex'), `agent-rules/profiles/${name}.md`, `profiles/${name}.md`);
     profileMetrics[name] = metrics([profile]);
   }
+  const largestSkillName = Object.entries(skillMetrics)
+    .sort((left, right) => right[1].bytes - left[1].bytes || left[0].localeCompare(right[0]))[0][0];
+  const optionalReferenceCumulative = [];
+  for (const host of ['claude', 'codex']) {
+    const optionalReferences = await Promise.all(MANIFEST.reference.map((source) => built.reference(host, source)));
+    const pointers = host === 'claude' ? [...built.claudeContexts.values()] : [];
+    const [profileName, largestProfileBase] = largestProfile[host];
+    const profileBase = host === 'codex'
+      ? await selectedProfileEntries(host, built.codexContexts(MANIFEST.contexts.map((context) => context.name)), distributionRoot, profileName)
+      : largestProfileBase;
+    const selectedSkill = await built.skill(host, largestSkillName);
+    optionalReferenceCumulative.push(plan(`${host}:all-optional-references`, host,
+      [...profileBase, ...pointers, selectedSkill, ...optionalReferences], conflictPairs, codexHostCap, {
+        scenario: `largest profile, all matching pointers, largest skill, and every optional full reference consulted`,
+        selected_profile: profileName,
+        selected_skill: largestSkillName,
+        budget_class: 'measured-optional-cumulative',
+        full_reference_reads: optionalReferences.map((entry) => entry.generated),
+        host_cap_bytes: null,
+        omitted_due_to_host_cap: [],
+      }));
+  }
+  {
+    const optionalReferences = await Promise.all(MANIFEST.reference.map((source) => built.reference('claude', source)));
+    const [profileName, profileBase] = largestProfile.claude;
+    const largestReviewSkillName = reviewSkillNames
+      .sort((left, right) => skillMetrics[right].bytes - skillMetrics[left].bytes || left.localeCompare(right))[0];
+    const reviewSkill = await built.skill('claude', largestReviewSkillName);
+    optionalReferenceCumulative.push(plan('claude:review-fork:all-optional-references', 'claude',
+      [...profileBase, ...built.claudeContexts.values(), reviewSkill, built.claudeReviewer, ...optionalReferences], conflictPairs, codexHostCap, {
+        scenario: 'read-only review fork with its selected skill, all possible path pointers, agent prompt, and every optional full reference consulted',
+        selected_profile: profileName,
+        selected_skill: largestReviewSkillName,
+        budget_class: 'measured-optional-cumulative',
+        full_reference_reads: optionalReferences.map((entry) => entry.generated),
+      }));
+  }
 
   return {
-    schema_version: 4,
+    schema_version: 5,
     budgets: BUDGETS,
     skill_catalog_intrinsic_format: 'name\\tdescription\\trepository-relative-path',
     skill_catalog_intrinsic_characters: catalogIntrinsicCharacters,
     skill_catalog_representative_target_root: '/workspace/project',
     skill_catalog_representative_characters: catalogRepresentativeCharacters,
+    skill_catalog_representative_estimated_tokens: Math.ceil(Buffer.byteLength(representativeCatalogEntries.join('\n'), 'utf8') / ESTIMATED_TOKEN_BYTES),
     skill_catalog_measurement: 'intrinsic excludes the variable target-root prefix; representative uses /workspace/project; both exclude skills supplied by other scopes',
     profile_inventory: { active: activeProfileNames, manifest: activeProfileNames },
     skill_inventory: { canonical: canonicalSkillNames, all: canonicalSkillNames, review_forks: reviewSkillNames },
-    model_inventory: (modelsDoc.overlays ?? []).map((overlay) => ({ id: overlay.id, host: overlay.host })),
+    model_inventory: (modelsDoc.overlays ?? []).map((overlay) => ({
+      id: overlay.id, host: overlay.host,
+      evaluation_model: overlay.evaluation_model, evaluation_effort: overlay.evaluation_effort,
+    })),
     context_routes: MANIFEST.contexts.map((context) => ({
       name: context.name,
       source: context.source,
       rule_source: context.ruleSource,
+      obligation_source: context.obligationSource ?? null,
       references: context.references,
       generated: `.claude/rules/${context.rule}`,
     })),
@@ -227,6 +335,8 @@ export async function analyzeRuntimeLoads(distributionRoot = committedDist) {
     profiles: profileMetrics,
     skills: skillMetrics,
     plans,
+    optional_reference_inventory: MANIFEST.reference,
+    optional_reference_cumulative: optionalReferenceCumulative,
   };
 }
 
@@ -234,7 +344,7 @@ export function runtimeLoadErrors(report) {
   const errors = [];
   const sameMembers = (actual, expected) => actual.length === expected.length
     && [...actual].sort().every((value, index) => value === [...expected].sort()[index]);
-  if (report.schema_version !== 4) errors.push(`runtime report schema_version must be 4, found ${report.schema_version}`);
+  if (report.schema_version !== 5) errors.push(`runtime report schema_version must be 5, found ${report.schema_version}`);
   const activeProfiles = report.profile_inventory?.active ?? [];
   const manifestProfiles = report.profile_inventory?.manifest ?? [];
   if (!sameMembers(activeProfiles, EXPECTED_PROFILES)) errors.push(`active profiles must be exactly ${EXPECTED_PROFILES.join(', ')}`);
@@ -242,7 +352,7 @@ export function runtimeLoadErrors(report) {
   const canonicalSkills = report.skill_inventory?.canonical ?? [];
   const allSkills = report.skill_inventory?.all ?? [];
   const reviewSkills = report.skill_inventory?.review_forks ?? [];
-  if (canonicalSkills.length !== 10 || new Set(canonicalSkills).size !== 10) errors.push(`skill inventory must contain exactly 10 unique canonical skills, found ${canonicalSkills.length}`);
+  if (!canonicalSkills.length || new Set(canonicalSkills).size !== canonicalSkills.length) errors.push('skill inventory must contain unique canonical skills');
   if (!sameMembers(allSkills, canonicalSkills)) errors.push('every public skill must be canonical');
   if (new Set(reviewSkills).size !== reviewSkills.length || reviewSkills.some((name) => !allSkills.includes(name))) errors.push('review-fork skill inventory must contain unique public skill names');
 
@@ -251,6 +361,8 @@ export function runtimeLoadErrors(report) {
   if (new Set(contextNames).size !== contextNames.length) errors.push('runtime context route names must be unique');
   for (const context of contextRoutes) {
     if (!context.rule_source || !context.generated || !(context.references?.length)) errors.push(`runtime context route ${context.name ?? '(missing)'} lacks source, generated, or reference attribution`);
+    const declared = MANIFEST.contexts.find((candidate) => candidate.name === context.name);
+    if ((context.obligation_source ?? null) !== (declared?.obligationSource ?? null)) errors.push(`runtime context route ${context.name ?? '(missing)'} has incorrect compact obligation attribution`);
   }
 
   for (const [name, measured] of Object.entries(report.profiles)) {
@@ -267,8 +379,14 @@ export function runtimeLoadErrors(report) {
     if (plan.duplicate_directive_ids.length) errors.push(`${plan.id} repeats directives: ${plan.duplicate_directive_ids.join(', ')}`);
     if (plan.contradictory_directive_pairs.length) errors.push(`${plan.id} loads declared conflicts: ${JSON.stringify(plan.contradictory_directive_pairs)}`);
     if (plan.omitted_due_to_host_cap.length) errors.push(`${plan.id} exceeds the host cap and omits instructions`);
-    if (plan.budget_class === 'always-on' && plan.estimated_tokens > BUDGETS.always_on_estimated_tokens) errors.push(`${plan.id} estimates ${plan.estimated_tokens} always-on tokens; budget is ${BUDGETS.always_on_estimated_tokens}`);
-    if (plan.selected_skill && plan.estimated_tokens > BUDGETS.kernel_profile_skill_estimated_tokens) errors.push(`${plan.id} estimates ${plan.estimated_tokens} tokens; combined budget is ${BUDGETS.kernel_profile_skill_estimated_tokens}`);
+    const automaticTokens = plan.estimated_tokens + (report.skill_catalog_representative_estimated_tokens ?? 0);
+    if (plan.budget_class === 'always-on' && automaticTokens > BUDGETS.always_on_estimated_tokens) errors.push(`${plan.id} plus the representative skill catalog estimates ${automaticTokens} automatic tokens; budget is ${BUDGETS.always_on_estimated_tokens}`);
+    if (plan.budget_class === 'routed' && automaticTokens > BUDGETS.routed_load_estimated_tokens) errors.push(`${plan.id} plus the representative skill catalog estimates ${automaticTokens} automatic-and-one-skill tokens; budget is ${BUDGETS.routed_load_estimated_tokens}`);
+    if (plan.budget_class === 'routed' && !Array.isArray(plan.routed_reference_reads)) errors.push(`${plan.id} must enumerate routed reference reads`);
+    for (const source of plan.optional_reference_candidates ?? []) {
+      if (!(report.optional_reference_inventory ?? []).includes(source)) errors.push(`${plan.id} names unknown optional reference ${source}`);
+      if (plan.ordered_source_files.includes(source)) errors.push(`${plan.id} includes optional full reference ${source} in its automatic load`);
+    }
   }
   for (const host of ['claude', 'codex']) {
     const skillPlans = report.plans.filter((candidate) => candidate.host === host && candidate.selected_skill);
@@ -279,12 +397,13 @@ export function runtimeLoadErrors(report) {
       if (skillPlan.selected_profile !== report.largest_skill_profile?.[host]?.name) errors.push(`${skillPlan.id} does not use the largest active ${host} profile`);
       if (host === 'claude') {
         if (!sameMembers(skillPlan.dynamically_matched_contexts ?? [], contextNames)) errors.push(`${skillPlan.id} does not model every dynamically matchable Claude route`);
-        if (!sameMembers(skillPlan.automatic_route_sources ?? [], contextRoutes.map((context) => context.rule_source))) errors.push(`${skillPlan.id} does not attribute every automatic Claude route source`);
-        if (skillPlan.on_demand_reference_reads_excluded !== true) errors.push(`${skillPlan.id} must state that subsequent on-demand reference reads are excluded`);
+        const automaticRouteSources = contextRoutes.flatMap((context) => [context.rule_source, ...(context.obligation_source ? [context.obligation_source] : [])]);
+        if (!sameMembers(skillPlan.automatic_route_sources ?? [], automaticRouteSources)) errors.push(`${skillPlan.id} does not attribute every automatic Claude route source`);
         for (const context of contextRoutes) if (!skillPlan.ordered_source_files.includes(context.rule_source)) errors.push(`${skillPlan.id} omits automatic route source ${context.rule_source}`);
+        for (const context of contextRoutes.filter((candidate) => candidate.obligation_source)) if (!skillPlan.ordered_source_files.includes(context.obligation_source)) errors.push(`${skillPlan.id} omits compact obligation source ${context.obligation_source}`);
         const expectsReviewer = reviewSkills.includes(skillPlan.selected_skill);
-        if (skillPlan.review_fork !== expectsReviewer) errors.push(`${skillPlan.id} review-fork metadata does not match the skill manifest`);
-        if (skillPlan.ordered_generated_files.includes('.claude/agents/code-reviewer.md') !== expectsReviewer) errors.push(`${skillPlan.id} reviewer prompt inclusion does not match the skill manifest`);
+        if (skillPlan.dispatches_review_fork !== expectsReviewer) errors.push(`${skillPlan.id} review-fork dispatch metadata does not match the skill manifest`);
+        if (skillPlan.ordered_generated_files.includes('.claude/agents/code-reviewer.md')) errors.push(`${skillPlan.id} mixes a separate review-fork prompt into the parent load`);
       }
     }
     const dedicatedProfilePlans = new Map(activeProfiles.map((profile) => [profile,
@@ -292,18 +411,51 @@ export function runtimeLoadErrors(report) {
         && candidate.selected_profile === profile
         && (candidate.id === `${host}:repository-root` || candidate.id === `${host}:profile:${profile}`)),
     ]));
-    for (const [profile, matches] of dedicatedProfilePlans) if (matches.length !== 1) errors.push(`${host} active profile ${profile} must have exactly one dedicated runtime plan`);
+    for (const [profile, matches] of dedicatedProfilePlans) {
+      if (matches.length !== 1) errors.push(`${host} active profile ${profile} must have exactly one dedicated runtime plan`);
+      if (host !== 'codex' || matches.length !== 1) continue;
+      const selectedRoot = matches[0];
+      if (selectedRoot.budget_class !== 'always-on') errors.push(`${selectedRoot.id} must count selected Codex context content as always-on`);
+      if (!sameMembers(selectedRoot.selected_contexts ?? [], contextNames)) errors.push(`${selectedRoot.id} must include all selected Codex contexts`);
+      for (const route of contextRoutes.filter((context) => context.obligation_source)) {
+        if (!selectedRoot.ordered_source_files.includes(route.obligation_source)) errors.push(`${selectedRoot.id} omits selected Codex obligation source ${route.obligation_source}`);
+      }
+    }
   }
-  const modelPlans = report.plans.filter((candidate) => candidate.model_overlay).map((candidate) => ({ id: candidate.model_overlay, host: candidate.host }));
+  const reviewForkPlans = report.plans.filter((candidate) => candidate.forked_skill);
+  if (!sameMembers(reviewForkPlans.map((candidate) => candidate.forked_skill), reviewSkills)) errors.push('Claude review-fork plans must cover every review-fork skill exactly once');
+  for (const forkPlan of reviewForkPlans) {
+    if (forkPlan.host !== 'claude' || forkPlan.skill_kind !== 'review-fork' || forkPlan.review_fork !== true) errors.push(`${forkPlan.id} has invalid review-fork metadata`);
+    if (forkPlan.selected_profile !== report.largest_skill_profile?.claude?.name) errors.push(`${forkPlan.id} does not use the largest active Claude profile`);
+    if (!forkPlan.ordered_generated_files.includes(`.claude/skills/${forkPlan.forked_skill}/SKILL.md`)) errors.push(`${forkPlan.id} omits its selected skill task prompt`);
+    for (const context of contextRoutes) if (!forkPlan.ordered_source_files.includes(context.rule_source)) errors.push(`${forkPlan.id} omits possible automatic route pointer ${context.rule_source}`);
+    if (!forkPlan.ordered_generated_files.includes('.claude/agents/code-reviewer.md')) errors.push(`${forkPlan.id} omits the review-fork prompt`);
+  }
+  const expectedFullReferences = (report.optional_reference_inventory ?? []).map((source) => `agent-rules/reference/${path.posix.basename(source)}`);
+  const cumulative = report.optional_reference_cumulative ?? [];
+  if (cumulative.length !== 3) errors.push('runtime report must measure Codex, Claude, and Claude review-fork cumulative optional reference loads');
+  for (const item of cumulative) {
+    if (item.budget_class !== 'measured-optional-cumulative') errors.push(`${item.id} must identify its optional cumulative measurement class`);
+    if (!sameMembers(item.full_reference_reads ?? [], expectedFullReferences)) errors.push(`${item.id} does not account for every optional full reference`);
+  }
+  const cumulativeFork = cumulative.find((item) => item.id === 'claude:review-fork:all-optional-references');
+  if (cumulativeFork) {
+    if (!reviewSkills.includes(cumulativeFork.selected_skill)) errors.push('Claude review-fork cumulative measurement must include a review-fork skill task prompt');
+    if (!cumulativeFork.ordered_generated_files.includes(`.claude/skills/${cumulativeFork.selected_skill}/SKILL.md`)) errors.push('Claude review-fork cumulative measurement omits its selected skill task prompt');
+    for (const context of contextRoutes) if (!cumulativeFork.ordered_source_files.includes(context.rule_source)) errors.push(`Claude review-fork cumulative measurement omits possible automatic route pointer ${context.rule_source}`);
+  }
+  const modelPlans = report.plans.filter((candidate) => candidate.model_overlay).map((candidate) => ({
+    id: candidate.model_overlay, host: candidate.host,
+    evaluation_model: candidate.evaluation_model, evaluation_effort: candidate.evaluation_effort,
+  }));
   const expectedModelPlans = report.model_inventory ?? [];
   for (const model of expectedModelPlans) if (!['claude', 'codex'].includes(model.host)) errors.push(`model overlay ${model.id} names unsupported runtime host ${model.host}`);
   if (modelPlans.length !== expectedModelPlans.length
-    || !expectedModelPlans.every((expected) => modelPlans.filter((actual) => actual.id === expected.id && actual.host === expected.host).length === 1)) {
+    || !expectedModelPlans.every((expected) => modelPlans.filter((actual) => JSON.stringify(actual) === JSON.stringify(expected)).length === 1)) {
     errors.push('runtime model plans must cover every compatibility overlay exactly once on its declared host');
   }
-  const derivedPlanCount = (2 * (5 + allSkills.length + activeProfiles.length - 1)) + expectedModelPlans.length;
-  if (derivedPlanCount !== EXPECTED_RUNTIME_PLAN_COUNT) errors.push(`runtime inventory derives ${derivedPlanCount} plans; the canonical inventory requires ${EXPECTED_RUNTIME_PLAN_COUNT}`);
-  if (report.plans.length !== EXPECTED_RUNTIME_PLAN_COUNT) errors.push(`runtime report has ${report.plans.length} plans; exact canonical coverage requires ${EXPECTED_RUNTIME_PLAN_COUNT}`);
+  const derivedPlanCount = (2 * (5 + allSkills.length + activeProfiles.length - 1)) + expectedModelPlans.length + reviewSkills.length + 1;
+  if (report.plans.length !== derivedPlanCount) errors.push(`runtime report has ${report.plans.length} plans; inventory derives ${derivedPlanCount}`);
   return errors;
 }
 
@@ -316,6 +468,7 @@ if (invokedDirectly) {
       for (const item of report.plans) console.log(`${item.id.padEnd(38)} ${String(item.physical_lines).padStart(4)} lines ${String(item.bytes).padStart(6)} bytes ~${String(item.estimated_tokens).padStart(4)} tokens`);
       console.log(`intrinsic skill catalog: ${report.skill_catalog_intrinsic_characters}/${BUDGETS.skill_catalog_intrinsic_characters} characters`);
       console.log(`representative skill catalog (${report.skill_catalog_representative_target_root}): ${report.skill_catalog_representative_characters}/${BUDGETS.skill_catalog_representative_characters} characters`);
+      for (const item of report.optional_reference_cumulative) console.log(`${item.id.padEnd(38)} ${String(item.physical_lines).padStart(4)} lines ${String(item.bytes).padStart(6)} bytes ~${String(item.estimated_tokens).padStart(4)} optional cumulative tokens`);
     }
     if (errors.length) {
       console.error(`FAIL (${errors.length})`);

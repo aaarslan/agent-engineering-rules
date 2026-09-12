@@ -12,7 +12,7 @@ Extends [security](security.md) and [boundaries](boundaries.md) with server spec
 
 - Use parameterized queries, always.
 - Wrap multi-write operations that must stay consistent in a transaction. Ask of every handler: if this dies halfway, is stored state still valid?
-- Avoid N+1 queries and unbounded responses: batch or join, paginate every list endpoint. See [performance](performance.md).
+- Bound resource use according to data volume and the endpoint contract; address measured N+1 behavior through batching or joins. Add pagination when the contract and scale warrant it, not to bounded finite lists by habit. See [performance](performance.md).
 
 ## External calls
 

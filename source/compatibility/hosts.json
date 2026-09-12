@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "reviewed": "2026-08-29",
-  "revalidate_after": "2026-11-29",
+  "reviewed": "2026-09-12",
+  "revalidate_after": "2026-12-12",
   "supported_hosts": {
     "claude": {
       "instruction_entry": "CLAUDE.md",
@@ -12,15 +12,16 @@
       ],
       "path_scoped": ".claude/rules/context-*.md",
       "skills": ".claude/skills/<name>/SKILL.md",
-      "protected_native_entrypoints": ["security-review", "verify"],
+      "protected_native_entrypoints": [
+        "security-review",
+        "verify"
+      ],
       "root_install_strategy": "managed-block",
       "hard_policy_delivery": "consumer-owned",
       "sources": [
         "https://code.claude.com/docs/en/memory",
-        "https://code.claude.com/docs/en/slash-commands",
-        "https://code.claude.com/docs/en/commands",
-        "https://code.claude.com/docs/en/plugins",
-        "https://code.claude.com/docs/en/plugins-reference"
+        "https://code.claude.com/docs/en/skills",
+        "https://code.claude.com/docs/en/sub-agents"
       ]
     },
     "codex": {
@@ -34,11 +35,7 @@
       "sources": [
         "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
         "https://learn.chatgpt.com/docs/build-skills",
-        "https://learn.chatgpt.com/docs/agent-configuration/rules",
-        "https://learn.chatgpt.com/docs/hooks",
-        "https://learn.chatgpt.com/docs/plugins",
-        "https://developers.openai.com/plugins/build/plugins",
-        "https://learn.chatgpt.com/docs/security"
+        "https://learn.chatgpt.com/docs/agent-configuration/subagents"
       ]
     }
   },
@@ -47,5 +44,5 @@
     "gemini": "Not supported until discovery, policy, installation, and load-plan fixtures exist.",
     "cursor": "Not supported until discovery, policy, installation, and load-plan fixtures exist."
   },
-  "plugin_policy": "Repository marketplaces do not provide the cross-host root-instruction composition and ownership contract required here. The project-local CLI is canonical; a skills-only plugin remains an optional future channel."
+  "plugin_policy": "V5 supports project-local CLI installation; plugin delivery is outside this release."
 }

@@ -54,11 +54,12 @@
       "task_class": "verification",
       "prompt": "Prove a completed behavior when one relevant check is unavailable and a performance claim is proposed.",
       "failure_class": "mock overclaim, failed-check greenlighting, redundant testing, or unsupported assurance claims",
-      "directive_ids": ["AE-18", "AE-19", "AE-20", "AE-21", "AE-22"],
+      "directive_ids": ["AE-18", "AE-19", "AE-20", "AE-21", "AE-22", "AE-26"],
       "assertions": [
         "Evidence is sufficient for the changed contract and risk without a generic review ritual.",
         "Mocks are not presented as proof of production wiring and unavailable checks remain unresolved.",
-        "Checks are decisive and proportionate, while performance and approval-like claims use measurement or authoritative substantiation as applicable."
+        "Checks are decisive and proportionate, while performance and approval-like claims use measurement or authoritative substantiation as applicable.",
+        "Completion follows the observed requested behavior and final repository state, with limitations reported without a required message format."
       ]
     },
     {

@@ -7,8 +7,8 @@
       "directive_ids": ["AE-03"],
       "concern": "external-cost-destructive-and-irreversible-authority",
       "mechanisms": {
-        "claude": ["permissions", "PreToolUse hooks", "managed settings"],
-        "codex": ["approval policy", "sandbox", "hooks", "managed rules"]
+        "claude": ["permissions", "managed settings"],
+        "codex": ["approval policy", "sandbox", "managed rules"]
       }
     },
     {
@@ -23,7 +23,7 @@
       "directive_ids": ["AE-15", "AE-23"],
       "concern": "secrets-sensitive-files-and-security-boundaries",
       "mechanisms": {
-        "claude": ["permissions", "PreToolUse hooks", "secret scanning", "protected paths", "CI"],
+        "claude": ["permissions", "secret scanning", "protected paths", "CI"],
         "codex": ["sandbox", "approval policy", "managed deny rules", "secret scanning", "protected paths", "CI"]
       }
     },
