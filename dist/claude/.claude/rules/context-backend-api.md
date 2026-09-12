@@ -10,4 +10,4 @@ paths:
 
 # Backend and API Route
 
-Before changing a matching API or server file, read `agent-rules/reference/backend-api.md` and load `agent-rules/reference/security.md` when a trust boundary is implicated.
+For uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/backend-api.md` for server/API boundaries, or `agent-rules/reference/security.md` for trust/data protection.

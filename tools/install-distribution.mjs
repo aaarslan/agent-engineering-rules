@@ -9,7 +9,9 @@ import { hostname } from 'node:os';
 import path from 'node:path';
 import { TextDecoder } from 'node:util';
 import { fileURLToPath } from 'node:url';
-import { MANIFEST, contextManifestErrors, contextRuleSourcePathErrors } from './build-distributions.mjs';
+import {
+  MANIFEST, contextManifestErrors, contextRuleSourcePathErrors, runtimePayloadPaths,
+} from './manifest.mjs';
 
 export const STATE_FILE = '.agent-engineering-rules-state.json';
 export const STATE_SCHEMA_VERSION = 3;
@@ -35,6 +37,7 @@ export const RETIRED_MANAGED_PATHS = Object.freeze({
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_DISTRIBUTION_ROOT = path.join(repo, 'dist');
+const RUNTIME_PAYLOAD = Object.freeze(runtimePayloadPaths(MANIFEST));
 const HOST_ORDER = ['claude', 'codex'];
 const HOSTS = {
   claude: { directory: 'claude', root: 'CLAUDE.md' },
@@ -655,6 +658,7 @@ async function recognizedManagedPaths(distributionRoot, retiredManagedPaths = RE
   const retired = validateRetiredManagedPaths(retiredManagedPaths);
   for (const host of HOST_ORDER) {
     for (const file of retired[host]) result.get(host).add(file);
+    for (const { destination } of RUNTIME_PAYLOAD) result.get(host).add(destination);
   }
   for (const host of HOST_ORDER) {
     const hostRoot = path.join(distributionRoot, HOSTS[host].directory);
@@ -666,6 +670,18 @@ async function recognizedManagedPaths(distributionRoot, retiredManagedPaths = RE
     }
   }
   return result;
+}
+
+async function runtimePayloadFiles(runtimeRoot = repo) {
+  const files = new Map();
+  for (const { source, destination } of RUNTIME_PAYLOAD) {
+    try {
+      files.set(destination, await readFile(inside(runtimeRoot, source)));
+    } catch (error) {
+      throw new InstallError('DISTRIBUTION', `package is missing runtime module ${source}: ${error.message}`);
+    }
+  }
+  return files;
 }
 
 function validateRecognizedStatePaths(state, recognized) {
@@ -728,7 +744,7 @@ function replaceTrailingProfile(text, standard, selected, demote = false) {
   return `${trimmed.slice(0, trimmed.length - from.length)}${to}\n`;
 }
 
-async function prepareHost(distributionRoot, host, profile, contexts) {
+async function prepareHost(distributionRoot, host, profile, contexts, runtime) {
   const hostRoot = path.join(distributionRoot, HOSTS[host].directory);
   let info;
   try { info = await stat(hostRoot); } catch { throw new InstallError('DISTRIBUTION', `missing distribution directory: ${hostRoot}`); }
@@ -756,6 +772,7 @@ async function prepareHost(distributionRoot, host, profile, contexts) {
     }
     files.set(relative, content);
   }
+  for (const [relative, content] of runtime ?? await runtimePayloadFiles()) files.set(relative, content);
 
   let rootBody = rawRoot;
   if (host === 'codex') {
@@ -1008,11 +1025,12 @@ export async function installDistribution({
   const nextState = JSON.parse(JSON.stringify(state));
   if (!nextState.pending) nextState.pending = {};
   const prepared = new Map();
+  const runtime = await runtimePayloadFiles();
   for (const host of selected) {
     const old = state.pending?.[host] ?? state.hosts[host];
     const chosenProfile = profile ?? old?.profile ?? DEFAULT_PROFILE;
     const chosenContexts = orderedContexts(contexts ?? old?.contexts ?? []);
-    prepared.set(host, await prepareHost(distributionRoot, host, chosenProfile, chosenContexts));
+    prepared.set(host, await prepareHost(distributionRoot, host, chosenProfile, chosenContexts, runtime));
   }
 
   const codexSkillCatalogCharacters = prepared.has('codex')
@@ -1333,9 +1351,10 @@ export async function doctorDistribution({
       issue('PENDING_TRANSACTION', 'an interrupted update journal is present; rerun update');
     }
 
+    const runtime = await runtimePayloadFiles();
     for (const host of hosts) {
       const selection = state.pending?.[host] ?? state.hosts[host];
-      const desired = await prepareHost(distributionRoot, host, selection.profile, selection.contexts);
+      const desired = await prepareHost(distributionRoot, host, selection.profile, selection.contexts, runtime);
       const stableFiles = state.hosts[host]?.files ?? {};
       const desiredFiles = Object.fromEntries([...desired.files].map(([file, content]) => [file, ownershipSha256(content)]));
       if (!sameStringMap(stableFiles, desiredFiles) || state.pending?.[host]) {

@@ -11,7 +11,7 @@ Extends [types-and-state](../design/types-and-state.md) and [boundaries](../desi
 ## TypeScript
 
 - Avoid `any`. For external or untrusted data use `unknown` plus runtime validation (the repo's validator, e.g. zod) at the boundary, then typed values inward.
-- New or unconfigured projects get `"strict": true` in tsconfig (plus `noUncheckedIndexedAccess` where practical), with tests included in typechecking. A green typecheck under lenient flags is a weak gate.
+- Follow repository compiler policy; select strictness deliberately for a new TypeScript project. State relevant blind spots in the configured typecheck rather than treating a permissive pass as strong evidence.
 - Prefer discriminated unions for multi-state behavior: `{ status: 'loading' } | { status: 'error'; error: E } | { status: 'success'; data: T }`.
 - Keep API contracts type-safe: share or generate types between client and server where the repo supports it; never hand-maintain two copies of one shape.
 - Prefer `readonly` and narrow types at module boundaries; let inference work inside function bodies.

@@ -5,7 +5,7 @@ Thank you for improving Agent Engineering Rules. Contributions should be bounded
 ## Before opening a pull request
 
 1. Search existing issues and pull requests.
-2. Open an issue before a large behavioral, installer, schema, or host-support change.
+2. Agree on scope for a material behavioral, installer, schema, or host-support change; an already authorized task needs no additional issue ceremony.
 3. Keep the universal contract compact. Put task-specific detail in the relevant skill or on-demand reference.
 4. Do not add compatibility claims for an untested host.
 5. Do not represent prose as a deterministic security or enforcement boundary.
@@ -26,11 +26,7 @@ Report suspected vulnerabilities privately according to [SECURITY.md](SECURITY.m
 Use Node.js 24 or newer.
 
 ```bash
-npm test
-npm run validate
-npm run validate:research
-npm run test:packed
-npm pack --dry-run --json
+npm run release:check
 ```
 
 Research validation and the packed-install smoke test are provider-free. Do not supply provider credentials for repository validation. `npm run release:check` runs the complete release-readiness suite and is also enforced before publication.
@@ -41,7 +37,7 @@ A pull request should:
 
 - solve one coherent problem;
 - explain the user-visible effect and trust-boundary impact;
-- include or update deterministic tests for behavioral changes;
+- add or update regression coverage when stable behavior, exposure and failure cost justify it;
 - list the exact verification commands run;
 - update public documentation only when the implementation changed;
 - avoid unrelated formatting or generated-file churn; and

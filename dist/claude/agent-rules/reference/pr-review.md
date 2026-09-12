@@ -15,7 +15,7 @@ Every finding must be evidence-grounded. Producing a plausible-sounding false po
 - **Evidence**: file:line actually read, plus the reachable input or state
 - **Severity**: impact-based, not attention-based
 - **Why it matters**: the concrete user, system, security, or data consequence
-- **Suggested action**: the smallest complete correction
+- **Suggested action**: the coherent correction at the owning boundary
 - **Verification method**: how to prove the correction and prevent regression
 - **Confidence**: high, medium, or low with uncertainty stated
 
@@ -25,7 +25,7 @@ Specialist subagents extend this format per [orchestration](orchestration.md).
 
 - Correctness, security, and data-integrity issues first, per the universal contract.
 - Contract breaks: changed APIs, schemas, enums, or payloads with unupdated consumers.
-- Missing regression tests for changed behavior.
+- Missing behavioral evidence or risk-justified regression protection.
 - Real design problems: wrong layer, duplicated business rules, speculative abstraction.
 
 ## What not to report

@@ -7,7 +7,7 @@ Business rules live in one layer, close to the domain. Not scattered across UI c
 - **UI components** render and delegate. No hidden business policy in components, templates, or styles.
 - **Controllers and route handlers** validate, authorize, and orchestrate. They stay thin; they do not contain domain decisions.
 - **Domain logic** depends on nothing about transport, UI, persistence, or framework. It can be tested with plain function calls.
-- **Database queries** fetch and persist. A query may enforce an invariant, but must not be the only representation of an important business rule.
+- **Database queries** fetch and persist. Put integrity constraints at the authoritative storage boundary where appropriate; callers translate violations without duplicating the business rule.
 
 The same split holds outside web apps: CLI commands, message consumers, and interrupt or RPC entry points play the controller role.
 

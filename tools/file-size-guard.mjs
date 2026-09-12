@@ -14,12 +14,9 @@ import { lstat, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
+import { loadThresholds, requiredThreshold } from './lib/thresholds.mjs';
 
 const execFile = promisify(execFileCallback);
-const DEFAULT_THRESHOLD = 500;
-const RENOTIFY_GROWTH = 0.20;
-const DENSE_MIN_BYTES = 4096;
-const DENSE_BYTES_PER_LINE = 240;
 const SOURCE_EXTENSIONS = new Set([
   '.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs', '.mts', '.cts',
   '.py', '.go', '.rs', '.java', '.kt', '.rb', '.php', '.swift',
@@ -42,9 +39,22 @@ const GIT_COMMAND = process.platform === 'win32' ? 'git.exe' : 'git';
 
 class InputError extends Error {}
 
-function thresholdFromEnvironment() {
+async function runtimeThresholds() {
+  const document = await loadThresholds();
+  return {
+    lineThreshold: requiredThreshold(document, 'FILE_SIZE_LINE_THRESHOLD'),
+    renotifyGrowth: requiredThreshold(document, 'FILE_SIZE_RENOTIFY_GROWTH'),
+    renotifyMinLines: requiredThreshold(document, 'FILE_SIZE_RENOTIFY_MIN_LINES'),
+    denseMinBytes: requiredThreshold(document, 'FILE_SIZE_DENSE_MIN_BYTES'),
+    denseBytesPerLine: requiredThreshold(document, 'FILE_SIZE_DENSE_BYTES_PER_LINE'),
+    gitTimeoutMs: requiredThreshold(document, 'FILE_SIZE_GIT_TIMEOUT_MS'),
+    gitMaxBufferBytes: requiredThreshold(document, 'FILE_SIZE_GIT_MAX_BUFFER_BYTES'),
+  };
+}
+
+function thresholdFromEnvironment(configuredThreshold) {
   const raw = process.env.FILE_SIZE_GUARD_THRESHOLD;
-  if (raw === undefined || raw === '') return DEFAULT_THRESHOLD;
+  if (raw === undefined || raw === '') return configuredThreshold;
   if (!/^[1-9]\d*$/.test(raw)) {
     throw new InputError('FILE_SIZE_GUARD_THRESHOLD must be a positive integer');
   }
@@ -150,11 +160,11 @@ function summaryFor(results) {
   return `${status} summary checked=${counts['APPLICABLE-PASS'] + counts.ADVISORY} advisory=${counts.ADVISORY} not-applicable=${counts['NOT-APPLICABLE']} errors=${counts.ERROR} reason=${quote(reason)}`;
 }
 
-async function gitHeadLines(file) {
+async function gitHeadLines(file, thresholds) {
   const directory = path.dirname(file);
   try {
     const { stdout } = await execFile(GIT_COMMAND, ['rev-parse', '--is-inside-work-tree'], {
-      cwd: directory, encoding: 'utf8', windowsHide: true, timeout: 2_000,
+      cwd: directory, encoding: 'utf8', windowsHide: true, timeout: thresholds.gitTimeoutMs,
     });
     if (stdout.trim() !== 'true') return null;
   } catch {
@@ -162,7 +172,8 @@ async function gitHeadLines(file) {
   }
   try {
     const { stdout } = await execFile(GIT_COMMAND, ['show', `HEAD:./${path.basename(file)}`], {
-      cwd: directory, encoding: 'buffer', windowsHide: true, timeout: 2_000, maxBuffer: 32 * 1024 * 1024,
+      cwd: directory, encoding: 'buffer', windowsHide: true,
+      timeout: thresholds.gitTimeoutMs, maxBuffer: thresholds.gitMaxBufferBytes,
     });
     return physicalLines(stdout.toString('utf8'));
   } catch {
@@ -195,7 +206,7 @@ async function saveState(file, state) {
   }
 }
 
-async function inspectFile(file, { threshold, hook, stateContext, scopeRoot, newFile = false }) {
+async function inspectFile(file, { threshold, thresholds, hook, stateContext, scopeRoot, newFile = false }) {
   const absolute = path.resolve(file);
   const shown = displayPath(absolute);
   let information;
@@ -228,7 +239,7 @@ async function inspectFile(file, { threshold, hook, stateContext, scopeRoot, new
   if (generated) return { status: 'NOT-APPLICABLE', file: shown, reason: generated };
 
   const metrics = metricsFor(text);
-  let baseline = newFile ? 0 : await gitHeadLines(absolute);
+  let baseline = newFile ? 0 : await gitHeadLines(absolute, thresholds);
   const key = absolute.split(path.sep).join('/');
   let stateChanged = false;
   if (hook && newFile && stateContext.state.seen[key] === undefined) {
@@ -246,14 +257,18 @@ async function inspectFile(file, { threshold, hook, stateContext, scopeRoot, new
   }
 
   const overLines = metrics.lines > threshold;
-  const dense = metrics.bytes >= DENSE_MIN_BYTES && metrics.bytesPerLine >= DENSE_BYTES_PER_LINE;
+  const dense = metrics.bytes >= thresholds.denseMinBytes
+    && metrics.bytesPerLine >= thresholds.denseBytesPerLine;
   const reasons = [];
   if (overLines) {
     if (baseline === null) {
       reasons.push(`current size exceeds the ${threshold}-line advisory threshold; no Git baseline is available`);
     } else if (baseline <= threshold) {
       reasons.push(`grew from ${baseline} to ${metrics.lines} lines, crossing the ${threshold}-line advisory threshold`);
-    } else if (metrics.lines - baseline >= Math.max(100, Math.ceil(baseline * RENOTIFY_GROWTH))) {
+    } else if (metrics.lines - baseline >= Math.max(
+      thresholds.renotifyMinLines,
+      Math.ceil(baseline * thresholds.renotifyGrowth),
+    )) {
       reasons.push(`was ${baseline} lines at Git HEAD and grew to ${metrics.lines} lines`);
     }
   }
@@ -267,8 +282,9 @@ async function inspectFile(file, { threshold, hook, stateContext, scopeRoot, new
       stateChanged = true;
     }
     if (stateChanged) await saveState(stateContext.file, stateContext.state);
+    const growthPercent = Math.round(thresholds.renotifyGrowth * 100);
     const reason = overLines && baseline !== null && baseline > threshold
-      ? `pre-existing large file has not grown by max(100 lines, 20%) from its ${baseline}-line Git baseline`
+      ? `pre-existing large file has not grown by max(${thresholds.renotifyMinLines} lines, ${growthPercent}%) from its ${baseline}-line Git baseline`
       : 'physical size and formatting-resistant density signals are below advisory conditions';
     return { status: 'APPLICABLE-PASS', file: shown, reason, metrics, baseline };
   }
@@ -277,13 +293,13 @@ async function inspectFile(file, { threshold, hook, stateContext, scopeRoot, new
   if (hook) {
     const previous = stateContext.state.nagged[key];
     const renotify = previous === undefined
-      || metrics.lines >= Math.ceil(previous.lines * (1 + RENOTIFY_GROWTH))
-      || metrics.bytes >= Math.ceil(previous.bytes * (1 + RENOTIFY_GROWTH));
+      || metrics.lines >= Math.ceil(previous.lines * (1 + thresholds.renotifyGrowth))
+      || metrics.bytes >= Math.ceil(previous.bytes * (1 + thresholds.renotifyGrowth));
     if (renotify) {
       stateContext.state.nagged[key] = { lines: metrics.lines, bytes: metrics.bytes };
       stateChanged = true;
     } else {
-      notification = 'suppressed-until-20%-growth';
+      notification = `suppressed-until-${Math.round(thresholds.renotifyGrowth * 100)}%-growth`;
     }
     if (stateChanged) await saveState(stateContext.file, stateContext.state);
   }
@@ -304,7 +320,8 @@ function parseCli(arguments_) {
   return { files };
 }
 
-function helpText() {
+function helpText(thresholds) {
+  const overrideExample = thresholds.lineThreshold + thresholds.renotifyMinLines;
   return `NOT-APPLICABLE mode=help reason="help displayed; no files were checked"
 Usage:
   node agent-rules/tools/file-size-guard.mjs --check FILE...
@@ -314,8 +331,8 @@ Canonical invocation:
   node agent-rules/tools/file-size-guard.mjs --check src/app.js src/view.tsx
 
 Alternate APIs:
-  PowerShell: $env:FILE_SIZE_GUARD_THRESHOLD='650'; node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
-  POSIX: FILE_SIZE_GUARD_THRESHOLD=650 node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
+  PowerShell: $env:FILE_SIZE_GUARD_THRESHOLD='${overrideExample}'; node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
+  POSIX: FILE_SIZE_GUARD_THRESHOLD=${overrideExample} node agent-rules/tools/file-size-guard.mjs --check src/legacy.js
 
 Results: APPLICABLE-PASS, ADVISORY, NOT-APPLICABLE with a reason, or ERROR.
 CLI exits: 0 checked (including advisory), 2 input/tool error, 3 all inputs not applicable.
@@ -323,7 +340,7 @@ With no arguments, one PostToolUse JSON object is read from stdin. Hook mode
 accepts Claude tool_input.file_path and Codex apply_patch tool_input.command,
 emits JSON context, and remains nonblocking even when hook input is malformed.
 
-The default 500-line signal is contextual, not a maintainability verdict.
+The default ${thresholds.lineThreshold}-line signal is contextual, not a maintainability verdict.
 The density signal uses authored UTF-8 bytes and an approximate four-bytes-per-
 token metric; declaration and decision counts are lexical hints, not complexity
 measurements. Generated, bundled, vendor/build, and non-source declarative files
@@ -369,7 +386,7 @@ function hookOutput(message, { modelContext = false } = {}) {
   });
 }
 
-async function runHook(raw) {
+async function runHook(raw, thresholds) {
   let payload;
   try {
     payload = JSON.parse(raw);
@@ -431,7 +448,7 @@ async function runHook(raw) {
 
   let threshold;
   try {
-    threshold = thresholdFromEnvironment();
+    threshold = thresholdFromEnvironment(thresholds.lineThreshold);
   } catch (error) {
     console.log(hookOutput(`ERROR reason=${quote(error.message)}`));
     return 0;
@@ -448,7 +465,7 @@ async function runHook(raw) {
   for (const candidate of candidates) {
     const file = path.isAbsolute(candidate.path) ? candidate.path : path.resolve(base, candidate.path);
     results.push(await inspectFile(file, {
-      threshold, hook: true, stateContext, scopeRoot: base, newFile: candidate.operation === 'add',
+      threshold, thresholds, hook: true, stateContext, scopeRoot: base, newFile: candidate.operation === 'add',
     }));
   }
   const message = [...results.map(formatResult), summaryFor(results)].join('\n');
@@ -457,7 +474,7 @@ async function runHook(raw) {
   return 0;
 }
 
-async function runCli(arguments_) {
+async function runCli(arguments_, thresholds) {
   let parsed;
   try {
     parsed = parseCli(arguments_);
@@ -466,12 +483,12 @@ async function runCli(arguments_) {
     return 2;
   }
   if (parsed.help) {
-    console.log(helpText());
+    console.log(helpText(thresholds));
     return 0;
   }
   let threshold;
   try {
-    threshold = thresholdFromEnvironment();
+    threshold = thresholdFromEnvironment(thresholds.lineThreshold);
   } catch (error) {
     console.error(`ERROR reason=${quote(error.message)}`);
     return 2;
@@ -480,7 +497,7 @@ async function runCli(arguments_) {
   const results = [];
   for (const file of parsed.files) {
     results.push(await inspectFile(file, {
-      threshold, hook: false, stateContext, scopeRoot: process.cwd(),
+      threshold, thresholds, hook: false, stateContext, scopeRoot: process.cwd(),
     }));
   }
   for (const result of results) console.log(formatResult(result));
@@ -492,13 +509,14 @@ async function runCli(arguments_) {
 
 async function main() {
   const arguments_ = process.argv.slice(2);
-  if (arguments_.length) return runCli(arguments_);
+  const thresholds = await runtimeThresholds();
+  if (arguments_.length) return runCli(arguments_, thresholds);
   if (process.stdin.isTTY) {
     console.error('ERROR reason="expected --check FILE..., --help, or PostToolUse JSON on stdin"');
     return 2;
   }
   const raw = await readStandardInput();
-  return runHook(raw);
+  return runHook(raw, thresholds);
 }
 
 main()

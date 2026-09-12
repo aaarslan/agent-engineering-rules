@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 
-import { MANIFEST } from './build-distributions.mjs';
+import { MANIFEST } from './manifest.mjs';
 import {
   contextRouteReferenceErrors,
   generatedReferencePathErrors,
@@ -12,8 +12,10 @@ import {
   orphanedSourceFiles,
   parseSourceFrontmatter,
   protectedClaudeSkillCollisions,
+  sourceBudgetErrors,
   walkSourceFiles,
 } from './validate-source.mjs';
+import { loadThresholds, requiredThreshold } from './lib/thresholds.mjs';
 
 test('manifest exposes only the greenfield canonical skills and profiles', () => {
   assert.deepEqual(MANIFEST.skills.map((skill) => skill.name), [
@@ -33,6 +35,30 @@ test('source frontmatter parsing accepts CRLF without retaining carriage returns
   assert.deepEqual(parsed.invalidRows, []);
   assert.equal(parsed.fields.get('scope'), 'always');
   assert.equal(parsed.fields.get('related'), '[testing.md]');
+});
+
+test('source budgets enforce the configured kernel line and byte ceilings', async () => {
+  const thresholds = await loadThresholds();
+  const within = '# Contract\n';
+  assert.deepEqual(sourceBudgetErrors({
+    name: 'kernel/contract.md', text: within, bytesLength: Buffer.byteLength(within),
+    isSkill: false, isTemplate: false, thresholds,
+  }), []);
+  const tooManyLines = `${Array.from({ length: thresholds.KERNEL_MAX_PHYSICAL_LINES + 1 }, () => 'x').join('\n')}\n`;
+  assert.ok(sourceBudgetErrors({
+    name: 'kernel/contract.md', text: tooManyLines, bytesLength: Buffer.byteLength(tooManyLines),
+    isSkill: false, isTemplate: false, thresholds,
+  }).some((error) => error.includes('physical lines exceeds kernel budget')));
+  assert.ok(sourceBudgetErrors({
+    name: 'kernel/contract.md', text: within, bytesLength: thresholds.KERNEL_MAX_BYTES + 1,
+    isSkill: false, isTemplate: false, thresholds,
+  }).some((error) => error.includes('bytes exceeds kernel budget')));
+});
+
+test('required thresholds fail clearly when configuration is missing or invalid', () => {
+  assert.throws(() => requiredThreshold({}, 'KERNEL_MAX_BYTES'), /thresholds\.json is missing non-negative numeric KERNEL_MAX_BYTES/);
+  assert.throws(() => requiredThreshold({ KERNEL_MAX_BYTES: '5120' }, 'KERNEL_MAX_BYTES'), /thresholds\.json is missing non-negative numeric KERNEL_MAX_BYTES/);
+  assert.throws(() => requiredThreshold({ KERNEL_MAX_BYTES: -1 }, 'KERNEL_MAX_BYTES'), /thresholds\.json is missing non-negative numeric KERNEL_MAX_BYTES/);
 });
 
 test('normalizes backslash-form repository paths before matching', () => {
@@ -106,17 +132,17 @@ test('generated reference paths must match the exact flat build destination', ()
   );
 });
 
-test('Claude routes name exactly their declared installed references and read the primary', () => {
+test('Claude routes name exactly their declared installed references as optional detail', () => {
   const context = {
     source: 'contexts/web-ui.md',
     references: ['contexts/web-ui.md', 'contexts/typescript-react.md'],
     requires: ['typescript-react'],
   };
   const sources = new Set(['contexts/web-ui.md', 'contexts/typescript-react.md']);
-  const valid = 'Read `agent-rules/reference/web-ui.md` and then `agent-rules/reference/typescript-react.md`.';
+  const valid = 'For uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/web-ui.md`, or `agent-rules/reference/typescript-react.md`.';
   assert.deepEqual(contextRouteReferenceErrors(valid, context, sources), []);
   assert.match(
-    contextRouteReferenceErrors('Read `agent-rules/reference/web-ui.md`.', context, sources).join('\n'),
+    contextRouteReferenceErrors('For uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/web-ui.md`.', context, sources).join('\n'),
     /omits declared installed full reference.*typescript-react\.md/,
   );
   assert.match(
@@ -124,8 +150,8 @@ test('Claude routes name exactly their declared installed references and read th
     /names undeclared installed reference.*security\.md/,
   );
   assert.match(
-    contextRouteReferenceErrors('Use `agent-rules/reference/web-ui.md` and `agent-rules/reference/typescript-react.md`.', context, sources).join('\n'),
-    /explicitly direct the agent to read/,
+    contextRouteReferenceErrors('Consult `agent-rules/reference/web-ui.md` and `agent-rules/reference/typescript-react.md`.', context, sources).join('\n'),
+    /limit full-reference consultation to uncertainty/,
   );
 });
 

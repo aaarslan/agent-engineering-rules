@@ -2,11 +2,11 @@
 
 # Standard Profile
 
-Use this default when behavior or stored state is expected to be maintained or extended.
+Protect maintained behavior with evidence proportional to its exposure and failure cost.
 
-- Preserve public behavior and stored-data compatibility unless the task changes them.
-- Keep changes localized but complete across affected callers, contracts, generated artifacts, and documentation.
-- Exercise the real changed flow and relevant failure path. Add targeted tests after behavior stabilizes and run applicable repository gates.
-- Run broad suites only for cross-cutting changes or repository-defined completion gates.
+- Establish the real changed flow and its material failures before expanding permanent coverage.
+- Once a durable user/caller contract stabilizes, protect meaningful end-to-end or boundary behavior; omit tests whose maintenance cost exceeds their regression value.
+- When extending production behavior, run relevant established regressions; preserve public and stored-data compatibility unless intentionally changed.
+- Use broader suites for meaningful integration risk or repository-defined gates. Reuse evidence unaffected by later changes.
 
-Report verified behavior, compatibility decisions, unavailable evidence, and remaining risk.
+Report compatibility decisions, relevant evidence, unavailable checks, and remaining risk.

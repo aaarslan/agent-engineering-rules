@@ -32,5 +32,5 @@ For any significant choice, record briefly (ADR, PR description, or design note)
 
 - [ ] Does the simplest option actually fail a real requirement?
 - [ ] Is the cost (operational, cognitive, onboarding) priced in?
-- [ ] Can this be reversed later without a rewrite?
+- [ ] Are replacement, migration, rollback, and recovery costs justified by the outcome?
 - [ ] Would a new team member understand why this exists?

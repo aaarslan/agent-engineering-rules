@@ -1,11 +1,10 @@
 # High-Assurance Profile
 
-Require traceable evidence for material risk; it does not establish compliance.
+Strong early verification protects high-consequence behavior; this profile establishes no certification.
 
-- Record requirements, assumptions, hazards, irreversible effects, and compatibility.
-- Map each to a test, inspection, or accountable check.
-- Exercise applicable migration, mixed versions, authorization, integrity, failure, recovery, and rollback or roll-forward.
-- Record a disposition for every applicable check in the traceability record; keep unresolved evidence explicit.
-- Use one independent review when material risk warrants; no verifier chains.
+- Map material requirements, hazards, assumptions, and irreversible effects to evidence or explicitly unresolved items.
+- Exercise implicated authorization, integrity, migration, mixed versions, failure, recovery, rollback or roll-forward.
+- Add durable regression protection for stable high-consequence contracts; verify risky unstable behavior early without building speculative test architecture.
+- Use independent review where it addresses a material uncertainty or required assurance. Reuse inspectable evidence; repeated commands alone add no independence.
 
-Report traceability, deviations, approvals, unavailable evidence, and residual risk. Never infer compliance or safety from the profile or checks.
+Report traceability, deviations, unavailable evidence, approvals, and residual risk.

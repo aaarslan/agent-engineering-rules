@@ -6,7 +6,7 @@ related: [../workflow/autonomous-execution.md, ../workflow/review-ledger.md, ../
 
 # Agent Orchestration
 
-Delegate only when independent workstreams reduce wall time or context pressure. A task one context can hold is faster in one context, and deterministic checks should not be repeated by a verifier agent.
+Delegate when independent workstreams reduce wall time or context pressure; do not split work whose coordination costs more than it saves. Inspect returned artifacts and evidence; rerun only to resolve a gap or invalidated result.
 
 Use an independent reviewer only for material correctness, security, integrity, compatibility, or accountable-assurance risk; an explicit high-assurance request; or a consequential conflict the coordinator cannot resolve from existing evidence. Do not spawn one for generic confidence or to repeat the coordinator's diff reading.
 
@@ -25,10 +25,9 @@ Give each specialist core plus only its concern files:
 
 ## Boundaries
 
-- Default delegation depth is one: specialists do not spawn specialists unless the user or project explicitly authorizes a deeper tree.
-- Run at most three specialists concurrently, and never more than the number of genuinely independent workstreams.
+- Follow host, user, and repository authorization for delegation depth and concurrency; never create more agents than independent useful workstreams.
 - Give each specialist a bounded deliverable, owned files, allowed tools, and a time, token, or tool-use cap when the host supports one. A specialist stops at its cap and returns partial evidence; it cannot extend its own budget.
-- Incremental external-service spend is zero by default. If spend or paid credits are authorized, set one shared cap and each specialist's allotment before work starts. Delegation never grants authority to publish or mutate shared or production systems.
+- Do not incur external-service spend without authorization. If spend or paid credits are authorized, share the approved budget across specialists. Delegation never grants authority to publish or mutate shared or production systems.
 - Use one independent review pass unless new evidence changes the risk. Do not create chains of reviewers reviewing reviewers.
 
 ## Contract

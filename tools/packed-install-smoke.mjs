@@ -33,8 +33,13 @@ const PACKAGE_ROOT_FILES = [
   'package.json',
   'tools/README.md',
   'tools/aer.mjs',
-  'tools/build-distributions.mjs',
+  'tools/aer-verify.mjs',
   'tools/install-distribution.mjs',
+  'tools/manifest.mjs',
+  'tools/contrast-check.mjs',
+  'tools/slop-scan.mjs',
+  'tools/file-size-guard.mjs',
+  'tools/lib/thresholds.mjs',
 ];
 const FORBIDDEN_PACKAGE_PATHS = [
   {
@@ -287,6 +292,8 @@ async function inspectPackManifest(report, expectedFiles, packageJson) {
     'INSTALL.md',
     'ADOPT.md',
     'tools/aer.mjs',
+    'tools/aer-verify.mjs',
+    'tools/lib/thresholds.mjs',
     'dist/claude/CLAUDE.md',
     'dist/claude/.claude/rules/core-contract.md',
     'dist/codex/AGENTS.md',

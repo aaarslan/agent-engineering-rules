@@ -4,7 +4,8 @@
 //    (catches hand-edited dist files and stale builds).
 // 2. Enforces host contracts: skill frontmatter shape, Codex AGENTS.md byte
 //    budget, no unresolved includes, no broken relative links.
-// 3. Exercises install, idempotent reinstall, and staged update behavior.
+// Installer behavior has its own npm test and packed-install gates; do not
+// repeat those suites from a structural distribution check.
 // Run: node tools/validate-distributions.mjs
 
 import { mkdtemp, readdir, readFile, rm, stat } from 'node:fs/promises';
@@ -12,7 +13,6 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MANIFEST, build } from './build-distributions.mjs';
-import { runInstallLifecycleTests } from './install-distribution.test.mjs';
 import { analyzeRuntimeLoads, runtimeLoadErrors } from './validate-runtime-loads.mjs';
 import { contextRouteReferenceErrors, generatedReferencePathErrors } from './validate-source.mjs';
 
@@ -112,14 +112,13 @@ async function main() {
   if (!/^tools: Read, Grep, Glob$/m.test(reviewer)) problem('dist/claude/.claude/agents/code-reviewer.md: read-only tool allowlist changed');
   const runtimeReport = await analyzeRuntimeLoads(dist);
   for (const error of runtimeLoadErrors(runtimeReport)) problem(`runtime load: ${error}`);
-  await runInstallLifecycleTests({ distributionRoot: dist });
 
   if (errors.length) {
     console.error(`FAIL (${errors.length})`);
     for (const e of errors) console.error(`  - ${e}`);
     process.exit(1);
   }
-  console.log(`PASS (distributions match a fresh build, satisfy host contracts, validate ${runtimeReport.plans.length} load plans, and pass install lifecycle tests)`);
+  console.log(`PASS (distributions match a fresh build, satisfy host contracts, and validate ${runtimeReport.plans.length} load plans)`);
 }
 
 main().catch((e) => { console.error(`FAIL: ${e.message}`); process.exit(1); });

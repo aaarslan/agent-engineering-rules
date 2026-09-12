@@ -1,6 +1,35 @@
 # Changelog
 
-## Unreleased
+## 5.0.0 - 2026-09-12
+
+Source corpus:
+
+- Restored the complete-and-simple engineering target, explicit normative strength and execution order, evidence-based subsystem replacement, universal security/data/operations obligations, exact contracts, and an objective completion predicate. The complete kernel has enforced physical-line and byte budgets; [the grievance map](source/evals/grievances.json) records every motivating requirement and its owner.
+- Made verification investment proportional to risk, lifespan and contract stability; preserve relevant production regressions while reusing valid evidence. Removed mandatory scanner/help rituals, duplicate verifier checks, fixed report layouts, rewrite-size aversion and repository-independent visual prescriptions.
+- Made selected web-UI interaction continuity directly visible from one shared clause, with post-action keyboard evidence covering retained focus, editing state and the next action. [The observed failure and delivery decision](docs/decisions/5.0.0-ui-interaction-delivery.md) explain the change; **no efficacy claim is made**, and the original comparison remains unchanged.
+
+Claude distribution:
+
+- Regenerated the kernel, assurance profiles, task skills and concern-specific references from one authority. Retained native project delivery and the optional read-only reviewer; no v4 hooks, runtime ledger or completion gate are installed.
+- The selected web route includes the compact interaction clause before optional detail, with expanded content counted in route and task-load budgets.
+
+Codex distribution:
+
+- Regenerated the managed root and on-demand skills without mandatory follow-on verification reading. Universal obligations remain in the compact initial contract; repository-owned instructions and profile selections remain preserved by the installer.
+- The selected web context carries that same interaction clause directly in the managed root. Deselecting the context removes its clause and pointer together; shortened index prose offsets the additional content without increasing load ceilings.
+
+Tools and validation:
+
+- Added explicit `aer verify <contrast|slop|size>` diagnostic selection with preserved result status, without project-script execution or completion certification. Extracted the shared manifest and ship runtime modules once at package root, copied through the existing ownership-safe installer.
+- Replaced dormant evaluation execution machinery with provider-free corpus, grievance and frozen-history validation. Distribution validation no longer reruns the installer suite; negative invariant tests, actual package installation and lifecycle checks protect the release boundaries.
+
+Evaluation and release decision:
+
+- **V4 is skipped and was not released.** V5 starts directly from v3.1.1; the rejected branch at `af7803f` preserves its code, decisions and evidence without merging that implementation.
+- **No efficacy claim is made.** Historical treatment bytes remain frozen, and no paid evaluation is run for this redesign; [evaluation policy](docs/evaluation.md) records limitations and future authorization/provenance requirements.
+- A subsequent user-requested, low-effort todo comparison scored v5 and v3.1.1 ten of ten exercised groups and the baseline eight; v3.1.1's reset check used a confirmation adapter. [The recorded comparison](docs/decisions/5.0.0-three-way-todo.md) is one known-task sample and does not establish v5 superiority over v3.1.1 or general efficacy.
+- Deviation: reject v4's enforcement/report runtime because its ceremony and guarantees conflict with the requirements; [decision](docs/decisions/5.0.0-review-and-plan.md#deliberate-departures).
+- Deviation: retain historical IDs, protocol constants and measurements in their original records rather than treating them as tunable thresholds; [decision](docs/decisions/5.0.0-review-and-plan.md#deliberate-departures).
 
 ## 3.1.1 - 2026-09-01
 

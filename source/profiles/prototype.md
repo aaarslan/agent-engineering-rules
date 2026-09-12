@@ -1,16 +1,16 @@
 ---
 scope: [profile]
-load_when: disposable greenfield experiments, demonstrations, or rapidly changing slices without a stable persistence or extension contract
-related: [../kernel/contract.md, ../workflow/verification.md, ../quality/testing.md]
+load_when: disposable experiments, demonstrations, single-use tools, or rapidly changing behavior without material production exposure
+related: [../kernel/contract.md, ../quality/testing.md]
 ---
 
 # Prototype Profile
 
-Deliver a coherent runnable slice quickly; avoid maintained-software ceremony that does not protect this slice.
+Prioritize a complete working vertical path with simple, replaceable parts.
 
-- Prefer replaceable code and simple boundaries. Remove starter, demo, or placeholder behavior only when the slice supersedes it; report unrelated residue.
-- Add no CI, deployment or production operations, or generalized extension systems unless requested or materially required.
-- Add tests when requested, reproducing a defect, protecting stable dense logic, or material exposure, data, or regression risk warrants durable coverage.
-- Run configured fast compile, lint, or build checks and exercise the changed real entrypoint.
+- Use direct execution, a smoke check, build, or manual flow to settle the actual uncertainty.
+- Add permanent tests only on request, for material security/privacy/financial/data risk, or when they accelerate development. A reproduced defect alone does not require durable infrastructure.
+- Avoid CI, fixtures, mocks, generalized extension systems, and production operations without a current need.
+- If real users, persisted data, or operational exposure emerge, strengthen assurance for those risks.
 
-Report the flow, checks, limitations, and deferred production work. Never claim production readiness without sufficient evidence.
+Report exercised behavior and material limitations, not test quantity.

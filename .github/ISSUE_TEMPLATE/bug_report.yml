@@ -12,7 +12,7 @@ body:
     id: version
     attributes:
       label: AER version or commit
-      placeholder: v3.1.1
+      placeholder: v5.0.0 or exact commit
     validations:
       required: true
   - type: dropdown

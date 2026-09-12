@@ -73,8 +73,9 @@ async function stageUpgradeFixtures(root, distributionRoot) {
     await writeFile(path.join(v1, host, ...sharedRetired.split('/')), '# Retired fixture\n');
     await writeFile(path.join(v2, host, ...added.split('/')), '# Added fixture\n');
     const rootFile = path.join(v2, host, rootName);
-    const upgraded = (await text(rootFile)).replace(/^# /, '# Updated ');
-    assert.notEqual(upgraded, await text(rootFile));
+    const originalRoot = await text(rootFile);
+    const upgraded = `${originalRoot.replace(/\s*$/, '')}\n\n<!-- lifecycle-v2-root -->\n`;
+    assert.notEqual(upgraded, originalRoot);
     await writeFile(rootFile, upgraded);
     const principles = path.join(v2, host, 'agent-rules', 'reference', 'principles.md');
     await writeFile(principles, `${await text(principles)}\n<!-- lifecycle-v2 -->\n`);
@@ -258,11 +259,52 @@ export async function runInstallLifecycleTests({ distributionRoot = defaultDistr
     assert.deepEqual(firstState.hosts.codex.contexts, []);
     assert.match(firstState.hosts.claude.root.sha256, /^[a-f0-9]{64}$/);
     assert.match(firstState.hosts.codex.root.sha256, /^[a-f0-9]{64}$/);
+    for (const relative of [
+      'agent-rules/tools/aer-verify.mjs',
+      'agent-rules/tools/contrast-check.mjs',
+      'agent-rules/tools/slop-scan.mjs',
+      'agent-rules/tools/file-size-guard.mjs',
+      'agent-rules/tools/lib/thresholds.mjs',
+      'agent-rules/tools/config/thresholds.json',
+    ]) {
+      assert.match(firstState.hosts.claude.files[relative], /^[a-f0-9]{64}$/);
+      assert.equal(firstState.hosts.claude.files[relative], firstState.hosts.codex.files[relative]);
+      assert.equal(await exists(path.join(host, ...relative.split('/'))), true);
+    }
     assert.equal(await exists(path.join(host, '.claude', 'rules', 'context-backend-api.md')), false, 'fresh contexts default to none');
     assert.equal((await doctorDistribution({ targetRoot: host, distributionRoot: v1 })).status, 'current');
     const firstSnapshot = await snapshot(host);
     await installDistribution({ targetRoot: host, distributionRoot: v1, hosts: ['claude', 'codex'], mode: 'update', log: false });
     assert.deepEqual(await snapshot(host), firstSnapshot, 'same-version update must be byte-idempotent');
+
+    await installDistribution({
+      targetRoot: host,
+      distributionRoot: v1,
+      hosts: ['claude', 'codex'],
+      contexts: ['web-ui'],
+      mode: 'update',
+      log: false,
+    });
+    const selectedState = JSON.parse(await text(path.join(host, STATE_FILE)));
+    assert.deepEqual(selectedState.hosts.claude.contexts, ['web-ui', 'typescript-react']);
+    assert.deepEqual(selectedState.hosts.codex.contexts, ['web-ui', 'typescript-react']);
+    assert.match(await text(path.join(host, '.claude', 'rules', 'context-web-ui.md')), /UI-01 Interaction/);
+    assert.match(await text(path.join(host, 'AGENTS.md')), /UI-01 Interaction/);
+    assert.match(await text(path.join(host, 'AGENTS.md')), /Detail: `agent-rules\/reference\/web-ui\.md`/);
+    assert.match(await text(path.join(host, 'CLAUDE.md')), /Preserve this prefix/);
+    assert.match(await text(path.join(host, 'AGENTS.md')), /Preserve this prefix/);
+    assert.equal((await doctorDistribution({ targetRoot: host, distributionRoot: v1 })).status, 'current');
+    const selectedSnapshot = await snapshot(host);
+    await installDistribution({ targetRoot: host, distributionRoot: v1, hosts: ['claude', 'codex'], contexts: ['web-ui'], mode: 'update', log: false });
+    assert.deepEqual(await snapshot(host), selectedSnapshot, 'selected context update must be byte-idempotent');
+
+    await installDistribution({ targetRoot: host, distributionRoot: v1, hosts: ['claude', 'codex'], contexts: [], mode: 'update', log: false });
+    assert.equal(await exists(path.join(host, '.claude', 'rules', 'context-web-ui.md')), false);
+    assert.doesNotMatch(await text(path.join(host, 'AGENTS.md')), /UI-01 Interaction|agent-rules\/reference\/web-ui\.md/);
+    assert.match(await text(path.join(host, 'CLAUDE.md')), /Preserve this prefix/);
+    assert.match(await text(path.join(host, 'AGENTS.md')), /Preserve this prefix/);
+    assert.equal((await doctorDistribution({ targetRoot: host, distributionRoot: v1 })).status, 'current');
+    assert.deepEqual(await snapshot(host), firstSnapshot, 'context removal must restore the prior managed inventory and preserve consumer prose');
     await assert.rejects(
       installDistribution({ targetRoot: host, distributionRoot: v1, hosts: ['codex'], mode: 'init', log: false }),
       (error) => error.code === 'ALREADY_INITIALIZED',
@@ -402,7 +444,7 @@ export async function runInstallLifecycleTests({ distributionRoot = defaultDistr
     assert.equal(await exists(path.join(movedBoundaryHost, STATE_FILE)), false, 'keepModified must disown the preserved root');
 
     const originalCodexRoot = await text(path.join(host, 'AGENTS.md'));
-    const tamperedCodexRoot = originalCodexRoot.replace('## Agent Engineering Contract', '## Tampered Engineering Contract');
+    const tamperedCodexRoot = originalCodexRoot.replace(ROOT_END, `<!-- lifecycle-root-tamper -->\n${ROOT_END}`);
     assert.notEqual(tamperedCodexRoot, originalCodexRoot);
     await writeFile(path.join(host, 'AGENTS.md'), tamperedCodexRoot);
     const tamperedSnapshot = await snapshot(host);

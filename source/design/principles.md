@@ -14,9 +14,10 @@ Applied judgment, not ceremony. Every principle below yields to the [universal c
 - **High cohesion, low coupling.** Code that changes together lives together; code that changes independently stays independent.
 - **Composition over inheritance.** Reach for inheritance only for genuine is-a relationships with stable base behavior.
 - **Explicit dependencies.** Pass dependencies in; avoid hidden globals, singletons, and ambient state.
-- **DRY, carefully.** Deduplicate knowledge (business rules, constants, schemas), not incidental similarity. Prefer small duplication over the wrong abstraction; extract on the second or third real repetition, when the shared shape is proven.
+- **DRY, carefully.** One business rule has one owning home. Unify duplicated knowledge across consumers; incidental code similarity needs proven shared meaning before abstraction.
 - **Optimize for the reader.** Readability and maintenance over cleverness. If a comment is needed to explain what code does, first try making the code clearer.
 - **No premature optimization.** Correct and clear first; optimize with measurements. See [performance](../quality/performance.md).
+- **Replacement is an option.** Compare patch, refactor, and replacement against real behavior, maintenance, migration, and recovery needs. Choose the coherent result; neither preserving a broken abstraction nor speculative rebuilding earns credit for its diff size.
 
 ## Abstraction test
 

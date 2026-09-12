@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
-import { lstat, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { cp, lstat, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   MANIFEST,
@@ -13,6 +14,8 @@ import {
   build,
   buildDestinationCollisions,
   buildDestinationPathErrors,
+  compactContextObligationErrors,
+  compiledObligationErrors,
   contextManifestErrors,
   contextRuleSourceErrors,
   frontmatterFields,
@@ -20,6 +23,8 @@ import {
   stripFrontmatter,
   thinContextRouteErrors,
 } from './build-distributions.mjs';
+
+const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 test('context manifest is one closed safe authority for build and install routing', async () => {
   assert.deepEqual(contextManifestErrors(MANIFEST), []);
@@ -37,6 +42,9 @@ test('context manifest is one closed safe authority for build and install routin
     ['duplicate dependencies', (manifest) => { manifest.contexts[0].requires = ['typescript-react', 'typescript-react']; }, /requires must be an array of unique/],
     ['missing required full reference', (manifest) => { manifest.contexts[0].references = ['contexts/web-ui.md']; }, /references must include required context source/],
     ['duplicate rule sources', (manifest) => { manifest.contexts[1].ruleSource = manifest.contexts[0].ruleSource; }, /ruleSource paths must be unique/],
+    ['unsafe obligation source', (manifest) => { manifest.contexts[0].obligationSource = '../escape.md'; }, /obligationSource is unsafe/],
+    ['obligation promoted to full reference', (manifest) => { manifest.contexts[0].obligationSource = manifest.contexts[0].source; }, /compact shared fragment|distinct from source/],
+    ['missing web obligation', (manifest) => { delete manifest.contexts[0].obligationSource; }, /web-ui context must declare its compact obligationSource/],
   ];
   for (const [label, mutate, expected] of mutations) {
     const manifest = structuredClone(MANIFEST);
@@ -46,9 +54,60 @@ test('context manifest is one closed safe authority for build and install routin
 });
 
 test('context adapters stay thin and cannot become a second rule authority', () => {
-  assert.deepEqual(thinContextRouteErrors('---\nscope: [context]\n---\n\n# Route\n\nRead `agent-rules/reference/example.md`.\n'), []);
+  assert.deepEqual(thinContextRouteErrors('---\nscope: [context]\n---\n\n# Route\n\nFor uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/example.md`.\n'), []);
+  const obligation = '---\nscope: [context]\nload_when: selected\nrelated: []\n---\n\n**UI-01 Interaction.** MUST preserve keyboard continuity.\n';
+  const route = '---\nscope: [context]\n---\n\n# Route\n\n{{include:contexts/web-interaction.md}}\n\nFor uncertainty beyond kernel/repository contracts, consult `agent-rules/reference/example.md`.\n';
+  assert.deepEqual(compactContextObligationErrors(obligation), []);
+  assert.deepEqual(thinContextRouteErrors(route, { obligationSource: 'contexts/web-interaction.md', obligationText: obligation }), []);
+  assert.match(thinContextRouteErrors(route.replace('web-interaction.md', 'arbitrary.md'), { obligationSource: 'contexts/web-interaction.md', obligationText: obligation }).join('\n'), /standalone declared include|arbitrary includes/);
+  assert.match(compactContextObligationErrors(obligation.replace('keyboard continuity.', 'keyboard continuity.\n\nA second authority.')).join('\n'), /exactly one physical-line paragraph/);
+  assert.match(compactContextObligationErrors(obligation.replace('preserve keyboard continuity.', 'preserve {{include:kernel/contract.md}}.')).join('\n'), /nested includes/);
+  assert.match(compactContextObligationErrors(obligation.replace('UI-01', 'AE-01')).join('\n'), /kernel AE directive IDs|stable directive UI-01/);
   assert.match(thinContextRouteErrors('# Route\n\nRead the reference.\n\n- AE-01: duplicate policy\n').join('\n'), /one routing paragraph|duplicate rule authorities/);
-  assert.match(thinContextRouteErrors(`# Route\n\n${'Read the full reference. '.repeat(60)}\n`).join('\n'), /maximum is 1024/);
+  assert.match(thinContextRouteErrors(`# Route\n\nFor uncertainty beyond kernel/repository contracts, consult \`agent-rules/reference/example.md\`. ${'More detail. '.repeat(100)}\n`).join('\n'), /maximum is 1024/);
+});
+
+test('web interaction obligation is composed from one authority into both hosts', async (context) => {
+  const output = await mkdtemp(path.join(tmpdir(), 'aer-ui-obligation-'));
+  context.after(() => rm(output, { recursive: true, force: true }));
+  await build(output);
+  const fragment = stripFrontmatter(await readFile(path.join(repo, 'source', MANIFEST.contexts[0].obligationSource), 'utf8')).trim();
+  const [claudeRoute, codexRoot, claudeReference, codexReference] = await Promise.all([
+    readFile(path.join(output, 'claude', '.claude', 'rules', MANIFEST.contexts[0].rule), 'utf8'),
+    readFile(path.join(output, 'codex', 'AGENTS.md'), 'utf8'),
+    readFile(path.join(output, 'claude', 'agent-rules', 'reference', 'web-ui.md'), 'utf8'),
+    readFile(path.join(output, 'codex', 'agent-rules', 'reference', 'web-ui.md'), 'utf8'),
+  ]);
+  for (const [label, generated] of [['Claude route', claudeRoute], ['Codex root', codexRoot], ['Claude reference', claudeReference], ['Codex reference', codexReference]]) {
+    assert.equal(generated.split(fragment).length - 1, 1, `${label} must contain the canonical fragment exactly once`);
+    assert.doesNotMatch(generated, /\{\{include:contexts\/web-interaction\.md\}\}/);
+  }
+  assert.equal(claudeReference, codexReference, 'both hosts must ship byte-identical expanded web references');
+  const codexRow = codexRoot.split(/\r?\n/).find((row) => row.includes(fragment));
+  assert.match(codexRow, /agent-rules\/reference\/web-ui\.md/);
+  assert.doesNotMatch(codexRow, /typescript-react\.md|backend-api\.md/);
+  assert.ok(codexRoot.indexOf(fragment) < codexRoot.indexOf('Detail only for uncertainty'), 'the direct obligation must precede optional-detail gating');
+  const obligations = [{ name: 'web-ui', body: fragment }];
+  assert.deepEqual(compiledObligationErrors(codexRoot, obligations), []);
+  assert.match(compiledObligationErrors(`${codexRoot}\n## Expanded profile\n${fragment}\n`, obligations).join('\n'), /fully composed Codex root/);
+  assert.match(compiledObligationErrors(codexRoot.replace(fragment, ''), obligations).join('\n'), /exactly once/);
+});
+
+test('context obligation delivery rejects indirect duplicate composition', async (context) => {
+  const fixture = await mkdtemp(path.join(tmpdir(), 'aer-ui-delivery-contract-'));
+  context.after(() => rm(fixture, { recursive: true, force: true }));
+  const sourceDirectory = path.join(fixture, 'source');
+  await cp(path.join(repo, 'source'), sourceDirectory, { recursive: true });
+
+  const rootFile = path.join(sourceDirectory, 'templates', 'codex-root.md');
+  const root = await readFile(rootFile, 'utf8');
+  await writeFile(rootFile, `${root.trimEnd()}\n\n{{include:contexts/claude-web-ui.md}}\n`);
+  assert.match((await contextRuleSourceErrors(MANIFEST, sourceDirectory)).join('\n'), /Codex root contains undeclared composed source/);
+
+  await writeFile(rootFile, root);
+  const referenceFile = path.join(sourceDirectory, 'contexts', 'web-ui.md');
+  await writeFile(referenceFile, `${(await readFile(referenceFile, 'utf8')).trimEnd()}\n\n{{include:contexts/claude-web-ui.md}}\n`);
+  assert.match((await contextRuleSourceErrors(MANIFEST, sourceDirectory)).join('\n'), /must contain only its declared compact obligation include/);
 });
 
 test('repository-only research inputs are validated but never emitted', async (context) => {
@@ -66,6 +125,20 @@ test('repository-only research inputs are validated but never emitted', async (c
     await assert.rejects(
       () => lstat(path.join(output, host, 'evals')),
       (error) => error.code === 'ENOENT',
+    );
+  }
+});
+
+test('runtime tools have one package source while generated config ships in dist', async (context) => {
+  const output = await mkdtemp(path.join(tmpdir(), 'aer-runtime-boundary-'));
+  context.after(() => rm(output, { recursive: true, force: true }));
+  await build(output);
+  for (const host of ['claude', 'codex']) {
+    const tools = path.join(output, host, 'agent-rules', 'tools');
+    assert.deepEqual(await readdir(tools), ['config']);
+    assert.equal(
+      await readFile(path.join(tools, 'config', 'thresholds.json'), 'utf8'),
+      await readFile(path.join(repo, 'source', 'config', 'thresholds.json'), 'utf8'),
     );
   }
 });
@@ -143,6 +216,16 @@ test('the current manifest has one producer per case-insensitive output destinat
   assert.doesNotThrow(() => assertBuildDestinations(MANIFEST));
   assert.deepEqual(buildDestinationCollisions(MANIFEST), []);
   assert.doesNotThrow(() => assertNoBuildDestinationCollisions(MANIFEST));
+});
+
+test('runtime manifest paths stay under tools and cannot collide with generated config', () => {
+  const outside = structuredClone(MANIFEST);
+  outside.tools[0] = 'runtime.mjs';
+  assert.match(buildDestinationPathErrors(outside).join('\n'), /must stay under tools/);
+
+  const collision = structuredClone(MANIFEST);
+  collision.tools.push('tools/config/thresholds.json');
+  assert.match(JSON.stringify(buildDestinationCollisions(collision)), /config\/thresholds\.json/);
 });
 
 test('destination preflight rejects portable path escapes and Windows aliases', () => {
@@ -286,7 +369,7 @@ test('build refuses symlinked output and host roots before recursive removal', a
   await mkdir(path.join(ancestorTarget, 'out'), { recursive: true });
   await symlink(ancestorTarget, ancestorAlias, process.platform === 'win32' ? 'junction' : 'dir');
   await assert.doesNotReject(() => build(path.join(ancestorAlias, 'out')));
-  assert.match(await readFile(path.join(ancestorTarget, 'out', 'claude', 'CLAUDE.md'), 'utf8'), /^# Engineering rules/m);
+  assert.match(await readFile(path.join(ancestorTarget, 'out', 'claude', 'CLAUDE.md'), 'utf8'), /^# AER index/m);
 });
 
 test('duplicate manifest destinations fail deterministically across every flattened output category', () => {
@@ -296,7 +379,6 @@ test('duplicate manifest destinations fail deterministically across every flatte
     ['context rule', (manifest) => manifest.contexts.push({ ...structuredClone(manifest.contexts[0]), source: 'contexts/duplicate.md' }), '.claude/rules/context-web-ui.md'],
     ['reference basename', (manifest) => manifest.reference.push('duplicate/principles.md'), 'agent-rules/reference/principles.md'],
     ['profile basename', (manifest) => manifest.profiles.push('duplicate/prototype.md'), 'agent-rules/profiles/prototype.md'],
-    ['tool basename', (manifest) => manifest.tools.push('duplicate/contrast-check.mjs'), 'agent-rules/tools/contrast-check.mjs'],
     ['case-insensitive agent alias', (manifest) => manifest.agents.push({ ...structuredClone(manifest.agents[0]), name: manifest.agents[0].name.toUpperCase() }), '.claude/agents/CODE-REVIEWER.md'],
   ];
 
