@@ -1,5 +1,7 @@
 # Decisions
 
+- [V5 repository-only evidence records](5.0.0-evidence-records.md): offline protocol locks and import validation without execution machinery or efficacy claims.
+
 - [V5 review and implementation plan](5.0.0-review-and-plan.md): building directly from v3.1.1, retaining engineering depth, and rejecting v4 runtime ceremony.
 - [V5 implementation verification](5.0.0-verification.md): local release gates, actual v3 upgrade/removal, integration failures and evidence limits.
 - [V5 UI interaction delivery](5.0.0-ui-interaction-delivery.md): the informal todo comparison, compact selected-context delivery, and evidence limits.

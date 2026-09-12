@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+Source corpus, Claude distribution, and Codex distribution:
+
+- Unchanged. No runtime obligations, payload files, or instruction budgets are added. No efficacy claim is made.
+
+Repository evidence and validation:
+
+- Added an installation-diff, collision, doctor, deliberate recovery, and uninstall walkthrough backed by a connected local regression.
+- Added an optional repository-only exact-byte protocol lock and imported study-record validator, with explicit failed/skipped attempts, missing evidence, unavailable costs, and integrity limitations. A deliberately incomplete template cannot be mistaken for an approved study.
+- Kept provider dispatch, grading, benchmark aggregation, consumer completion grammar, and paid trials out of scope; preserved frozen history and the package allowlist. [Decision](docs/decisions/5.0.0-evidence-records.md).
+
 ## 5.0.0 - 2026-09-12
 
 Source corpus:
