@@ -23,6 +23,10 @@ Select `codex` or `both` only when the project uses those hosts. The default ass
 
 Global installation only makes the executable available. Managed content and ownership records stay in the selected project. From a source checkout, use `node tools/aer.mjs` instead of `aer`. See [INSTALL.md](INSTALL.md) for updates, profiles, contexts, collisions, recovery and uninstall.
 
+Inspect the [installation walkthrough](docs/installation-walkthrough.md) for an
+actual managed-block diff, an unowned collision refusal, a saved-edit recovery,
+and the precise limits of `doctor`.
+
 ## Engineering contract
 
 Completeness determines what must work; simplicity determines how it is built. A large refactor or subsystem replacement is appropriate when evidence supports it. Small patches, large diffs, added layers and test counts are not quality signals.
@@ -62,6 +66,11 @@ The dependency-free installer checks boundaries, symbolic links, collisions, own
 ## Evidence and contribution
 
 [Evaluation policy](docs/evaluation.md) distinguishes structural checks, historical outcomes and future paid research. Frozen history remains intact. The dormant execution harnesses are removed, and CI never dispatches a provider.
+
+The [evidence-bundle workflow](docs/evidence/README.md) helps an explicitly authorized
+study owner freeze a reviewed protocol and validate imported records. It exposes
+missing evidence and unsuccessful attempts without generating benchmark scores.
+It is repository-only; no new study or general efficacy result is claimed.
 
 Run the provider-free release gate at a meaningful integration boundary:
 

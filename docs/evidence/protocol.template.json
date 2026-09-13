@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "aer-study/1",
+  "studyId": "REPLACE_study_id",
+  "question": "REPLACE_bounded_question_without_a_predetermined_improvement_target",
+  "review": {
+    "reviewer": "REPLACE_reviewer",
+    "reviewedAt": "REPLACE_canonical_UTC_timestamp",
+    "reference": "REPLACE_review_record_reference"
+  },
+  "authorization": {
+    "reference": "REPLACE_explicit_study_provider_model_and_spend_authorization_reference",
+    "provider": "REPLACE_authorized_provider",
+    "model": "REPLACE_authorized_exact_model",
+    "currency": "REPLACE_currency",
+    "spendCeiling": null
+  },
+  "configuration": {
+    "provider": "REPLACE_same_authorized_provider",
+    "model": "REPLACE_same_authorized_model",
+    "modelRevision": "REPLACE_exact_revision_or_explicit_provider_limitation",
+    "effort": "REPLACE_effort_setting",
+    "hostVersion": "REPLACE_host_version",
+    "toolVersions": "REPLACE_pinned_tool_versions",
+    "repositoryRevision": "REPLACE_repository_commit",
+    "maxTokens": null,
+    "timeoutSeconds": null,
+    "maxAttempts": null,
+    "budgetEnforcement": "REPLACE_external_budget_enforcement_mechanism",
+    "overshootPolicy": "REPLACE_bounded_overshoot_policy_and_measurement"
+  },
+  "analysis": {
+    "method": "REPLACE_predeclared_paired_analysis_and_handling_of_failures",
+    "uncertainty": "REPLACE_repetition_and_uncertainty_method_chosen_before_results",
+    "stoppingRules": "REPLACE_predeclared_stopping_rules",
+    "exclusions": "REPLACE_predeclared_exclusions_and_sensitivity_analysis",
+    "randomization": "REPLACE_method_and_record_of_frozen_pair_order",
+    "fairnessAudit": "REPLACE_contract_disclosure_and_materially_different_correct_solution_checks",
+    "isolation": "REPLACE_fresh_sessions_checkouts_and_memory_isolation",
+    "humanRework": "REPLACE_measurement_of_owner_repair_consumer_impact_and_verification_cost"
+  },
+  "tasks": [
+    {
+      "id": "REPLACE_task_id",
+      "version": "REPLACE_task_version",
+      "prompt": { "path": "inputs/prompt.md", "sha256": "REPLACE_sha256" },
+      "contract": { "path": "inputs/contract.md", "sha256": "REPLACE_sha256" },
+      "rubric": { "path": "inputs/rubric.md", "sha256": "REPLACE_sha256" },
+      "editableFiles": ["REPLACE_exact_editable_file"]
+    }
+  ],
+  "treatments": [
+    { "id": "baseline", "role": "baseline", "revision": "REPLACE_exact_baseline_revision", "instructions": { "path": "inputs/baseline.txt", "sha256": "REPLACE_sha256" } },
+    { "id": "v5-treatment", "role": "treatment", "revision": "REPLACE_exact_AER_revision_and_profile", "instructions": { "path": "inputs/treatment.txt", "sha256": "REPLACE_sha256" } }
+  ],
+  "pairs": [
+    { "id": "REPLACE_pair_id", "taskId": "REPLACE_task_id", "order": ["baseline", "v5-treatment"] }
+  ]
+}

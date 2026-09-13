@@ -45,11 +45,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs tools/tool-contracts.test.mjs tools/guidance-regressions.test.mjs tools/hardening-regressions.test.mjs",
+    "test": "node --test tools/build-distributions.test.mjs tools/validate-source.test.mjs tools/validate-public-content.test.mjs tools/aer.test.mjs tools/install-distribution.test.mjs tools/install-walkthrough.test.mjs tools/tool-contracts.test.mjs tools/guidance-regressions.test.mjs tools/hardening-regressions.test.mjs",
     "test:cli": "node --test tools/aer.test.mjs tools/install-distribution.test.mjs",
     "test:packed": "node tools/packed-install-smoke.mjs",
     "validate": "node tools/validate-public-content.mjs && node tools/validate-source.mjs && node tools/build-distributions.mjs && node tools/validate-distributions.mjs",
-    "validate:research": "node --test tools/validate-corpus.test.mjs && node tools/validate-corpus.mjs && node tools/validate-runtime-loads.mjs --json",
+    "validate:research": "node --test tools/validate-corpus.test.mjs tools/study-record.test.mjs && node tools/validate-corpus.mjs && node tools/validate-runtime-loads.mjs --json",
     "release:check": "npm test && npm run validate && npm run validate:research && npm run test:packed",
     "prepublishOnly": "npm run release:check"
   }

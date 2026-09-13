@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import test from 'node:test';
+import { runCli } from './aer.mjs';
+
+test('documented collision, install diff, drift refusal, deliberate recovery and uninstall', async (t) => {
+  const root = await mkdtemp(path.join(tmpdir(), 'aer-walkthrough-'));
+  t.after(async () => {
+    assert.equal(path.dirname(root), path.resolve(tmpdir()));
+    assert.ok(path.basename(root).startsWith('aer-walkthrough-'));
+    await rm(root, { recursive: true, force: true });
+  });
+  const command = async (...args) => {
+    const stdout = [], stderr = [];
+    const code = await runCli([...args, '--target', root], { log: (value) => stdout.push(value), error: (value) => stderr.push(value) });
+    return { code, stdout: stdout.join('\n'), stderr: stderr.join('\n') };
+  };
+  const ownerText = '# Project instructions\n\nKeep the project-specific release checklist.\n';
+  const collision = path.join(root, 'agent-rules', 'reference', 'security.md');
+  await writeFile(path.join(root, 'AGENTS.md'), ownerText);
+  await mkdir(path.dirname(collision), { recursive: true });
+  await writeFile(collision, 'Consumer-owned security notes.\n');
+  const blocked = await command('init', '--host', 'codex', '--dry-run');
+  assert.equal(blocked.code, 1); assert.match(blocked.stderr, /collision|unowned/i);
+  assert.equal(await readFile(collision, 'utf8'), 'Consumer-owned security notes.\n');
+  assert.equal((await readdir(root)).includes('.agent-engineering-rules-state.json'), false);
+  await rename(collision, path.join(root, 'consumer-security-notes.md'));
+  assert.equal((await command('init', '--host', 'codex', '--dry-run')).code, 0);
+  assert.equal(await readFile(path.join(root, 'AGENTS.md'), 'utf8'), ownerText);
+  assert.equal((await command('init', '--host', 'codex')).code, 0);
+  const installedRoot = await readFile(path.join(root, 'AGENTS.md'), 'utf8');
+  assert.ok(installedRoot.startsWith(ownerText));
+  assert.ok(installedRoot.length > ownerText.length);
+  assert.equal(JSON.parse((await command('doctor', '--json')).stdout).status, 'current');
+  const owned = await readFile(collision, 'utf8');
+  await writeFile(collision, `${owned}\nLocal change to a managed file.\n`);
+  const beforeDoctor = await readFile(collision, 'utf8');
+  assert.equal(JSON.parse((await command('doctor', '--json')).stdout).status, 'drift');
+  assert.equal(await readFile(collision, 'utf8'), beforeDoctor, 'doctor must not repair');
+  assert.equal((await command('update', '--dry-run')).code, 1);
+  await writeFile(path.join(root, 'saved-managed-edit.txt'), beforeDoctor);
+  await writeFile(collision, owned);
+  assert.equal((await command('update', '--dry-run')).code, 0);
+  assert.equal((await command('update')).code, 0);
+  assert.equal(JSON.parse((await command('doctor', '--json')).stdout).status, 'current');
+  assert.equal((await command('uninstall', '--dry-run')).code, 0);
+  assert.equal((await command('uninstall')).code, 0);
+  assert.equal(await readFile(path.join(root, 'AGENTS.md'), 'utf8'), ownerText);
+  assert.equal(await readFile(path.join(root, 'consumer-security-notes.md'), 'utf8'), 'Consumer-owned security notes.\n');
+  t.diagnostic('Observed: unowned collision refused; preview unchanged; init current; managed edit drift; update refused; saved edit plus restored owned bytes recovered; uninstall preserved consumer text. No model was run.');
+});

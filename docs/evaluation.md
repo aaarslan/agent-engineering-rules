@@ -44,6 +44,13 @@ Dormant v3 dispatch and synthetic execution harnesses are removed. Frozen inputs
 
 ## Future evaluation
 
+The [repository-only evidence workflow](evidence/README.md) supplies a deliberately
+incomplete protocol template, exact-byte freeze command, and optional validation
+of externally collected per-attempt records. It does not execute, grade, aggregate,
+or authorize a study. It is excluded from the installed runtime and published
+payload. The policy below remains authoritative; completing a template or obtaining
+a valid import is not permission to spend or evidence of efficacy.
+
 Product repair comes first. Any future study requires a reviewed plan and explicit spend authorization. The motivating request names ZAI, DeepSeek and Meta as intended paid providers. Claude/Codex installation support, historical metadata, existing credentials and previous approvals do not authorize a new Anthropic/OpenAI study or provider substitution. Establish exact endpoints, model identities, account capabilities and budget enforcement from current official sources before dispatch.
 
 Prefer maintained, auditable, established evaluation methods when they fit the product question. Do not build another bespoke harness merely to obtain a favorable percentage, repeatedly repair Deep-SWE during product work, or claim official benchmark improvement from private variants. Official recorded performance and a matched local baseline are different evidence; label them.

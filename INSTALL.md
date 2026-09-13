@@ -33,6 +33,9 @@ Contributors to this repository can use `node tools/aer.mjs <command>`.
 
 ## Initialize
 
+For a connected example with an actual installation diff and refusal/recovery
+outcomes, see the [provider-free walkthrough](docs/installation-walkthrough.md).
+
 Install AER into the current repository after reviewing the preview:
 
     aer init --host claude --dry-run
