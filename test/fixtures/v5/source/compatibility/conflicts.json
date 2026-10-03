@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "directive_conflicts": [],
+  "note": "Stable IDs make exact ownership and declared conflicts deterministic. Semantic conflicts not expressible here remain evaluation and review obligations."
+}

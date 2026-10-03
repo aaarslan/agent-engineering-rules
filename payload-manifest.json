@@ -1,0 +1,1273 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "tools/render-v6.mjs",
+  "files": [
+    {
+      "path": "integrations/claude-code.json",
+      "normalization": "utf8-lf",
+      "sha256": "1cd139165a0d9307cfcf32cd224be3a9ac5ae87891a0f9ef2ada0123462858df",
+      "bytes": 383
+    },
+    {
+      "path": "integrations/clients.json",
+      "normalization": "utf8-lf",
+      "sha256": "f5f0f18a428101b806c2896eb396ff4dcc6ae544b10e848d45d1412d61bc040e",
+      "bytes": 2048
+    },
+    {
+      "path": "integrations/payload-history.json",
+      "normalization": "utf8-lf",
+      "sha256": "cecdf0208a4640800e0d0d3e929d2d384b53a7666923808750f6229739ddffe7",
+      "bytes": 43
+    },
+    {
+      "path": "integrations/reviewer.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ba9438bc616c9525c8060c17c4aced5169106da7b12057260f8687dc3bde146",
+      "bytes": 1371
+    },
+    {
+      "path": "kernel/block.md",
+      "normalization": "utf8-lf",
+      "sha256": "54bbc10adc05fd412d796f033bd31bca48119437a5a2bf2bb251f58472f147a4",
+      "bytes": 222
+    },
+    {
+      "path": "kernel/clauses/ui-interaction.md",
+      "normalization": "utf8-lf",
+      "sha256": "bcf1b20bcc789a4237b64063aa9baf4344631b5f33242b269265b3deab5fe253",
+      "bytes": 399
+    },
+    {
+      "path": "kernel/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "54bcc25de1b483f781b7e3837c1d07a51db2a5155ffdc1a5c9c0048bd4cf6745",
+      "bytes": 5448
+    },
+    {
+      "path": "kernel/profiles/high-assurance.md",
+      "normalization": "utf8-lf",
+      "sha256": "331a61124dd575828d68da66ae7a6565925e1fc4f93ca35d39f5401d64999d84",
+      "bytes": 781
+    },
+    {
+      "path": "kernel/profiles/prototype.md",
+      "normalization": "utf8-lf",
+      "sha256": "ea7179806b491cd294e14375b2849fb1f87dd55c96cb1ed9000980d5b38d3e28",
+      "bytes": 672
+    },
+    {
+      "path": "kernel/profiles/standard.md",
+      "normalization": "utf8-lf",
+      "sha256": "28e3811ff4f3d849bbf5e41a4e605d4c81927df468559f93903a706853b802f1",
+      "bytes": 745
+    },
+    {
+      "path": "kernel/thresholds.json",
+      "normalization": "utf8-lf",
+      "sha256": "da512b3b94ff666f2d5f385eb7aca30256c497d001d1e6698800223cdec77f22",
+      "bytes": 1260
+    },
+    {
+      "path": "schemas/aer-lock.schema.json",
+      "normalization": "utf8-lf",
+      "sha256": "5a2df5a2ad5573b1fb7baf6a3faaad0b53734689ec5140dddbff45c6bcc7b95f",
+      "bytes": 8722
+    },
+    {
+      "path": "schemas/output.schema.json",
+      "normalization": "utf8-lf",
+      "sha256": "18ab828696b9aaf0b3798596f6cddb9106c9d9d9cae2990fd2f56255ee128bb6",
+      "bytes": 5556
+    },
+    {
+      "path": "schemas/payload-manifest.schema.json",
+      "normalization": "utf8-lf",
+      "sha256": "6d3e3f897fd4ad26d739d6266aee79730fa084349fa3968e8ba4cc6402ae55c2",
+      "bytes": 1258
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/backend-api.md",
+      "normalization": "utf8-lf",
+      "sha256": "b60c64a9239cb267c0af909858a0fb2affcdd3d5b74c78561a19fd6832b6340c",
+      "bytes": 1962
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-building-backend-apis/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-building-backend-apis/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "ca6621ae2fe1230ff2327e717f953569091d86e8d532197b770b0921dea1a09b",
+      "bytes": 1075
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-building-web-ui/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-building-web-ui/scripts/contrast-check.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "c914a7beb45a61dd1e8dbd4ff40986fe8e36efde0f9a3d2987aad031ca0285bb",
+      "bytes": 11069
+    },
+    {
+      "path": "skills/aer-building-web-ui/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "2b933627284e55360aacbed97db11dde975df8cbee025b21c1f667bc315fb583",
+      "bytes": 2533
+    },
+    {
+      "path": "skills/aer-changing-data/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-changing-data/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-changing-data/references/database-migrations.md",
+      "normalization": "utf8-lf",
+      "sha256": "c233d5701edffe4ce6d0c51fa93b4126783df7936ffa350b9be8f1ab5a23c955",
+      "bytes": 1947
+    },
+    {
+      "path": "skills/aer-changing-data/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-changing-data/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-changing-data/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-changing-data/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-changing-data/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-changing-data/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-changing-data/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-changing-data/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-changing-data/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-changing-data/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-changing-data/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-changing-data/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-changing-data/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-changing-data/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-changing-data/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-changing-data/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "ab34289571cb3f90fd7a0b065974c32f3dcbc6759870a981c2355dd8cc963339",
+      "bytes": 1554
+    },
+    {
+      "path": "skills/aer-designing-code/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-designing-code/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-designing-code/references/decision-making.md",
+      "normalization": "utf8-lf",
+      "sha256": "f2b0116260994f2b43217c21dcf6c2d2a30ca5d88452a2282d2b5c1fd9923212",
+      "bytes": 1912
+    },
+    {
+      "path": "skills/aer-designing-code/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-designing-code/references/errors-and-side-effects.md",
+      "normalization": "utf8-lf",
+      "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+      "bytes": 2025
+    },
+    {
+      "path": "skills/aer-designing-code/references/observability.md",
+      "normalization": "utf8-lf",
+      "sha256": "8c5f6a1002c94165a2a3e150f2b5412200f6376f97110afaee4686bacd43636a",
+      "bytes": 1516
+    },
+    {
+      "path": "skills/aer-designing-code/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-designing-code/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-designing-code/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-designing-code/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-designing-code/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-designing-code/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-designing-code/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-designing-code/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "c5bb78e0c6a0058568b56d98d45399d5a9306c88f7091a247f6bddeabd1802ba",
+      "bytes": 1327
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/errors-and-side-effects.md",
+      "normalization": "utf8-lf",
+      "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+      "bytes": 2025
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-fixing-bugs/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-fixing-bugs/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "e14c3eade1e0cf14bb7aa940edaff8ce08cac34ea58feb591c57dc6914906c90",
+      "bytes": 1476
+    },
+    {
+      "path": "skills/aer-implementing-features/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-implementing-features/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-implementing-features/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-implementing-features/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-implementing-features/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-implementing-features/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-implementing-features/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-implementing-features/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-implementing-features/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-implementing-features/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-implementing-features/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-implementing-features/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-implementing-features/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-implementing-features/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-implementing-features/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-implementing-features/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-implementing-features/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-implementing-features/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "2fd0363abc9fefa0baa0e0283f981fcbe857a9d84c05ecdeb83b76cf8c5109f5",
+      "bytes": 2339
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-refactoring-code/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-refactoring-code/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "99e34e132379ab28904e9e2f3b7cf18e113403954eccf00b78aa68f295501fcf",
+      "bytes": 1562
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-reviewing-changes/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-reviewing-changes/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "4a338b8d8d85d07b06ed7e73f14ebec917f0cdeefac848d9956d8a01526d81a2",
+      "bytes": 1884
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-reviewing-security/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-reviewing-security/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "432c710c1c623268270f9c3602e6f944ec16cb6e89e798895feeb67e4e7671cd",
+      "bytes": 1876
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/autonomous-execution.md",
+      "normalization": "utf8-lf",
+      "sha256": "b646d72dbc50b42c18d862475ce7a3539a0972c8abf64f73c8dd42ae72ba8007",
+      "bytes": 2526
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-running-long-tasks/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-running-long-tasks/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "4f2e6b5480abd99021436292da9f6cd1ff0439a561d72e853b31caacaa23d9d2",
+      "bytes": 1702
+    },
+    {
+      "path": "skills/aer-securing-code/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-securing-code/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-securing-code/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-securing-code/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-securing-code/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-securing-code/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-securing-code/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-securing-code/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-securing-code/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-securing-code/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "c63829cbaef4b2fbd89722fbe11d8de1f0f861cd96d5ba6ac8b5585daace0efb",
+      "bytes": 1017
+    },
+    {
+      "path": "skills/aer-verifying-work/references/boundaries.md",
+      "normalization": "utf8-lf",
+      "sha256": "ddf9f8a971922c066967df94ac1a421ffbdbd24657e5b10d80a3cd7e73e298fc",
+      "bytes": 2120
+    },
+    {
+      "path": "skills/aer-verifying-work/references/contract.md",
+      "normalization": "utf8-lf",
+      "sha256": "fbe6ec20e3d3ead81d27dd6d1443acf63cc906cf05f5086ca456c3f7a0639897",
+      "bytes": 383
+    },
+    {
+      "path": "skills/aer-verifying-work/references/design-checkpoint.md",
+      "normalization": "utf8-lf",
+      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+      "bytes": 1544
+    },
+    {
+      "path": "skills/aer-verifying-work/references/implementation.md",
+      "normalization": "utf8-lf",
+      "sha256": "f6a4f0488fe4728ff0331cb7b1629d400207c06da492e4b5a7360d0f4af450f7",
+      "bytes": 1943
+    },
+    {
+      "path": "skills/aer-verifying-work/references/orchestration.md",
+      "normalization": "utf8-lf",
+      "sha256": "cb5274aeb930e57171fbbc2d38883f7a73ee402097c5a0bd344b8ad8a2e12e0c",
+      "bytes": 2668
+    },
+    {
+      "path": "skills/aer-verifying-work/references/performance.md",
+      "normalization": "utf8-lf",
+      "sha256": "53cc280e931d573253769f1bd04c36027d588ef854ee91803e47ebcc6109408a",
+      "bytes": 1607
+    },
+    {
+      "path": "skills/aer-verifying-work/references/pr-review.md",
+      "normalization": "utf8-lf",
+      "sha256": "17b99960a8fa88b696936ff1d56f41937491a1b271dabf8759fd608a1241a29c",
+      "bytes": 2211
+    },
+    {
+      "path": "skills/aer-verifying-work/references/principles.md",
+      "normalization": "utf8-lf",
+      "sha256": "5b86592282d2ad2c7e804b7e8de2d566fae85436820ab9846053cf93de00dacd",
+      "bytes": 2076
+    },
+    {
+      "path": "skills/aer-verifying-work/references/review-ledger.md",
+      "normalization": "utf8-lf",
+      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+      "bytes": 1429
+    },
+    {
+      "path": "skills/aer-verifying-work/references/security.md",
+      "normalization": "utf8-lf",
+      "sha256": "0d84301f733079877e2812b49f71f35b21f39c188313e945eb8aa9bbaae1cd87",
+      "bytes": 2178
+    },
+    {
+      "path": "skills/aer-verifying-work/references/skeptic-pass.md",
+      "normalization": "utf8-lf",
+      "sha256": "47de9f6cee1330f7b62d0a89ef4a4129d1ecc017fb7bf1a4855e0d0aae713b60",
+      "bytes": 2726
+    },
+    {
+      "path": "skills/aer-verifying-work/references/testing.md",
+      "normalization": "utf8-lf",
+      "sha256": "2692b9d1c8b360b5624bb1efe4384c56155777146fef4c47cb2db997349bcb15",
+      "bytes": 3045
+    },
+    {
+      "path": "skills/aer-verifying-work/references/types-and-state.md",
+      "normalization": "utf8-lf",
+      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+      "bytes": 1589
+    },
+    {
+      "path": "skills/aer-verifying-work/references/typescript-react.md",
+      "normalization": "utf8-lf",
+      "sha256": "e93855671233b3799608e0efbea25601ec0f1abf4196ea955bbc572328ea5b06",
+      "bytes": 1990
+    },
+    {
+      "path": "skills/aer-verifying-work/references/ui-styling.md",
+      "normalization": "utf8-lf",
+      "sha256": "d3a71fabe97b18b7e0b7e6464b3b186f87bcffb38fc4543dcfc0345685b4b548",
+      "bytes": 1148
+    },
+    {
+      "path": "skills/aer-verifying-work/references/verification.md",
+      "normalization": "utf8-lf",
+      "sha256": "8ea71258904f548a133bd7272a7eb714209149452cd4b5b723ff845df59ab10e",
+      "bytes": 3152
+    },
+    {
+      "path": "skills/aer-verifying-work/references/web-ui.md",
+      "normalization": "utf8-lf",
+      "sha256": "7ede1d22e2c67befd185f3865a98409dbc696fcca2c00642ed42d7c0f0b340a9",
+      "bytes": 4660
+    },
+    {
+      "path": "skills/aer-verifying-work/scripts/config/thresholds.json",
+      "normalization": "utf8-lf",
+      "sha256": "4f6aaa6355b445ed49f3b9b1f41bca0aa78873ee12e785badf8ee3c0a809d106",
+      "bytes": 296
+    },
+    {
+      "path": "skills/aer-verifying-work/scripts/file-size-guard.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "0e36b98b28995afe50a94ee5b97f0f2a2d1c109bd68a023994bbd6dc556e59e1",
+      "bytes": 13554
+    },
+    {
+      "path": "skills/aer-verifying-work/scripts/lib/thresholds.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "8aa7e4d7d33bdc24908131f35acafdb9541a0571e1022abddea0b11751ed2f68",
+      "bytes": 1131
+    },
+    {
+      "path": "skills/aer-verifying-work/scripts/slop-scan.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "dd06f0928f7e17d223663725c94b7ee8cd5a8d68c83c161f5f05dc01a9ab5393",
+      "bytes": 23052
+    },
+    {
+      "path": "skills/aer-verifying-work/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "e1961a35f65b31f03350dc164ac8454b53ff9388dd09b84b1a665876d2ab05b9",
+      "bytes": 2000
+    },
+    {
+      "path": "skills/aer-writing-docs/references/documentation.md",
+      "normalization": "utf8-lf",
+      "sha256": "1e9d87598feb82d613f4b37e4b81a5f8b6458b329d412a59195821cbbb66dc5e",
+      "bytes": 1533
+    },
+    {
+      "path": "skills/aer-writing-docs/SKILL.md",
+      "normalization": "utf8-lf",
+      "sha256": "58553501ba80020b7e3634b5d38dd49b2941ba8989131ed987b5248ce7851c25",
+      "bytes": 1355
+    },
+    {
+      "path": "src/block.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "4dbc1c5ce1903134c9731e1d116040206a2ebf67337ef59a7a07892d06f0f81d",
+      "bytes": 2262
+    },
+    {
+      "path": "src/check.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "63d930b208c2b071b047ec93c15ca26df2082dad07fe83bd1c5060617e65c00d",
+      "bytes": 3679
+    },
+    {
+      "path": "src/cli.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "aa2b4db87cdee608fead5e09afd78f181563dbba57e049457d99d2625eb8e7dc",
+      "bytes": 4893
+    },
+    {
+      "path": "src/fs-safe.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "9d3f19b6e63d373aa3ea6be5aab886aa3954ca62943e5c1c7563d5f8c30047b2",
+      "bytes": 8616
+    },
+    {
+      "path": "src/install.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "ac25fe718a862813094f8b6390f3c9decd114e220597f27b8836e8e4b6b80909",
+      "bytes": 7553
+    },
+    {
+      "path": "src/payload.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "524018ec3d0b5e1a1fa90eee7a4255cfd0d33f37965798d24c541c34dd1b1cba",
+      "bytes": 13683
+    },
+    {
+      "path": "src/plan.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "bc21ec7070cdc43711f9123e9dd8729765fb70bc7778fdb5863112f400da470a",
+      "bytes": 5771
+    },
+    {
+      "path": "src/state.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "fe7841d12df615f71e24f42e999e20b3b7c8c93b87bcc5299f4589595b581edd",
+      "bytes": 7280
+    },
+    {
+      "path": "src/thresholds.mjs",
+      "normalization": "utf8-lf",
+      "sha256": "daed13b513930917d8a61c20e960c12009ff2750277a622d2f5e99c6853465e7",
+      "bytes": 385
+    }
+  ],
+  "sourceIdentity": "37bbfaffcc8cd98880a6e3967244c57ca4bf0c7b51494b0ae5d349ffeafcbb15"
+}

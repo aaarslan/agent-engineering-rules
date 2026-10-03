@@ -1,15 +1,33 @@
 # Evaluation and evidence
 
-AER v5 makes no efficacy claim. Release checks establish corpus consistency, diagnostic behavior, package contents, and installation safety. They do not establish better model engineering, lower token use, or less human rework.
+V6 prepares [140 competing-catalog routing contracts](../evals/routing/catalog-cases.json)
+and [39 behavioral cases](../evals/behavior/cases.json) over thirteen runnable,
+sanitized fixture directories. Offline baseline tests prove setup only. Third
+cases are future holdouts; all grading requirements are disclosed. The
+[rubric](../evals/behavior/rubric.json) separates harmful failures, behavior,
+delivery/routing and costs. No model activation rates or outcomes were measured.
+
+The [study index](../evals/behavior/study-index.json) names four separate paired
+comparisons: kernel, skills, standalone and pinned v5 upgrade. Each future
+configuration needs its own reviewed/authorized `aer-study/1` protocol with
+exact client/channel/version, model/revision/effort, tool and permission set,
+memory/compaction isolation, treatment and fixture identities, repetitions,
+timeout/turn/spend ceilings and cost accounting. The unchanged
+[study-record tool](../tools/study-record.mjs) validates one baseline and one
+treatment sharing one configuration; it cannot aggregate a multi-arm matrix.
+Templates are deliberately incomplete until those facts and authorization exist.
+No synthetic authorization or empirical results are fabricated to fill them.
+
+AER v6 makes no efficacy claim. Release checks establish corpus consistency, diagnostic behavior, package contents, and installation safety. They do not establish better model engineering, lower token use, or less human rework.
 
 ## Product validation
 
 Run `npm test`, `npm run validate`, `npm run validate:research`, and `npm run test:packed` at the release integration gate. These are provider-free. During implementation, use targeted checks; broaden or repeat only when evidence was invalidated or a required integration gate is reached.
 
-- [The grievance inventory](../source/evals/grievances.json) preserves every user-supplied requirement ID and its owner. All efficacy statuses remain unmeasured. Source references establish design traceability, not model adherence.
-- [The live directive registry](../source/evals/directives.json) and [scenarios](../source/evals/scenarios.json) close over the current kernel. They describe intended situations, not a hidden-test benchmark.
+- [The grievance inventory](../research/evals/grievances.json) preserves every user-supplied requirement ID and its owner. All efficacy statuses remain unmeasured. Source references establish design traceability, not model adherence.
+- [The live directive registry](../research/evals/directives.json) and [scenarios](../research/evals/scenarios.json) close over the current kernel. They describe intended situations, not a hidden-test benchmark.
 - [The corpus validator](../tools/validate-corpus.mjs) checks registries, grievance closure, frozen history, official-source metadata, policy ownership, and compatibility dates. Negative tests exercise missing, duplicate, stale and mutated records.
-- [The load validator](../tools/validate-runtime-loads.mjs) models generated automatic content and task loads. Its byte-based token count is an estimate. Host/user instructions and optional references add context; mandatory AER reads cannot be excluded merely because they live in a reference file.
+- [The load validator](../tools/validate-runtime-loads.mjs) models root, nested, standalone, full-set, plugin-kernel and cumulative long-session loads. Its byte-based token count is an estimate. Host/user instructions and optional references add context; mandatory AER reads cannot be excluded merely because they live in a reference file.
 - Installer and packed-artifact checks exercise real local ownership, updates, drift refusal and uninstall. Diagnostics prove only their selected mathematical or lexical scope.
 
 No release or CI path dispatches an evaluation provider or needs provider credentials. V5 has no paid runner, fake provider adapter, repetition matrix or benchmark-report generator.
@@ -28,7 +46,7 @@ A separate user-requested run compared fresh low-effort GPT-6 Astra agents with 
 
 ## Historical evidence
 
-[Frozen history](../source/evals/frozen-history.json) pins historical files and their source revision. Validation hashes them without executing tasks or graders. Values may differ from the current corpus; a future experiment needs a new protocol and treatment version. Never modify an old arm after observing outcomes.
+[Frozen history](../research/evals/frozen-history.json) pins historical files and their source revision. Validation hashes them without executing tasks or graders. Values may differ from the current corpus; a future experiment needs a new protocol and treatment version. Never modify an old arm after observing outcomes.
 
 | Record | Status and interpretation |
 | --- | --- |

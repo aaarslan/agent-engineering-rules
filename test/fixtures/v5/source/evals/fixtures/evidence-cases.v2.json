@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-evidence-honesty-v2",
+  "cases": [
+    {"id": "keep-unavailable-unresolved", "kind": "unavailable-check", "request": {"integration_check": "unavailable", "performance_measurement": null, "proposed_claim": "faster"}}
+  ]
+}

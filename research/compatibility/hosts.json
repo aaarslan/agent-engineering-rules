@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-10-02",
+  "revalidate_after": "2027-01-02",
+  "supported_hosts": {
+    "claude": {
+      "instruction_entry": "AGENTS.md (fallback) or explicit CLAUDE.md import",
+      "always_on": [
+        "selected instructions file managed block"
+      ],
+      "path_scoped": "none; relevant standalone references",
+      "skills": ".claude/skills/<name>/SKILL.md",
+      "protected_native_entrypoints": [
+        "security-review",
+        "verify"
+      ],
+      "root_install_strategy": "managed-block",
+      "hard_policy_delivery": "consumer-owned",
+      "sources": [
+        "https://code.claude.com/docs/en/memory",
+        "https://code.claude.com/docs/en/skills",
+        "https://code.claude.com/docs/en/sub-agents"
+      ]
+    },
+    "codex": {
+      "instruction_entry": "AGENTS.md",
+      "discovery": "project-root-to-working-directory",
+      "merge": "concatenate-root-to-leaf",
+      "combined_project_instruction_bytes": 32768,
+      "skills": ".agents/skills/<name>/SKILL.md",
+      "root_install_strategy": "managed-block",
+      "hard_policy_delivery": "consumer-owned",
+      "sources": [
+        "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+        "https://learn.chatgpt.com/docs/build-skills",
+        "https://learn.chatgpt.com/docs/agent-configuration/subagents"
+      ]
+    }
+  },
+  "reserved_adapters": {
+    "copilot": "Not supported until discovery, policy, installation, and load-plan fixtures exist.",
+    "gemini": "Not supported until discovery, policy, installation, and load-plan fixtures exist.",
+    "cursor": "Not supported until discovery, policy, installation, and load-plan fixtures exist."
+  },
+  "plugin_policy": "v6 direct install: format/installability verified offline; plugins deferred. Discovery/invocation need final-client evidence."
+}

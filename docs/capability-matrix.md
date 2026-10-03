@@ -1,16 +1,38 @@
-# Host capability matrix
+# Capability and verification matrix
 
-Reviewed 2026-09-12 against the official pages linked below. These are documentation checks, not live host-adherence tests. V5 installs instructions and optional diagnostics; it does not install enforcement hooks or infer that a host executed a rule.
+Reviewed 2026-10-02 against official documentation. Labels distinguish **verified
+in source/tests**, **documented by a client**, **proposed AER policy**, and
+**unmeasured behavior**. A configured CI job is not execution evidence.
 
-| Surface | Claude Code | Codex | AER v5 decision |
-| --- | --- | --- | --- |
-| Project instructions | Project `CLAUDE.md` and unscoped `.claude/rules/` supply instruction context; path-scoped rules load for matching files. [Memory documentation](https://code.claude.com/docs/en/memory) | Discovers `AGENTS.override.md`, then `AGENTS.md`, then configured fallbacks along the root-to-working-directory chain, with at most one file per directory. [Instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md) | Preserve consumer text outside one managed root block. Supply one kernel and selected assurance profile; project conventions stay repository-owned. |
-| Attention and size | Documentation recommends concise instructions. Its separate auto-memory index has a truncation rule; that is not a universal limit on project instructions. [Memory documentation](https://code.claude.com/docs/en/memory) | Combined project instructions have a configurable byte cap; the documented default is recorded in `source/compatibility/hosts.json`. [Instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md) | The grievance about first-pass attention motivates a compact kernel, not a claim that all models read only a fixed number of lines. Current AER budgets live in `source/config/thresholds.json`. |
-| Skills | Project skills use `.claude/skills/<name>/SKILL.md`; bodies load on use. `disable-model-invocation` supports explicit invocation, and `context: fork` can route work to a subagent. Native names include `verify` and `security-review`. [Skills documentation](https://code.claude.com/docs/en/skills) | Skills use progressive disclosure: catalog metadata first, full body on selection. Repository skills use `.agents/skills/`. [Skills documentation](https://learn.chatgpt.com/docs/build-skills) | Retain task skills without concatenating their bodies into the root. Prefixed review/verification skill names avoid native-name collisions. An installed skill is not proof of invocation. |
-| Delegation | Custom agents use Markdown under `.claude/agents/`; an explicit tool allowlist can narrow tools. [Subagents](https://code.claude.com/docs/en/sub-agents) | Supports subagents and project custom roles, including read-only configurations. [Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) | Retain the optional Claude reviewer limited to Read/Grep/Glob. Codex review behavior relies on the active host permissions. No mandatory verifier, model pin, fresh-context claim or automatic duplicate check. |
-| Model guidance | Opus 5 guidance cautions against redundant generic verification instructions and verifier subagents. [Official guidance](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5) | Current GPT-6 Astra guidance recommends calibrating testing to the change and avoiding repeated checks after sufficient evidence. [Official guidance](https://developers.openai.com/api/docs/guides/latest-model) | Documentary model records inform review only. Distributions remain model-neutral, and records authorize no provider call or efficacy claim. |
-| Policy and installation | Instruction context and task skills do not themselves enforce correctness or safety. [Memory documentation](https://code.claude.com/docs/en/memory) | The instruction discovery mechanism describes prompt composition, not guaranteed adherence. [Instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md) | Settings, permissions, sandbox, CI and operational policies remain consumer-owned. AER never edits them as part of installation. Local tests establish the installer's own ownership behavior only. |
+| Channel/property | Evidence | Claim limit |
+|---|---|---|
+| Portable Agent Skills | Final frontmatter/resource validators and isolated package lifecycle | Format-valid/installable; manual-only/read-only are instructions |
+| Codex direct representation | Sidecar/body inventory tests; [official skills documentation](https://learn.chatgpt.com/docs/build-skills) | Invocation policy documented; final-session discovery/invocation unverified |
+| Claude Code direct representation | Rendered native metadata and restricted adapter inventory tests; [skills](https://code.claude.com/docs/en/skills), [subagents](https://code.claude.com/docs/en/sub-agents) | Manual invocation/fork/tool allowlist documented; actual session/tool probes unverified |
+| Instruction discovery | [Codex AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [Claude memory](https://code.claude.com/docs/en/memory) | Filesystem checks do not prove loading once; private settings/memory affect sessions |
+| Optional plugins | No final plugin artifact | Explicitly deferred; no discovery/control/update claim |
+| Other clients/cloud/account uploads | Canonical standard metadata only | Discovery, executable-resource runtime and controls unverified |
+| macOS arm64 / Node 24.21.0 | Local release/lifecycle tests | Observed local mechanical behavior only |
+| Minimum Node 24.0.0 | Exact runtime release check recorded separately | See release evidence; do not infer from the newer runtime |
+| Linux and Windows | Required pinned-action CI matrices retained | Execution unavailable locally; gates unverified until actual jobs pass |
+| Better engineering / lower cost | No v6 provider/model trials | Unmeasured behavior; no efficacy or savings claim |
 
-Load validation measures installed-marker-aware generated roots, selected profiles, routed context content, a representative skill catalog and supported task plans. Selected web-UI content carries its compact interaction obligation directly in the generated Codex root and Claude web route; full references remain optional. Review-fork plans include the selected skill task prompt, agent prompt and possible path rules. Token figures use a declared byte estimator, not a model tokenizer; target paths, host/user content and tool wrappers vary. All optional full references are also measured cumulatively, outside the automatic-content budget; reading all of them is neither required nor claimed to fit that budget. Universal obligations remain in the kernel, and unconditional follow-on reads are checked rather than hidden outside the budget.
+Local binaries inspected: Claude Code 2.1.285 and Codex CLI 0.160.0 (`--version`
+and `--help` only initially). Their presence is not final-artifact discovery or
+invocation evidence. No model trial is authorized by this implementation task.
 
-V4's hook/trust/payload experiments remain historical at `af7803f21629e71f3b65036923fffd34277e8b0a`. V5 makes no claims about those mechanisms. Unsupported hosts and plugin delivery channels remain outside this release.
+Claude documentation currently describes `AGENTS.md` fallback in 2.1.277+, with
+session limitations before 2.1.281; `CLAUDE.md`/`CLAUDE.local.md` and user/managed
+settings can change discovery. An explicitly reviewed `@AGENTS.md` bridge can
+retain one contract; inspect `/context` in the actual session. Forked review skills
+need bounded scope and supplied diff because caller history is not assumed.
+
+Codex documentation describes repository `.agents/skills` discovery and initial
+name/description/path listing, plus `agents/openai.yaml` invocation policy. A
+custom destination needs its own discovery setup. Multiple matching directories
+may expose duplicate skills; AER does not edit private configuration to resolve it.
+
+AER's compact block budget, profiles and UI placement are **proposed AER policy**,
+not measured optima or format requirements. Byte estimates do not measure tokens,
+cache effects or monetary costs. Compatibility dates require review when stale;
+offline validators do not silently browse or fabricate new review dates.

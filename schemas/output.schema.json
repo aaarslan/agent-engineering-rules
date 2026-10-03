@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aaarslan/agent-engineering-rules/schemas/output.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "current",
+        "preview",
+        "uninstalled",
+        "not-installed",
+        "refused",
+        "error",
+        "invalid",
+        "interrupted",
+        "active-install",
+        "unstable-snapshot",
+        "drift"
+      ]
+    },
+    "exitCode": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "runningPackage": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourceIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "version",
+            "sourceIdentity"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "installedPackage": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourceIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "representationIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "version",
+            "sourceIdentity",
+            "representationIdentity"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "packageMatch": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "plannedChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "file",
+              "block"
+            ]
+          },
+          "action": {
+            "enum": [
+              "create",
+              "update",
+              "delete"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "type",
+          "action"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "committedChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "file",
+              "block"
+            ]
+          },
+          "action": {
+            "enum": [
+              "create",
+              "update",
+              "delete"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "type",
+          "action"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "retained": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "contextEstimates": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "blockBytes": {
+              "type": "number",
+              "minimum": 0
+            },
+            "blockLines": {
+              "type": "number",
+              "minimum": 0
+            },
+            "rawCatalogCharacters": {
+              "type": "number",
+              "minimum": 0
+            },
+            "catalogWithPathsCharacters": {
+              "type": "number",
+              "minimum": 0
+            },
+            "activatedSkillAndResourceBytes": {
+              "type": "number",
+              "minimum": 0
+            },
+            "roughBlockTokens": {
+              "type": "number",
+              "minimum": 0
+            },
+            "estimator": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "blockBytes",
+            "blockLines",
+            "rawCatalogCharacters",
+            "catalogWithPathsCharacters",
+            "activatedSkillAndResourceBytes",
+            "roughBlockTokens",
+            "estimator"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pendingOperation": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "exitCode",
+    "runningPackage",
+    "installedPackage",
+    "packageMatch",
+    "plannedChanges",
+    "committedChanges",
+    "retained",
+    "conflicts",
+    "notes",
+    "contextEstimates",
+    "pendingOperation"
+  ]
+}

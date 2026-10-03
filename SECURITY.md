@@ -1,31 +1,18 @@
-# Security Policy
+# Security policy
 
-## Supported versions
-
-Security fixes are provided for the latest published major release.
-
-| Version | Supported |
-| --- | --- |
-| 3.x | Yes |
-| Earlier versions | No |
-
-## Report a vulnerability
+The 6.0.0 tree is an unpublished candidate. Maintainers target the current released
+major for security fixes; this change does not claim a new npm release or make a
+support commitment for retired majors. V5 is retained only as a pinned exit and
+regression fixture. Report the exact installed package/revision and protocol
+schema, runtime/platform, representation, selections and a sanitized reproduction.
 
 Use GitHub's [private vulnerability reporting form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new).
+Do not disclose credentials, private prompts, customer data or proprietary code
+in public issues. Allow triage before public disclosure.
 
-Do not open a public issue for a suspected vulnerability. Do not include API keys, credentials, proprietary source code, private prompts, customer data, or other sensitive project content in a report.
-
-Please include:
-
-- the affected AER version or commit;
-- the operating system and Node.js version;
-- the selected host, profile, and contexts;
-- a minimal reproduction using non-sensitive fixtures;
-- the expected and observed behavior; and
-- the security impact you believe is possible.
-
-Reports are evaluated against the repository's actual trust boundary. AER manages project-local instruction files and its ownership ledger; it does not claim to sandbox an agent, secure a provider, replace repository permissions, or enforce prose as code.
-
-## Disclosure
-
-Please allow time for triage and remediation before public disclosure. Confirmed vulnerabilities may be handled through a GitHub repository security advisory with credit to the reporter when requested.
+AER manages project-local files and a ledger. Its safety checks do not sandbox an
+agent or a process controlling the same filesystem. Native invocation controls,
+review tool restrictions, provider permissions and model compliance are distinct.
+`packageMatch` is local consistency, not publisher authenticity. Installing a
+skill makes executable resources available; nothing runs on discovery/install.
+Review artifacts, pin versions and use the client's actual permission controls.

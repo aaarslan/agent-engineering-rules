@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-diagnostic-recovery-v2",
+  "cases": [
+    {"id": "primary-fails", "kind": "failed-diagnostic", "request": {"probe": "primary-owner", "hypothesis": "application-owner"}},
+    {"id": "fallback-changes-hypothesis", "kind": "changed-diagnostic", "request": {"probe": "fallback-owner", "hypothesis": "configuration-owner"}}
+  ]
+}

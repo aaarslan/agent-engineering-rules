@@ -1,83 +1,81 @@
-# Agent Engineering Rules
+# Agent Engineering Rules v6
 
-[![Validate](https://github.com/aaarslan/agent-engineering-rules/actions/workflows/validate.yml/badge.svg)](https://github.com/aaarslan/agent-engineering-rules/actions/workflows/validate.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+AER supplies independently usable engineering skills, a compact project contract,
+assurance profiles, and an ownership-aware project installer. `@aaarslan/aer` is
+ESM, requires Node 24.0.0 or newer, and has no runtime dependencies.
 
-**Complete engineering, simple implementation, proportionate verification.**
+The 6.0.0 tree is an unpublished release candidate. Mechanical checks do not
+establish model efficacy, client discovery or tool enforcement. See the dated
+[capability matrix](docs/capability-matrix.md) and repository
+[execution record](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/decisions/6.0.0-plan.md).
 
-AER installs a compact, model-neutral engineering contract for Claude Code and Codex in one selected repository. The contract asks agents to repair owning defects, preserve exact behavior, complete real integrations, supply missing technical judgment, and support completion claims with relevant evidence.
+## Installation
 
-V5 succeeds v3.1.1 directly. V4 is skipped; its branch remains historical evidence. Read the [release notes](CHANGELOG.md), [review and implementation plan](docs/decisions/5.0.0-review-and-plan.md), and [grievance inventory](source/evals/grievances.json) for the requirements and decisions. V5 makes no general efficacy claim.
+Build and pack locally; install the resulting tarball into a disposable npm
+prefix for review. The exercised commands are in [INSTALL.md](INSTALL.md).
+After an explicitly authorized maintainer publication, pin `@aaarslan/aer@6.0.0`
+in team tooling; do not assume a floating version preserves treatment bytes.
 
-## Install
-
-Use Node.js 24 or newer and a Git repository:
-
-```bash
-npm install --global @aaarslan/aer@5.0.0
-aer init --host claude --target <project> --dry-run
-aer init --host claude --target <project>
+```sh
+aer install --destination codex:.agents/skills --destination claude-code:.claude/skills --dry-run
+aer install --destination codex:.agents/skills --destination claude-code:.claude/skills
+aer check --json
+aer uninstall --dry-run
 ```
 
-Select `codex` or `both` only when the project uses those hosts. The default assurance profile is `standard`; alternatives are `prototype` and `high-assurance`. No stack context is selected by default.
+Default: `portable:.agents/skills`, `AGENTS.md`, `standard`, all released skills.
+The representation is explicit; a vendor-looking path does not select controls.
+Portable copies use standard metadata. Codex adds invocation sidecars. Claude
+Code adds manual invocation controls and a `Read, Grep, Glob` reviewer adapter
+for the two review skills. The native review directories require that adapter;
+they are a combined integration inventory, not portable standalone packages.
+Arbitrary safe project-relative destinations remain available; client discovery
+at a custom path requires separate configuration/inspection.
 
-Global installation only makes the executable available. Managed content and ownership records stay in the selected project. From a source checkout, use `node tools/aer.mjs` instead of `aer`. See [INSTALL.md](INSTALL.md) for updates, profiles, contexts, collisions, recovery and uninstall.
+Later `install` retains omitted recorded selections. `--skills none` installs the
+same kernel/profile and browser-conditional UI clause without owning skills.
+Skills installed alone retain their own safety context and resources. AER does
+not own skills delivered by another installer or plugin.
 
-Inspect the [installation walkthrough](docs/installation-walkthrough.md) for an
-actual managed-block diff, an unowned collision refusal, a saved-edit recovery,
-and the precise limits of `doctor`.
+## Available skills
 
-## Engineering contract
+| Skill | Task | Integrated invocation |
+|---|---|---|
+| aer-implementing-features | Complete product behavior | Contextual |
+| aer-fixing-bugs | Symptom, cause, correction, evidence | Contextual |
+| aer-refactoring-code | Preserve behavior while changing structure | Contextual |
+| aer-designing-code | Consequential boundaries and structure | Contextual |
+| aer-changing-data | Data meaning, mixed versions and recovery | Contextual |
+| aer-securing-code | Implement affected trust-boundary protections | Contextual |
+| aer-reviewing-security | Bounded read-only security review | Manual |
+| aer-verifying-work | Requested disputed claim or diagnostic | Manual |
+| aer-reviewing-changes | Requested diff/branch/PR review | Manual |
+| aer-writing-docs | Documentation against current evidence | Contextual |
+| aer-building-web-ui | Browser interaction and styling | Contextual |
+| aer-building-backend-apis | Endpoint and failure contracts | Contextual |
+| aer-running-long-tasks | Explicitly delegated long work | Manual |
 
-Completeness determines what must work; simplicity determines how it is built. A large refactor or subsystem replacement is appropriate when evidence supports it. Small patches, large diffs, added layers and test counts are not quality signals.
+Portable descriptions request the same scope, but do not enforce invocation or
+read-only tools. Explicit invocation uses the actual client's mechanism. Relevant
+tasks can use multiple skills; none requires another skill or the kernel.
 
-The kernel uses stable directives, normative strength, an explicit execution order and a completion predicate. It keeps universal responsibilities in the initial contract: ownership, exact input/output behavior, lifecycle, authorization, secrets, data integrity, migration, recovery, accessibility and operations. User product constraints remain authoritative; proposed mechanisms still require engineering judgment.
+## Ownership and verification
 
-| Layer | Purpose |
-| --- | --- |
-| Kernel | Always-active engineering obligations and completion conditions |
-| Assurance profile | Evidence investment suited to lifespan, exposure, contract stability and failure cost |
-| Task skill | Concern-specific guidance when the task calls for it |
-| Reference | Design, security, data, UI or verification detail read only when relevant |
-| Optional diagnostic | A selected calculation or heuristic with a bounded, explicit result |
+`aer.lock.json` records package/source and representation identities, selections,
+block ownership and complete file inventory. `check` compares sets and hashes and
+never repairs. `packageMatch` compares the locally running package, not publisher
+authenticity. Unowned identical collisions and modified owned material refuse.
+Dry runs create no lock, state, directories or temporary files. A real operation
+records a pending transaction before modifying payload; rerun with its recorded
+request and creating package. Manual stale-lock recovery and retention are in
+[INSTALL.md](INSTALL.md). Consumer bytes outside the managed block are preserved.
 
-Every implementation needs enough evidence of its real behavior. It does not automatically need permanent test infrastructure. Durable coverage protects stable contracts; relevant production regressions and repository gates still apply. Reuse passing evidence unless a change or unresolved concern invalidates it.
+AER has no automatic hooks, telemetry, provider runner, background updater or
+permission grants. Optional diagnostics run only when explicitly selected.
+Plugins are deferred; no plugin manifest or marketplace package is advertised.
+V5 detection is read-only and refuses mixed installations; use the tested pinned
+[v5 exit path](INSTALL.md#leaving-v5).
 
-Completion requires working behavior, coherent consumers and artifacts, relevant evidence, and honest limits. Reports distinguish direct exercises, regression coverage, existing checks and material omissions. V5 imposes no report parser, mandatory verifier run, command ledger, automatic broad-suite loop or hook-based completion gate.
-
-## Optional diagnostics
-
-`aer verify` selects one diagnostic; it neither runs a project test suite nor certifies completion:
-
-```bash
-aer verify contrast '#ffffff' '#000000'
-aer verify slop --root <project>
-aer verify size --check <file>
-```
-
-After installation, the equivalent entrypoint is `node agent-rules/tools/aer-verify.mjs <check> <args>`. Contrast checks only supplied opaque color pairs; slop and size findings require contextual review. See [the diagnostic contracts](INSTALL.md#optional-diagnostics).
-
-## Delivery and trust
-
-Claude receives a managed `CLAUDE.md` block, native rules and skills, and an optional read-only reviewer. Codex receives a managed `AGENTS.md` block and native skills. Both receive on-demand references and diagnostic files. [Current host documentation](docs/capability-matrix.md) supports the layouts; installation is not proof of model adherence.
-
-The dependency-free installer checks boundaries, symbolic links, collisions, ownership hashes and interrupted updates. It preserves consumer-owned text and configuration. `aer doctor` inspects integrity without repair. AER does not install permissions, hooks, consumer CI, global agent settings, services or accounts; prose is not a security boundary.
-
-## Evidence and contribution
-
-[Evaluation policy](docs/evaluation.md) distinguishes structural checks, historical outcomes and future paid research. Frozen history remains intact. The dormant execution harnesses are removed, and CI never dispatches a provider.
-
-The [evidence-bundle workflow](docs/evidence/README.md) helps an explicitly authorized
-study owner freeze a reviewed protocol and validate imported records. It exposes
-missing evidence and unsuccessful attempts without generating benchmark scores.
-It is repository-only; no new study or general efficacy result is claimed.
-
-Run the provider-free release gate at a meaningful integration boundary:
-
-```bash
-npm run release:check
-```
-
-Edit rules in `source/`, update the shared `MANIFEST` in `tools/manifest.mjs` when paths change, and regenerate `dist/` with `node tools/build-distributions.mjs`. Runtime tools ship once at package root; the installer copies the required files into the selected project.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), [CHANGELOG.md](CHANGELOG.md), and [tools/README.md](tools/README.md). Report vulnerabilities through the private [security advisory form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new). MIT licensed.
+Contributors: [repository guide](https://github.com/aaarslan/agent-engineering-rules/blob/main/CONTRIBUTING.md). Evidence and prepared offline
+fixtures: [repository evaluation guide](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/evaluation.md). Security reporting:
+[SECURITY.md](SECURITY.md).

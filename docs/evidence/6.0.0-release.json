@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-02",
+  "baseRevision": "25377518505432f0362cca28de3b00fd525af20c",
+  "branch": "feature/aer-v6",
+  "package": "@aaarslan/aer@6.0.0",
+  "publication": "not authorized; not performed",
+  "specification": {
+    "file": "aer-v6-reviewed-implementation-brief (1).md",
+    "sha256": "26130d00b1821f2d72c47207c4c8d8bd1c779cf1999a0e6cf7490d559bbcf278"
+  },
+  "baseline": {
+    "platform": "Darwin 27.0.0 arm64",
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "command": "npm run release:check",
+    "initialResult": "failed 62/63; pre-existing macOS unresolved /var vs /private/var entrypoint bug",
+    "correction": "realpath comparison in active v5 dispatcher; retired at cutover; audited fixture unchanged",
+    "correctedResult": "passed 63 main and 14 research tests, 39 load plans and packed smoke"
+  },
+  "verification": [
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-current-packed-evidence.json npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.21.0 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 35,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.21.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 573167,
+        "integrity": "sha512-AcLqtKa7W3GHSOhr8GXSqTM68BKL95yszbA+8HJ6fbS+E0eCGIQMM5m8Nb8T6Q2kZ/ao/wBhvC13YHJaA1ySfQ==",
+        "sha256": "7aea1453fc2992c826ac61b342cdf3e9da9f98741bf184067ffc300a0ab3c5cd",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    },
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-minimum-packed-evidence.json npm exec --yes --package=node@24.0.0 -- npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.0.0 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 35,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.0.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 573167,
+        "integrity": "sha512-AcLqtKa7W3GHSOhr8GXSqTM68BKL95yszbA+8HJ6fbS+E0eCGIQMM5m8Nb8T6Q2kZ/ao/wBhvC13YHJaA1ySfQ==",
+        "sha256": "7aea1453fc2992c826ac61b342cdf3e9da9f98741bf184067ffc300a0ab3c5cd",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    }
+  ],
+  "research": {
+    "liveDirectives": 26,
+    "scenarios": 6,
+    "grievances": 110,
+    "frozenFiles": 37,
+    "auditedFixtureFiles": 234,
+    "auditedFixtureByteDifferences": 0,
+    "routingCases": 140,
+    "preparedBehaviorCases": 39,
+    "runnableFixtureBaselines": 13,
+    "loadingScenarios": 54,
+    "modelTrials": 0
+  },
+  "releaseGates": {
+    "mechanicalImplementation": "passed locally",
+    "linux": "unverified; no executor/container runtime available; CI configured only",
+    "windows": "unverified; no Windows executor available; CI configured only",
+    "clientDiscovery": "unverified final-artifact sessions; binaries/version/help inspected only",
+    "nativeInvocationAndTools": "artifact metadata/body inventory verified; actual implicit/explicit and restricted tool probes unverified",
+    "plugins": "explicitly deferred",
+    "efficacy": "unmeasured; no authorized trials",
+    "releaseReadiness": "not fully verified"
+  },
+  "limits": [
+    "packageMatch is local consistency, not authentication",
+    "unknown prior inventories cannot authorize cleanup; use their pinned package",
+    "manual stale/partial lock and unowned journal-temp recovery",
+    "process interruption coverage is not a hostile-filesystem or power-loss guarantee"
+  ],
+  "sourceIdentity": "37bbfaffcc8cd98880a6e3967244c57ca4bf0c7b51494b0ae5d349ffeafcbb15",
+  "finalReviewCorrections": [
+    {
+      "finding": "Absent/pending check returned before the final snapshot guard",
+      "correction": "All loaded states repeat lock/state inspection; absent/pending concurrent-change regression passed",
+      "sections": "9.3, 11.1"
+    },
+    {
+      "finding": "Published documentation linked to excluded repository files",
+      "correction": "Explicitly ship capability matrix; distinguish online repository records; packed local Markdown closure checked",
+      "sections": "3, 13, 14"
+    },
+    {
+      "finding": "The stronger packed closure assertion failed on retired v5 links in the reviewer adapter on both runtimes",
+      "correction": "Remove duplicated procedure from the thin adapter; canonical installed review skill supplies it; rendered inventories validate closure; final full gates passed",
+      "sections": "4.1, 7.2, 8.1"
+    },
+    {
+      "finding": "Root lock metadata still named v5",
+      "correction": "Offline package-lock refresh; active metadata consistency validator passed",
+      "sections": "3, 12"
+    },
+    {
+      "finding": "Standalone diagnostics duplicated tunable defaults and complete block line accounting lacked a guard",
+      "correction": "Generate the independent config from canonical thresholds; enforce composed physical lines including markers; affected content/diagnostic and research tests passed",
+      "sections": "4.2, 10.1, 10.2"
+    }
+  ],
+  "additionalVerification": [
+    {
+      "command": "node --test test/content.test.mjs && npm run validate:research",
+      "exitCode": 0,
+      "runtime": "Node 24.21.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "purpose": "Affected negative composed-line regression and offline research/load guards; 6 tests passed"
+    },
+    {
+      "command": "npm exec --yes --package=node@24.0.0 -- node --test test/content.test.mjs && npm exec --yes --package=node@24.0.0 -- npm run validate:research",
+      "exitCode": 0,
+      "runtime": "Node 24.0.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "purpose": "Same affected final guards on the minimum runtime; 6 tests passed"
+    }
+  ]
+}

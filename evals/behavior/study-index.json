@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "awaiting explicit authorization and frozen client/configuration records",
+  "comparisons": [
+    {
+      "id": "kernel",
+      "baseline": "No AER",
+      "treatment": "v6 kernel/profile"
+    },
+    {
+      "id": "skills",
+      "baseline": "v6 kernel/profile",
+      "treatment": "same kernel/profile plus skills"
+    },
+    {
+      "id": "standalone",
+      "baseline": "No AER",
+      "treatment": "v6 skills without kernel"
+    },
+    {
+      "id": "upgrade",
+      "baseline": "pinned v5",
+      "treatment": "corresponding v6"
+    }
+  ],
+  "protocolPolicy": "Separate aer-study/1 paired protocol per comparison/configuration. No combined matrix and no provider execution. Template in docs/evidence/protocol.template.json."
+}

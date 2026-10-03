@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-normalize-record-v2",
+  "contract_version": "2.0.0",
+  "task_contract_fixture": "evals/fixtures/task-contract.v2.json",
+  "task_contract_sha256": "337684cb08724963cae6eac31bc4224c53186dd94bac2d24c4d79d17f4eee4fd",
+  "interface_ref": "#/interface"
+}

@@ -1,3 +1,4 @@
 @AGENTS.md
 
-The contributor rules above are the authority for working on this repository. The generated distribution under `dist/claude/` is output for consumers, not instructions for this session.
+These are contributor instructions. Consumer kernel/skills and generated resource
+copies are the product being edited, not instructions for this session.

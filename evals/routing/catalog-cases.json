@@ -1,0 +1,1738 @@
+{
+  "schemaVersion": 1,
+  "catalog": [
+    "aer-implementing-features",
+    "aer-fixing-bugs",
+    "aer-refactoring-code",
+    "aer-designing-code",
+    "aer-changing-data",
+    "aer-securing-code",
+    "aer-reviewing-security",
+    "aer-verifying-work",
+    "aer-reviewing-changes",
+    "aer-writing-docs",
+    "aer-building-web-ui",
+    "aer-building-backend-apis",
+    "aer-running-long-tasks"
+  ],
+  "claim": "Offline expected routing contracts only; no activation frequency measured.",
+  "cases": [
+    {
+      "id": "aer-implementing-features-positive-1",
+      "prompt": "Add a saved favorites action",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-positive-2",
+      "prompt": "Implement a feature through the API and storage",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-positive-3",
+      "prompt": "Create an undo action for notes",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-positive-4",
+      "prompt": "Add a filter that persists on reload",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-positive-5",
+      "prompt": "Support bulk archive of selected notes",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-implementing-features"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-implementing-features"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-implementing-features"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-implementing-features"
+      ]
+    },
+    {
+      "id": "aer-implementing-features-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-implementing-features"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-positive-1",
+      "prompt": "Fix a toggle that loses the draft",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-fixing-bugs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-positive-2",
+      "prompt": "Saving a note fails after a retry",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-fixing-bugs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-positive-3",
+      "prompt": "The list is empty on the second call",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-fixing-bugs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-positive-4",
+      "prompt": "Repair the regression in missing-field validation",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-fixing-bugs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-positive-5",
+      "prompt": "Fix stale state after deleting a note",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-fixing-bugs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-fixing-bugs"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-fixing-bugs"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-fixing-bugs"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-fixing-bugs"
+      ]
+    },
+    {
+      "id": "aer-fixing-bugs-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-fixing-bugs"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-positive-1",
+      "prompt": "Refactor duplicated validation without behavior changes",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-refactoring-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-positive-2",
+      "prompt": "Separate persistence ownership while preserving calls",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-refactoring-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-positive-3",
+      "prompt": "Rename ambiguous states with the same serialization",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-refactoring-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-positive-4",
+      "prompt": "Remove duplicate policy in two handlers",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-refactoring-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-positive-5",
+      "prompt": "Reduce coupling in the note service",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-refactoring-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-refactoring-code"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-refactoring-code"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-refactoring-code"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-refactoring-code"
+      ]
+    },
+    {
+      "id": "aer-refactoring-code-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-refactoring-code"
+      ]
+    },
+    {
+      "id": "aer-designing-code-positive-1",
+      "prompt": "Design a boundary for two storage backends",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-designing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-designing-code-positive-2",
+      "prompt": "Choose ownership for persisted note state",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-designing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-designing-code-positive-3",
+      "prompt": "Compare cache invalidation designs",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-designing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-designing-code-positive-4",
+      "prompt": "Design cancellation across a long-running operation",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-designing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-designing-code-positive-5",
+      "prompt": "Decide a compatible versioning strategy",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-designing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-designing-code-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-designing-code"
+      ]
+    },
+    {
+      "id": "aer-designing-code-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-designing-code"
+      ]
+    },
+    {
+      "id": "aer-designing-code-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-designing-code"
+      ]
+    },
+    {
+      "id": "aer-designing-code-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-designing-code"
+      ]
+    },
+    {
+      "id": "aer-designing-code-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-designing-code"
+      ]
+    },
+    {
+      "id": "aer-changing-data-positive-1",
+      "prompt": "Migrate archived values preserving existing notes",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-changing-data"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-changing-data-positive-2",
+      "prompt": "Backfill note identifiers with recovery",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-changing-data"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-changing-data-positive-3",
+      "prompt": "Change schema across mixed application versions",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-changing-data"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-changing-data-positive-4",
+      "prompt": "Add a nullable field with rollout sequencing",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-changing-data"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-changing-data-positive-5",
+      "prompt": "Make a migration idempotent after interruption",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-changing-data"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-changing-data-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-changing-data"
+      ]
+    },
+    {
+      "id": "aer-changing-data-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-changing-data"
+      ]
+    },
+    {
+      "id": "aer-changing-data-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-changing-data"
+      ]
+    },
+    {
+      "id": "aer-changing-data-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-changing-data"
+      ]
+    },
+    {
+      "id": "aer-changing-data-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-changing-data"
+      ]
+    },
+    {
+      "id": "aer-securing-code-positive-1",
+      "prompt": "Add authorization to the affected route",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-securing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-securing-code-positive-2",
+      "prompt": "Protect user secrets in the log path",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-securing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-securing-code-positive-3",
+      "prompt": "Bound retry behavior at the external call",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-securing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-securing-code-positive-4",
+      "prompt": "Validate attacker-controlled note identifiers",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-securing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-securing-code-positive-5",
+      "prompt": "Prevent HTML injection in note rendering",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-securing-code"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-securing-code-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-securing-code"
+      ]
+    },
+    {
+      "id": "aer-securing-code-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-securing-code"
+      ]
+    },
+    {
+      "id": "aer-securing-code-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-securing-code"
+      ]
+    },
+    {
+      "id": "aer-securing-code-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-securing-code"
+      ]
+    },
+    {
+      "id": "aer-securing-code-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-securing-code"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-positive-1",
+      "prompt": "$aer-reviewing-security Review the named note authorization boundary",
+      "explicitInvocation": "aer-reviewing-security",
+      "primary": [
+        "aer-reviewing-security"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-positive-2",
+      "prompt": "$aer-reviewing-security Audit this handler with a bounded read-only scope",
+      "explicitInvocation": "aer-reviewing-security",
+      "primary": [
+        "aer-reviewing-security"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-positive-3",
+      "prompt": "$aer-reviewing-security Check secret exposure in the supplied diff",
+      "explicitInvocation": "aer-reviewing-security",
+      "primary": [
+        "aer-reviewing-security"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-positive-4",
+      "prompt": "$aer-reviewing-security Review injection reachability in note rendering",
+      "explicitInvocation": "aer-reviewing-security",
+      "primary": [
+        "aer-reviewing-security"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-positive-5",
+      "prompt": "$aer-reviewing-security Investigate security controls on the supplied endpoint",
+      "explicitInvocation": "aer-reviewing-security",
+      "primary": [
+        "aer-reviewing-security"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-implicit-exclusion-1",
+      "prompt": "Review the named note authorization boundary",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-reviewing-security-implicit-exclusion-2",
+      "prompt": "Audit this handler with a bounded read-only scope",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-positive-1",
+      "prompt": "$aer-verifying-work Verify the claim that recovery preserves drafts",
+      "explicitInvocation": "aer-verifying-work",
+      "primary": [
+        "aer-verifying-work"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-positive-2",
+      "prompt": "$aer-verifying-work Investigate this disputed passing check",
+      "explicitInvocation": "aer-verifying-work",
+      "primary": [
+        "aer-verifying-work"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-positive-3",
+      "prompt": "$aer-verifying-work Check color contrast for the specified pair",
+      "explicitInvocation": "aer-verifying-work",
+      "primary": [
+        "aer-verifying-work"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-positive-4",
+      "prompt": "$aer-verifying-work Inspect whether the size signal is meaningful",
+      "explicitInvocation": "aer-verifying-work",
+      "primary": [
+        "aer-verifying-work"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-positive-5",
+      "prompt": "$aer-verifying-work Falsify the asserted API serialization guarantee",
+      "explicitInvocation": "aer-verifying-work",
+      "primary": [
+        "aer-verifying-work"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-implicit-exclusion-1",
+      "prompt": "Verify the claim that recovery preserves drafts",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-verifying-work-implicit-exclusion-2",
+      "prompt": "Investigate this disputed passing check",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-positive-1",
+      "prompt": "$aer-reviewing-changes Review the supplied change to note toggling",
+      "explicitInvocation": "aer-reviewing-changes",
+      "primary": [
+        "aer-reviewing-changes"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-positive-2",
+      "prompt": "$aer-reviewing-changes Review this diff for contract regressions",
+      "explicitInvocation": "aer-reviewing-changes",
+      "primary": [
+        "aer-reviewing-changes"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-positive-3",
+      "prompt": "$aer-reviewing-changes Inspect this branch read-only for material bugs",
+      "explicitInvocation": "aer-reviewing-changes",
+      "primary": [
+        "aer-reviewing-changes"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-positive-4",
+      "prompt": "$aer-reviewing-changes Review the complete supplied handler diff",
+      "explicitInvocation": "aer-reviewing-changes",
+      "primary": [
+        "aer-reviewing-changes"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-positive-5",
+      "prompt": "$aer-reviewing-changes Assess this PR with evidence-backed findings",
+      "explicitInvocation": "aer-reviewing-changes",
+      "primary": [
+        "aer-reviewing-changes"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-implicit-exclusion-1",
+      "prompt": "Review the supplied change to note toggling",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-reviewing-changes-implicit-exclusion-2",
+      "prompt": "Review this diff for contract regressions",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-positive-1",
+      "prompt": "Document the real note-save command",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-writing-docs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-positive-2",
+      "prompt": "Correct the stale endpoint example",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-writing-docs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-positive-3",
+      "prompt": "Audit install documentation against code",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-writing-docs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-positive-4",
+      "prompt": "Write recovery instructions for this failure",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-writing-docs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-positive-5",
+      "prompt": "Explain current limits using repository evidence",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-writing-docs"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-writing-docs"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-writing-docs"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-writing-docs"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-writing-docs"
+      ]
+    },
+    {
+      "id": "aer-writing-docs-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-writing-docs"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-positive-1",
+      "prompt": "Preserve input focus when toggling browser notes",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-web-ui"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-positive-2",
+      "prompt": "Build keyboard-accessible note editing",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-web-ui"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-positive-3",
+      "prompt": "Fix browser styling and accessible action names",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-web-ui"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-positive-4",
+      "prompt": "Implement an empty state in the browser view",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-web-ui"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-positive-5",
+      "prompt": "Make the browser list preserve drafts on render",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-web-ui"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-web-ui"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-web-ui"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-web-ui"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-web-ui"
+      ]
+    },
+    {
+      "id": "aer-building-web-ui-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-web-ui"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-positive-1",
+      "prompt": "Implement an authenticated notes endpoint",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-backend-apis"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-positive-2",
+      "prompt": "Preserve response shape while changing the handler",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-backend-apis"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-positive-3",
+      "prompt": "Add invalid-input responses to the API",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-backend-apis"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-positive-4",
+      "prompt": "Handle durable failure in the backend route",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-backend-apis"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-positive-5",
+      "prompt": "Make the API retry path idempotent",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-building-backend-apis"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-backend-apis"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-backend-apis"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-backend-apis"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-backend-apis"
+      ]
+    },
+    {
+      "id": "aer-building-backend-apis-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-building-backend-apis"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-positive-1",
+      "prompt": "$aer-running-long-tasks Complete the delegated multi-step notes project",
+      "explicitInvocation": "aer-running-long-tasks",
+      "primary": [
+        "aer-running-long-tasks"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-positive-2",
+      "prompt": "$aer-running-long-tasks Execute the authorized long task with checkpoints",
+      "explicitInvocation": "aer-running-long-tasks",
+      "primary": [
+        "aer-running-long-tasks"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-positive-3",
+      "prompt": "$aer-running-long-tasks Continue the bounded objective from this checkpoint",
+      "explicitInvocation": "aer-running-long-tasks",
+      "primary": [
+        "aer-running-long-tasks"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-positive-4",
+      "prompt": "$aer-running-long-tasks Coordinate explicitly authorized independent increments",
+      "explicitInvocation": "aer-running-long-tasks",
+      "primary": [
+        "aer-running-long-tasks"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-positive-5",
+      "prompt": "$aer-running-long-tasks Finish all requested outcomes within the given budget",
+      "explicitInvocation": "aer-running-long-tasks",
+      "primary": [
+        "aer-running-long-tasks"
+      ],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-negative-1",
+      "prompt": "Explain a poem",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-negative-2",
+      "prompt": "Translate this sentence",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-negative-3",
+      "prompt": "What is two plus two?",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-negative-4",
+      "prompt": "Summarize this public recipe",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-negative-5",
+      "prompt": "Name a color",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-implicit-exclusion-1",
+      "prompt": "Complete the delegated multi-step notes project",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "aer-running-long-tasks-implicit-exclusion-2",
+      "prompt": "Execute the authorized long task with checkpoints",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-running-long-tasks"
+      ]
+    },
+    {
+      "id": "authenticated-api-migration",
+      "prompt": "Add an authenticated notes API endpoint with a data migration",
+      "explicitInvocation": null,
+      "primary": [
+        "aer-implementing-features"
+      ],
+      "supporting": [
+        "aer-building-backend-apis",
+        "aer-securing-code",
+        "aer-changing-data"
+      ],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    },
+    {
+      "id": "ambiguous-help",
+      "prompt": "Help with this repository",
+      "explicitInvocation": null,
+      "primary": [],
+      "supporting": [],
+      "forbidden": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security",
+        "aer-running-long-tasks",
+        "aer-verifying-work"
+      ]
+    }
+  ]
+}
