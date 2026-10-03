@@ -18,7 +18,7 @@
 - [ ] `npm run test:packed`
 - [ ] `npm pack --dry-run --json`
 - [ ] No provider call was made
-- [ ] Canonical source and generated distributions are synchronized, or neither changed
+- [ ] Canonical content and generated resources/inventory are synchronized, or neither changed
 
 ## Documentation
 
