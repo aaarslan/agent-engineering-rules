@@ -4,13 +4,13 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, readdir, symlink, link, realpa
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync,spawn } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
 import { install, uninstall } from '../src/install.mjs';
 import { check } from '../src/check.mjs';
 import { STATE, RUN_LOCK, walk, hash, replace, snapshot, temporaryPath } from '../src/fs-safe.mjs';
 import { readPackage } from '../src/payload.mjs';
 
 const small={skills:['aer-implementing-features','aer-reviewing-changes']};
+const childFixture=path.resolve('test/helpers/installer-child.mjs');
 async function dir(t) {const d=await realpath(await mkdtemp(path.join(tmpdir(),'aer-v6-test-')));t.after(()=>rm(d,{recursive:true,force:true}));return d;}
 async function file(root,p,bytes) {await mkdir(path.dirname(path.join(root,p)),{recursive:true});await writeFile(path.join(root,p),bytes);}
 async function tree(root) {return Object.fromEntries(await Promise.all((await walk(root)).map(async p=>[p,hash(await readFile(path.join(root,p)))])));}
@@ -130,8 +130,7 @@ test('consumer edits outside blocks survive interrupted move recovery and keep-m
 test('actual process kill after payload/state temporary sync leaves a recoverable pending operation',async t=>{
  for(const where of ['payload','commit']) {
   const target=await dir(t);
-  const code=`import {install} from ${JSON.stringify(pathToFileURL(path.resolve('src/install.mjs')).href)};let stateWrites=0;await install(${JSON.stringify({target,skills:['aer-implementing-features']})},{atomicBoundary:(name,p)=>{if(name==='temporary-synced'){if(p==='aer.lock.json')stateWrites++;if((${JSON.stringify(where)}==='payload'&&p!=='aer.lock.json')||(${JSON.stringify(where)}==='commit'&&stateWrites===2))process.kill(process.pid,'SIGKILL');}}});`;
-  const killed=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',windowsHide:true,timeout:20000});assert.notEqual(killed.status,0,killed.stdout+killed.stderr);
+  const killed=spawnSync(process.execPath,[childFixture,where,target],{encoding:'utf8',windowsHide:true,timeout:20000});assert.notEqual(killed.status,0,killed.stdout+killed.stderr);
   assert.equal(JSON.parse(await readFile(path.join(target,STATE),'utf8')).status,'pending');assert.equal((await check({target})).status,'active-install');
   // Child termination is observed before this explicit manual stale-lock removal.
   await rm(path.join(target,RUN_LOCK));await install({target});assert.equal((await check({target})).status,'current');await uninstall({target});assert.deepEqual(await tree(target),{});
@@ -144,9 +143,8 @@ test('atomic replacement never removes an unowned or externally replaced tempora
  assert.equal(await readFile(path.join(target,temp),'utf8'),'external replacement');
 });
 test('two real mutator processes exclude one another and journal initialization interruption remains unowned',{timeout:30000},async t=>{
- const target=await dir(t),module=pathToFileURL(path.resolve('src/install.mjs')).href;
- const code=`import {install} from ${JSON.stringify(module)};await install(${JSON.stringify({target,skills:'none'})},{boundary:async name=>{if(name==='pending'){console.log('READY');await new Promise(resolve=>process.stdin.once('data',resolve));}}});`;
- const child=spawn(process.execPath,['--input-type=module','-e',code],{stdio:['pipe','pipe','pipe'],windowsHide:true});t.after(()=>{if(child.exitCode===null)child.kill();});
+ const target=await dir(t);
+ const child=spawn(process.execPath,[childFixture,'pending',target],{stdio:['pipe','pipe','pipe'],windowsHide:true});t.after(()=>{if(child.exitCode===null)child.kill();});
  const closed=new Promise(resolve=>child.once('close',resolve));let stderr='';child.stderr.on('data',d=>stderr+=d);
  await new Promise((resolve,reject)=>{
   const finish=error=>{clearTimeout(timer);child.stdout.off('data',ready);child.off('error',failed);child.off('exit',exited);error?reject(error):resolve();};
@@ -157,7 +155,6 @@ test('two real mutator processes exclude one another and journal initialization 
  });
  const second=spawnSync(process.execPath,[path.resolve('src/cli.mjs'),'install','--target',target,'--json'],{encoding:'utf8',windowsHide:true});assert.equal(second.status,3,second.stdout+second.stderr);child.stdin.end('continue');assert.equal(await closed,0);assert.equal((await check({target})).status,'current');
  const interrupted=await dir(t);
- const kill=`import {install} from ${JSON.stringify(module)};await install(${JSON.stringify({target:interrupted,skills:'none'})},{atomicBoundary:(name,p)=>{if(name==='temporary-synced'&&p==='aer.lock.json')process.kill(process.pid,'SIGKILL');}});`;
- const r=spawnSync(process.execPath,['--input-type=module','-e',kill],{encoding:'utf8',windowsHide:true,timeout:20000});assert.notEqual(r.status,0);await rm(path.join(interrupted,RUN_LOCK));assert.equal((await check({target:interrupted})).status,'interrupted');await refused(install({target:interrupted,skills:'none'}));
+ const r=spawnSync(process.execPath,[childFixture,'initialize',interrupted],{encoding:'utf8',windowsHide:true,timeout:20000});assert.notEqual(r.status,0);await rm(path.join(interrupted,RUN_LOCK));assert.equal((await check({target:interrupted})).status,'interrupted');await refused(install({target:interrupted,skills:'none'}));
  const remnants=(await walk(interrupted)).filter(p=>p.startsWith('aer.lock.json.aer-'));assert.equal(remnants.length,1);await rm(path.join(interrupted,remnants[0]));await install({target:interrupted,skills:'none'});assert.equal((await check({target:interrupted})).status,'current');
 });

@@ -16,8 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  release-linux:
-    name: release-linux
+  release-linux-runtimes:
+    name: release-linux-runtime
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -37,8 +37,8 @@ jobs:
       - name: Validate final package, lifecycle, research and preserved regressions
         run: npm run release:check
 
-  release-windows:
-    name: release-windows
+  release-windows-runtimes:
+    name: release-windows-runtime
     runs-on: windows-latest
     timeout-minutes: 20
     strategy:
@@ -57,6 +57,30 @@ jobs:
         run: node tools/probe-filesystem.mjs
       - name: Validate final package, lifecycle, research and preserved regressions
         run: npm run release:check
+
+  release-linux:
+    name: release-linux
+    needs: release-linux-runtimes
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every Linux runtime cell
+        env:
+          RESULT: ${{ needs.release-linux-runtimes.result }}
+        run: test "$RESULT" = success
+
+  release-windows:
+    name: release-windows
+    needs: release-windows-runtimes
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every Windows runtime cell
+        env:
+          RESULT: ${{ needs.release-windows-runtimes.result }}
+        run: test "$RESULT" = success
 
   research-preflight:
     name: research-preflight
