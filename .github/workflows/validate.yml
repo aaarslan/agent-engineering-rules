@@ -21,8 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
+      fail-fast: false
       matrix:
-        node: ['24.0.0', '24.x']
+        node: ['24.11.1', '24.x']
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -41,8 +42,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 20
     strategy:
+      fail-fast: false
       matrix:
-        node: ['24.0.0', '24.x']
+        node: ['24.11.1', '24.x']
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:

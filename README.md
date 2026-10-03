@@ -2,7 +2,7 @@
 
 AER supplies independently usable engineering skills, a compact project contract,
 assurance profiles, and an ownership-aware project installer. `@aaarslan/aer` is
-ESM, requires Node 24.0.0 or newer, and has no runtime dependencies.
+ESM, requires Node 24.11.1 or newer, and has no runtime dependencies.
 
 The release separates mechanical safety, client controls, and model outcomes.
 Isolated client-control probes do not establish model efficacy. See the dated
@@ -11,7 +11,7 @@ Isolated client-control probes do not establish model efficacy. See the dated
 
 ## Installation
 
-Install the pinned CLI with Node 24.0.0 or newer. Preview project changes before
+Install the pinned CLI with Node 24.11.1 or newer. Preview project changes before
 installing; the exercised recovery commands are in [INSTALL.md](INSTALL.md).
 A floating version does not preserve treatment bytes.
 

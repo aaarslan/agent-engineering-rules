@@ -18,7 +18,7 @@
   "bugs": "https://github.com/aaarslan/agent-engineering-rules/issues",
   "type": "module",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=24.11.1"
   },
   "bin": {
     "aer": "src/cli.mjs"

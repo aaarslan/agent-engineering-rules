@@ -59,16 +59,13 @@ export async function snapshot(root, relative, maxBytes = requiredThreshold(THRE
   try {
     const a = await h.stat({bigint:true});
     const bytes = await h.readFile(); const b = await lstat(file,{bigint:true});
-    if (!a.isFile() || !b.isFile() || a.nlink !== 1n || b.nlink !== 1n || !identity(s, a) || !identity(a, b) || a.size !== b.size || a.mtimeNs !== b.mtimeNs || BigInt(bytes.length) !== b.size)
+    if (!a.isFile() || !b.isFile() || a.nlink !== 1n || b.nlink !== 1n || !identity(s,a) || !identity(a,b) || a.size!==b.size || a.mtimeNs!==b.mtimeNs || BigInt(bytes.length)!==b.size)
       throw new AerError(`${relative} changed during snapshot`, 4, 'unstable-snapshot');
-    return { bytes, dev: device(b.dev).toString(), ino: b.ino.toString(), birthtimeNs: b.birthtimeNs.toString(), mode: Number(b.mode & 0o777n) };
+    return { bytes, dev: b.dev.toString(), ino: b.ino.toString(), birthtimeNs: b.birthtimeNs.toString(), mode: Number(b.mode & 0o777n) };
   } finally { await h.close(); }
 }
-// Older Windows libuv path stat reports a 64-bit volume serial while fstat
-// reports its low 32 bits. Current libuv consistently uses the low 32 bits.
-// BigInt retains the exact inode and timestamp; Number can round their identity.
-const device=value=>process.platform==='win32'?BigInt(value)&0xffffffffn:BigInt(value);
-function identity(a, b) { return device(a.dev) === device(b.dev) && BigInt(a.ino) === BigInt(b.ino) && (BigInt(a.ino) !== 0n || BigInt(a.birthtimeNs) === BigInt(b.birthtimeNs)); }
+// BigInt preserves exact filesystem identity and nanosecond timestamps.
+function identity(a,b) { return BigInt(a.dev)===BigInt(b.dev)&&BigInt(a.ino)===BigInt(b.ino)&&(BigInt(a.ino)!==0n||BigInt(a.birthtimeNs)===BigInt(b.birthtimeNs)); }
 export function sameSnapshot(a, b) { return a === null || b === null ? a === b : identity(a,b) && a.bytes.equals(b.bytes); }
 export async function guard(root, relative, expected) {
   if (!sameSnapshot(expected, await snapshot(root, relative))) throw new AerError(`${relative} changed after inspection; retain pending operation`, 4, 'interrupted');

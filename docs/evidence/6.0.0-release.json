@@ -179,9 +179,12 @@
       "windowsCurrent": "passed",
       "windowsMinimum": "19 failed, 1 cancelled, 15 passed; snapshot mismatch and child readiness hang; job timeout"
     },
-    "correction": "BigInt exact identity/nanosecond metadata with native Windows low-32-bit volume serial; unchanged/equal-byte replacement regression; bounded child readiness",
+    "correction": "Exact BigInt filesystem identity, bounded child readiness, verified Node 24 LTS floor; the intermediate normalization/reopen workaround is not shipped.",
     "localCorrectionChecks": "npm test && npm run validate: passed 36 tests and all validators",
     "finalClientProbes": "passed on prior release-doc artifact; corrected installer final artifact will be checked separately",
-    "modelTrials": 0
+    "modelTrials": 0,
+    "minimumRuntimeDecision": "Node >=24.11.1 LTS; actual Windows 24.0.0 path dev=0 vs handle dev=38870174. Exact BigInt guards retained; no original fixture assertion waived.",
+    "secondCi": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37150655914",
+    "secondCiResult": "Windows 24.0.0 failed promptly; metadata probe disproved the normalization-only hypothesis. LTS minimum matrix pending."
   }
 }

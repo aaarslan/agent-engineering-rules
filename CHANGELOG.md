@@ -30,8 +30,9 @@ Three-command CLI at `src/cli.mjs`, complete inventory/closed state schemas,
 read-only previews/checks, safe convergent selection/path moves, recoverable
 install/update/uninstall and explicit retention. Package allowlist excludes
 research/tests/tooling; diagnostics are explicitly invoked skill resources.
-Snapshots preserve exact BigInt inode/timestamp identity and normalize the native
-Windows volume serial across Node 24 versions. V5 detection refuses adoption; pinned exit is exercised against the audited
+Snapshots preserve exact BigInt inode/timestamp identity. Minimum Node 24.11.1
+LTS avoids inconsistent native Windows identity in Node 24.0.0; the full v5
+fixture remains unchanged. V5 detection refuses adoption; pinned exit is exercised against the audited
 packed fixture. Plugin channels are deferred. See the execution record for
 verification, limitations and material decisions.
 

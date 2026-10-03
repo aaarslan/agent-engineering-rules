@@ -1,8 +1,7 @@
 # Security policy
 
-The 6.0.0 tree is an unpublished candidate. Maintainers target the current released
-major for security fixes; this change does not claim a new npm release or make a
-support commitment for retired majors. V5 is retained only as a pinned exit and
+Maintainers target 6.x for security fixes. No support commitment is made for
+retired majors. V5 is retained only as a pinned exit and
 regression fixture. Report the exact installed package/revision and protocol
 schema, runtime/platform, representation, selections and a sanitized reproduction.
 

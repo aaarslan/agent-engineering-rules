@@ -2,7 +2,7 @@
 
 ## Install the pinned release
 
-With Node 24.0.0 or newer:
+With Node 24.11.1 or newer:
 
 ```sh
 npm install --global @aaarslan/aer@6.0.0
@@ -106,6 +106,8 @@ is not a power-loss transaction or a sandbox against a hostile filesystem owner.
 
 ## Leaving v5
 
+Use Node 24.11.1 LTS or newer for the pinned exit workflow. Node 24.0.0 has
+inconsistent native Windows file identity and is outside v6 support.
 V6 never adopts or removes v5 state/markers. The packed v5 fixture at audited
 revision `25377518505432f0362cca28de3b00fd525af20c` exercises this walkthrough:
 

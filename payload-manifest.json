@@ -1235,8 +1235,8 @@
     {
       "path": "src/fs-safe.mjs",
       "normalization": "utf8-lf",
-      "sha256": "4d537681ec91184817953cfbcff0a09e818459cb967987ea81779ec6bb705afc",
-      "bytes": 9183
+      "sha256": "5ae27908724858f38cd4291901710543440b55f39fb294e75e8661d94bb6f58a",
+      "bytes": 8902
     },
     {
       "path": "src/install.mjs",
@@ -1269,5 +1269,5 @@
       "bytes": 385
     }
   ],
-  "sourceIdentity": "1204e3da181c256035a9bdb459a2268365c3ef34d0e301ee4c3e5883d24a0c34"
+  "sourceIdentity": "462c070dfb87973886c405cda9b1905f09c4728b993630209cd4522faa4d75aa"
 }

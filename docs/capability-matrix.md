@@ -13,7 +13,7 @@ in source/tests**, **documented by a client**, **proposed AER policy**, and
 | Optional plugins | No final plugin artifact | Explicitly deferred; no discovery/control/update claim |
 | Other clients/cloud/account uploads | Canonical standard metadata only | Discovery, executable-resource runtime and controls unverified |
 | macOS arm64 / Node 24.21.0 | Local release/lifecycle tests | Observed local mechanical behavior only |
-| Minimum Node 24.0.0 | Exact runtime release check recorded separately | See release evidence; do not infer from the newer runtime |
+| Minimum Node 24.11.1 LTS | Exact runtime release check recorded separately | Node 24.0.0 is unsupported: inconsistent Windows filesystem identity; see release evidence |
 | Linux and Windows | GitHub Actions minimum/current Node 24 matrices | Executed results and exact runtimes are recorded in [release evidence](https://github.com/aaarslan/agent-engineering-rules/blob/v6.0.0/docs/evidence/6.0.0-release.json); job configuration alone is not evidence |
 | Better engineering / lower cost | No v6 provider/model trials | Unmeasured behavior; no efficacy or savings claim |
 

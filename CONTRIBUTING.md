@@ -10,7 +10,7 @@ npm run build
 npm run release:check
 ```
 
-Use Node 24.0.0 or newer. Commit source and generated resources/inventory together.
+Use Node 24.11.1 or newer. Commit source and generated resources/inventory together.
 Validators are read-only; CI has no provider credentials or runner. The preserved
 v5 fixture suite runs in a disposable copy and never enters the published package.
 Frozen research bytes must remain unchanged. Routing and fixture baselines are
