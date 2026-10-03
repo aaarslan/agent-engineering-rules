@@ -1,5 +1,42 @@
 # Changelog
 
+## 6.0.0 - 2026-10-03
+
+### Source corpus
+
+Thirteen independently usable skills with self-contained resources, compact
+contract/profiles and canonical browser-conditional UI-01 in both kernel and web
+skill. Preserve AE-01–AE-26 and rationale/counterexamples; qualify authorized local
+APIs, affected-surface inspection, unavailable evidence, material reporting,
+nonmaterial cleanup and framework-native boundaries. Research moved without
+changing frozen evidence. No efficacy or cost-saving claim is made.
+
+### Claude distribution
+
+Explicit `claude-code:PATH` rendering preserves manual invocation and the two
+review bindings to a read-only tool adapter. Instruction import is explicitly
+reviewed by the consumer. Discovery, explicit/manual invocation and restricted tools were probed on
+Claude Code 2.1.285 using deterministic loopback responses.
+
+### Codex distribution
+
+Explicit `codex:PATH` adds native declarative invocation sidecars; portable bodies
+remain equivalent. Discovery, implicit catalog exclusion and explicit activation were probed on
+Codex CLI 0.160.0 using deterministic loopback responses.
+
+### Runtime and package
+
+Three-command CLI at `src/cli.mjs`, complete inventory/closed state schemas,
+read-only previews/checks, safe convergent selection/path moves, recoverable
+install/update/uninstall and explicit retention. Package allowlist excludes
+research/tests/tooling; diagnostics are explicitly invoked skill resources.
+Snapshots preserve exact BigInt inode/timestamp identity. Minimum Node 24.11.1
+LTS avoids inconsistent native Windows identity in Node 24.0.0; the full v5
+fixture remains unchanged. V5 detection refuses adoption; pinned exit is exercised against the audited
+packed fixture. Plugin channels are deferred. See the execution record for
+verification, limitations and material decisions.
+
+
 ## Unreleased
 
 Source corpus, Claude distribution, and Codex distribution:
@@ -16,7 +53,7 @@ Repository evidence and validation:
 
 Source corpus:
 
-- Restored the complete-and-simple engineering target, explicit normative strength and execution order, evidence-based subsystem replacement, universal security/data/operations obligations, exact contracts, and an objective completion predicate. The complete kernel has enforced physical-line and byte budgets; [the grievance map](source/evals/grievances.json) records every motivating requirement and its owner.
+- Restored the complete-and-simple engineering target, explicit normative strength and execution order, evidence-based subsystem replacement, universal security/data/operations obligations, exact contracts, and an objective completion predicate. The complete kernel has enforced physical-line and byte budgets; [the grievance map](test/fixtures/v5/source/evals/grievances.json) records every motivating requirement and its owner.
 - Made verification investment proportional to risk, lifespan and contract stability; preserve relevant production regressions while reusing valid evidence. Removed mandatory scanner/help rituals, duplicate verifier checks, fixed report layouts, rewrite-size aversion and repository-independent visual prescriptions.
 - Made selected web-UI interaction continuity directly visible from one shared clause, with post-action keyboard evidence covering retained focus, editing state and the next action. [The observed failure and delivery decision](docs/decisions/5.0.0-ui-interaction-delivery.md) explain the change; **no efficacy claim is made**, and the original comparison remains unchanged.
 

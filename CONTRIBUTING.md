@@ -1,46 +1,25 @@
 # Contributing
 
-Thank you for improving Agent Engineering Rules. Contributions should be bounded, evidence-backed, and compatible with the project's explicit trust boundary.
+Follow [AGENTS.md](AGENTS.md). Author contract/profile text in `kernel/`, skill
+bodies in `skills/`, shared references/fragments in `source/shared/`. The controlled
+renderer updates shared copies and the full payload inventory; it does not fork
+engineering prose by host. Client metadata lives in `integrations/`.
 
-## Before opening a pull request
-
-1. Search existing issues and pull requests.
-2. Agree on scope for a material behavioral, installer, schema, or host-support change; an already authorized task needs no additional issue ceremony.
-3. Keep the universal contract compact. Put task-specific detail in the relevant skill or on-demand reference.
-4. Do not add compatibility claims for an untested host.
-5. Do not represent prose as a deterministic security or enforcement boundary.
-6. Do not add provider calls to CI or make live evaluation automatic.
-
-Report suspected vulnerabilities privately according to [SECURITY.md](SECURITY.md).
-
-## Source authority
-
-- Edit canonical material under `source/`.
-- Never edit generated `dist/claude/` or `dist/codex/` files directly.
-- After changing canonical source or its manifest, run `node tools/build-distributions.mjs`.
-- Commit canonical source and generated output together.
-- Preserve the installer ownership model: unowned collisions, customized files, and host-owned content must not be overwritten by assumption.
-
-## Validate
-
-Use Node.js 24 or newer.
-
-```bash
+```sh
+npm run build
 npm run release:check
 ```
 
-Research validation and the packed-install smoke test are provider-free. Do not supply provider credentials for repository validation. `npm run release:check` runs the complete release-readiness suite and is also enforced before publication.
+Use Node 24.11.1 or newer. Commit source and generated resources/inventory together.
+Validators are read-only; CI has no provider credentials or runner. The preserved
+v5 fixture suite runs in a disposable copy and never enters the published package.
+Frozen research bytes must remain unchanged. Routing and fixture baselines are
+mechanical preparation, not model efficacy results. Keep the narrow study-record
+schema and separate paired protocols for each authorized comparison/configuration.
 
-## Pull requests
-
-A pull request should:
-
-- solve one coherent problem;
-- explain the user-visible effect and trust-boundary impact;
-- add or update regression coverage when stable behavior, exposure and failure cost justify it;
-- list the exact verification commands run;
-- update public documentation only when the implementation changed;
-- avoid unrelated formatting or generated-file churn; and
-- use signed commits when possible.
-
-Maintainers may decline changes that add instruction weight without demonstrated value, create hidden policy, duplicate existing authority, or broaden the supported surface without reproducible evidence.
+For behavior expansion add paired live evidence or explicitly disclaim efficacy
+in the changelog. Record material deviations and safety-invariant coverage in
+[docs/decisions/](docs/decisions/README.md). Never weaken ownership assertions to
+obtain green checks. Use `feature/` branches and describe behavior/evidence in PRs.
+Release publication, tags, marketplace submissions, provider trials and repository
+settings require a separate explicit maintainer action. See [SECURITY.md](SECURITY.md).

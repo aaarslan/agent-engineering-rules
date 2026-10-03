@@ -5,10 +5,10 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MANIFEST } from './manifest.mjs';
+import { MANIFEST } from './research-manifest.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const sourceRoot = path.join(repo, 'source');
+const sourceRoot = path.join(repo, 'research');
 const HASH = /^[a-f0-9]{64}$/;
 const DIRECTIVE_ID = /^AE-\d{2}$/;
 const OFFICIAL_SOURCE_HOSTS = new Map([
@@ -131,7 +131,7 @@ export function grievanceErrors(document, { liveDirectiveIds, availableFiles, fi
     if (!ownerMatch) errors.push(`${label} owner must be a live kernel directive or docs/evaluation.md#future-evaluation`);
     else if (ownerMatch[2] && !liveDirectiveIds.has(ownerMatch[2])) errors.push(`${label} owner names missing directive ${ownerMatch[2]}`);
 
-    const ownerPath = ownerMatch?.[2] ? 'source/kernel/contract.md' : ownerMatch ? 'docs/evaluation.md' : null;
+    const ownerPath = ownerMatch?.[2] ? 'kernel/contract.md' : ownerMatch ? 'docs/evaluation.md' : null;
     if (ownerPath && !availableFiles.has(ownerPath)) errors.push(`${label} owner file does not exist: ${ownerPath}`);
     if (ownerPath === 'docs/evaluation.md' && !/^#{1,6}\s+Future evaluation\s*$/im.test(fileContents.get(ownerPath) ?? '')) {
       errors.push(`${label} owner anchor does not exist: docs/evaluation.md#future-evaluation`);
@@ -242,16 +242,27 @@ export async function validateCorpus({ today = new Date().toISOString().slice(0,
     json('compatibility/models.json'),
     json('compatibility/conflicts.json'),
     json('policy/policy-map.json'),
-    readFile(path.join(sourceRoot, 'kernel/contract.md'), 'utf8'),
+    readFile(path.join(repo, 'kernel/contract.md'), 'utf8'),
     readFile(path.join(repo, 'docs/evaluation.md'), 'utf8'),
   ]);
   const errors = [];
+  const semantic=await json('evals/semantic-map.json');
+  if(semantic.schemaVersion!==1||semantic.directives?.length!==26||semantic.ui?.id!=='UI-01')errors.push('invalid semantic change map');
+  for(const entry of semantic.directives??[]) {
+    if(!entry.before||!entry.after||!kernel.includes(entry.after)||!directives.directives.some(d=>d.id===entry.id&&d.rationale&&d.counterexample))errors.push(`semantic map does not close over live directive ${entry.id}`);
+    if(entry.status==='preserved'&&entry.before!==entry.after)errors.push(`undeclared semantic change ${entry.id}`);
+  }
+  const sourceMap=await json('evals/source-map.json');
+  if(sourceMap.schemaVersion!==1||new Set(sourceMap.entries?.map(e=>e.source)).size!==sourceMap.entries?.length)errors.push('invalid source relocation map');
+  for(const entry of sourceMap.entries??[])for(const target of entry.targets??[]) {
+    try {await stat(path.join(repo,target));}catch {errors.push(`source relocation lost target ${target}`);}
+  }
   errors.push(...directiveScenarioErrors(directives, scenarios, kernel));
   const liveDirectiveIds = new Set(directives.directives.map((entry) => entry.id));
   const scenarioIds = new Set(scenarios.scenarios.map((entry) => entry.id));
 
   const availableFiles = new Set();
-  for (const relative of ['source/kernel/contract.md', 'docs/evaluation.md', 'tools/validate-source.mjs', 'tools/validate-corpus.mjs']) {
+  for (const relative of ['kernel/contract.md', 'docs/evaluation.md', 'tools/validate-v6.mjs', 'tools/validate-corpus.mjs']) {
     try { await stat(path.join(repo, relative)); availableFiles.add(relative); } catch { /* reported by the owning validation */ }
   }
   for (const entry of grievances.grievances ?? []) {
@@ -269,6 +280,8 @@ export async function validateCorpus({ today = new Date().toISOString().slice(0,
   const bytesByPath = new Map(await Promise.all(historicalPaths.map(async (relative) => [relative, await readFile(path.join(sourceRoot, relative))])));
   errors.push(...frozenHistoryErrors(frozenHistory, historicalPaths, bytesByPath));
   const research = new Set(MANIFEST.research ?? []);
+  const actualResearch=await walk(sourceRoot);
+  if([...research].sort().join('\n')!==actualResearch.sort().join('\n'))errors.push('repository research inventory is stale');
   for (const relative of ['evals/directives.json', 'evals/scenarios.json', 'evals/grievances.json', 'evals/frozen-history.json', ...historicalPaths]) {
     if (!research.has(relative)) errors.push(`MANIFEST.research omits ${relative}`);
   }

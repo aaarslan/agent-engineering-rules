@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-instruction-ingestion-v2",
+  "scenario_id": "enforcement-compatibility-and-profile",
+  "contract_version": "2.0.0",
+  "operation": "load-instructions",
+  "interface": {"transport": "http", "method": "POST", "path": "/load-instructions", "request_content_type": "application/json", "response_content_type": "application/json", "errors": {}},
+  "required_case_kinds": ["canonical-one-copy", "duplicate-two-copy"],
+  "artifact_capture": "The harness captures ordered HTTP results in case-results.json; the runtime writes no files."
+}

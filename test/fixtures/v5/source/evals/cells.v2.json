@@ -1,0 +1,3280 @@
+{
+  "schema_version": 2,
+  "evaluation_contract_version": "2",
+  "plan_id": "frozen-experiment-cells-v2",
+  "archive_before_provider": true,
+  "cells": [
+    {
+      "cell_id": "cell-24380a3a74d2c31c3397",
+      "experiment_id": "opus-final-verification",
+      "host": "claude",
+      "scenario_id": "mode-evidence-and-retry",
+      "arm_id": "absent",
+      "task_id": "synthetic-diagnostic-recovery-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "generic_final_verification",
+      "factor_value": false,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/bug-fix.md": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e7591fdc486359f79e4ca30cba5961bffb2101f0bd1560ce2e1ef5c6b61285c3",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "8c2a5f82a0b46352ff662f847e50a26712b9751b4876121404fb8dbdfc73c11d",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "a671a8cd5bff00d47db94d5042fc20d3f11d66f6f8bac4862c6245f48ec00689",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-73a5a483a47f771b688d",
+      "experiment_id": "opus-final-verification",
+      "host": "claude",
+      "scenario_id": "mode-evidence-and-retry",
+      "arm_id": "present",
+      "task_id": "synthetic-diagnostic-recovery-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "generic_final_verification",
+      "factor_value": true,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "8e2837d9c4a18b3a0edead79522fbfa3ea408d612e87eec9c59984a884e9891f"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/bug-fix.md": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "8e2837d9c4a18b3a0edead79522fbfa3ea408d612e87eec9c59984a884e9891f",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "f4954086710ef8c06e9fc835bb8ddddc8825536895b85323aef92fc8e2d6f786",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "c51cf8e77941bf35ee9a48e6767c6b7e22e82d0b714fb3126791051207c03d04",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "591a544ef47d6dce3e7833f3ef64c3249440f94a24490281595778c34a0e67ae",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-a26816898b44bbd9a0a1",
+      "experiment_id": "opus-final-verification",
+      "host": "claude",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "absent",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "generic_final_verification",
+      "factor_value": false,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "9488ec869278b4c03265b1a2a4f4782f469106caf2745ae7345f154a4e872895",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "0dfdb9283113284351d7a74ce6e8d491b73c10c60036f9bfd6cbe16b66f04700",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-32181ebf7aaa92039e29",
+      "experiment_id": "opus-final-verification",
+      "host": "claude",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "present",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "generic_final_verification",
+      "factor_value": true,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "8e2837d9c4a18b3a0edead79522fbfa3ea408d612e87eec9c59984a884e9891f"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "8e2837d9c4a18b3a0edead79522fbfa3ea408d612e87eec9c59984a884e9891f",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "07bc44149aecab884266e47cada7595a29182782c110a591b557bae29d8afa47",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "39e71d2471d48a3fe13984608a6cf208ccd8bafdf80584aadb5f8b41f458f21f",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "b0470bfb487394358125afa7447990564c2531a2d28d5cb67916af61c85bb1fc",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-42262d8167b36c229b60",
+      "experiment_id": "opus-subagent-count",
+      "host": "claude",
+      "scenario_id": "mode-evidence-and-retry",
+      "arm_id": "zero",
+      "task_id": "synthetic-diagnostic-recovery-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "maximum_subagents",
+      "factor_value": 0,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/bug-fix.md": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "9a983f23fa30311b3f2fe1b178e413854152f338e94d815c9eb8b584c8c3e6a1",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "8c2a5f82a0b46352ff662f847e50a26712b9751b4876121404fb8dbdfc73c11d",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "de857ee34173b7e5541dddf68d363fa867b50386fe4145d6b06056cfad5e5389",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-734d9d0344d8e40610c5",
+      "experiment_id": "opus-subagent-count",
+      "host": "claude",
+      "scenario_id": "mode-evidence-and-retry",
+      "arm_id": "one",
+      "task_id": "synthetic-diagnostic-recovery-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "maximum_subagents",
+      "factor_value": 1,
+      "effort": "provider-default",
+      "max_subagents": 1,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/bug-fix.md": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e62b1234db24b10713da2e477ebf34688ec51514b0835e855d0d3a049920f468",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "8c2a5f82a0b46352ff662f847e50a26712b9751b4876121404fb8dbdfc73c11d",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "2281f49810d71199dcbeeb757041bc6355872d94fabb66064693ab9370d28f99",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-2c240b8568c172df3be8",
+      "experiment_id": "opus-subagent-count",
+      "host": "claude",
+      "scenario_id": "mode-evidence-and-retry",
+      "arm_id": "multiple",
+      "task_id": "synthetic-diagnostic-recovery-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "anthropic-opus-5",
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "maximum_subagents",
+      "factor_value": 2,
+      "effort": "provider-default",
+      "max_subagents": 2,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/bug-fix.md": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "1920e119b039bef90fa99cdf61c7a5e5c822295bbd6d815aba4ee902c18f8797",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "84e862a6d2dd74c3a4d6bb82b3dd1e59b034e0dc0b0810c85ebde0f12a6772ce",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "8c2a5f82a0b46352ff662f847e50a26712b9751b4876121404fb8dbdfc73c11d",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "5abc994926c99035e8e5b79c8f292e38ab451475a977ce49a2af7213262ea85e",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-c3797e75c57fb74604d5",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "all-kernel-groups",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation",
+        "evidence-and-completion",
+        "enforcement-and-compatibility"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "d3a1f44d443af887a11715150605546c9eec6f3bcb719b941a6b91b06b9ad19c",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "f3cf7ae665dbf8888b2362589c75e2dde1647f9ea2100032a80f7ac147e58c47",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "37536e79ba94ad27a7e3bd8622879e4d24cf32b4cf20cfaa5a9359fd1ce4b5a2",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-7ef1ac99ad0c31d539e3",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "without-enforcement",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation",
+        "evidence-and-completion"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "76fa157fbc843e416793632069349514d0c65e9f56dbf91640f5e1054c7d8a69"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "76fa157fbc843e416793632069349514d0c65e9f56dbf91640f5e1054c7d8a69",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e68d63de4f3f2ca6b4d921a3d9fe2611b59dbbf595297d9a6195e23c84f235ff",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "7f44dcfa4a1acc8b353078a86ad790d61e4277776fc8733a91b112498eb72a99",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "3b18f52dba66ef11fec1550494d4fd71bf1db91988bd503a36cbc481e6986479",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-ec3a9e22a4615664b0d9",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "without-evidence-or-enforcement",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "32d4b4bd137aa99aa4c72e7b13264feb811f3e328bde1570678005c6e42cb1c3"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "32d4b4bd137aa99aa4c72e7b13264feb811f3e328bde1570678005c6e42cb1c3",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "2fd5de6c2487cadacfd6176426d753926ac7250754adadcd4e7f0eebebe7e6ed",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "cd658797cc0fe0bf5c5aa4dcb71093d80777e5a299d5cabd97ac724f5f82dda0",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "8b0653fce4ddde0811685867a9c5bf98fa8350e9b4eb38993e92ab22a53eac03",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-82c314fafeff5b396acb",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "authority-and-mode-only",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "ab40173eec5af5b73ad3a9dd1beec17c7da323260516fdf1018203d2427fa37a"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "ab40173eec5af5b73ad3a9dd1beec17c7da323260516fdf1018203d2427fa37a",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e05c7b38b8547d1088c08d968ea5f3cad6642883bd451eb1a237667b49d1b9e0",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "85bb48d2b6890287e5a91c870ef04eed5fe3023fc8958986765e8255ad2afd0c",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "1ef31f43c73012ef2aae30c5e0642db958f10291efb5aab01edf4a596d333f80",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-89e4410b9eb9134b8ca8",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "authority-only",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "39fe4f3b02ec6300825dfafd28dfdd38614a33ed64a842244f4002dc6f0a4c42"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "39fe4f3b02ec6300825dfafd28dfdd38614a33ed64a842244f4002dc6f0a4c42",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "d03eacd4c21b0671c46a5aae59f68618b8c345ce9f0e5be129265e0ebecc3a67",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "c3d11a5d5d01883325cf4d876e324b9d808e9abaa55e8193314bb502a5963186",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "e274165bc294a54141acb2183b65fdb2420615467c3a6e7980fc26c5519bcc72",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-bf5e1918a947be12450f",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "no-kernel-groups",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "fdb0dbf0c52371bec2033ef7389086d9419b5575e41a271bb0d5694f8568cdc9"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "fdb0dbf0c52371bec2033ef7389086d9419b5575e41a271bb0d5694f8568cdc9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "081df3c848941eab5fbeb48c666d9f78e037e03453d697436639c7606ff557cb",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "4815305f51127e525f023e8ed3111aa0a952d31f6a935464a899288ba9adeff3",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "56dcb3d15154b192212d2766ef1a9a3f2bc9ef2cd50ed5266d9d1d0df3f7b0ce",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-971dedec8ec17e635a53",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "all-kernel-groups",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation",
+        "evidence-and-completion",
+        "enforcement-and-compatibility"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "2657fb41600dfc26760ac45248c6657d254c0985d3eaa745498bd59e5b0dd568",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "2899b0818688ccc551f5dd89115bad10d69cd3c8b54d91953be7c573ebc9a4d7",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-f33f974be984e3c5e889",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "without-enforcement",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation",
+        "evidence-and-completion"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "76fa157fbc843e416793632069349514d0c65e9f56dbf91640f5e1054c7d8a69"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "76fa157fbc843e416793632069349514d0c65e9f56dbf91640f5e1054c7d8a69",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "909444409dae13bb19fa64a234d24a524fbc2b2ba7df963005f9f49bbcb9e20c",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "5758fafb2178f4fede87ec35dc3dffc71cacc26612da44942feed97050caaefb",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "1d4b65d882cdb0710e1754dff3339572901aa02f4076b0ba70d985254df70fe7",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-a97aa02de0eeaa8afd38",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "without-evidence-or-enforcement",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode",
+        "implementation"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "32d4b4bd137aa99aa4c72e7b13264feb811f3e328bde1570678005c6e42cb1c3"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "32d4b4bd137aa99aa4c72e7b13264feb811f3e328bde1570678005c6e42cb1c3",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "616a51343bc8207c84494255fefa5fcb042c4649a25a7686fb55209ca1b37ece",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "b92bbd11b9afcb347eb6bbc121c7c2eac94eb5e2d6cd2cd3a66353a2a7d019ae",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "058223ac2944eb328b13bccebc4e60af5f60e3f09e95a0eea1c99d2d28724e3f",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-6da89c9cebf25d6330e9",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "authority-and-mode-only",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope",
+        "operating-mode"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "ab40173eec5af5b73ad3a9dd1beec17c7da323260516fdf1018203d2427fa37a"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "ab40173eec5af5b73ad3a9dd1beec17c7da323260516fdf1018203d2427fa37a",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "159a1ef0b04382f9905176ede410adf233b5455760ce525c160f9d5d014789f2",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "e11ad2583e23673207c3bd084fe9dca3909938bf026f14bafa9e65a9e26930be",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "ec1cfea70292f61090b3130509bd217070e1c94ac81c8e008e7fd165f212abf8",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-194077a6594d8c792aa7",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "authority-only",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [
+        "authority-and-scope"
+      ],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "39fe4f3b02ec6300825dfafd28dfdd38614a33ed64a842244f4002dc6f0a4c42"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "39fe4f3b02ec6300825dfafd28dfdd38614a33ed64a842244f4002dc6f0a4c42",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "9dca9a0f777d8d55235c71a5397ffa6e5afde99c7c014e3f6e05b2eb134be54c",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "9bad14a3236f474fa2a10c80762242adcda33e6f8169e66d28151e343f4e123d",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "c954988870307fd3eb4956bc28c09a07710c344ebfc2cc542ab91aaec470de83",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-5182530fd30ce8fea266",
+      "experiment_id": "gpt-instruction-group-removal",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "no-kernel-groups",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "loaded_instruction_groups",
+      "factor_value": [],
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "fdb0dbf0c52371bec2033ef7389086d9419b5575e41a271bb0d5694f8568cdc9"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "fdb0dbf0c52371bec2033ef7389086d9419b5575e41a271bb0d5694f8568cdc9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "fc3bf6eb36d38a602b65f3fc898d3f05cbecc679c8001c4326583f6e8b46d2e7",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "e9addb2059cefecbc8cae2e410568cbb9eec799b63737a200df778f843594bdd",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "88692807511152bfe8ee2e65d8f42e78d65a9b3089eec4401e61ec90fc7b95ae",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-8c483918ae9bdc77cb21",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "low",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "low",
+      "effort": "low",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "8d9d435ed9b941a4dcddda21625a639bb73dcf22f7e0259509f35df669cf4a01",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "f3cf7ae665dbf8888b2362589c75e2dde1647f9ea2100032a80f7ac147e58c47",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "d5382e9ea014198652e3190450e79b373dc579664c142f098fb4218c377d3bdd",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-dab2c3ecda9be3f2b353",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "medium",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "medium",
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "834c5258fee3b6877e90bf5d9153dd13287cff857a245bd1a40f14b40dce5a21",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "f3cf7ae665dbf8888b2362589c75e2dde1647f9ea2100032a80f7ac147e58c47",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "aaae27fde63454345526b1e672ce77b028266ca964e9f697356d94d64c4daacf",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-3fee7b55d3eee11fe4c4",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "high",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "high",
+      "effort": "high",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e833198aaaf97fe82103ab91d06601770bffb2f82fd704e30e84d8844ac9869a",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "f3cf7ae665dbf8888b2362589c75e2dde1647f9ea2100032a80f7ac147e58c47",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "ceba67e5ccda04fe1efc5a4ec628bb2e9908f6ca43134bcc0fb04c2baf1b9f2c",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-c146bebaad49a16c5c1a",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "xhigh",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "xhigh",
+      "effort": "xhigh",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "12b6d23e22911da43ce8858e4fe0366492afe66793529d842d4069b30e6b1507",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "2d8481a765df9e54aaa510622798040583c9f60aa5202078b4e0cfce9693eb65",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "f3cf7ae665dbf8888b2362589c75e2dde1647f9ea2100032a80f7ac147e58c47",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "86aff27fd286a18880bdefd5af0470281d9aad26b68f7bf320b27c5cb9f77e94",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-fa3c0e9b5717b144847b",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "exact-contract-and-lifecycle",
+      "arm_id": "low",
+      "task_id": "synthetic-normalize-record-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "low",
+      "effort": "low",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/data-change.md": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "3f54cc128f2f332ee8098955842617c53f8b6d243817e371a141521efc890dcc",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "05232c52c394822c0b2a8e4bdc255843231ba316699182a68d28230885c5bfe4",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "6c871a7b5a0bda7316b4e8711c11adea74fcf6c49ef39efbf044e9bc2c22eec2",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-0a5a01cc008ee6ab931b",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "exact-contract-and-lifecycle",
+      "arm_id": "medium",
+      "task_id": "synthetic-normalize-record-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "medium",
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/data-change.md": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "74392e40fcf577f6db9eda933abd0659be528dc00d995a2f02ccd282dd767fc1",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "05232c52c394822c0b2a8e4bdc255843231ba316699182a68d28230885c5bfe4",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "4ca21af1f13dd254e0e6f4fbb58a739bd3c12833a54c0a4c0aa683ba7721d898",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-6bd81f2555e50f020e06",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "exact-contract-and-lifecycle",
+      "arm_id": "high",
+      "task_id": "synthetic-normalize-record-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "high",
+      "effort": "high",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/data-change.md": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "faf0d95a03d36afd11eb39f8ea9d0223a18d218acf3233fc15f9d4853c86698b",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "05232c52c394822c0b2a8e4bdc255843231ba316699182a68d28230885c5bfe4",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "5ad44065bea63be54399a8bd0038cd4d75542d734ec38080b2188868929018d1",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-12137e857e7d95e70711",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "exact-contract-and-lifecycle",
+      "arm_id": "xhigh",
+      "task_id": "synthetic-normalize-record-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "xhigh",
+      "effort": "xhigh",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/data-change.md": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bebdc56cec427d38fde35b3ab4546b497542e6c650a6cf0dc7c6a46262c7dade",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "7d83341a1a5769d1b736b13e8f4a017b69eaa2d9678fc7ef75dfa383af2e88e5",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "05232c52c394822c0b2a8e4bdc255843231ba316699182a68d28230885c5bfe4",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "8d6bdcd2922a0e97e2d1f694bdbe1bdcec9cfc48017e1079767140670b1b6ff9",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-b41263c7ed0dd6b3e87f",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "low",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "low",
+      "effort": "low",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "ac33613b7343349003d38359f787550f5ae53070d330384d6dcf891299079f67",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "88eaf49f8086ea80b88725cb64c98be952931b037bf13d270e0f31389295f1f0",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-d55d66ea25d7f4cf951b",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "medium",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "medium",
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "6dec5b441e30e70eff25c8ca6d49aa2932c9a45605ac6e7d11fc4484b37e2da3",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "dd1b6eb12bf81e567f181feaae7a2677c976cd0c632bd0369e2cee83f20d14dd",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-bfca753b5b3cc9320150",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "high",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "high",
+      "effort": "high",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "eaf82130bd53b7d542af8dd7af73b8fb220790cdcd3c90405c23d92d378d4908",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "d0c343c64c8216acf0b35c9181c634d0c0b6915bff2cb41c702d1e90f4b33540",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-17690f337974f3bf657f",
+      "experiment_id": "gpt-effort-sweep",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "xhigh",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": "openai-gpt-5.6",
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "effort",
+      "factor_value": "xhigh",
+      "effort": "xhigh",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "3c11bc9e1b2c203c6397e43845725793e62f38d8b674a2046d70d0d5bfef5f38",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "a09a245459aa0fbf016193005b868f712fda01c4fb1d3bbc30385f0d15fa9746",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "2f974eb44d3d5f6a73fba71d9dd0c501d61ec7f909392b0224e58e53991f6240",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "4dc0951a48a45ff216fec220cd387c6212b1291b04867d08fdd0fa2faabd5623",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-c32f4f31865aa4d82236",
+      "experiment_id": "duplicate-instruction-ingestion",
+      "host": "claude",
+      "scenario_id": "enforcement-compatibility-and-profile",
+      "arm_id": "canonical-only",
+      "task_id": "synthetic-instruction-ingestion-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "universal_instruction_copies",
+      "factor_value": 1,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/high-assurance.md": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-security-review.md": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "c6add0d4499021f9e1129e16ca74afec5b077bdfb63d6a4f2bb55fa26d8ebc29",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "3af6598633f693e5d6774769d5c9f8f8adae822e349b33631deb4e34132b55c1",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "c113264194ef3acdfd0dfce3aa78099d6cdc005da7387882bfb328f94879d006",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-a32284bf2dff67fa3143",
+      "experiment_id": "duplicate-instruction-ingestion",
+      "host": "claude",
+      "scenario_id": "enforcement-compatibility-and-profile",
+      "arm_id": "duplicated-root-files",
+      "task_id": "synthetic-instruction-ingestion-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "universal_instruction_copies",
+      "factor_value": 2,
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/high-assurance.md": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-security-review.md": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "a6654cf0875e2563181697edc2637e01d21cfa16d185809c7afc35b23193b78d",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "70ea06a7c20f47288ac80ff64957cd248a4f07ce60fb81321490db46c6fefa9e",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "23c340a1ae75e5e6e6865240c2168d01ae84035b353fb4b035ae9bf04f5b084e",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-62b130b352444d2398e2",
+      "experiment_id": "duplicate-instruction-ingestion",
+      "host": "codex",
+      "scenario_id": "enforcement-compatibility-and-profile",
+      "arm_id": "canonical-only",
+      "task_id": "synthetic-instruction-ingestion-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "universal_instruction_copies",
+      "factor_value": 1,
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/high-assurance.md": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-security-review.md": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "0100e4686a18f3adbeeebb3660bf7efd24fd64b1c5ee1d9e7b9d053ce7974862",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "3af6598633f693e5d6774769d5c9f8f8adae822e349b33631deb4e34132b55c1",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "42456a25db862b12814280962db34a6da69c301bd2b32030d51f4aa60f28d40b",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-24ecda38418bed5718c2",
+      "experiment_id": "duplicate-instruction-ingestion",
+      "host": "codex",
+      "scenario_id": "enforcement-compatibility-and-profile",
+      "arm_id": "duplicated-root-files",
+      "task_id": "synthetic-instruction-ingestion-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "universal_instruction_copies",
+      "factor_value": 2,
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/high-assurance.md": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-security-review.md": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "1fdc23328cfc70206cdd6643f798f41aab8f0e91a98436db075a9cc0046150a9",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a98d931a3e67ae884ada1027fcc1bdc64ad8fe254a9d6fc840f1bf2ec080a181",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "d05e6097d185dcbc856d56575b323981aa23f8333ad3ec99aeeadc0338029a12",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "70ea06a7c20f47288ac80ff64957cd248a4f07ce60fb81321490db46c6fefa9e",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "55ae9f15b63638250e1cf376dea819e9bc5cc41b3b89e4a56c79077ac6d3eee2",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-0fe6d0c909619bde8d2b",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "below-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 1000,
+        "selected_skill_estimated_tokens": 400
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "skills/feature.md": "8c830f049009a6a751f112221d90d90674cd404dfe97d429e0ddd6c387832da4"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "8c830f049009a6a751f112221d90d90674cd404dfe97d429e0ddd6c387832da4",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "7201d1179df842848cbd305c9d2bfea736a6b14dc07e87e1b052b8840952f5a4",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "ba5ccf0851b7c3c9ae52966856c65b9b22ef88fd89605ad05f2749ccc435b259",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "cc719d1a6bcd655e54e3acb79d83e3e52dbcfbfbabe335914d6c8902f88ca75c",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-901171023110caf0a491",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "at-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 2000,
+        "selected_skill_estimated_tokens": 800
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "691c502831d232fb4f2908538068ce89a16b60754418984e4ca6b835f601700b"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "691c502831d232fb4f2908538068ce89a16b60754418984e4ca6b835f601700b",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "09971f31dc4bce7efa919b734b4188a0564acd7d975ce0a22e00ded0577f4b36",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "85f586a768e526eabad55a229433c2fcc41db1a072ce46871c3d938ae7ccfb18",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "3af467925c7916e1a0e1093a8a28531204516776010d0685a96ff60939f86d35",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-7123f4bb40f4e29d8039",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "above-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 4000,
+        "selected_skill_estimated_tokens": 1600
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "skills/feature.md": "4d382f80e9a9369dce80186c6d299528bbdcc10dd669e48bc995f30a351d578c"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "4d382f80e9a9369dce80186c6d299528bbdcc10dd669e48bc995f30a351d578c",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "0139cf949c24179aaca0f679769e8065bd7b277fb3705c3e50c1c124a7f7af2f",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "de28057471bf8cf0982046b1041be5b254623968e16f4e7dcc79dd6fe5a5d33b",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "1002bb9e9f22d94c1d702511b56b42d71d66142f0f90328252552f5805b8429c",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-cf2965c16fc7b17011b7",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "below-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 1000,
+        "selected_skill_estimated_tokens": 400
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "skills/aer-verify.md": "65e1a3fe9ac6f1cc12729edcdc280ddeeebff1347aa3d4b940b8176423e4b2ab"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "65e1a3fe9ac6f1cc12729edcdc280ddeeebff1347aa3d4b940b8176423e4b2ab",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "17cebef87405257c3f5b1a3eb450b372d4c9aa4db0ddb2defe2af6bd72f95149",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "7527bc48b2759ca0d789876db7e3f6f74cfb123bc3980fc68f80fec46536f88f",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "8fd0a018e1d3cb6a74953c6d3eaba59ab4b7850a25b7b3e59d081f4aaeb52dfc",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-e930c71b96b1d29955a7",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "at-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 2000,
+        "selected_skill_estimated_tokens": 800
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "bcc8c89ad8e29a5b8ecc5a0f1ec103f610106d21e0e15622082e318f584d4d2d"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bcc8c89ad8e29a5b8ecc5a0f1ec103f610106d21e0e15622082e318f584d4d2d",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "ed54ba5ae6ec4ca5dffd3d2678c14aa908c9a2a3ab7ac45262d40f06f730e42b",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "c4bfa5bd29fca433054d91907360bd23afebf602e1560a2f170461acd2ec9922",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "9b79546c9e6282571a67dbb50a0c824ac35e2aa82ec3e9ad5fb4e1887f51025d",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-49bedd67a9e4ce2094b0",
+      "experiment_id": "skill-surface-size",
+      "host": "claude",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "above-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 4000,
+        "selected_skill_estimated_tokens": 1600
+      },
+      "effort": "provider-default",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "skills/aer-verify.md": "a7476a09258be13aea77082ae84766424887c6de95bcc980e484b7a7204e9777"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a7476a09258be13aea77082ae84766424887c6de95bcc980e484b7a7204e9777",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "7f9a4b525a9bb043bf5b23a729275be2db7d70b3a3a327ce60987d4f257bbedc",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "7f40ac9d76be4c6621fbd429239e38fb1f8b5ebf82ee4c256d17d70c0df731b3",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "e08e0e8cf7fc481d706d4ee42fa2f15e029a4a3ad120b939145ecd44b47845e8",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-bfb57128a914a08b52d0",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "below-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 1000,
+        "selected_skill_estimated_tokens": 400
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "skills/feature.md": "8c830f049009a6a751f112221d90d90674cd404dfe97d429e0ddd6c387832da4"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "8c830f049009a6a751f112221d90d90674cd404dfe97d429e0ddd6c387832da4",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "3e8fde97a8222b4a184cc5b3ad85acbc3b14a9ad1f93c7848ad277ec3fcf0a45",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "ba5ccf0851b7c3c9ae52966856c65b9b22ef88fd89605ad05f2749ccc435b259",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "07f55395f6024c91b6a049ad68e85ceb958a6b04dc10b35926237d10b7bf3bf6",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-77a49b4af7e46d0ba1b4",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "at-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 2000,
+        "selected_skill_estimated_tokens": 800
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/feature.md": "691c502831d232fb4f2908538068ce89a16b60754418984e4ca6b835f601700b"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "691c502831d232fb4f2908538068ce89a16b60754418984e4ca6b835f601700b",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "e9392f94651f530bbcdd9d5e18190f870f7dd34e3b69c4d078f45829bbc04c6a",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "85f586a768e526eabad55a229433c2fcc41db1a072ce46871c3d938ae7ccfb18",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "b31c5ebdc11d3832503af4b4aff837d8dc6f6add73371235db7100cde74da12b",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-1a2ac01c536532f835f6",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "scope-and-ownership",
+      "arm_id": "above-target",
+      "task_id": "synthetic-scope-projection-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 4000,
+        "selected_skill_estimated_tokens": 1600
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "skills/feature.md": "4d382f80e9a9369dce80186c6d299528bbdcc10dd669e48bc995f30a351d578c"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "4d382f80e9a9369dce80186c6d299528bbdcc10dd669e48bc995f30a351d578c",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "ec333f2928e343cd3730115ea4975b900350680d7e754d9c3d19463b3d5bd7b1",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "de28057471bf8cf0982046b1041be5b254623968e16f4e7dcc79dd6fe5a5d33b",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "b02989dd7b65c07873f138ab2a8504804ee29a33e13bd7bc06d6ae476253d928",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-0fea739a6f0077e0788a",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "below-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 1000,
+        "selected_skill_estimated_tokens": 400
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "skills/aer-verify.md": "65e1a3fe9ac6f1cc12729edcdc280ddeeebff1347aa3d4b940b8176423e4b2ab"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "e3f065ee10e95f10a9cbb95ce5b305b0e9f6c3fc6325a9384b386ebfb35d6b72",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "65e1a3fe9ac6f1cc12729edcdc280ddeeebff1347aa3d4b940b8176423e4b2ab",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "a74fb10bfb6fe1205a1b1169fad84f7ec17b66fa3dfefe46f435bd556cde2c4e",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "7527bc48b2759ca0d789876db7e3f6f74cfb123bc3980fc68f80fec46536f88f",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "b28a0a8b3bddfd1967604e24c9132ef5c990f2924c257d734dbac462937ce43e",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-35eb6baf226ae0919904",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "at-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 2000,
+        "selected_skill_estimated_tokens": 800
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "skills/aer-verify.md": "bcc8c89ad8e29a5b8ecc5a0f1ec103f610106d21e0e15622082e318f584d4d2d"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "75ea5da5053bf8bbd418b8493e653367c7380136488b951a4fd3489194bc8a06",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "bcc8c89ad8e29a5b8ecc5a0f1ec103f610106d21e0e15622082e318f584d4d2d",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "211d93096cd985ccab111f1e541f0fec4df3a6131d46378d80f46532d6099fdd",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "c4bfa5bd29fca433054d91907360bd23afebf602e1560a2f170461acd2ec9922",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "811100ee665a51f87f0cee0cd265493c9bee2953443922258e54304eddbcd3d5",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "cell_id": "cell-175fd304fedf85c8cefc",
+      "experiment_id": "skill-surface-size",
+      "host": "codex",
+      "scenario_id": "evidence-economics-and-truth",
+      "arm_id": "above-target",
+      "task_id": "synthetic-evidence-honesty-v2",
+      "base_treatment_id": "compact-task",
+      "model_overlay_id": null,
+      "provider": "openai",
+      "model": "gpt-5.6",
+      "factor_name": "skill_catalog_and_selected_body_scale",
+      "factor_value": {
+        "catalog_characters": 4000,
+        "selected_skill_estimated_tokens": 1600
+      },
+      "effort": "medium",
+      "max_subagents": 0,
+      "components": {
+        "kernel": {
+          "kernel/contract.md": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af"
+        },
+        "profile": {
+          "profiles/standard.md": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb"
+        },
+        "skill": {
+          "skills/catalog.txt": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "skills/aer-verify.md": "a7476a09258be13aea77082ae84766424887c6de95bcc980e484b7a7204e9777"
+        },
+        "plugin": {},
+        "hook": {},
+        "policy": {}
+      },
+      "component_artifacts": [
+        {
+          "name": "kernel.md",
+          "sha256": "95c4a215bbac18d3aeb4637b93bc0dd24b6da711a27b967d485658eda03793af",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "profile.md",
+          "sha256": "6505d3777a3d9643b17b37f736ff47b75e5c6d7685baaba22242fcd20ee8b0fb",
+          "content_type": "text/markdown"
+        },
+        {
+          "name": "skill-catalog.txt",
+          "sha256": "2b14ecb80c6083832cec152dcadff325432a0a272e26811d1cc4f11e95e767a9",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "task-skill.md",
+          "sha256": "a7476a09258be13aea77082ae84766424887c6de95bcc980e484b7a7204e9777",
+          "content_type": "text/markdown"
+        }
+      ],
+      "instruction_assembly": {
+        "name": "instruction-assembly.json",
+        "sha256": "a17bca487aa1cde1d98e9449f7ecb618308a4eb56c90a0ddbd49594f86144f6e",
+        "content_type": "application/json"
+      },
+      "expanded_instructions": {
+        "name": "expanded-instructions.txt",
+        "sha256": "7f40ac9d76be4c6621fbd429239e38fb1f8b5ebf82ee4c256d17d70c0df731b3",
+        "content_type": "text/plain"
+      },
+      "execution_config": {
+        "name": "execution-config.json",
+        "sha256": "8739f1404f50bfda7838ba4f4ce1fab6b9550ec9bcc39d3c8d622e4f2e17d6bb",
+        "content_type": "application/json"
+      }
+    }
+  ]
+}

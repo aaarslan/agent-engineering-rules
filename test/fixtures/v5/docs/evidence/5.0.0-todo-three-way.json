@@ -1,0 +1,259 @@
+{
+  "experiment_id": "todo-three-way-20260912-01",
+  "completed_utc": "2026-09-12T19:23:07Z",
+  "status": "completed",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "attempts_per_arm": 1,
+  "context": "Fresh agent histories, separate directories and origins; same frozen task and prompt template; shared host and base agent instructions.",
+  "score_unit": "Strict requirement groups, out of 10; a group fails when an exercised required case fails.",
+  "arms": [
+    {
+      "arm": "arm-a",
+      "treatment": "current v5",
+      "status": "completed",
+      "timeout": false,
+      "score": 10,
+      "instructions_sha256": "8c74735620a7ad261838792a59bd77ec43a80c08538aa4027d73e78f398684f7",
+      "installed_agents_md": {
+        "lines": 60,
+        "bytes": 6533
+      },
+      "source": "Uncommitted v5 working tree based on c1353c7993b4ff78e09963b01207d8b2d2c5d29e; installed payload frozen in initial-artifacts.json."
+    },
+    {
+      "arm": "arm-b",
+      "treatment": "v3.1.1",
+      "status": "completed",
+      "timeout": false,
+      "score": 10,
+      "qualification": "One reset check used an accepted-confirmation adapter; native dialog handling is unverified.",
+      "instructions_sha256": "71f8a6af6bcc801832e8317b484dd422226d6c9292bfbb606b9e9629d5988c46",
+      "installed_agents_md": {
+        "lines": 80,
+        "bytes": 7353
+      },
+      "source": "Actual v3.1.1 installer from release tag; commit c1353c7993b4ff78e09963b01207d8b2d2c5d29e; annotated tag object 3734f197b4dc35e8d42ca391fa511b91f8faacbb."
+    },
+    {
+      "arm": "arm-c",
+      "treatment": "without AER",
+      "status": "completed",
+      "timeout": false,
+      "score": 8,
+      "instructions_sha256": null,
+      "installed_agents_md": null,
+      "source": "Same starter project without AER files."
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "name": "Launch, empty state, local operation",
+      "evidence": "All three rendered an empty list from absent storage and ran locally without packages, CDN assets, network APIs, or a build step.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Add and title handling",
+      "evidence": "All rejected whitespace-only input visibly, trimmed outside whitespace, preserved two internal spaces, allowed duplicate titles, and rendered <b>literal</b> as text.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Completion, order, active count",
+      "evidence": "All completed and reopened the selected duplicate, retained creation order, and displayed the global active count independently of filters.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Edit, save, cancellation",
+      "evidence": "All rejected a blank edit without losing the task, saved a trimmed replacement, and retained the original after Cancel and Escape. Focus is scored separately in group 10.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Delete identity and clear completed",
+      "evidence": "All removed the selected duplicate only and cleared completed tasks while retaining active tasks. Persisted IDs were checked for duplicate deletion.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Filters and search",
+      "evidence": "All composed uppercase PLAN substring search with All/Active/Completed and distinguished no matching tasks from an empty list.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Persistence contract",
+      "evidence": "All reloaded saved IDs, order, completion, and internal whitespace with the required version-1 object and task fields. Real localStorage values were inspected through an evaluator page.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Invalid data and explicit recovery",
+      "evidence": "All visibly rejected and preserved malformed JSON, version 2, a string-valued completed field, and duplicate IDs. Explicit reset wrote {\"version\":1,\"todos\":[]}. The v3.1.1 reset used an accepted-confirmation adapter after its native dialog stalled the browser driver; the native dialog itself is unverified.",
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "pass"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Failed writes, draft preservation, retry",
+      "evidence": "All retained saved state and initial drafts during injected add/edit write failures. V5 and v3.1.1 preserved a revised draft through recovery. Baseline Retry persisted the earlier proposal and cleared the revised draft.",
+      "failed_arms": [
+        "arm-c"
+      ],
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "fail"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Keyboard continuity and 390px layout",
+      "evidence": "All had reachable controls, visible keyboard focus styling, and no horizontal document overflow at a measured 390px viewport. V5 and v3.1.1 maintained usable focus after state changes. Baseline focus fell to BODY after toggle, reopen, Save, Cancel/Escape, deletion, and filtered removal.",
+      "failed_arms": [
+        "arm-c"
+      ],
+      "status_by_arm": {
+        "arm-a": "pass",
+        "arm-b": "pass",
+        "arm-c": "fail"
+      }
+    }
+  ],
+  "observed_failures": [
+    {
+      "arm": "arm-c",
+      "group": 9,
+      "steps": [
+        "Enable storage write failure with valid saved tasks.",
+        "Submit Original failed draft.",
+        "Change input to Revised draft to keep.",
+        "Restore storage writes without reloading.",
+        "Click Try again."
+      ],
+      "observed": "Saved title was Original failed draft; the input became empty. Revised draft to keep was lost.",
+      "expected": "Recovery must preserve the user's current revised draft.",
+      "code": "arm-c/app.js: commit stores a retry closure over the earlier next/after proposal; input changes do not invalidate it."
+    },
+    {
+      "arm": "arm-c",
+      "group": 10,
+      "steps": [
+        "Activate task actions by keyboard.",
+        "Inspect the focused element after rendering."
+      ],
+      "observed": {
+        "toggle": "BODY",
+        "reopen": "BODY",
+        "save": "BODY",
+        "cancel": "BODY",
+        "escape": "BODY",
+        "delete": "BODY",
+        "filtered_removal": "BODY"
+      },
+      "expected": "Continue keyboard use from the retained control, its trigger, or a logical neighboring control.",
+      "code": "arm-c/app.js: render replaces the whole task list; these action paths do not restore focus."
+    }
+  ],
+  "mobile_evidence": {
+    "method": "Each app exercised in its own same-origin iframe with 390px innerWidth. Native scrollbar occupies 15px; available client width and document scroll width were both 375px.",
+    "all_arms": {
+      "innerWidth": 390,
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "outside_controls": [],
+      "save_focus_outline_style": "solid",
+      "save_focus_outline_width": "2.4px"
+    },
+    "after_escape": {
+      "arm-a": "BUTTON: Edit task: Buy milk",
+      "arm-b": "BUTTON: Edit Buy milk",
+      "arm-c": "BODY"
+    }
+  },
+  "verification": {
+    "direct_by_orchestrator": "Real browser task flows, keyboard actions, corrupt storage fixtures, real localStorage inspection, injected quota-style write failures and recovery, measured mobile layout, screenshots, source inspection, protected-input and post-submission hash comparison.",
+    "permanent_tests_added_by_orchestrator": 0,
+    "existing_agent_tests_rerun_by_orchestrator": 0,
+    "agent_reports": {
+      "arm-a": "34 assertions in checks.html plus browser and syntax checks reported passing.",
+      "arm-b": "27 assertions in checks.html plus browser, syntax, contrast and advisory scan checks reported passing.",
+      "arm-c": "checks.mjs with DOM/storage doubles plus browser and syntax checks reported passing."
+    },
+    "omissions": "No broad suite reruns, paid APIs, repeated model samples, cross-browser/device matrix, actual disk/quota exhaustion, or OS-level read isolation. Agent-authored checks were not rerun because the independent browser cases supplied the relevant evidence. Their passing claims are not used as proof of all requirements.",
+    "test_artifact_bytes": {
+      "arm-a": 5745,
+      "arm-b": 6499,
+      "arm-c": 3444
+    },
+    "app_artifact_bytes": {
+      "arm-a": 13622,
+      "arm-b": 15961,
+      "arm-c": 14890
+    }
+  },
+  "integrity": {
+    "protected_inputs_unchanged": true,
+    "post_submission_app_changes": 0,
+    "details": "integrity.json",
+    "release_archive_sha256": "a63e54f3f3b26cd2c95e19de1213f82c15b17cac0be10235bf2a374efaed224d"
+  },
+  "infrastructure": [
+    "First baseline spawn was rejected by the host thread limit. A fresh baseline was dispatched after v5 finished, with its own full ten-minute allowance; the rejected spawn was not counted as a model attempt.",
+    "Three v3.1.1 corruption snapshots were taken before its module finished loading. Those observations were unresolved; waiting for the visible recovery control established the error state. No app change or model rerun.",
+    "V3.1.1 native reset confirmation stalled the browser driver; getJsDialog returned no dialog. A fresh tab and an opt-in evaluator accepted-confirmation adapter exercised the same app's reset path. Native dialog handling remains unverified. Original and adapted evaluator scripts are preserved."
+  ],
+  "evaluator": {
+    "initial_sha256": "55d72b078601094995168604e952a022d718c1a823d19014764dc22cc5498515",
+    "adapted_sha256": "257b922065040b66aba906b6b45804a575974e88a837f5fd21c060fce97b7ad2"
+  },
+  "metrics": {
+    "exact_agent_runtime_seconds": null,
+    "tokens": null,
+    "cost": null,
+    "reason": "Not exposed by these subagent tools; observed completion times and scheduling events are in run.json, not treated as compute-time measurements."
+  },
+  "conclusion": "Current v5 and v3.1.1 tied on the exercised groups; both exceeded this baseline sample by two groups. This experiment does not demonstrate v5 superiority over v3.1.1.",
+  "limits": [
+    "One sample per treatment, one model, one small task, unblinded evaluator.",
+    "Known task reused after v5 was revised using the earlier comparison; not a held-out general-efficacy evaluation.",
+    "Directory/prompt separation with fresh histories, not OS-level proof against treatment leakage.",
+    "Passing ten exercised groups does not prove every possible task interaction, general engineering quality, or all 110 grievances.",
+    "All three agents created optional permanent checks. File sizes and assertion counts do not establish testing efficiency or time saved.",
+    "The v3.1.1 reset qualification must accompany its score."
+  ]
+}

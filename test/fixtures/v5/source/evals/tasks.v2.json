@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "evaluation_contract_version": "2",
+  "provider_policy": {
+    "calls": "disabled",
+    "authorization_reference": null,
+    "spend_cap_usd": 0,
+    "network": "loopback-only",
+    "allowed_hosts": ["127.0.0.1"],
+    "credentials": "forbidden"
+  },
+  "tasks": [
+    {
+      "id": "synthetic-scope-projection-v2",
+      "contract_version": "2.0.0",
+      "scenario_id": "scope-and-ownership",
+      "repository_fixture": "evals/fixtures/scope-repository.v2.json",
+      "task_contract_fixture": "evals/fixtures/scope-contract.v2.json",
+      "input_fixture": "evals/fixtures/scope-cases.v2.json",
+      "expected_artifact_fixture": "evals/fixtures/scope-expected.v2.json",
+      "artifact_name": "case-results.json",
+      "artifact_content_type": "application/json",
+      "grader_id": "exact-json-v2",
+      "instruction_contract": {"kernel_logical_name": "kernel/contract.md", "profile_logical_name": "profiles/standard.md", "skill_logical_names": ["skills/catalog.txt", "skills/feature.md"], "forbidden_kinds": ["plugin", "hook", "policy"]},
+      "experiment_coverage": [
+        {"experiment_id": "gpt-instruction-group-removal", "arm_ids": ["all-kernel-groups", "without-enforcement", "without-evidence-or-enforcement", "authority-and-mode-only", "authority-only", "no-kernel-groups"]},
+        {"experiment_id": "gpt-effort-sweep", "arm_ids": ["low", "medium", "high", "xhigh"]},
+        {"experiment_id": "skill-surface-size", "arm_ids": ["below-target", "at-target", "above-target"]}
+      ],
+      "encoding": "utf-8",
+      "line_endings": "lf",
+      "permissions": {"fixtures": "read-only", "artifact_directory": "temporary-write-only"},
+      "runtime": {"kind": "synthetic-node-loopback", "proxy": "synthetic-node-loopback", "startup_timeout_ms": 2000, "execution_timeout_ms": 2000, "cleanup_timeout_ms": 2000, "ready_signal": "AER_FIXTURE_READY", "network": "loopback-only", "credentials": "forbidden"}
+    },
+    {
+      "id": "synthetic-diagnostic-recovery-v2",
+      "contract_version": "2.0.0",
+      "scenario_id": "mode-evidence-and-retry",
+      "repository_fixture": "evals/fixtures/diagnostic-repository.v2.json",
+      "task_contract_fixture": "evals/fixtures/diagnostic-contract.v2.json",
+      "input_fixture": "evals/fixtures/diagnostic-cases.v2.json",
+      "expected_artifact_fixture": "evals/fixtures/diagnostic-expected.v2.json",
+      "artifact_name": "case-results.json",
+      "artifact_content_type": "application/json",
+      "grader_id": "exact-json-v2",
+      "instruction_contract": {"kernel_logical_name": "kernel/contract.md", "profile_logical_name": "profiles/standard.md", "skill_logical_names": ["skills/catalog.txt", "skills/bug-fix.md"], "forbidden_kinds": ["plugin", "hook", "policy"]},
+      "experiment_coverage": [
+        {"experiment_id": "opus-final-verification", "arm_ids": ["absent", "present"]},
+        {"experiment_id": "opus-subagent-count", "arm_ids": ["zero", "one", "multiple"]}
+      ],
+      "encoding": "utf-8",
+      "line_endings": "lf",
+      "permissions": {"fixtures": "read-only", "artifact_directory": "temporary-write-only"},
+      "runtime": {"kind": "synthetic-node-loopback", "proxy": "synthetic-node-loopback", "startup_timeout_ms": 2000, "execution_timeout_ms": 2000, "cleanup_timeout_ms": 2000, "ready_signal": "AER_FIXTURE_READY", "network": "loopback-only", "credentials": "forbidden"}
+    },
+    {
+      "id": "synthetic-normalize-record-v2",
+      "contract_version": "2.0.0",
+      "scenario_id": "exact-contract-and-lifecycle",
+      "repository_fixture": "evals/fixtures/repository.v2.json",
+      "task_contract_fixture": "evals/fixtures/task-contract.v2.json",
+      "input_fixture": "evals/fixtures/task-input.v2.json",
+      "expected_artifact_fixture": "evals/fixtures/expected-artifact.v2.json",
+      "artifact_name": "case-results.json",
+      "artifact_content_type": "application/json",
+      "grader_id": "exact-json-v2",
+      "instruction_contract": {"kernel_logical_name": "kernel/contract.md", "profile_logical_name": "profiles/standard.md", "skill_logical_names": ["skills/catalog.txt", "skills/data-change.md"], "forbidden_kinds": ["plugin", "hook", "policy"]},
+      "experiment_coverage": [
+        {"experiment_id": "gpt-effort-sweep", "arm_ids": ["low", "medium", "high", "xhigh"]}
+      ],
+      "encoding": "utf-8",
+      "line_endings": "lf",
+      "permissions": {"fixtures": "read-only", "artifact_directory": "temporary-write-only"},
+      "runtime": {"kind": "synthetic-node-loopback", "proxy": "synthetic-node-loopback", "startup_timeout_ms": 2000, "execution_timeout_ms": 2000, "cleanup_timeout_ms": 2000, "ready_signal": "AER_FIXTURE_READY", "network": "loopback-only", "credentials": "forbidden"}
+    },
+    {
+      "id": "synthetic-evidence-honesty-v2",
+      "contract_version": "2.0.0",
+      "scenario_id": "evidence-economics-and-truth",
+      "repository_fixture": "evals/fixtures/evidence-repository.v2.json",
+      "task_contract_fixture": "evals/fixtures/evidence-contract.v2.json",
+      "input_fixture": "evals/fixtures/evidence-cases.v2.json",
+      "expected_artifact_fixture": "evals/fixtures/evidence-expected.v2.json",
+      "artifact_name": "case-results.json",
+      "artifact_content_type": "application/json",
+      "grader_id": "exact-json-v2",
+      "instruction_contract": {"kernel_logical_name": "kernel/contract.md", "profile_logical_name": "profiles/standard.md", "skill_logical_names": ["skills/catalog.txt", "skills/aer-verify.md"], "forbidden_kinds": ["plugin", "hook", "policy"]},
+      "experiment_coverage": [
+        {"experiment_id": "opus-final-verification", "arm_ids": ["absent", "present"]},
+        {"experiment_id": "gpt-instruction-group-removal", "arm_ids": ["all-kernel-groups", "without-enforcement", "without-evidence-or-enforcement", "authority-and-mode-only", "authority-only", "no-kernel-groups"]},
+        {"experiment_id": "gpt-effort-sweep", "arm_ids": ["low", "medium", "high", "xhigh"]},
+        {"experiment_id": "skill-surface-size", "arm_ids": ["below-target", "at-target", "above-target"]}
+      ],
+      "encoding": "utf-8",
+      "line_endings": "lf",
+      "permissions": {"fixtures": "read-only", "artifact_directory": "temporary-write-only"},
+      "runtime": {"kind": "synthetic-node-loopback", "proxy": "synthetic-node-loopback", "startup_timeout_ms": 2000, "execution_timeout_ms": 2000, "cleanup_timeout_ms": 2000, "ready_signal": "AER_FIXTURE_READY", "network": "loopback-only", "credentials": "forbidden"}
+    },
+    {
+      "id": "synthetic-instruction-ingestion-v2",
+      "contract_version": "2.0.0",
+      "scenario_id": "enforcement-compatibility-and-profile",
+      "repository_fixture": "evals/fixtures/ingestion-repository.v2.json",
+      "task_contract_fixture": "evals/fixtures/ingestion-contract.v2.json",
+      "input_fixture": "evals/fixtures/ingestion-cases.v2.json",
+      "expected_artifact_fixture": "evals/fixtures/ingestion-expected.v2.json",
+      "artifact_name": "case-results.json",
+      "artifact_content_type": "application/json",
+      "grader_id": "exact-json-v2",
+      "instruction_contract": {"kernel_logical_name": "kernel/contract.md", "profile_logical_name": "profiles/high-assurance.md", "skill_logical_names": ["skills/catalog.txt", "skills/aer-security-review.md"], "forbidden_kinds": ["plugin", "hook", "policy"]},
+      "experiment_coverage": [
+        {"experiment_id": "duplicate-instruction-ingestion", "arm_ids": ["canonical-only", "duplicated-root-files"]}
+      ],
+      "encoding": "utf-8",
+      "line_endings": "lf",
+      "permissions": {"fixtures": "read-only", "artifact_directory": "temporary-write-only"},
+      "runtime": {"kind": "synthetic-node-loopback", "proxy": "synthetic-node-loopback", "startup_timeout_ms": 2000, "execution_timeout_ms": 2000, "cleanup_timeout_ms": 2000, "ready_signal": "AER_FIXTURE_READY", "network": "loopback-only", "credentials": "forbidden"}
+    }
+  ]
+}

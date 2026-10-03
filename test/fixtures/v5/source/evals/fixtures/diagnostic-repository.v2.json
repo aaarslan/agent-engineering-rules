@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-diagnostic-recovery-v2",
+  "contract_version": "2.0.0",
+  "task_contract_fixture": "evals/fixtures/diagnostic-contract.v2.json",
+  "task_contract_sha256": "5cda29a37a03e1606c32fb83e6ee90ab8f5a23a2761fe6cfc8f5fa268d3b5639",
+  "interface_ref": "#/interface"
+}

@@ -1,5 +1,8 @@
 # Decisions
 
+- [V6 execution record](6.0.0-plan.md): baseline, state machine, scope mapping and release evidence.
+
+
 - [V5 repository-only evidence records](5.0.0-evidence-records.md): offline protocol locks and import validation without execution machinery or efficacy claims.
 
 - [V5 review and implementation plan](5.0.0-review-and-plan.md): building directly from v3.1.1, retaining engineering depth, and rejecting v4 runtime ceremony.

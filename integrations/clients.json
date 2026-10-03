@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-03",
+  "skills": [
+    {
+      "name": "aer-implementing-features",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-fixing-bugs",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-refactoring-code",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-designing-code",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-changing-data",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-securing-code",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-reviewing-security",
+      "manualOnly": true
+    },
+    {
+      "name": "aer-verifying-work",
+      "manualOnly": true
+    },
+    {
+      "name": "aer-reviewing-changes",
+      "manualOnly": true
+    },
+    {
+      "name": "aer-writing-docs",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-building-web-ui",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-building-backend-apis",
+      "manualOnly": false
+    },
+    {
+      "name": "aer-running-long-tasks",
+      "manualOnly": true
+    }
+  ],
+  "clients": {
+    "portable": {
+      "renderer": "portable-v1",
+      "channel": "direct",
+      "sources": [
+        "https://agentskills.io/specification"
+      ],
+      "capabilities": [
+        "standard-frontmatter"
+      ],
+      "testedVersions": []
+    },
+    "codex": {
+      "renderer": "codex-v1",
+      "channel": "direct",
+      "sources": [
+        "https://learn.chatgpt.com/docs/build-skills",
+        "https://learn.chatgpt.com/docs/agent-configuration/agents-md"
+      ],
+      "capabilities": [
+        "invocation-sidecar"
+      ],
+      "testedVersions": [
+        "0.160.0"
+      ]
+    },
+    "claude-code": {
+      "renderer": "claude-code-v1",
+      "channel": "direct",
+      "sources": [
+        "https://code.claude.com/docs/en/skills",
+        "https://code.claude.com/docs/en/sub-agents",
+        "https://code.claude.com/docs/en/memory"
+      ],
+      "capabilities": [
+        "manual-invocation",
+        "restricted-reviewer"
+      ],
+      "testedVersions": [
+        "2.1.285"
+      ]
+    }
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aaarslan/agent-engineering-rules/schemas/aer-lock.schema.json",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/stable"
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "status": {
+          "const": "pending"
+        },
+        "operation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-f0-9-]{36}$"
+            },
+            "kind": {
+              "enum": [
+                "install",
+                "uninstall"
+              ]
+            },
+            "original": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/stable"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "desired": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/stable"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "operations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "file",
+                      "block"
+                    ]
+                  },
+                  "before": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "after": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "beforeBytes": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "afterBytes": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "path",
+                  "type",
+                  "before",
+                  "after",
+                  "beforeBytes",
+                  "afterBytes"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "retained": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "keepModified": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "original",
+            "desired",
+            "operations",
+            "retained",
+            "keepModified"
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "operation"
+      ]
+    }
+  ],
+  "$defs": {
+    "stable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "status": {
+          "const": "stable"
+        },
+        "package": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourceIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "representationIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "version",
+            "sourceIdentity",
+            "representationIdentity"
+          ]
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "enum": [
+                "prototype",
+                "standard",
+                "high-assurance"
+              ]
+            },
+            "instructionsFile": {
+              "type": "string",
+              "minLength": 1
+            },
+            "skills": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "destinations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "representation": {
+                    "enum": [
+                      "portable",
+                      "codex",
+                      "claude-code"
+                    ]
+                  },
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "representation",
+                  "path"
+                ]
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "profile",
+            "instructionsFile",
+            "skills",
+            "destinations"
+          ]
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "normalization": {
+                "enum": [
+                  "utf8-lf",
+                  "binary"
+                ]
+              },
+              "representation": {
+                "enum": [
+                  "portable",
+                  "codex",
+                  "claude-code"
+                ]
+              },
+              "renderer": {
+                "enum": [
+                  "portable-v1",
+                  "codex-v1",
+                  "claude-code-v1"
+                ]
+              }
+            },
+            "required": [
+              "sha256",
+              "normalization",
+              "representation",
+              "renderer"
+            ]
+          },
+          "maxProperties": 10000
+        },
+        "block": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "ownership": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "createdFile": {
+                  "type": "boolean"
+                },
+                "separator": {
+                  "enum": [
+                    "",
+                    "\n",
+                    "\r\n"
+                  ]
+                },
+                "tail": {
+                  "enum": [
+                    "",
+                    "\n",
+                    "\r\n"
+                  ]
+                }
+              },
+              "required": [
+                "createdFile",
+                "separator",
+                "tail"
+              ]
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "ownership"
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "package",
+        "selection",
+        "files",
+        "block"
+      ]
+    }
+  }
+}

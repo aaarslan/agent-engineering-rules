@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-scope-projection-v2",
+  "cases": [
+    {"sequence": 1, "id": "suggestion-is-not-scope", "kind": "bounded-scope", "status": 200, "content_type": "application/json", "body": {"display_name": "Ada Lovelace", "roles": ["maintainer"]}}
+  ]
+}

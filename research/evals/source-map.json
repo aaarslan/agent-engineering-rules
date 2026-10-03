@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "auditedRevision": "25377518505432f0362cca28de3b00fd525af20c",
+  "entries": [
+    {
+      "source": "source/agents/orchestration.md",
+      "targets": [
+        "source/shared/orchestration.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/architecture/decision-making.md",
+      "targets": [
+        "source/shared/decision-making.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/compatibility/conflicts.json",
+      "targets": [
+        "research/compatibility/conflicts.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/compatibility/hosts.json",
+      "targets": [
+        "research/compatibility/hosts.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/compatibility/models.json",
+      "targets": [
+        "research/compatibility/models.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/config/thresholds.json",
+      "targets": [
+        "kernel/thresholds.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/_template.md",
+      "targets": [
+        "integrations/clients.json"
+      ],
+      "reason": "Retired v5 path-only/context-template delivery; standalone relevant-reference and explicitly selected integration replacements."
+    },
+    {
+      "source": "source/contexts/backend-api.md",
+      "targets": [
+        "source/shared/backend-api.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/claude-backend-api.md",
+      "targets": [
+        "integrations/clients.json"
+      ],
+      "reason": "Retired v5 path-only/context-template delivery; standalone relevant-reference and explicitly selected integration replacements."
+    },
+    {
+      "source": "source/contexts/claude-typescript-react.md",
+      "targets": [
+        "integrations/clients.json"
+      ],
+      "reason": "Retired v5 path-only/context-template delivery; standalone relevant-reference and explicitly selected integration replacements."
+    },
+    {
+      "source": "source/contexts/claude-web-ui.md",
+      "targets": [
+        "integrations/clients.json"
+      ],
+      "reason": "Retired v5 path-only/context-template delivery; standalone relevant-reference and explicitly selected integration replacements."
+    },
+    {
+      "source": "source/contexts/database-migrations.md",
+      "targets": [
+        "source/shared/database-migrations.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/documentation.md",
+      "targets": [
+        "source/shared/documentation.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/pr-review.md",
+      "targets": [
+        "source/shared/pr-review.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/typescript-react.md",
+      "targets": [
+        "source/shared/typescript-react.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/ui-styling.md",
+      "targets": [
+        "source/shared/ui-styling.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/web-interaction.md",
+      "targets": [
+        "kernel/clauses/ui-interaction.md",
+        "skills/aer-building-web-ui/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/contexts/web-ui.md",
+      "targets": [
+        "source/shared/web-ui.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/design/boundaries.md",
+      "targets": [
+        "source/shared/boundaries.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/design/errors-and-side-effects.md",
+      "targets": [
+        "source/shared/errors-and-side-effects.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/design/principles.md",
+      "targets": [
+        "source/shared/principles.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/design/types-and-state.md",
+      "targets": [
+        "source/shared/types-and-state.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/cells.v2.json",
+      "targets": [
+        "research/evals/cells.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components.v2.json",
+      "targets": [
+        "research/evals/components.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/kernel/contract.txt",
+      "targets": [
+        "research/evals/components/v2/kernel/contract.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/profiles/high-assurance.txt",
+      "targets": [
+        "research/evals/components/v2/profiles/high-assurance.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/profiles/standard.txt",
+      "targets": [
+        "research/evals/components/v2/profiles/standard.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/skills/aer-security-review.txt",
+      "targets": [
+        "research/evals/components/v2/skills/aer-security-review.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/skills/aer-verify.txt",
+      "targets": [
+        "research/evals/components/v2/skills/aer-verify.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/skills/bug-fix.txt",
+      "targets": [
+        "research/evals/components/v2/skills/bug-fix.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/skills/data-change.txt",
+      "targets": [
+        "research/evals/components/v2/skills/data-change.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/components/v2/skills/feature.txt",
+      "targets": [
+        "research/evals/components/v2/skills/feature.txt"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/directives.json",
+      "targets": [
+        "research/evals/directives.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/experiments.v2.json",
+      "targets": [
+        "research/evals/experiments.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/diagnostic-cases.v2.json",
+      "targets": [
+        "research/evals/fixtures/diagnostic-cases.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/diagnostic-contract.v2.json",
+      "targets": [
+        "research/evals/fixtures/diagnostic-contract.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/diagnostic-expected.v2.json",
+      "targets": [
+        "research/evals/fixtures/diagnostic-expected.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/diagnostic-repository.v2.json",
+      "targets": [
+        "research/evals/fixtures/diagnostic-repository.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/evidence-cases.v2.json",
+      "targets": [
+        "research/evals/fixtures/evidence-cases.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/evidence-contract.v2.json",
+      "targets": [
+        "research/evals/fixtures/evidence-contract.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/evidence-expected.v2.json",
+      "targets": [
+        "research/evals/fixtures/evidence-expected.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/evidence-repository.v2.json",
+      "targets": [
+        "research/evals/fixtures/evidence-repository.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/expected-artifact.v2.json",
+      "targets": [
+        "research/evals/fixtures/expected-artifact.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/grader-rubric.v2.json",
+      "targets": [
+        "research/evals/fixtures/grader-rubric.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/ingestion-cases.v2.json",
+      "targets": [
+        "research/evals/fixtures/ingestion-cases.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/ingestion-contract.v2.json",
+      "targets": [
+        "research/evals/fixtures/ingestion-contract.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/ingestion-expected.v2.json",
+      "targets": [
+        "research/evals/fixtures/ingestion-expected.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/ingestion-repository.v2.json",
+      "targets": [
+        "research/evals/fixtures/ingestion-repository.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/repository.v2.json",
+      "targets": [
+        "research/evals/fixtures/repository.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/scope-cases.v2.json",
+      "targets": [
+        "research/evals/fixtures/scope-cases.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/scope-contract.v2.json",
+      "targets": [
+        "research/evals/fixtures/scope-contract.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/scope-expected.v2.json",
+      "targets": [
+        "research/evals/fixtures/scope-expected.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/scope-repository.v2.json",
+      "targets": [
+        "research/evals/fixtures/scope-repository.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/task-contract.v2.json",
+      "targets": [
+        "research/evals/fixtures/task-contract.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/fixtures/task-input.v2.json",
+      "targets": [
+        "research/evals/fixtures/task-input.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/frozen-history.json",
+      "targets": [
+        "research/evals/frozen-history.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/graders.v2.json",
+      "targets": [
+        "research/evals/graders.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/grievances.json",
+      "targets": [
+        "research/evals/grievances.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/run.example.json",
+      "targets": [
+        "research/evals/run.example.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/run.schema.json",
+      "targets": [
+        "research/evals/run.schema.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/scenarios.json",
+      "targets": [
+        "research/evals/scenarios.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/tasks.v2.json",
+      "targets": [
+        "research/evals/tasks.v2.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/evals/treatments.json",
+      "targets": [
+        "research/evals/treatments.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/kernel/contract.md",
+      "targets": [
+        "kernel/contract.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/policy/policy-map.json",
+      "targets": [
+        "research/policy/policy-map.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/profiles/high-assurance.md",
+      "targets": [
+        "kernel/profiles/high-assurance.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/profiles/prototype.md",
+      "targets": [
+        "kernel/profiles/prototype.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/profiles/standard.md",
+      "targets": [
+        "kernel/profiles/standard.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/quality/observability.md",
+      "targets": [
+        "source/shared/observability.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/quality/performance.md",
+      "targets": [
+        "source/shared/performance.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/quality/security.md",
+      "targets": [
+        "source/shared/security.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/quality/testing.md",
+      "targets": [
+        "source/shared/testing.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/aer-security-review.md",
+      "targets": [
+        "skills/aer-reviewing-security/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/aer-verify.md",
+      "targets": [
+        "skills/aer-verifying-work/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/autonomous-mission.md",
+      "targets": [
+        "skills/aer-running-long-tasks/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/bug-fix.md",
+      "targets": [
+        "skills/aer-fixing-bugs/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/data-change.md",
+      "targets": [
+        "skills/aer-changing-data/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/doc-update.md",
+      "targets": [
+        "skills/aer-writing-docs/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/feature.md",
+      "targets": [
+        "skills/aer-implementing-features/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/pr-review.md",
+      "targets": [
+        "skills/aer-reviewing-changes/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/refactor.md",
+      "targets": [
+        "skills/aer-refactoring-code/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/skills/ui-styling.md",
+      "targets": [
+        "skills/aer-building-web-ui/SKILL.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/templates/claude-root.md",
+      "targets": [
+        "kernel/block.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/templates/code-reviewer.md",
+      "targets": [
+        "integrations/reviewer.md",
+        "integrations/claude-code.json"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/templates/codex-root.md",
+      "targets": [
+        "kernel/block.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/autonomous-execution.md",
+      "targets": [
+        "source/shared/autonomous-execution.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/design-checkpoint.md",
+      "targets": [
+        "source/shared/design-checkpoint.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/implementation.md",
+      "targets": [
+        "source/shared/implementation.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/review-ledger.md",
+      "targets": [
+        "source/shared/review-ledger.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/skeptic-pass.md",
+      "targets": [
+        "source/shared/skeptic-pass.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    },
+    {
+      "source": "source/workflow/verification.md",
+      "targets": [
+        "source/shared/verification.md"
+      ],
+      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+    }
+  ]
+}

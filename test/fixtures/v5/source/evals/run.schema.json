@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aaarslan/agent-engineering-rules/source/evals/run.schema.json",
+  "title": "Agent Engineering Rules evaluation run v2",
+  "type": "object",
+  "required": [
+    "schema_version", "task_id", "scenario_id", "treatment_id", "experiment_id", "experiment_arm_id", "experiment_factor_value", "cell_id",
+    "host", "host_version", "model", "model_revision", "provider", "effort", "instructions", "instruction_assembly", "execution_config",
+    "repository_revision", "task_contract_sha256", "permissions", "sandbox", "network", "approval_mode",
+    "provider_authorization", "subagents", "tokens", "latency_ms", "tool_calls", "test_runs", "retries",
+    "cost_usd", "raw_output", "artifacts", "grader", "execution_status", "artifact_status", "grader_status",
+    "strict_score", "scope_drift_score", "evidence_truthfulness_score"
+  ],
+  "properties": {
+    "schema_version": {"const":2},
+    "task_id": {"enum":["synthetic-scope-projection-v2","synthetic-diagnostic-recovery-v2","synthetic-normalize-record-v2","synthetic-evidence-honesty-v2","synthetic-instruction-ingestion-v2"]},
+    "scenario_id": {
+      "enum": [
+        "scope-and-ownership",
+        "mode-evidence-and-retry",
+        "exact-contract-and-lifecycle",
+        "boundary-and-external-authority",
+        "evidence-economics-and-truth",
+        "enforcement-compatibility-and-profile"
+      ]
+    },
+    "treatment_id": {
+      "enum": [
+        "host-baseline",
+        "compact-kernel",
+        "compact-task",
+        "compact-verify",
+        "compact-high-assurance"
+      ]
+    },
+    "experiment_id": {
+      "enum": [
+        null,
+        "opus-final-verification",
+        "opus-subagent-count",
+        "gpt-instruction-group-removal",
+        "gpt-effort-sweep",
+        "duplicate-instruction-ingestion",
+        "skill-surface-size"
+      ]
+    },
+    "experiment_arm_id": {"type":["string","null"],"minLength":1,"maxLength":128},
+    "experiment_factor_value": {"type":["boolean","integer","string","array","object","null"],"maxItems":16,"maxProperties":16},
+    "cell_id": {"type":["string","null"],"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "host": {"enum":["claude","codex"]},
+    "host_version": {"type":"string","minLength":1,"maxLength":256},
+    "model": {"type":"string","minLength":1,"maxLength":256},
+    "model_revision": {"type":"string","minLength":1,"maxLength":256},
+    "provider": {"enum":["anthropic","openai"]},
+    "effort": {"type":"string","minLength":1,"maxLength":64},
+    "instructions": {
+      "type":"object",
+      "required":["expanded_artifact","components"],
+      "properties":{
+        "expanded_artifact": {
+          "type":"object",
+          "required":["name","sha256","content_type"],
+          "properties":{
+            "name":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+            "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+            "content_type":{"const":"text/plain"}
+          },
+          "additionalProperties":false
+        },
+        "components": {
+          "type":"object",
+          "required":["kernel","profile","skill","plugin","hook","policy"],
+          "properties":{
+            "kernel":{"$ref":"#/$defs/hashMap"},
+            "profile":{"$ref":"#/$defs/hashMap"},
+            "skill":{"$ref":"#/$defs/hashMap"},
+            "plugin":{"$ref":"#/$defs/hashMap"},
+            "hook":{"$ref":"#/$defs/hashMap"},
+            "policy":{"$ref":"#/$defs/hashMap"}
+          },
+          "additionalProperties":false
+        }
+      },
+      "additionalProperties":false
+    },
+    "instruction_assembly": {"$ref":"#/$defs/jsonArtifactRef"},
+    "execution_config": {"$ref":"#/$defs/jsonArtifactRef"},
+    "repository_revision": {"type":"string","pattern":"^(?:[a-f0-9]{40}|[a-f0-9]{64})$"},
+    "task_contract_sha256": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "permissions": {"type":"string","minLength":1,"maxLength":4096},
+    "sandbox": {"type":"string","minLength":1,"maxLength":256},
+    "network": {"type":"string","minLength":1,"maxLength":256},
+    "approval_mode": {"type":"string","minLength":1,"maxLength":256},
+    "provider_authorization": {
+      "type":"object",
+      "required":["authorized","reference","spend_cap_usd"],
+      "properties":{
+        "authorized":{"type":"boolean"},
+        "reference":{"type":["string","null"],"minLength":1,"maxLength":1024},
+        "spend_cap_usd":{"type":"number","minimum":0,"maximum":1000000000}
+      },
+      "additionalProperties":false
+    },
+    "subagents": {
+      "type":"object",
+      "required":["count","max_depth","spend_usd","nodes"],
+      "properties":{
+        "count":{"type":"integer","minimum":0,"maximum":10000},
+        "max_depth":{"type":"integer","minimum":0,"maximum":100},
+        "spend_usd":{"type":"number","minimum":0,"maximum":1000000000},
+        "nodes":{
+          "type":"array","maxItems":10000,"items":{
+            "type":"object",
+            "required":["id","parent_id","role","model","depth","spend_usd","status"],
+            "properties":{
+              "id":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+              "parent_id":{"type":["string","null"],"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+              "role":{"type":"string","minLength":1,"maxLength":256},
+              "model":{"type":"string","minLength":1,"maxLength":256},
+              "depth":{"type":"integer","minimum":1,"maximum":100},
+              "spend_usd":{"type":"number","minimum":0,"maximum":1000000000},
+              "status":{"enum":["passed","failed","invalid"]}
+            },
+            "additionalProperties":false
+          }
+        }
+      },
+      "additionalProperties":false
+    },
+    "tokens": {
+      "type":"object",
+      "required":["input","output","total"],
+      "properties":{
+        "input":{"type":"integer","minimum":0,"maximum":1000000000},
+        "output":{"type":"integer","minimum":0,"maximum":1000000000},
+        "total":{"type":"integer","minimum":0,"maximum":1000000000}
+      },
+      "additionalProperties":false
+    },
+    "latency_ms": {"type":"integer","minimum":0,"maximum":604800000},
+    "tool_calls": {
+      "type":"array","maxItems":1000000,"items":{
+        "type":"object",
+        "required":["sequence","tool","input_sha256","status","duration_ms","output_artifact"],
+        "properties":{
+          "sequence":{"type":"integer","minimum":1,"maximum":1000000},
+          "tool":{"type":"string","minLength":1,"maxLength":256},
+          "input_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+          "status":{"enum":["passed","failed","invalid"]},
+          "duration_ms":{"type":"integer","minimum":0,"maximum":604800000},
+          "output_artifact":{"type":["string","null"],"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"}
+        },
+        "additionalProperties":false
+      }
+    },
+    "test_runs": {
+      "type":"array","maxItems":1000000,"items":{
+        "type":"object",
+        "required":["sequence","command","working_directory","status","exit_code","duration_ms","output_artifact"],
+        "properties":{
+          "sequence":{"type":"integer","minimum":1,"maximum":1000000},
+          "command":{"type":"array","minItems":1,"maxItems":256,"items":{"type":"string","minLength":1,"maxLength":4096}},
+          "working_directory":{"type":"string","minLength":1,"maxLength":1024},
+          "status":{"enum":["passed","failed","invalid"]},
+          "exit_code":{"type":["integer","null"],"minimum":-2147483648,"maximum":2147483647},
+          "duration_ms":{"type":"integer","minimum":0,"maximum":604800000},
+          "output_artifact":{"type":["string","null"],"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"}
+        },
+        "additionalProperties":false
+      }
+    },
+    "retries": {
+      "type":"array","maxItems":1000000,"items":{
+        "type":"object",
+        "required":["sequence","action","reason","change_kind","prior_result_artifact"],
+        "properties":{
+          "sequence":{"type":"integer","minimum":1,"maximum":1000000},
+          "action":{"type":"string","minLength":1,"maxLength":4096},
+          "reason":{"type":"string","minLength":1,"maxLength":4096},
+          "change_kind":{"enum":["unchanged-diagnostic","hypothesis","implementation","input","command","environment"]},
+          "prior_result_artifact":{"type":["string","null"],"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"}
+        },
+        "additionalProperties":false
+      }
+    },
+    "cost_usd": {"type":"number","minimum":0,"maximum":1000000000},
+    "raw_output": {
+      "type":"object",
+      "required":["name","sha256","content_type"],
+      "properties":{
+        "name":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+        "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "content_type":{"type":"string","pattern":"^[a-z0-9][a-z0-9!#$&^_.+-]{0,63}/[a-z0-9][a-z0-9!#$&^_.+-]{0,63}$"}
+      },
+      "additionalProperties":false
+    },
+    "artifacts": {
+      "type":"object",
+      "minProperties":3,
+      "maxProperties":10000,
+      "propertyNames":{"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+      "additionalProperties":{"$ref":"#/$defs/artifact"}
+    },
+    "grader": {
+      "type":"object",
+      "required":["id","version","rubric_sha256","output_artifact","output_sha256"],
+      "properties":{
+        "id":{"type":"string","minLength":1,"maxLength":256},
+        "version":{"type":"string","minLength":1,"maxLength":256},
+        "rubric_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "output_artifact":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+        "output_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+      },
+      "additionalProperties":false
+    },
+    "execution_status": {"enum":["passed","failed","invalid"]},
+    "artifact_status": {"enum":["passed","failed","invalid"]},
+    "grader_status": {"enum":["passed","failed","invalid"]},
+    "strict_score": {"type":["number","null"],"minimum":0,"maximum":1},
+    "scope_drift_score": {"type":["number","null"],"minimum":0,"maximum":1},
+    "evidence_truthfulness_score": {"type":["number","null"],"minimum":0,"maximum":1}
+  },
+  "$defs": {
+    "jsonArtifactRef": {
+      "type":"object",
+      "required":["name","sha256","content_type"],
+      "properties":{
+        "name":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+        "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "content_type":{"const":"application/json"}
+      },
+      "additionalProperties":false
+    },
+    "hashMap": {
+      "type":"object",
+      "maxProperties":256,
+      "propertyNames":{"pattern":"^[A-Za-z0-9][A-Za-z0-9._/-]{0,255}$"},
+      "additionalProperties":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+    },
+    "artifact": {
+      "type":"object",
+      "required":["sha256","content_type"],
+      "properties":{
+        "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "content_type":{"type":"string","pattern":"^[a-z0-9][a-z0-9!#$&^_.+-]{0,63}/[a-z0-9][a-z0-9!#$&^_.+-]{0,63}$"}
+      },
+      "additionalProperties":false
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"grader_status":{"const":"passed"}},"required":["grader_status"]},
+      "then": {"properties":{"strict_score":{"type":"number"},"scope_drift_score":{"type":"number"},"evidence_truthfulness_score":{"type":"number"}}},
+      "else": {"properties":{"strict_score":{"type":"null"},"scope_drift_score":{"type":"null"},"evidence_truthfulness_score":{"type":"null"}}}
+    },
+    {
+      "if": {"properties":{"experiment_id":{"const":null}},"required":["experiment_id"]},
+      "then": {"properties":{
+        "experiment_arm_id":{"type":"null"},
+        "experiment_factor_value":{"type":"null"},
+        "cell_id":{"type":"null"},
+        "provider_authorization":{"properties":{"authorized":{"const":false},"reference":{"type":"null"},"spend_cap_usd":{"const":0}}},
+        "execution_status":{"const":"invalid"},
+        "artifact_status":{"const":"invalid"},
+        "grader_status":{"const":"invalid"},
+        "strict_score":{"type":"null"},
+        "scope_drift_score":{"type":"null"},
+        "evidence_truthfulness_score":{"type":"null"},
+        "cost_usd":{"const":0}
+      }},
+      "else": {"properties":{"experiment_arm_id":{"type":"string"},"experiment_factor_value":{"type":["boolean","integer","string","array","object"]},"cell_id":{"type":"string"}}}
+    }
+  ],
+  "additionalProperties": false
+}

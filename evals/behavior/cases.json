@@ -1,0 +1,630 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-executed-model-trials",
+  "cases": [
+    {
+      "id": "aer-implementing-features-1",
+      "skill": "aer-implementing-features",
+      "fixture": "evals/fixtures/aer-implementing-features",
+      "prompt": "evals/fixtures/aer-implementing-features/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-implementing-features-2",
+      "skill": "aer-implementing-features",
+      "fixture": "evals/fixtures/aer-implementing-features",
+      "prompt": "evals/fixtures/aer-implementing-features/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-implementing-features-3",
+      "skill": "aer-implementing-features",
+      "fixture": "evals/fixtures/aer-implementing-features",
+      "prompt": "evals/fixtures/aer-implementing-features/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-fixing-bugs-1",
+      "skill": "aer-fixing-bugs",
+      "fixture": "evals/fixtures/aer-fixing-bugs",
+      "prompt": "evals/fixtures/aer-fixing-bugs/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-fixing-bugs-2",
+      "skill": "aer-fixing-bugs",
+      "fixture": "evals/fixtures/aer-fixing-bugs",
+      "prompt": "evals/fixtures/aer-fixing-bugs/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-fixing-bugs-3",
+      "skill": "aer-fixing-bugs",
+      "fixture": "evals/fixtures/aer-fixing-bugs",
+      "prompt": "evals/fixtures/aer-fixing-bugs/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-refactoring-code-1",
+      "skill": "aer-refactoring-code",
+      "fixture": "evals/fixtures/aer-refactoring-code",
+      "prompt": "evals/fixtures/aer-refactoring-code/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-refactoring-code-2",
+      "skill": "aer-refactoring-code",
+      "fixture": "evals/fixtures/aer-refactoring-code",
+      "prompt": "evals/fixtures/aer-refactoring-code/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-refactoring-code-3",
+      "skill": "aer-refactoring-code",
+      "fixture": "evals/fixtures/aer-refactoring-code",
+      "prompt": "evals/fixtures/aer-refactoring-code/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-designing-code-1",
+      "skill": "aer-designing-code",
+      "fixture": "evals/fixtures/aer-designing-code",
+      "prompt": "evals/fixtures/aer-designing-code/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-designing-code-2",
+      "skill": "aer-designing-code",
+      "fixture": "evals/fixtures/aer-designing-code",
+      "prompt": "evals/fixtures/aer-designing-code/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-designing-code-3",
+      "skill": "aer-designing-code",
+      "fixture": "evals/fixtures/aer-designing-code",
+      "prompt": "evals/fixtures/aer-designing-code/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-changing-data-1",
+      "skill": "aer-changing-data",
+      "fixture": "evals/fixtures/aer-changing-data",
+      "prompt": "evals/fixtures/aer-changing-data/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-changing-data-2",
+      "skill": "aer-changing-data",
+      "fixture": "evals/fixtures/aer-changing-data",
+      "prompt": "evals/fixtures/aer-changing-data/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-changing-data-3",
+      "skill": "aer-changing-data",
+      "fixture": "evals/fixtures/aer-changing-data",
+      "prompt": "evals/fixtures/aer-changing-data/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-securing-code-1",
+      "skill": "aer-securing-code",
+      "fixture": "evals/fixtures/aer-securing-code",
+      "prompt": "evals/fixtures/aer-securing-code/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-securing-code-2",
+      "skill": "aer-securing-code",
+      "fixture": "evals/fixtures/aer-securing-code",
+      "prompt": "evals/fixtures/aer-securing-code/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-securing-code-3",
+      "skill": "aer-securing-code",
+      "fixture": "evals/fixtures/aer-securing-code",
+      "prompt": "evals/fixtures/aer-securing-code/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-security-1",
+      "skill": "aer-reviewing-security",
+      "fixture": "evals/fixtures/aer-reviewing-security",
+      "prompt": "evals/fixtures/aer-reviewing-security/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-security-2",
+      "skill": "aer-reviewing-security",
+      "fixture": "evals/fixtures/aer-reviewing-security",
+      "prompt": "evals/fixtures/aer-reviewing-security/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-security-3",
+      "skill": "aer-reviewing-security",
+      "fixture": "evals/fixtures/aer-reviewing-security",
+      "prompt": "evals/fixtures/aer-reviewing-security/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-verifying-work-1",
+      "skill": "aer-verifying-work",
+      "fixture": "evals/fixtures/aer-verifying-work",
+      "prompt": "evals/fixtures/aer-verifying-work/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-verifying-work-2",
+      "skill": "aer-verifying-work",
+      "fixture": "evals/fixtures/aer-verifying-work",
+      "prompt": "evals/fixtures/aer-verifying-work/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-verifying-work-3",
+      "skill": "aer-verifying-work",
+      "fixture": "evals/fixtures/aer-verifying-work",
+      "prompt": "evals/fixtures/aer-verifying-work/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-changes-1",
+      "skill": "aer-reviewing-changes",
+      "fixture": "evals/fixtures/aer-reviewing-changes",
+      "prompt": "evals/fixtures/aer-reviewing-changes/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-changes-2",
+      "skill": "aer-reviewing-changes",
+      "fixture": "evals/fixtures/aer-reviewing-changes",
+      "prompt": "evals/fixtures/aer-reviewing-changes/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-reviewing-changes-3",
+      "skill": "aer-reviewing-changes",
+      "fixture": "evals/fixtures/aer-reviewing-changes",
+      "prompt": "evals/fixtures/aer-reviewing-changes/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-writing-docs-1",
+      "skill": "aer-writing-docs",
+      "fixture": "evals/fixtures/aer-writing-docs",
+      "prompt": "evals/fixtures/aer-writing-docs/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-writing-docs-2",
+      "skill": "aer-writing-docs",
+      "fixture": "evals/fixtures/aer-writing-docs",
+      "prompt": "evals/fixtures/aer-writing-docs/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-writing-docs-3",
+      "skill": "aer-writing-docs",
+      "fixture": "evals/fixtures/aer-writing-docs",
+      "prompt": "evals/fixtures/aer-writing-docs/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-web-ui-1",
+      "skill": "aer-building-web-ui",
+      "fixture": "evals/fixtures/aer-building-web-ui",
+      "prompt": "evals/fixtures/aer-building-web-ui/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-web-ui-2",
+      "skill": "aer-building-web-ui",
+      "fixture": "evals/fixtures/aer-building-web-ui",
+      "prompt": "evals/fixtures/aer-building-web-ui/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-web-ui-3",
+      "skill": "aer-building-web-ui",
+      "fixture": "evals/fixtures/aer-building-web-ui",
+      "prompt": "evals/fixtures/aer-building-web-ui/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-backend-apis-1",
+      "skill": "aer-building-backend-apis",
+      "fixture": "evals/fixtures/aer-building-backend-apis",
+      "prompt": "evals/fixtures/aer-building-backend-apis/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-backend-apis-2",
+      "skill": "aer-building-backend-apis",
+      "fixture": "evals/fixtures/aer-building-backend-apis",
+      "prompt": "evals/fixtures/aer-building-backend-apis/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-building-backend-apis-3",
+      "skill": "aer-building-backend-apis",
+      "fixture": "evals/fixtures/aer-building-backend-apis",
+      "prompt": "evals/fixtures/aer-building-backend-apis/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-running-long-tasks-1",
+      "skill": "aer-running-long-tasks",
+      "fixture": "evals/fixtures/aer-running-long-tasks",
+      "prompt": "evals/fixtures/aer-running-long-tasks/case-1.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-running-long-tasks-2",
+      "skill": "aer-running-long-tasks",
+      "fixture": "evals/fixtures/aer-running-long-tasks",
+      "prompt": "evals/fixtures/aer-running-long-tasks/case-2.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": false,
+      "requirementsDisclosed": true
+    },
+    {
+      "id": "aer-running-long-tasks-3",
+      "skill": "aer-running-long-tasks",
+      "fixture": "evals/fixtures/aer-running-long-tasks",
+      "prompt": "evals/fixtures/aer-running-long-tasks/case-3.md",
+      "rubric": "evals/behavior/rubric.json",
+      "setup": "copy fixture directory to a disposable directory",
+      "baselineCommand": [
+        "node",
+        "--test",
+        "baseline.test.mjs"
+      ],
+      "cleanup": "remove only the disposable copy after retaining evidence",
+      "holdout": true,
+      "requirementsDisclosed": true
+    }
+  ]
+}

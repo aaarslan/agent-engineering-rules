@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-03",
+  "kind": "deterministic offline client-control probes",
+  "artifactSha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+  "configuration": {
+    "consumer": "disposable Git repository with explicit codex:.agents/skills and claude-code:.claude/skills",
+    "codex": "isolated CODEX_HOME; app-server stdio; ephemeral/read-only/approval never; loopback responses endpoint with no auth",
+    "claude": "isolated CLAUDE_CONFIG_DIR; project settings only; disableAllHooks; strict MCP; no persistence; loopback messages endpoint with dummy credential; nonessential traffic disabled",
+    "remoteProviderRequests": 0,
+    "modelTrials": 0
+  },
+  "commands": [
+    "node /tmp/aer-v6-client-probes/codex-probe.mjs",
+    "node /tmp/aer-v6-client-probes/claude-probe.mjs"
+  ],
+  "clients": {
+    "codex": {
+      "version": "0.160.0",
+      "discoveredRoot": 13,
+      "discoveredNested": 13,
+      "implicitManualSkills": 0,
+      "explicitReviewBodyActivated": true,
+      "kernelOccurrences": 1,
+      "uiOccurrences": 1,
+      "nestedKernelOccurrences": 1
+    },
+    "claude-code": {
+      "version": "2.1.285",
+      "contextualCatalog": 9,
+      "implicitManualSkills": 0,
+      "explicitReviewBodies": [
+        "aer-reviewing-changes",
+        "aer-reviewing-security"
+      ],
+      "reviewTools": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "modelOriginatedManualInvocation": "rejected: disable-model-invocation",
+      "reviewerBashAttempt": "rejected: No such tool available: Bash",
+      "sentinelCreated": false,
+      "kernelOccurrences": 1,
+      "uiOccurrences": 1,
+      "nestedKernelOccurrences": 1
+    }
+  },
+  "files": {
+    "codex-skills.json": "34431761b004f6859744012c1273095c8e6bd4cf1b88a17aacf286b759df7ab5",
+    "codex-probe.mjs": "1bfd341a33a6ab99e355647f7ac099be272e5a68b3aa54ffc8deead1ee407a45",
+    "claude-security-requests.json": "cbf4c64b4fe053ac324d6f5f458fd89a513f5735526b14387b5c4d6e32ecaecb",
+    "claude-explicit-requests.json": "70a56dcde846841271d5ab3934c720f02874b04a2faa615c11260264bcfdea6b",
+    "codex-explicit-request.json": "e7e16cc2e88226ecc05237a17540c483dadfe36abf811fc8ec54fe4a71aba5c0",
+    "claude-manual-attempt-output.json": "079d200028e8edf0e53445a7e8cf3b99e5a7663f848d695f97414b14553b8ac5",
+    "claude-restricted-agent-requests.json": "9555b906e5e4b5f22394c6f30eb14e435ca550b58affce4e505e22f694298b7f",
+    "claude-probe.mjs": "84e8bfb8fb34f4947237eb15a9d0072bc433126088667983274e83c5d195bf2e",
+    "claude-manual-attempt-requests.json": "d1c4dc08de91d9dce26e3d36efcd866c87cedd101a573af0298706e108ddff0a",
+    "final-install.json": "c0dfce64b41de3289a4f846ab9a4b8e47c9ba1c3cfa1a417241e967a89ac32c8",
+    "claude-implicit-requests.json": "7435952077918586ece38f8c8f7759d465dd9a312a88fc68f459b8ed9513b455",
+    "codex-nested-request.json": "35e197dd8d647179eaaf8b3d7a6c4008f4920bd10077aec247a5171b1a5045dc",
+    "claude-nested-requests.json": "2b8be1a4a2cde5ee2b6e361dbd73a45c935c0f10d5cfdf4b46678a5eddd6308a",
+    "claude-write-attempt-requests.json": "2287ae2f4e984b182705cc9d256ffdb58c924a4c411b59f48a0dda7247403cd4",
+    "claude-restricted-agent-output.json": "7ece8b332d575f94b578be62922c921a273f0c160889bd7fe3b0af40a149699f",
+    "claude-implicit-output.json": "9bd765b4883fd36981809bf1fc772513f9991b06cc873c94b1b1bcd412b1066f",
+    "claude-security-output.json": "3884f107a3b3ffeaf3d274ec0430bfff9224719796631556261eda4ad59f61eb",
+    "claude-write-attempt-output.json": "6072f628d3f9613115a2d302f9496367cc4cdf42cb0ac4d2bb12a56849b6ead1",
+    "codex-implicit-request.json": "5d83eab7f89a37a761110e8291e92e6e8fefcc1f6d60a8d290e5b6556bfe14bd",
+    "release-install.json": "73096993835e4b136f8eac97aabc89f411d55637494867c37299f5624888ad5e",
+    "claude-explicit-output.json": "83999380a36b7cb117e48d7ef238c8bb119020b316c2d549dbd57f3837c94660",
+    "install.json": "5595f676fa9a12efdb1c3e7545d573cb146984d06974dc3878e98bdc8a00efdc",
+    "claude-nested-output.json": "32aff37319e1ce81a416d7a9463c1efc594cc71a4215cf8baab907fb23868035"
+  },
+  "limits": [
+    "Synthetic protocol responses are not measured model behavior or actual provider usage/cost.",
+    "No claims about private settings, IDE/cloud sessions or unrelated versions.",
+    "Claude bare mode suppresses ordinary discovery and is not the tested integrated channel.",
+    "Temporary local probes are not a shipped provider/evaluation runner."
+  ],
+  "initialArtifactSha256": "7aea1453fc2992c826ac61b342cdf3e9da9f98741bf184067ffc300a0ab3c5cd",
+  "finalArtifactRecheck": "passed all discovery, catalog, activation, root/nested clause counts and negative control assertions",
+  "sourceIdentity": "462c070dfb87973886c405cda9b1905f09c4728b993630209cd4522faa4d75aa",
+  "minimumNode": "24.11.1"
+}

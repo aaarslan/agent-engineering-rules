@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "reviewSkills": [
+    "aer-reviewing-changes",
+    "aer-reviewing-security"
+  ],
+  "resource": ".claude/agents/aer-code-reviewer.md",
+  "name": "aer-code-reviewer",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob"
+  ],
+  "fields": {
+    "disable-model-invocation": true,
+    "context": "fork",
+    "agent": "aer-code-reviewer",
+    "background": false
+  }
+}

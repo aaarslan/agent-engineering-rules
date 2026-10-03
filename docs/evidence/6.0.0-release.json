@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-03",
+  "baseRevision": "25377518505432f0362cca28de3b00fd525af20c",
+  "branch": "feature/aer-v6",
+  "package": "@aaarslan/aer@6.0.0",
+  "publication": "authorized; publication receipt is recorded in the GitHub v6.0.0 release",
+  "specification": {
+    "file": "aer-v6-reviewed-implementation-brief (1).md",
+    "sha256": "26130d00b1821f2d72c47207c4c8d8bd1c779cf1999a0e6cf7490d559bbcf278"
+  },
+  "baseline": {
+    "platform": "Darwin 27.0.0 arm64",
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "command": "npm run release:check",
+    "initialResult": "failed 62/63; pre-existing macOS unresolved /var vs /private/var entrypoint bug",
+    "correction": "realpath comparison in active v5 dispatcher; retired at cutover; audited fixture unchanged",
+    "correctedResult": "passed 63 main and 14 research tests, 39 load plans and packed smoke"
+  },
+  "verification": [
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-current-packed-evidence.json npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.21.0 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 35,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.21.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 573167,
+        "integrity": "sha512-AcLqtKa7W3GHSOhr8GXSqTM68BKL95yszbA+8HJ6fbS+E0eCGIQMM5m8Nb8T6Q2kZ/ao/wBhvC13YHJaA1ySfQ==",
+        "sha256": "7aea1453fc2992c826ac61b342cdf3e9da9f98741bf184067ffc300a0ab3c5cd",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    },
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-minimum-packed-evidence.json npm exec --yes --package=node@24.0.0 -- npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.0.0 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 35,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.0.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 573167,
+        "integrity": "sha512-AcLqtKa7W3GHSOhr8GXSqTM68BKL95yszbA+8HJ6fbS+E0eCGIQMM5m8Nb8T6Q2kZ/ao/wBhvC13YHJaA1ySfQ==",
+        "sha256": "7aea1453fc2992c826ac61b342cdf3e9da9f98741bf184067ffc300a0ab3c5cd",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    },
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-ship-packed-evidence.json npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.21.0 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 36,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.21.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 574680,
+        "integrity": "sha512-2U4Vbi7njbsVzBsRyMHDynTgXOjVEqg9efbUSjZ70F+cBZUn5ML0l2MDsTDvlZVxbLi6l/QTrgOhW3HNyU/3sA==",
+        "sha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    },
+    {
+      "command": "AER_EVIDENCE_FILE=/tmp/aer-v6-ship-minimum-packed-evidence.json npm exec --yes --package=node@24.11.1 -- npm run release:check",
+      "exitCode": 0,
+      "runtime": "Node 24.11.1 / npm 11.19.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "mainTests": {
+        "passed": 36,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalFixtureTests": {
+        "passed": 77,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.0",
+        "node": "24.11.1",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 219,
+        "unpackedBytes": 574680,
+        "integrity": "sha512-2U4Vbi7njbsVzBsRyMHDynTgXOjVEqg9efbUSjZ70F+cBZUn5ML0l2MDsTDvlZVxbLi6l/QTrgOhW3HNyU/3sA==",
+        "sha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    }
+  ],
+  "research": {
+    "liveDirectives": 26,
+    "scenarios": 6,
+    "grievances": 110,
+    "frozenFiles": 37,
+    "auditedFixtureFiles": 234,
+    "auditedFixtureByteDifferences": 0,
+    "routingCases": 140,
+    "preparedBehaviorCases": 39,
+    "runnableFixtureBaselines": 13,
+    "loadingScenarios": 54,
+    "modelTrials": 0
+  },
+  "releaseGates": {
+    "mechanicalImplementation": "passed final local and actual Linux/Windows CI",
+    "linux": "passed minimum 24.11.1 and current 24.21.0",
+    "windows": "passed Windows Server 2025 x64 minimum 24.11.1 and current 24.21.0",
+    "clientDiscovery": "passed final-artifact isolated local CLI root/nested probes; private/remote configurations excluded",
+    "nativeInvocationAndTools": "passed final-artifact loopback implicit/explicit and Claude restricted tool/negative controls",
+    "plugins": "explicitly deferred",
+    "efficacy": "unmeasured; no authorized trials",
+    "releaseReadiness": "all required 6.0 gates verified; optional plugins deferred; no model efficacy claim"
+  },
+  "limits": [
+    "packageMatch is local consistency, not authentication",
+    "unknown prior inventories cannot authorize cleanup; use their pinned package",
+    "manual stale/partial lock and unowned journal-temp recovery",
+    "process interruption coverage is not a hostile-filesystem or power-loss guarantee"
+  ],
+  "sourceIdentity": "462c070dfb87973886c405cda9b1905f09c4728b993630209cd4522faa4d75aa",
+  "finalReviewCorrections": [
+    {
+      "finding": "Absent/pending check returned before the final snapshot guard",
+      "correction": "All loaded states repeat lock/state inspection; absent/pending concurrent-change regression passed",
+      "sections": "9.3, 11.1"
+    },
+    {
+      "finding": "Published documentation linked to excluded repository files",
+      "correction": "Explicitly ship capability matrix; distinguish online repository records; packed local Markdown closure checked",
+      "sections": "3, 13, 14"
+    },
+    {
+      "finding": "The stronger packed closure assertion failed on retired v5 links in the reviewer adapter on both runtimes",
+      "correction": "Remove duplicated procedure from the thin adapter; canonical installed review skill supplies it; rendered inventories validate closure; final full gates passed",
+      "sections": "4.1, 7.2, 8.1"
+    },
+    {
+      "finding": "Root lock metadata still named v5",
+      "correction": "Offline package-lock refresh; active metadata consistency validator passed",
+      "sections": "3, 12"
+    },
+    {
+      "finding": "Standalone diagnostics duplicated tunable defaults and complete block line accounting lacked a guard",
+      "correction": "Generate the independent config from canonical thresholds; enforce composed physical lines including markers; affected content/diagnostic and research tests passed",
+      "sections": "4.2, 10.1, 10.2"
+    }
+  ],
+  "additionalVerification": [
+    {
+      "command": "node --test test/content.test.mjs && npm run validate:research",
+      "exitCode": 0,
+      "runtime": "Node 24.21.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "purpose": "Affected negative composed-line regression and offline research/load guards; 6 tests passed"
+    },
+    {
+      "command": "npm exec --yes --package=node@24.0.0 -- node --test test/content.test.mjs && npm exec --yes --package=node@24.0.0 -- npm run validate:research",
+      "exitCode": 0,
+      "runtime": "Node 24.0.0",
+      "platform": "Darwin 27.0.0 arm64",
+      "purpose": "Same affected final guards on the minimum runtime; 6 tests passed"
+    }
+  ],
+  "releaseFollowUp": {
+    "recordedOn": "2026-10-03",
+    "implementationPr": "https://github.com/aaarslan/agent-engineering-rules/pull/13",
+    "initialCi": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37148943189",
+    "initialCiResults": {
+      "linuxMinimum": "passed",
+      "linuxCurrent": "passed",
+      "windowsCurrent": "passed",
+      "windowsMinimum": "19 failed, 1 cancelled, 15 passed; snapshot mismatch and child readiness hang; job timeout"
+    },
+    "correction": "Exact BigInt filesystem identity, bounded child readiness, verified Node 24 LTS floor; the intermediate normalization/reopen workaround is not shipped.",
+    "localCorrectionChecks": "npm test && npm run validate: passed 36 tests and all validators",
+    "finalClientProbes": "Passed against exact final tarball 6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc; no remote provider dispatch.",
+    "modelTrials": 0,
+    "minimumRuntimeDecision": "Node >=24.11.1 LTS; actual Windows 24.0.0 path dev=0 vs handle dev=38870174. Exact BigInt guards retained; no original fixture assertion waived.",
+    "secondCi": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37150655914",
+    "secondCiResult": "Windows 24.0.0 failed promptly; metadata probe disproved the normalization-only hypothesis. LTS minimum matrix pending.",
+    "finalVerifiedRevision": "625573b573e0b92f577d850a5f5170a19807b804",
+    "finalCi": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37151350575",
+    "finalCiResults": [
+      {
+        "job": "windows-minimum",
+        "command": "npm run release:check",
+        "exitCode": 0,
+        "platform": "Microsoft Windows Server 2025",
+        "artifact": {
+          "package": "@aaarslan/aer@6.0.0",
+          "node": "24.11.1",
+          "npm": "npm/11.6.2 node/v24.11.1 win32 x64 workspaces/false ci/github-actions",
+          "platform": "win32",
+          "arch": "x64",
+          "files": 219,
+          "unpackedBytes": 574680,
+          "integrity": "sha512-udIzozJwZwEIrt6DFj24Go1ZtGNDMuWATym6ae4nVVHVsNWbg90rCWlNvfKVoEqXS3xEu1fliSBRRdj/rfKuuQ==",
+          "sha256": "c3d6ed4bec8d17d9eae50dab95528fd671132f3348a9f1c074238d3885b1d4f5",
+          "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+          "checks": [
+            "complete inventory",
+            "isolated npm prefix",
+            "preview/install/check/idempotence",
+            "selection/instruction/destination moves",
+            "collision/drift refusal",
+            "packed interruption/resume",
+            "uninstall preservation",
+            "pinned packed v5 exit"
+          ]
+        },
+        "mainTests": 36,
+        "originalFixtureTests": 77,
+        "filesystemProbes": [
+          {
+            "node": "v24.11.1",
+            "uv": "1.51.0",
+            "platform": "win32",
+            "bigint": false,
+            "before": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752.1597",
+              "birthtimeMs": "1791059008752.1597"
+            },
+            "handle": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752.1597",
+              "birthtimeMs": "1791059008752.1597"
+            },
+            "after": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752.1597",
+              "birthtimeMs": "1791059008752.1597"
+            },
+            "bytes": 222
+          },
+          {
+            "node": "v24.11.1",
+            "uv": "1.51.0",
+            "platform": "win32",
+            "bigint": true,
+            "before": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752",
+              "birthtimeMs": "1791059008752"
+            },
+            "handle": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752",
+              "birthtimeMs": "1791059008752"
+            },
+            "after": {
+              "dev": "2159692075",
+              "ino": "281474976711247",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008752",
+              "birthtimeMs": "1791059008752"
+            },
+            "bytes": 222
+          }
+        ]
+      },
+      {
+        "job": "windows-current",
+        "command": "npm run release:check",
+        "exitCode": 0,
+        "platform": "Microsoft Windows Server 2025",
+        "artifact": {
+          "package": "@aaarslan/aer@6.0.0",
+          "node": "24.21.0",
+          "npm": "npm/11.19.0 node/v24.21.0 win32 x64 workspaces/false ci/github-actions/dotcom-hosted",
+          "platform": "win32",
+          "arch": "x64",
+          "files": 219,
+          "unpackedBytes": 574680,
+          "integrity": "sha512-udIzozJwZwEIrt6DFj24Go1ZtGNDMuWATym6ae4nVVHVsNWbg90rCWlNvfKVoEqXS3xEu1fliSBRRdj/rfKuuQ==",
+          "sha256": "c3d6ed4bec8d17d9eae50dab95528fd671132f3348a9f1c074238d3885b1d4f5",
+          "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+          "checks": [
+            "complete inventory",
+            "isolated npm prefix",
+            "preview/install/check/idempotence",
+            "selection/instruction/destination moves",
+            "collision/drift refusal",
+            "packed interruption/resume",
+            "uninstall preservation",
+            "pinned packed v5 exit"
+          ]
+        },
+        "mainTests": 36,
+        "originalFixtureTests": 77,
+        "filesystemProbes": [
+          {
+            "node": "v24.21.0",
+            "uv": "1.52.1",
+            "platform": "win32",
+            "bigint": false,
+            "before": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434.64",
+              "birthtimeMs": "1791059008434.64"
+            },
+            "handle": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434.64",
+              "birthtimeMs": "1791059008434.64"
+            },
+            "after": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434.64",
+              "birthtimeMs": "1791059008434.64"
+            },
+            "bytes": 222
+          },
+          {
+            "node": "v24.21.0",
+            "uv": "1.52.1",
+            "platform": "win32",
+            "bigint": true,
+            "before": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434",
+              "birthtimeMs": "1791059008434"
+            },
+            "handle": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434",
+              "birthtimeMs": "1791059008434"
+            },
+            "after": {
+              "dev": "150137783",
+              "ino": "281474976711228",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059008434",
+              "birthtimeMs": "1791059008434"
+            },
+            "bytes": 222
+          }
+        ]
+      },
+      {
+        "job": "linux-minimum",
+        "command": "npm run release:check",
+        "exitCode": 0,
+        "platform": "Ubuntu 24.04 x64 (GitHub hosted runner)",
+        "artifact": {
+          "package": "@aaarslan/aer@6.0.0",
+          "node": "24.11.1",
+          "npm": "npm/11.6.2 node/v24.11.1 linux x64 workspaces/false ci/github-actions",
+          "platform": "linux",
+          "arch": "x64",
+          "files": 219,
+          "unpackedBytes": 574680,
+          "integrity": "sha512-2U4Vbi7njbsVzBsRyMHDynTgXOjVEqg9efbUSjZ70F+cBZUn5ML0l2MDsTDvlZVxbLi6l/QTrgOhW3HNyU/3sA==",
+          "sha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+          "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+          "checks": [
+            "complete inventory",
+            "isolated npm prefix",
+            "preview/install/check/idempotence",
+            "selection/instruction/destination moves",
+            "collision/drift refusal",
+            "packed interruption/resume",
+            "uninstall preservation",
+            "pinned packed v5 exit"
+          ]
+        },
+        "mainTests": 36,
+        "originalFixtureTests": 77,
+        "filesystemProbes": [
+          {
+            "node": "v24.11.1",
+            "uv": "1.51.0",
+            "platform": "linux",
+            "bigint": false,
+            "before": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482.4038",
+              "birthtimeMs": "1791059002482.4038"
+            },
+            "handle": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482.4038",
+              "birthtimeMs": "1791059002482.4038"
+            },
+            "after": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482.4038",
+              "birthtimeMs": "1791059002482.4038"
+            },
+            "bytes": 222
+          },
+          {
+            "node": "v24.11.1",
+            "uv": "1.51.0",
+            "platform": "linux",
+            "bigint": true,
+            "before": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482",
+              "birthtimeMs": "1791059002482"
+            },
+            "handle": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482",
+              "birthtimeMs": "1791059002482"
+            },
+            "after": {
+              "dev": "2049",
+              "ino": "2423082",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059002482",
+              "birthtimeMs": "1791059002482"
+            },
+            "bytes": 222
+          }
+        ]
+      },
+      {
+        "job": "linux-current",
+        "command": "npm run release:check",
+        "exitCode": 0,
+        "platform": "Ubuntu 24.04 x64 (GitHub hosted runner)",
+        "artifact": {
+          "package": "@aaarslan/aer@6.0.0",
+          "node": "24.21.0",
+          "npm": "npm/11.19.0 node/v24.21.0 linux x64 workspaces/false ci/github-actions/dotcom-hosted",
+          "platform": "linux",
+          "arch": "x64",
+          "files": 219,
+          "unpackedBytes": 574680,
+          "integrity": "sha512-2U4Vbi7njbsVzBsRyMHDynTgXOjVEqg9efbUSjZ70F+cBZUn5ML0l2MDsTDvlZVxbLi6l/QTrgOhW3HNyU/3sA==",
+          "sha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+          "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+          "checks": [
+            "complete inventory",
+            "isolated npm prefix",
+            "preview/install/check/idempotence",
+            "selection/instruction/destination moves",
+            "collision/drift refusal",
+            "packed interruption/resume",
+            "uninstall preservation",
+            "pinned packed v5 exit"
+          ]
+        },
+        "mainTests": 36,
+        "originalFixtureTests": 77,
+        "filesystemProbes": [
+          {
+            "node": "v24.21.0",
+            "uv": "1.52.1",
+            "platform": "linux",
+            "bigint": false,
+            "before": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952.7524",
+              "birthtimeMs": "1791059006952.7524"
+            },
+            "handle": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952.7524",
+              "birthtimeMs": "1791059006952.7524"
+            },
+            "after": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952.7524",
+              "birthtimeMs": "1791059006952.7524"
+            },
+            "bytes": 222
+          },
+          {
+            "node": "v24.21.0",
+            "uv": "1.52.1",
+            "platform": "linux",
+            "bigint": true,
+            "before": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952",
+              "birthtimeMs": "1791059006952"
+            },
+            "handle": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952",
+              "birthtimeMs": "1791059006952"
+            },
+            "after": {
+              "dev": "2049",
+              "ino": "2423085",
+              "nlink": "1",
+              "size": "222",
+              "mtimeMs": "1791059006952",
+              "birthtimeMs": "1791059006952"
+            },
+            "bytes": 222
+          }
+        ]
+      }
+    ],
+    "unsupportedRuntimeCheck": {
+      "command": "npm exec --yes --package=node@24.0.0 -- node src/cli.mjs install --target <disposable> --json",
+      "exitCode": 2,
+      "targetUnchanged": true,
+      "reason": "requires Node >=24.11.1"
+    }
+  },
+  "finalArtifact": {
+    "package": "@aaarslan/aer@6.0.0",
+    "node": "24.21.0",
+    "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+    "platform": "darwin",
+    "arch": "arm64",
+    "files": 219,
+    "unpackedBytes": 574680,
+    "integrity": "sha512-2U4Vbi7njbsVzBsRyMHDynTgXOjVEqg9efbUSjZ70F+cBZUn5ML0l2MDsTDvlZVxbLi6l/QTrgOhW3HNyU/3sA==",
+    "sha256": "6713817252a2e0e6c3cd0ee7de56d0de9d478aae2671ff99133ae7cd882ce2fc",
+    "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+    "checks": [
+      "complete inventory",
+      "isolated npm prefix",
+      "preview/install/check/idempotence",
+      "selection/instruction/destination moves",
+      "collision/drift refusal",
+      "packed interruption/resume",
+      "uninstall preservation",
+      "pinned packed v5 exit"
+    ]
+  }
+}

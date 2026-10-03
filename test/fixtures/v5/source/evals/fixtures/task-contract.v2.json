@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "task_id": "synthetic-normalize-record-v2",
+  "scenario_id": "exact-contract-and-lifecycle",
+  "contract_version": "2.0.0",
+  "operation": "normalize-record",
+  "interface": {
+    "transport": "http",
+    "method": "POST",
+    "path": "/normalize-record",
+    "request_content_type": "application/json",
+    "response_content_type": "application/json",
+    "errors": {
+      "invalid-input": {
+        "predicates": ["display_name:not-string", "roles:not-array", "roles[*]:not-string"],
+        "status": 400,
+        "body": {"error": "invalid-input"}
+      }
+    }
+  },
+  "required_case_kinds": ["valid-initial", "valid-repeat", "invalid-display-name", "invalid-roles", "invalid-role-entry", "valid-recovery"],
+  "artifact_capture": "The harness captures ordered HTTP results in case-results.json; the runtime writes no files."
+}
