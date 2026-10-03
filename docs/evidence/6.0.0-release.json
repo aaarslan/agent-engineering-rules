@@ -4,7 +4,7 @@
   "baseRevision": "25377518505432f0362cca28de3b00fd525af20c",
   "branch": "feature/aer-v6",
   "package": "@aaarslan/aer@6.0.0",
-  "publication": "not authorized; not performed",
+  "publication": "authorized 2026-10-03; pending corrected final release checks",
   "specification": {
     "file": "aer-v6-reviewed-implementation-brief (1).md",
     "sha256": "26130d00b1821f2d72c47207c4c8d8bd1c779cf1999a0e6cf7490d559bbcf278"
@@ -111,10 +111,10 @@
   },
   "releaseGates": {
     "mechanicalImplementation": "passed locally",
-    "linux": "unverified; no executor/container runtime available; CI configured only",
-    "windows": "unverified; no Windows executor available; CI configured only",
-    "clientDiscovery": "unverified final-artifact sessions; binaries/version/help inspected only",
-    "nativeInvocationAndTools": "artifact metadata/body inventory verified; actual implicit/explicit and restricted tool probes unverified",
+    "linux": "passed initial actual GitHub CI; corrected final tree pending",
+    "windows": "current passed initial CI; minimum failure corrected, final CI pending",
+    "clientDiscovery": "actual isolated root/nested local CLI probes passed; final installer recheck pending",
+    "nativeInvocationAndTools": "actual implicit/explicit and Claude restricted tool/negative controls passed using loopback fixtures",
     "plugins": "explicitly deferred",
     "efficacy": "unmeasured; no authorized trials",
     "releaseReadiness": "not fully verified"
@@ -168,5 +168,20 @@
       "platform": "Darwin 27.0.0 arm64",
       "purpose": "Same affected final guards on the minimum runtime; 6 tests passed"
     }
-  ]
+  ],
+  "releaseFollowUp": {
+    "recordedOn": "2026-10-03",
+    "implementationPr": "https://github.com/aaarslan/agent-engineering-rules/pull/13",
+    "initialCi": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37148943189",
+    "initialCiResults": {
+      "linuxMinimum": "passed",
+      "linuxCurrent": "passed",
+      "windowsCurrent": "passed",
+      "windowsMinimum": "19 failed, 1 cancelled, 15 passed; snapshot mismatch and child readiness hang; job timeout"
+    },
+    "correction": "BigInt exact identity/nanosecond metadata with native Windows low-32-bit volume serial; unchanged/equal-byte replacement regression; bounded child readiness",
+    "localCorrectionChecks": "npm test && npm run validate: passed 36 tests and all validators",
+    "finalClientProbes": "passed on prior release-doc artifact; corrected installer final artifact will be checked separately",
+    "modelTrials": 0
+  }
 }

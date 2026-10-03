@@ -1,8 +1,14 @@
 # Install, inspect and recover
 
-## Exercise the unpublished artifact
+## Install the pinned release
 
-From the AER checkout with Node 24.0.0 or newer:
+With Node 24.0.0 or newer:
+
+```sh
+npm install --global @aaarslan/aer@6.0.0
+```
+
+To reproduce package checks from the AER checkout in disposable directories:
 
 ```sh
 npm run build
@@ -15,7 +21,7 @@ Use the prefix's `bin/aer` on POSIX or `aer.cmd` on Windows. The packed smoke al
 executes the installed `src/cli.mjs` with the tested Node executable. Targets must
 already exist. Test in disposable consumers, never the AER checkout or a global
 agent configuration. Installation does not execute lifecycle scripts or skills.
-Registry examples below assume a separately authorized publication and version pin.
+Keep registry installs version-pinned when reproducing an installation or study.
 
 ## Direct representations
 
@@ -30,8 +36,8 @@ with `allow_implicit_invocation: false` for manual routes. `claude-code` renders
 `disable-model-invocation: true`; both review routes bind a fork to the installed
 `.claude/agents/aer-code-reviewer.md` with `Read, Grep, Glob` only. This resource is
 visible in previews and collision checked. Installed engineering body bytes are
-the same across representations. Native controls are documented by the clients;
-final-session invocation and available-tool probes remain separate release gates.
+the same across representations. Native controls are documented by the clients and exercised in isolated local
+CLI protocol probes; see the dated capability matrix for versions and limits.
 
 AER does not edit `CLAUDE.md` or private settings automatically. When your actual
 Claude setup prefers `CLAUDE.md`, explicitly review adding `@AGENTS.md` there and

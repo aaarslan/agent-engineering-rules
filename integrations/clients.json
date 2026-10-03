@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-02",
+  "reviewedOn": "2026-10-03",
   "skills": [
     {
       "name": "aer-implementing-features",
@@ -77,7 +77,9 @@
       "capabilities": [
         "invocation-sidecar"
       ],
-      "testedVersions": []
+      "testedVersions": [
+        "0.160.0"
+      ]
     },
     "claude-code": {
       "renderer": "claude-code-v1",
@@ -91,7 +93,9 @@
         "manual-invocation",
         "restricted-reviewer"
       ],
-      "testedVersions": []
+      "testedVersions": [
+        "2.1.285"
+      ]
     }
   }
 }

@@ -53,18 +53,22 @@ export async function snapshot(root, relative, maxBytes = requiredThreshold(THRE
   await parents(root, relative);
   const file = resolvePath(root, relative);
   let s;
-  try { s = await lstat(file); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
-  if (!s.isFile() || s.isSymbolicLink() || s.nlink !== 1 || s.size > maxBytes) throw new AerError(`unsafe file, link or oversized input: ${relative}`);
+  try { s = await lstat(file,{bigint:true}); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+  if (!s.isFile() || s.isSymbolicLink() || s.nlink !== 1n || s.size > BigInt(maxBytes)) throw new AerError(`unsafe file, link or oversized input: ${relative}`);
   const h = await open(file, 'r');
   try {
-    const a = await h.stat();
-    const bytes = await h.readFile(); const b = await lstat(file);
-    if (!identity(s, a) || !identity(a, b) || a.size !== b.size || a.mtimeMs !== b.mtimeMs || bytes.length !== b.size)
+    const a = await h.stat({bigint:true});
+    const bytes = await h.readFile(); const b = await lstat(file,{bigint:true});
+    if (!a.isFile() || !b.isFile() || a.nlink !== 1n || b.nlink !== 1n || !identity(s, a) || !identity(a, b) || a.size !== b.size || a.mtimeNs !== b.mtimeNs || BigInt(bytes.length) !== b.size)
       throw new AerError(`${relative} changed during snapshot`, 4, 'unstable-snapshot');
-    return { bytes, dev: b.dev, ino: b.ino, birthtimeMs: b.birthtimeMs, mode: b.mode & 0o777 };
+    return { bytes, dev: device(b.dev).toString(), ino: b.ino.toString(), birthtimeNs: b.birthtimeNs.toString(), mode: Number(b.mode & 0o777n) };
   } finally { await h.close(); }
 }
-function identity(a, b) { return a.dev === b.dev && a.ino === b.ino && (a.ino !== 0 || a.birthtimeMs === b.birthtimeMs); }
+// Older Windows libuv path stat reports a 64-bit volume serial while fstat
+// reports its low 32 bits. Current libuv consistently uses the low 32 bits.
+// BigInt retains the exact inode and timestamp; Number can round their identity.
+const device=value=>process.platform==='win32'?BigInt(value)&0xffffffffn:BigInt(value);
+function identity(a, b) { return device(a.dev) === device(b.dev) && BigInt(a.ino) === BigInt(b.ino) && (BigInt(a.ino) !== 0n || BigInt(a.birthtimeNs) === BigInt(b.birthtimeNs)); }
 export function sameSnapshot(a, b) { return a === null || b === null ? a === b : identity(a,b) && a.bytes.equals(b.bytes); }
 export async function guard(root, relative, expected) {
   if (!sameSnapshot(expected, await snapshot(root, relative))) throw new AerError(`${relative} changed after inspection; retain pending operation`, 4, 'interrupted');
@@ -79,7 +83,7 @@ export async function replace(root, relative, content, expected, {operationId = 
   const temp = resolvePath(root,temporaryPath(relative,operationId));
   let h,created,written=false;
   try {
-    h = await open(temp, 'wx', expected?.mode ?? 0o644);created=await h.stat();await boundary?.('temporary-created',relative);
+    h = await open(temp, 'wx', expected?.mode ?? 0o644);created=await h.stat({bigint:true});await boundary?.('temporary-created',relative);
     await h.writeFile(content);written=true;await h.sync();await boundary?.('temporary-synced',relative);await h.close(); h = null;
     await guard(root, relative, expected); await rename(temp, file);
   } finally {

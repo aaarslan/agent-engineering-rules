@@ -4,19 +4,19 @@ AER supplies independently usable engineering skills, a compact project contract
 assurance profiles, and an ownership-aware project installer. `@aaarslan/aer` is
 ESM, requires Node 24.0.0 or newer, and has no runtime dependencies.
 
-The 6.0.0 tree is an unpublished release candidate. Mechanical checks do not
-establish model efficacy, client discovery or tool enforcement. See the dated
+The release separates mechanical safety, client controls, and model outcomes.
+Isolated client-control probes do not establish model efficacy. See the dated
 [capability matrix](docs/capability-matrix.md) and repository
 [execution record](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/decisions/6.0.0-plan.md).
 
 ## Installation
 
-Build and pack locally; install the resulting tarball into a disposable npm
-prefix for review. The exercised commands are in [INSTALL.md](INSTALL.md).
-After an explicitly authorized maintainer publication, pin `@aaarslan/aer@6.0.0`
-in team tooling; do not assume a floating version preserves treatment bytes.
+Install the pinned CLI with Node 24.0.0 or newer. Preview project changes before
+installing; the exercised recovery commands are in [INSTALL.md](INSTALL.md).
+A floating version does not preserve treatment bytes.
 
 ```sh
+npm install --global @aaarslan/aer@6.0.0
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills --dry-run
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills
 aer check --json

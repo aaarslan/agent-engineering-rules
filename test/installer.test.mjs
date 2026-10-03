@@ -143,12 +143,18 @@ test('atomic replacement never removes an unowned or externally replaced tempora
  await assert.rejects(replace(target,'file.md',Buffer.from('payload'),null,{operationId:id,boundary:async name=>{if(name==='temporary-synced'){await rm(path.join(target,temp));await file(target,temp,'external replacement');throw Error('changed');}}}));
  assert.equal(await readFile(path.join(target,temp),'utf8'),'external replacement');
 });
-test('two real mutator processes exclude one another and journal initialization interruption remains unowned',async t=>{
+test('two real mutator processes exclude one another and journal initialization interruption remains unowned',{timeout:30000},async t=>{
  const target=await dir(t),module=pathToFileURL(path.resolve('src/install.mjs')).href;
  const code=`import {install} from ${JSON.stringify(module)};await install(${JSON.stringify({target,skills:'none'})},{boundary:async name=>{if(name==='pending'){console.log('READY');await new Promise(resolve=>process.stdin.once('data',resolve));}}});`;
  const child=spawn(process.execPath,['--input-type=module','-e',code],{stdio:['pipe','pipe','pipe'],windowsHide:true});t.after(()=>{if(child.exitCode===null)child.kill();});
- const closed=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});
- await new Promise((resolve,reject)=>{child.stdout.once('data',d=>d.toString().includes('READY')?resolve():reject(Error('unexpected handshake')));child.on('error',reject);});
+ const closed=new Promise(resolve=>child.once('close',resolve));let stderr='';child.stderr.on('data',d=>stderr+=d);
+ await new Promise((resolve,reject)=>{
+  const finish=error=>{clearTimeout(timer);child.stdout.off('data',ready);child.off('error',failed);child.off('exit',exited);error?reject(error):resolve();};
+  const ready=d=>finish(d.toString().includes('READY')?null:Error('unexpected handshake'));
+  const failed=error=>finish(error),exited=code=>finish(Error(`mutator exited before readiness (${code}): ${stderr}`));
+  const timer=setTimeout(()=>finish(Error(`mutator readiness timed out: ${stderr}`)),20000);
+  child.stdout.once('data',ready);child.once('error',failed);child.once('exit',exited);
+ });
  const second=spawnSync(process.execPath,[path.resolve('src/cli.mjs'),'install','--target',target,'--json'],{encoding:'utf8',windowsHide:true});assert.equal(second.status,3,second.stdout+second.stderr);child.stdin.end('continue');assert.equal(await closed,0);assert.equal((await check({target})).status,'current');
  const interrupted=await dir(t);
  const kill=`import {install} from ${JSON.stringify(module)};await install(${JSON.stringify({target:interrupted,skills:'none'})},{atomicBoundary:(name,p)=>{if(name==='temporary-synced'&&p==='aer.lock.json')process.kill(process.pid,'SIGKILL');}});`;

@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.0.0 (unpublished)
+## 6.0.0 - 2026-10-03
 
 ### Source corpus
 
@@ -15,12 +15,14 @@ changing frozen evidence. No efficacy or cost-saving claim is made.
 
 Explicit `claude-code:PATH` rendering preserves manual invocation and the two
 review bindings to a read-only tool adapter. Instruction import is explicitly
-reviewed by the consumer. Runtime discovery/invocation remains an unverified gate.
+reviewed by the consumer. Discovery, explicit/manual invocation and restricted tools were probed on
+Claude Code 2.1.285 using deterministic loopback responses.
 
 ### Codex distribution
 
 Explicit `codex:PATH` adds native declarative invocation sidecars; portable bodies
-remain equivalent. Runtime discovery/invocation remains an unverified gate.
+remain equivalent. Discovery, implicit catalog exclusion and explicit activation were probed on
+Codex CLI 0.160.0 using deterministic loopback responses.
 
 ### Runtime and package
 
@@ -28,7 +30,8 @@ Three-command CLI at `src/cli.mjs`, complete inventory/closed state schemas,
 read-only previews/checks, safe convergent selection/path moves, recoverable
 install/update/uninstall and explicit retention. Package allowlist excludes
 research/tests/tooling; diagnostics are explicitly invoked skill resources.
-V5 detection refuses adoption; pinned exit is exercised against the audited
+Snapshots preserve exact BigInt inode/timestamp identity and normalize the native
+Windows volume serial across Node 24 versions. V5 detection refuses adoption; pinned exit is exercised against the audited
 packed fixture. Plugin channels are deferred. See the execution record for
 verification, limitations and material decisions.
 

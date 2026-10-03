@@ -11,8 +11,8 @@
     {
       "path": "integrations/clients.json",
       "normalization": "utf8-lf",
-      "sha256": "f5f0f18a428101b806c2896eb396ff4dcc6ae544b10e848d45d1412d61bc040e",
-      "bytes": 2048
+      "sha256": "6eb0882bc25c14ead9e84b6e2ce5e14f4e54084c686ba58e6d92d87bfaf26ba6",
+      "bytes": 2098
     },
     {
       "path": "integrations/payload-history.json",
@@ -1235,8 +1235,8 @@
     {
       "path": "src/fs-safe.mjs",
       "normalization": "utf8-lf",
-      "sha256": "9d3f19b6e63d373aa3ea6be5aab886aa3954ca62943e5c1c7563d5f8c30047b2",
-      "bytes": 8616
+      "sha256": "4d537681ec91184817953cfbcff0a09e818459cb967987ea81779ec6bb705afc",
+      "bytes": 9183
     },
     {
       "path": "src/install.mjs",
@@ -1269,5 +1269,5 @@
       "bytes": 385
     }
   ],
-  "sourceIdentity": "37bbfaffcc8cd98880a6e3967244c57ca4bf0c7b51494b0ae5d349ffeafcbb15"
+  "sourceIdentity": "1204e3da181c256035a9bdb459a2268365c3ef34d0e301ee4c3e5883d24a0c34"
 }
