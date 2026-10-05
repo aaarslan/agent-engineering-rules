@@ -1,5 +1,7 @@
 # Decisions
 
+- [V7 rearchitecture study](7.0.0-rearchitecture-study.md): measured state of v6, findings, proposed architecture, feasibility and maintainer decisions (study only, no behavior change).
+
 - [V6 execution record](6.0.0-plan.md): baseline, state machine, scope mapping and release evidence.
 
 
