@@ -1,13 +1,32 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+import http from 'node:http';
+
+export function createServer({ records, currentActor, partner }) {
+  return http.createServer(async (request, response) => {
+    try {
+      const id = decodeURIComponent(request.url.slice('/records/'.length));
+      if (request.method === 'GET') {
+        const record = records.get(id);
+        response.writeHead(record ? 200 : 404, {
+          'content-type': 'application/json',
+        });
+        response.end(JSON.stringify(record ?? { error: 'not found' }));
+        return;
+      }
+      if (request.method === 'POST') {
+        const chunks = [];
+        for await (const chunk of request) chunks.push(chunk);
+        const body = JSON.parse(Buffer.concat(chunks).toString());
+        const record = records.get(id);
+        const receipt = await partner.reserve(body.quantity);
+        records.set(id, { ...record, quantity: body.quantity, receipt });
+        response.writeHead(200, { 'content-type': 'application/json' });
+        response.end(JSON.stringify(records.get(id)));
+        return;
+      }
+      response.writeHead(405).end();
+    } catch {
+      response.writeHead(500, { 'content-type': 'application/json' });
+      response.end(JSON.stringify({ error: 'internal error' }));
+    }
+  });
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
-}
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
-}
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }

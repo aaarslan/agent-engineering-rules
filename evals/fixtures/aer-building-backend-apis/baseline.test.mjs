@@ -1,8 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {save,toggle,readNote,migrate} from './app.mjs';
-test('sanitized fixture baseline and known authorization defect',()=>{
- const s=new Map();save(s,'private-note','draft');assert.equal(toggle(s,'private-note').archived,true);
- assert.equal(readNote(s,'unrelated-actor','private-note').value,'draft');
- assert.equal(migrate([{archived:'false'}])[0].archived,true);
+import { createServer } from './app.mjs';
+test('fixture setup and known starting behavior', async (t) => {
+  const records = new Map([
+    ['a', { id: 'a', workspace: 'alpha', quantity: 1 }],
+  ]);
+  const server = createServer({
+    records,
+    currentActor: () => null,
+    partner: { reserve: async () => ({ ok: true, receiptId: 'r' }) },
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const result = await fetch(
+    `http://127.0.0.1:${server.address().port}/records/a`,
+  );
+  assert.equal(result.status, 200);
+  assert.equal((await result.json()).workspace, 'alpha');
 });

@@ -1,7 +1,7 @@
 <!-- Generated from source/shared/web-ui.md by tools/render-v6.mjs -->
 # Web UI
 
-Use [TypeScript and React](typescript-react.md) only for that selected stack and [UI Styling](ui-styling.md) for the requested visual design.
+Choose the stack and visual design from the requested product and repository; browser behavior applies across frameworks.
 
 ## Safe rendering
 

@@ -36,7 +36,7 @@ try {
    assert.ok(names.includes(resource),`${name}: packed link escapes or is absent: ${m[1]}`);
   }
  }
- assert.equal(command(cli,['--version']).stdout.trim(),'6.0.0');await access(path.join(prefix,process.platform==='win32'?'aer.cmd':'bin/aer'));
+ assert.equal(command(cli,['--version']).stdout.trim(),'6.0.1');await access(path.join(prefix,process.platform==='win32'?'aer.cmd':'bin/aer'));
  const pkg=JSON.parse(await readFile(path.join(installed,'package.json'),'utf8'));assert.equal(pkg.bin.aer,'src/cli.mjs');assert.equal(pkg.dependencies,undefined);assert.equal(pkg.scripts.postinstall,undefined);
  const consumer=await directory('consumer project');await writeFile(path.join(consumer,'AGENTS.md'),'\uFEFFconsumer\r\nno final');const original=await tree(consumer);
  function cliRun(args,code=0,target=consumer){const r=command(cli,[...args,'--target',target,'--json']);assert.equal(r.status,code,r.stdout+r.stderr);return JSON.parse(r.stdout);}
@@ -61,7 +61,7 @@ try {
  await writeFile(path.join(temporary,'v5-modified-backup.md'),'modified v5');await writeFile(edited,oldOwned);
  r=command(oldCli,['uninstall','--target',legacy]);assert.equal(r.status,0,r.stdout+r.stderr);assert.equal(await readFile(path.join(legacy,'AGENTS.md'),'utf8'),'consumer v5');
  cliRun(['install','--skills','none'],0,legacy);cliRun(['uninstall'],0,legacy);
- const record={package:'@aaarslan/aer@6.0.0',node:process.versions.node,npm:process.env.npm_config_user_agent??'unknown',platform:process.platform,arch:process.arch,files:pack.files.length,unpackedBytes:pack.unpackedSize,integrity:pack.integrity,sha256:hash(bytes),v5Integrity:oldPack.integrity,checks:['complete inventory','isolated npm prefix','preview/install/check/idempotence','selection/instruction/destination moves','collision/drift refusal','packed interruption/resume','uninstall preservation','pinned packed v5 exit']};
+ const record={package:'@aaarslan/aer@6.0.1',node:process.versions.node,npm:process.env.npm_config_user_agent??'unknown',platform:process.platform,arch:process.arch,files:pack.files.length,unpackedBytes:pack.unpackedSize,integrity:pack.integrity,sha256:hash(bytes),v5Integrity:oldPack.integrity,checks:['complete inventory','isolated npm prefix','preview/install/check/idempotence','selection/instruction/destination moves','collision/drift refusal','packed interruption/resume','uninstall preservation','pinned packed v5 exit']};
  console.log(JSON.stringify(record,null,2));
  if(process.env.AER_EVIDENCE_FILE)await writeFile(process.env.AER_EVIDENCE_FILE,JSON.stringify(record,null,2)+'\n');
 } finally {await rm(temporary,{recursive:true,force:true});}

@@ -1,0 +1,60 @@
+{
+  "version": "6.0.1",
+  "date": "2026-10-05",
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "priorIdentity": "462c070dfb87973886c405cda9b1905f09c4728b993630209cd4522faa4d75aa",
+  "sourceIdentity": "2cf01e39573251bd0b0bcb7a6cfaeaf5fd4cba3b8a07f1200ea3450602f3f74d",
+  "scenarios": [
+    {
+      "profile": "prototype",
+      "representations": 3,
+      "removed": 396,
+      "remainingReferences": 114,
+      "checks": [
+        "prior history matches exact 6.0.0 package",
+        "modified reference refusal",
+        "read-only preview",
+        "upgrade",
+        "396 obsolete reference copies removed",
+        "current check",
+        "idempotence",
+        "uninstall preserves consumer bytes"
+      ]
+    },
+    {
+      "profile": "standard",
+      "representations": 3,
+      "removed": 396,
+      "remainingReferences": 114,
+      "checks": [
+        "prior history matches exact 6.0.0 package",
+        "modified reference refusal",
+        "read-only preview",
+        "upgrade",
+        "396 obsolete reference copies removed",
+        "current check",
+        "idempotence",
+        "uninstall preserves consumer bytes"
+      ]
+    },
+    {
+      "profile": "high-assurance",
+      "representations": 3,
+      "removed": 396,
+      "remainingReferences": 114,
+      "checks": [
+        "prior history matches exact 6.0.0 package",
+        "modified reference refusal",
+        "read-only preview",
+        "upgrade",
+        "396 obsolete reference copies removed",
+        "current check",
+        "idempotence",
+        "uninstall preserves consumer bytes"
+      ]
+    }
+  ],
+  "modelTrials": 0
+}

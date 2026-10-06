@@ -1,81 +1,113 @@
-# Agent Engineering Rules v6
+# Agent Engineering Rules
 
-AER supplies independently usable engineering skills, a compact project contract,
-assurance profiles, and an ownership-aware project installer. `@aaarslan/aer` is
-ESM, requires Node 24.11.1 or newer, and has no runtime dependencies.
+AER gives coding agents reusable guidance for completing engineering work: trace a
+change through its real callers and state, preserve unrelated behavior, verify the
+risks that matter, and report what the evidence actually supports.
 
-The release separates mechanical safety, client controls, and model outcomes.
-Isolated client-control probes do not establish model efficacy. See the dated
-[capability matrix](docs/capability-matrix.md) and repository
-[execution record](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/decisions/6.0.0-plan.md).
+Use an individual skill for a task, or install the project contract and the skills
+together. Skills include their own safety context and local references; none
+requires another skill. The contract supplies shared expectations across tasks.
+AER is guidance, not a permission boundary or a certification of model output.
 
-## Installation
+For example, invoking `aer-fixing-bugs` asks the agent to establish the failure,
+repair its owning code, preserve affected contracts, and exercise the correction.
+It does not ask for a new framework, an unrelated redesign, or a routine verifier
+chain. In Codex, use `$aer-fixing-bugs`; in Claude Code, use `/aer-fixing-bugs`.
 
-Install the pinned CLI with Node 24.11.1 or newer. Preview project changes before
-installing; the exercised recovery commands are in [INSTALL.md](INSTALL.md).
-A floating version does not preserve treatment bytes.
+## Install the project contract and skills
+
+The CLI requires Node 24.11.1 or newer and has no runtime dependencies. Preview
+changes in the consumer project, then apply the same command:
 
 ```sh
-npm install --global @aaarslan/aer@6.0.0
+npm install --global @aaarslan/aer@6.0.1
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills --dry-run
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills
-aer check --json
-aer uninstall --dry-run
+aer check
 ```
 
-Default: `portable:.agents/skills`, `AGENTS.md`, `standard`, all released skills.
-The representation is explicit; a vendor-looking path does not select controls.
-Portable copies use standard metadata. Codex adds invocation sidecars. Claude
-Code adds manual invocation controls and a `Read, Grep, Glob` reviewer adapter
-for the two review skills. The native review directories require that adapter;
-they are a combined integration inventory, not portable standalone packages.
-Arbitrary safe project-relative destinations remain available; client discovery
-at a custom path requires separate configuration/inspection.
+This installs the contract in an owned `AGENTS.md` block and renders each client's
+native invocation controls. If Claude Code prefers an existing `CLAUDE.md`, add
+`@AGENTS.md` there after reviewing the import and check `/context`. For a
+Claude-only project, the existing `--instructions-file .claude/rules/aer.md`
+option delivers the same contract through an unconditional native rules file.
+See [installation options](INSTALL.md) for single-client commands, profiles,
+selection changes, upgrades and recovery.
 
-Later `install` retains omitted recorded selections. `--skills none` installs the
-same kernel/profile and browser-conditional UI clause without owning skills.
-Skills installed alone retain their own safety context and resources. AER does
-not own skills delivered by another installer or plugin.
+## Install individual portable skills
 
-## Available skills
+The committed `skills/<name>/SKILL.md` directories can also be copied directly or
+installed with the [generic skills CLI](https://github.com/vercel-labs/skills):
 
-| Skill | Task | Integrated invocation |
+```sh
+npx skills add aaarslan/agent-engineering-rules --skill aer-fixing-bugs
+```
+
+This channel supplies portable skill instructions and resources. It does not
+install the project contract, Codex invocation sidecars, or Claude's restricted
+reviewer adapter. In portable copies, explicit-only and read-only scope are
+instructions rather than mechanically enforced controls. Use the AER CLI when
+those native integration controls are needed. Each installer owns its own files;
+use its removal/update command rather than asking another installer to adopt them.
+
+## Choose guidance for the work
+
+| Skill | Use it for | Native invocation |
 |---|---|---|
-| aer-implementing-features | Complete product behavior | Contextual |
-| aer-fixing-bugs | Symptom, cause, correction, evidence | Contextual |
-| aer-refactoring-code | Preserve behavior while changing structure | Contextual |
-| aer-designing-code | Consequential boundaries and structure | Contextual |
+| aer-implementing-features | New or changed product behavior | Contextual |
+| aer-fixing-bugs | A reproduced or established failure | Contextual |
+| aer-refactoring-code | A named structural problem; preserve behavior | Contextual |
+| aer-designing-code | An unresolved consequential architectural decision | Contextual |
 | aer-changing-data | Data meaning, mixed versions and recovery | Contextual |
-| aer-securing-code | Implement affected trust-boundary protections | Contextual |
-| aer-reviewing-security | Bounded read-only security review | Manual |
-| aer-verifying-work | Requested disputed claim or diagnostic | Manual |
-| aer-reviewing-changes | Requested diff/branch/PR review | Manual |
-| aer-writing-docs | Documentation against current evidence | Contextual |
+| aer-securing-code | Trust boundaries implicated by the change | Contextual |
 | aer-building-web-ui | Browser interaction and styling | Contextual |
 | aer-building-backend-apis | Endpoint and failure contracts | Contextual |
+| aer-writing-docs | Documentation against current behavior | Contextual |
+| aer-reviewing-changes | A requested diff, branch or PR review | Manual |
+| aer-reviewing-security | A requested bounded security review | Manual |
+| aer-verifying-work | A requested disputed claim or diagnostic | Manual |
 | aer-running-long-tasks | Explicitly delegated long work | Manual |
 
-Portable descriptions request the same scope, but do not enforce invocation or
-read-only tools. Explicit invocation uses the actual client's mechanism. Relevant
-tasks can use multiple skills; none requires another skill or the kernel.
+Several skills can support one task, such as an API feature with authorization
+and a migration. Design and refactoring skills are not default companions to every
+feature. Native manual routes require explicit invocation. Routing quality and
+model adherence have not been measured.
 
-## Ownership and verification
+The `standard` profile is the default for maintained work. `prototype` limits
+permanent test infrastructure for disposable work; `high-assurance` asks for
+stronger evidence where failures are costly. Apply the actual task's exposure and
+risk within the repository profile; correctness and integrity always apply.
 
-`aer.lock.json` records package/source and representation identities, selections,
-block ownership and complete file inventory. `check` compares sets and hashes and
-never repairs. `packageMatch` compares the locally running package, not publisher
-authenticity. Unowned identical collisions and modified owned material refuse.
-Dry runs create no lock, state, directories or temporary files. A real operation
-records a pending transaction before modifying payload; rerun with its recorded
-request and creating package. Manual stale-lock recovery and retention are in
-[INSTALL.md](INSTALL.md). Consumer bytes outside the managed block are preserved.
+## Update, inspect and remove
 
-AER has no automatic hooks, telemetry, provider runner, background updater or
-permission grants. Optional diagnostics run only when explicitly selected.
-Plugins are deferred; no plugin manifest or marketplace package is advertised.
-V5 detection is read-only and refuses mixed installations; use the tested pinned
-[v5 exit path](INSTALL.md#leaving-v5).
+Rerun `aer install` to update an existing installation. Omitted selections retain
+the recorded profile, skills, destinations and instruction path. Version 6.0.1
+recognizes the released 6.0.0 inventory and retires its unused reference copies.
+Modified owned files and unowned collisions refuse changes; inspect and preserve
+consumer edits before resolving them.
 
-Contributors: [repository guide](https://github.com/aaarslan/agent-engineering-rules/blob/main/CONTRIBUTING.md). Evidence and prepared offline
-fixtures: [repository evaluation guide](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/evaluation.md). Security reporting:
-[SECURITY.md](SECURITY.md).
+```sh
+aer install --dry-run
+aer install
+aer check --json
+aer uninstall --dry-run
+aer uninstall
+```
+
+The ownership ledger and pending operation support interrupted updates without
+losing consumer text outside the managed block. `--keep-modified` detaches and
+reports retained material. [INSTALL.md](INSTALL.md) explains these paths and the
+pinned v5 exit. AER has no automatic hooks, telemetry, background updater, provider
+runner or permission grants. Diagnostics run only when explicitly selected.
+
+## Evidence and contributing
+
+Mechanical release checks exercise package contents, ownership, recovery and
+standalone resources. Client probes establish only the named versions and tested
+controls. AER makes no claim of better model outcomes or lower cost; current
+behavioral fixtures and routing cases prepare future matched trials.
+See the [capability matrix](docs/capability-matrix.md) and
+[repository evaluation guide](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/evaluation.md).
+
+Contributor guidance: [CONTRIBUTING.md](https://github.com/aaarslan/agent-engineering-rules/blob/main/CONTRIBUTING.md).
+Security reporting: [SECURITY.md](SECURITY.md).

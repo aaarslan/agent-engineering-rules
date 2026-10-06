@@ -1,0 +1,3 @@
+# Acceptance contract
+
+An authenticated actor has a nonempty string subject and workspace. A document has id, workspace and text. Missing/malformed actors raise Error('unauthenticated'); cross-workspace reads/writes raise Error('forbidden'). Missing IDs raise Error('not found') for authenticated callers. updateDocument accepts string text only and must not mutate on denied or invalid input. listDocuments returns only the actor's workspace, with copies so callers cannot mutate stored records. Preserve unrelated documents. These are fixture authorization rules, not a production identity-provider integration.

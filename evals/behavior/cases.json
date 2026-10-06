@@ -16,7 +16,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-implementing-features/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-13",
+        "AE-14"
+      ],
+      "acceptance": "evals/fixtures/aer-implementing-features/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-implementing-features-2",
@@ -32,7 +46,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-implementing-features/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-13",
+        "AE-14"
+      ],
+      "acceptance": "evals/fixtures/aer-implementing-features/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-implementing-features-3",
@@ -48,7 +76,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-implementing-features/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-13",
+        "AE-14"
+      ],
+      "acceptance": "evals/fixtures/aer-implementing-features/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-fixing-bugs-1",
@@ -64,7 +106,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-fixing-bugs/contract.md",
+      "coverage": [
+        "AE-04",
+        "AE-14",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-fixing-bugs/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-fixing-bugs-2",
@@ -80,7 +136,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-fixing-bugs/contract.md",
+      "coverage": [
+        "AE-04",
+        "AE-14",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-fixing-bugs/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-fixing-bugs-3",
@@ -96,7 +166,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-fixing-bugs/contract.md",
+      "coverage": [
+        "AE-04",
+        "AE-14",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-fixing-bugs/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-refactoring-code-1",
@@ -112,7 +196,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-refactoring-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-11",
+        "AE-12"
+      ]
     },
     {
       "id": "aer-refactoring-code-2",
@@ -128,7 +218,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-refactoring-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-11",
+        "AE-12"
+      ]
     },
     {
       "id": "aer-refactoring-code-3",
@@ -144,7 +240,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-refactoring-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-11",
+        "AE-12"
+      ]
     },
     {
       "id": "aer-designing-code-1",
@@ -160,7 +262,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-designing-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-06",
+        "AE-17"
+      ]
     },
     {
       "id": "aer-designing-code-2",
@@ -176,7 +284,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-designing-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-06",
+        "AE-17"
+      ]
     },
     {
       "id": "aer-designing-code-3",
@@ -192,7 +306,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-designing-code/contract.md",
+      "coverage": [
+        "AE-05",
+        "AE-06",
+        "AE-17"
+      ]
     },
     {
       "id": "aer-changing-data-1",
@@ -208,7 +328,20 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-changing-data/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ],
+      "acceptance": "evals/fixtures/aer-changing-data/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-changing-data-2",
@@ -224,7 +357,20 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-changing-data/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ],
+      "acceptance": "evals/fixtures/aer-changing-data/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-changing-data-3",
@@ -240,7 +386,20 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-changing-data/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ],
+      "acceptance": "evals/fixtures/aer-changing-data/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-securing-code-1",
@@ -256,7 +415,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-securing-code/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-securing-code/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-securing-code-2",
@@ -272,7 +445,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-securing-code/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-securing-code/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-securing-code-3",
@@ -288,7 +475,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-securing-code/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-18"
+      ],
+      "acceptance": "evals/fixtures/aer-securing-code/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-reviewing-security-1",
@@ -304,7 +505,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-security/contract.md",
+      "coverage": [
+        "AE-15",
+        "AE-18",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-reviewing-security-2",
@@ -320,7 +527,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-security/contract.md",
+      "coverage": [
+        "AE-15",
+        "AE-18",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-reviewing-security-3",
@@ -336,7 +549,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-security/contract.md",
+      "coverage": [
+        "AE-15",
+        "AE-18",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-verifying-work-1",
@@ -352,7 +571,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-verifying-work/contract.md",
+      "coverage": [
+        "AE-18",
+        "AE-20",
+        "AE-26"
+      ]
     },
     {
       "id": "aer-verifying-work-2",
@@ -368,7 +593,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-verifying-work/contract.md",
+      "coverage": [
+        "AE-18",
+        "AE-20",
+        "AE-26"
+      ]
     },
     {
       "id": "aer-verifying-work-3",
@@ -384,7 +615,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-verifying-work/contract.md",
+      "coverage": [
+        "AE-18",
+        "AE-20",
+        "AE-26"
+      ]
     },
     {
       "id": "aer-reviewing-changes-1",
@@ -400,7 +637,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-changes/contract.md",
+      "coverage": [
+        "AE-07",
+        "AE-12",
+        "AE-18"
+      ]
     },
     {
       "id": "aer-reviewing-changes-2",
@@ -416,7 +659,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-changes/contract.md",
+      "coverage": [
+        "AE-07",
+        "AE-12",
+        "AE-18"
+      ]
     },
     {
       "id": "aer-reviewing-changes-3",
@@ -432,7 +681,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-reviewing-changes/contract.md",
+      "coverage": [
+        "AE-07",
+        "AE-12",
+        "AE-18"
+      ]
     },
     {
       "id": "aer-writing-docs-1",
@@ -448,7 +703,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-writing-docs/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-16",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-writing-docs-2",
@@ -464,7 +725,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-writing-docs/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-16",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-writing-docs-3",
@@ -480,7 +747,13 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-writing-docs/contract.md",
+      "coverage": [
+        "AE-12",
+        "AE-16",
+        "AE-22"
+      ]
     },
     {
       "id": "aer-building-web-ui-1",
@@ -496,7 +769,12 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-web-ui/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ]
     },
     {
       "id": "aer-building-web-ui-2",
@@ -512,7 +790,12 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-web-ui/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ]
     },
     {
       "id": "aer-building-web-ui-3",
@@ -528,7 +811,12 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-web-ui/contract.md",
+      "coverage": [
+        "AE-14",
+        "AE-15"
+      ]
     },
     {
       "id": "aer-building-backend-apis-1",
@@ -544,7 +832,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-backend-apis/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-16"
+      ],
+      "acceptance": "evals/fixtures/aer-building-backend-apis/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-building-backend-apis-2",
@@ -560,7 +862,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-backend-apis/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-16"
+      ],
+      "acceptance": "evals/fixtures/aer-building-backend-apis/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-building-backend-apis-3",
@@ -576,7 +892,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-building-backend-apis/contract.md",
+      "coverage": [
+        "AE-13",
+        "AE-15",
+        "AE-16"
+      ],
+      "acceptance": "evals/fixtures/aer-building-backend-apis/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-running-long-tasks-1",
@@ -592,7 +922,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-running-long-tasks/contract.md",
+      "coverage": [
+        "AE-08",
+        "AE-14",
+        "AE-26"
+      ],
+      "acceptance": "evals/fixtures/aer-running-long-tasks/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-1:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-running-long-tasks-2",
@@ -608,7 +952,21 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": false,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-running-long-tasks/contract.md",
+      "coverage": [
+        "AE-08",
+        "AE-14",
+        "AE-26"
+      ],
+      "acceptance": "evals/fixtures/aer-running-long-tasks/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-2:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     },
     {
       "id": "aer-running-long-tasks-3",
@@ -624,7 +982,22 @@
       ],
       "cleanup": "remove only the disposable copy after retaining evidence",
       "holdout": true,
-      "requirementsDisclosed": true
+      "requirementsDisclosed": true,
+      "contract": "evals/fixtures/aer-running-long-tasks/contract.md",
+      "coverage": [
+        "AE-08",
+        "AE-14",
+        "AE-26"
+      ],
+      "acceptance": "evals/fixtures/aer-running-long-tasks/acceptance.test.mjs",
+      "acceptanceCommand": [
+        "node",
+        "--test",
+        "--test-name-pattern=^case-3:",
+        "acceptance.test.mjs"
+      ],
+      "seedAcceptanceFailures": 1
     }
-  ]
+  ],
+  "fixtureRevision": "6.0.1"
 }

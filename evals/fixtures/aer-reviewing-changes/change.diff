@@ -1,0 +1,17 @@
+--- a/app.mjs
++++ b/app.mjs
+@@ -1,11 +1,11 @@
+ export function listNotes(notes) {
+-  return notes.filter((note) => !note.archived);
++  return notes.filter((note) => note.archived);
+ }
+ export function serializeNote(note) {
+-  return JSON.stringify({ id: note.id, value: note.value });
++  return JSON.stringify({ id: note.id, value: note.value || '' });
+ }
+ export function parseCursor(value) {
+   const cursor = Number(value);
+-  if (!Number.isInteger(cursor) || cursor < 0) throw new TypeError('cursor');
++  if (!Number.isInteger(cursor)) throw new TypeError('cursor');
+   return cursor;
+ }

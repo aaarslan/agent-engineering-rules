@@ -1,18 +1,18 @@
 # Backend and API
 
-Extends [security](security.md) and [boundaries](boundaries.md) with server specifics.
+Server-specific guidance for the affected endpoints, authorization and data contracts.
 
 ## Boundaries
 
 - Validate all input at the boundary; pass typed, validated values inward. Enforce authorization server-side per endpoint and per object.
-- Keep route handlers to the thin role defined in [boundaries](boundaries.md): validate, authorize, call domain logic, map the result to a response.
+- Keep route handlers thin: validate, authorize, call domain logic, map the result to a response.
 - Use consistent error formats across the API, following the repo's existing shape. Map expected failures to correct status codes; never leak stack traces or internals to clients.
 
 ## Data
 
 - Use parameterized queries, always.
 - Wrap multi-write operations that must stay consistent in a transaction. Ask of every handler: if this dies halfway, is stored state still valid?
-- Bound resource use according to data volume and the endpoint contract; address measured N+1 behavior through batching or joins. Add pagination when the contract and scale warrant it, not to bounded finite lists by habit. See [performance](performance.md).
+- Bound resource use according to data volume and the endpoint contract; address measured N+1 behavior through batching or joins. Add pagination when the contract and scale warrant it, not to bounded finite lists by habit.
 
 ## External calls
 

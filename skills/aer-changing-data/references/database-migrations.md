@@ -21,6 +21,6 @@ Answer before writing:
 
 ## Verification and drift
 
-- Run the migration against a realistic local or disposable database, up and (where a down migration exists) down, before calling it done. Shared environments such as staging fall under the authorization rule in [verification](verification.md).
+- Run the migration against a realistic local or disposable database, up and (where a down migration exists) down, before calling it done. Obtain authority before writing to shared environments such as staging.
 - Check the full drift chain in the same change: migration, schema file, ORM models, generated types, API contracts, seeds, fixtures, and docs.
 - Never edit an already-applied migration; add a new one.

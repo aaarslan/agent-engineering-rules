@@ -1,6 +1,6 @@
 ---
 name: "aer-verifying-work"
-description: "Investigate a requested disputed completion claim or diagnostic uncertainty. Explicit invocation only on integrated clients; exclude routine final passes and repeated checks without new evidence."
+description: "Investigate an explicitly requested disputed claim or diagnostic uncertainty. Exclude routine final passes and repeated checks without new evidence."
 ---
 
 <!-- aer:shared-safety:start -->
@@ -8,6 +8,8 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 <!-- aer:shared-safety:end -->
 
 # Focused Verification
+
+Use only when the user explicitly requests this workflow.
 
 - Identify the claim, changed artifact, available evidence, and remaining uncertainty.
 - Inspect relevant implementation and existing results before selecting any new check; do not repeat valid evidence simply because another agent produced it.

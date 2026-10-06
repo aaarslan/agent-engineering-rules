@@ -1,6 +1,6 @@
 ---
 name: "aer-implementing-features"
-description: "Implement requested product behavior through real entrypoints and durable state. Use for new capabilities or feature changes; a symptom-only correction belongs to bug fixing."
+description: "Implement new or changed product behavior end to end. Exclude symptom-only bug fixes and behavior-preserving refactors."
 ---
 
 <!-- aer:shared-safety:start -->

@@ -1,8 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {save,toggle,readNote,migrate} from './app.mjs';
-test('sanitized fixture baseline and known authorization defect',()=>{
- const s=new Map();save(s,'private-note','draft');assert.equal(toggle(s,'private-note').archived,true);
- assert.equal(readNote(s,'unrelated-actor','private-note').value,'draft');
- assert.equal(migrate([{archived:'false'}])[0].archived,true);
+import { mkdtemp, writeFile, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { migrate, readActive } from './app.mjs';
+test('fixture setup and known starting behavior', async (t) => {
+  const dir = await mkdtemp(path.join(tmpdir(), 'aer-data-fixture-'));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+  const file = path.join(dir, 'rows.json');
+  await writeFile(
+    file,
+    JSON.stringify([{ id: 'a', archived: 'false', text: 'keep' }]),
+  );
+  await migrate(file);
+  assert.equal(JSON.parse(await readFile(file, 'utf8'))[0].active, false);
+  assert.equal(readActive({ archived: 'false' }), false);
 });

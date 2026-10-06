@@ -1,13 +1,17 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+export function quoteForScreen(items) {
+  return items.reduce((sum, item) => sum + item.quantity * item.unitCents, 0);
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
+export function quoteForReceipt(items) {
+  let total = 0;
+  for (const item of items) total += item.quantity * item.unitCents;
+  return { totalCents: total, currency: 'USD' };
 }
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
+export function quoteForExport(items) {
+  return JSON.stringify({
+    totalCents: items.reduce(
+      (sum, item) => sum + item.quantity * item.unitCents,
+      0,
+    ),
+    currency: 'USD',
+  });
 }
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }

@@ -1,6 +1,6 @@
 ---
 name: "aer-securing-code"
-description: "Implement protections at affected trust boundaries: authorization, input, secrets and external effects. Use during relevant code changes; does not initiate a whole-repository security audit."
+description: "Implement protections when the changed code crosses an authorization, input, secret or external-effect boundary. Exclude unrelated security audits."
 ---
 
 <!-- aer:shared-safety:start -->

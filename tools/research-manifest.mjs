@@ -3,7 +3,6 @@ export const MANIFEST = {
   "research": [
     "compatibility/conflicts.json",
     "compatibility/hosts.json",
-    "compatibility/models.json",
     "evals/cells.v2.json",
     "evals/components.v2.json",
     "evals/components/v2/kernel/contract.txt",

@@ -13,6 +13,10 @@ npm run release:check
 Use Node 24.11.1 or newer. Commit source and generated resources/inventory together.
 Validators are read-only; CI has no provider credentials or runner. The preserved
 v5 fixture suite runs in a disposable copy and never enters the published package.
+Before editing a released payload, capture its `historyRecord()` from the exact
+previous package and append it to `integrations/payload-history.json`. Never
+reconstruct prior hashes from modified sources. Verify old-to-new upgrade,
+obsolete-file removal, modified-file refusal and uninstall in disposable consumers.
 Frozen research bytes must remain unchanged. Routing and fixture baselines are
 mechanical preparation, not model efficacy results. Keep the narrow study-record
 schema and separate paired protocols for each authorized comparison/configuration.

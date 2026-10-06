@@ -7,7 +7,7 @@ Every finding must be evidence-grounded. Producing a plausible-sounding false po
 1. Read the relevant implementation, not just the diff hunk. Diffs lie by omission; the bug or its guard often sits just outside the context lines.
 2. Attempt to falsify the finding: construct the concrete input or state that triggers it. If you cannot, downgrade confidence or drop it.
 3. Check whether the current diff already addresses it elsewhere.
-4. Check supplied or otherwise available history and comments for whether this is a deliberate, previously settled decision (see [review-ledger](review-ledger.md)); state when history is unavailable.
+4. Check supplied or otherwise available history and comments for whether this is a deliberate, previously settled decision; state when history is unavailable.
 
 ## Finding format
 
@@ -19,11 +19,11 @@ Every finding must be evidence-grounded. Producing a plausible-sounding false po
 - **Verification method**: how to prove the correction and prevent regression
 - **Confidence**: high, medium, or low with uncertainty stated
 
-Specialist subagents extend this format per [orchestration](orchestration.md).
+Give any authorized specialist a bounded scope and include its evidence in the same finding format.
 
 ## What to report
 
-- Correctness, security, and data-integrity issues first, per the [universal contract](contract.md).
+- Correctness, security, and data-integrity issues first.
 - Contract breaks: changed APIs, schemas, enums, or payloads with unupdated consumers.
 - Missing behavioral evidence or risk-justified regression protection.
 - Real design problems: wrong layer, duplicated business rules, speculative abstraction.

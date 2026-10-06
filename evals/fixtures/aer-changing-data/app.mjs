@@ -1,13 +1,15 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+import { readFile, writeFile } from 'node:fs/promises';
+
+export function readActive(row) {
+  return row.active ?? !Boolean(row.archived);
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
+export async function migrate(file, { afterWrite = async () => {} } = {}) {
+  const rows = JSON.parse(await readFile(file, 'utf8'));
+  for (let index = 0; index < rows.length; index++) {
+    rows[index].active = !Boolean(rows[index].archived);
+    delete rows[index].archived;
+    await writeFile(file, JSON.stringify(rows));
+    await afterWrite(index);
+  }
+  return rows.length;
 }
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
-}
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }

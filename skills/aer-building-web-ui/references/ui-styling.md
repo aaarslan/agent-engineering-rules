@@ -1,7 +1,7 @@
 <!-- Generated from source/shared/ui-styling.md by tools/render-v6.mjs -->
 # UI Styling
 
-The requested product, reference, and repository design system own visual decisions. [Web UI](web-ui.md) owns behavior and accessibility.
+The requested product, reference, and repository design system own visual decisions. Preserve functional behavior, keyboard access, visible focus and accessible names while changing appearance.
 
 - Preserve the requested composition, hierarchy, content, and form factor; do not add an unsolicited application shell or product feature.
 - Use existing tokens and components. If none exist, choose a coherent local visual system suited to the brief, without imposing a universal palette, typeface, spacing scale, or aesthetic.

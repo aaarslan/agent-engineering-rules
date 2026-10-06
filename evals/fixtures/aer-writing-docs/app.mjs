@@ -1,13 +1,10 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+export function parseCommand(args) {
+  if (args.length !== 2 || args[0] !== 'show')
+    throw new TypeError('usage: show ID');
+  if (!/^[a-z][a-z0-9-]*$/.test(args[1])) throw new TypeError('id');
+  return { command: 'show', id: args[1] };
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
+export function showNote(notes, id) {
+  if (!notes.has(id)) throw new Error('not found');
+  return JSON.stringify({ id, text: notes.get(id) }) + '\n';
 }
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
-}
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }

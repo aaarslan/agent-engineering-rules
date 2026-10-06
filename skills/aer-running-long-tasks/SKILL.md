@@ -1,6 +1,6 @@
 ---
 name: "aer-running-long-tasks"
-description: "Execute explicitly delegated long engineering work in bounded increments with durable checkpoints. Explicit invocation only on integrated clients; preserve authority, budgets and exact remaining work."
+description: "Execute explicitly delegated long engineering work with bounded increments and resumable checkpoints."
 ---
 
 <!-- aer:shared-safety:start -->
@@ -8,6 +8,8 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 <!-- aer:shared-safety:end -->
 
 # Autonomous Mission
+
+Use only when the user explicitly requests this workflow.
 
 - Confirm the objective, authority, explicit budgets, material risks, and genuine blockers; make routine assumptions visible and proceed.
 - Choose direct or planned increments. Each increment must produce a complete behavior and usable evidence before the next begins.

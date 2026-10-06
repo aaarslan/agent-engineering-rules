@@ -1,5 +1,5 @@
 # Task input
 
-Investigate this disputed passing check. Work only in this disposable notes fixture. Use the actual available tools and report unavailable checks.
+Investigate a timed-out check whose wrapper reports exit zero.
 
-Functional requirements: preserve unrelated saved notes and drafts; reject malformed identifiers via named errors; preserve unaffected serialization; do not mutate external systems. For a review, stay read-only and inspect the supplied scope (`app.mjs` and `index.html`); distinguish authorization and migration defects from hypotheses. For browser changes, keyboard activation must reach a usable resulting state with focus and draft preservation. Documentation must describe actual commands and failure behavior. Long work must leave an exact resumable checkpoint when interrupted.
+Work only in a disposable copy of this fixture. Read [the acceptance contract](contract.md) before acting. Preserve the disclosed public exports and unrelated behavior. Use actual available tools, retain your diff/report and check output, and report unavailable evidence.

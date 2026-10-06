@@ -34,8 +34,8 @@ jobs:
           package-manager-cache: false
       - name: Diagnose filesystem metadata on the claimed runtime
         run: node tools/probe-filesystem.mjs
-      - name: Validate final package, lifecycle, research and preserved regressions
-        run: npm run release:check
+      - name: Validate package, lifecycle and preserved regressions
+        run: npm run release:runtime
 
   release-windows-runtimes:
     name: release-windows-runtime
@@ -55,8 +55,8 @@ jobs:
           package-manager-cache: false
       - name: Diagnose filesystem metadata on the claimed runtime
         run: node tools/probe-filesystem.mjs
-      - name: Validate final package, lifecycle, research and preserved regressions
-        run: npm run release:check
+      - name: Validate package, lifecycle and preserved regressions
+        run: npm run release:runtime
 
   release-linux:
     name: release-linux

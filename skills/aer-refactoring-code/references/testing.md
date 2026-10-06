@@ -25,7 +25,7 @@ Verification establishes current behavior. Permanent tests protect stable behavi
 - During implementation, target relevant uncertainty. Do not rerun an unchanged broad suite after every edit.
 - Rerun when relevant behavior changed, prior evidence was invalidated, integration creates a new risk, or a repository completion gate requires current evidence.
 - Reserve broad regression suites for meaningful integration boundaries and required final gates; a final report alone does not invalidate a passing result.
-- Failure calls for diagnosis and a relevant repair, not identical reruns. Follow [verification](verification.md).
+- Failure calls for diagnosis and a relevant repair, not identical reruns.
 - Match existing repository tooling and deterministic test patterns; introduce no framework merely to appear rigorous.
 
 Report direct behavior exercised, permanent regressions added, existing checks rerun, and material checks omitted with their cost/value reason. Optimize information gained per time, context, execution cost, and complexity; do not infer provider incentives from repeated testing behavior.

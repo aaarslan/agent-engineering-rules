@@ -33,9 +33,9 @@
     {
       "source": "source/compatibility/models.json",
       "targets": [
-        "research/compatibility/models.json"
+        "docs/decisions/6.0.1-model-hypotheses.json"
       ],
-      "reason": "Preserved semantics/resources or explicit reviewed qualification."
+      "reason": "Archived documentary hypotheses in 6.0.1; no runtime overlay or recurring expiry validation."
     },
     {
       "source": "source/config/thresholds.json",

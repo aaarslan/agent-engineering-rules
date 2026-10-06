@@ -1,6 +1,6 @@
 # TypeScript and React
 
-Extends [types-and-state](types-and-state.md) and [boundaries](boundaries.md) with stack specifics. For browser rendering, load [web-ui](web-ui.md) alongside it.
+Stack-specific guidance for types, state and ownership in an existing TypeScript or React project.
 
 ## TypeScript
 
@@ -18,4 +18,4 @@ Extends [types-and-state](types-and-state.md) and [boundaries](boundaries.md) wi
 - Do not mirror props into state without a concrete reason (such as an explicitly uncontrolled "initial value" input).
 - Keep business rules out of JSX. Components render decisions made elsewhere (hooks, domain functions).
 - Extract a hook only when it improves cohesion, testability, or real reuse, not to shorten a component.
-- Rendering safety, UI states, focus management, and accessibility are in [web-ui](web-ui.md); they apply to React unchanged.
+- Use framework escaping for untrusted text; preserve drafts, focus, caret and selection across updates, and keyboard-exercise changed actions through their resulting state.

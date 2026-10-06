@@ -5,7 +5,7 @@
 With Node 24.11.1 or newer:
 
 ```sh
-npm install --global @aaarslan/aer@6.0.0
+npm install --global @aaarslan/aer@6.0.1
 ```
 
 To reproduce package checks from the AER checkout in disposable directories:
@@ -14,7 +14,7 @@ To reproduce package checks from the AER checkout in disposable directories:
 npm run build
 npm run release:check
 npm pack --ignore-scripts --pack-destination /path/to/disposable-artifacts
-npm install --global --prefix /path/to/disposable-prefix --ignore-scripts --no-audit --no-fund /path/to/disposable-artifacts/aaarslan-aer-6.0.0.tgz
+npm install --global --prefix /path/to/disposable-prefix --ignore-scripts --no-audit --no-fund /path/to/disposable-artifacts/aaarslan-aer-6.0.1.tgz
 ```
 
 Use the prefix's `bin/aer` on POSIX or `aer.cmd` on Windows. The packed smoke also
@@ -45,6 +45,50 @@ inspect `/context` in a fresh session. Inspect ancestors/nested files and memory
 including whether the contract loads once. Custom destinations are installable,
 but their discovery is not certified by their directory name. See
 [capability limits](docs/capability-matrix.md).
+
+## Native instruction delivery and portable skills
+
+For a Claude-only project, use the existing instruction-path option to install an
+owned contract block in a native unconditional rules file:
+
+```sh
+aer install --destination claude-code:.claude/skills --instructions-file .claude/rules/aer.md --dry-run
+```
+
+Repeat without `--dry-run` after inspecting the plan. Rules without `paths` load
+at startup; this also works alongside an existing `CLAUDE.md`. For Codex alone,
+use `--destination codex:.agents/skills` and the default `AGENTS.md`. For both
+clients, use the shared block and a reviewed Claude import where required. Do not
+create an extra copy of the same contract in another discovered instruction file.
+
+The source `skills/` directories support portable copying and generic discovery:
+
+```sh
+npx skills add aaarslan/agent-engineering-rules --skill aer-fixing-bugs
+```
+
+Generic copying does not run AER's client renderer. It supplies no kernel or
+native manual-only/restricted reviewer integration. AER does not adopt another
+installer's files; use that installer's update/removal flow before changing owners.
+
+## Supplying a review packet
+
+Claude's two native review skills intentionally have only Read, Grep and Glob.
+The caller supplies the requested base/head, changed paths and complete diff;
+reference file paths for a large packet instead of truncating it. Collect the
+packet using the caller's available repository tools, for example:
+
+```sh
+git rev-parse HEAD
+git --no-pager diff --no-ext-diff --no-textconv BASE...HEAD --name-only
+git --no-pager diff --no-ext-diff --no-textconv BASE...HEAD
+```
+
+Replace `BASE` with the reviewed base revision. Include untracked authored files
+separately when they are in scope. The reviewer can then read affected callers and
+contracts itself. Missing scope remains a limitation, not an invented full review.
+Do not grant broad `Bash(git diff:*)` permission as a read-only guarantee: command
+flags such as `--output` can write files. AER does not alter consumer permissions.
 
 ## Changes and uninstall
 
@@ -85,8 +129,10 @@ Resolve conflicting edits by backing them up and deliberately restoring owned
 bytes, or use the supported uninstall retention path. Outside instruction edits
 are preserved during recovery. Unknown prior inventory identities require their
 pinned package; a hash in an edited ledger cannot authorize arbitrary deletion.
-Recognized package history enables tested upgrade/downgrade transitions; 6.0.0
-has no earlier v6 release inventories. Unknown future downgrades refuse safely.
+Recognized package history enables tested upgrades: 6.0.1 includes the released
+6.0.0 inventory. A prior package cannot recognize a future release, so downgrades
+require uninstalling with the installed version first. Unknown inventories refuse
+safely rather than trusting ledger hashes as deletion authority.
 
 `.aer.run.lock` excludes mutators and records PID, hostname, nonce and creation
 time. AER does not automatically recover stale locks. Inspect that record, confirm
