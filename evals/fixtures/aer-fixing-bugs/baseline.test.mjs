@@ -1,8 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {save,toggle,readNote,migrate} from './app.mjs';
-test('sanitized fixture baseline and known authorization defect',()=>{
- const s=new Map();save(s,'private-note','draft');assert.equal(toggle(s,'private-note').archived,true);
- assert.equal(readNote(s,'unrelated-actor','private-note').value,'draft');
- assert.equal(migrate([{archived:'false'}])[0].archived,true);
+import { Editor } from './app.mjs';
+test('fixture setup and known starting behavior', async () => {
+  const notes = new Map([
+    ['a', 'old'],
+    ['b', 'keep'],
+  ]);
+  const e = new Editor(notes);
+  e.edit('a');
+  e.change('revised');
+  await assert.rejects(
+    e.save(async () => {
+      throw new Error('offline');
+    }),
+  );
+  assert.equal(e.draft, '');
+  e.cancel();
+  assert.equal(notes.size, 0);
 });

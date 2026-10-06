@@ -16,199 +16,67 @@
   "resources": {
     "aer-building-backend-apis": [
       "backend-api.md",
-      "boundaries.md",
-      "contract.md",
-      "performance.md",
-      "principles.md",
-      "security.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "web-ui.md"
+      "security.md"
     ],
     "aer-reviewing-changes": [
-      "boundaries.md",
-      "contract.md",
-      "orchestration.md",
-      "performance.md",
       "pr-review.md",
-      "principles.md",
       "review-ledger.md",
-      "security.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "web-ui.md"
+      "security.md"
     ],
     "aer-fixing-bugs": [
-      "boundaries.md",
-      "contract.md",
-      "design-checkpoint.md",
       "errors-and-side-effects.md",
-      "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
-      "security.md",
-      "skeptic-pass.md",
       "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "verification.md"
     ],
     "aer-implementing-features": [
-      "boundaries.md",
-      "contract.md",
       "design-checkpoint.md",
       "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
-      "security.md",
-      "skeptic-pass.md",
-      "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "verification.md"
     ],
     "aer-running-long-tasks": [
       "autonomous-execution.md",
-      "boundaries.md",
-      "contract.md",
-      "design-checkpoint.md",
-      "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
-      "security.md",
-      "skeptic-pass.md",
-      "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "orchestration.md"
     ],
     "aer-securing-code": [
-      "boundaries.md",
-      "contract.md",
-      "performance.md",
-      "principles.md",
-      "security.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "web-ui.md"
+      "security.md"
     ],
     "aer-writing-docs": [
       "documentation.md"
     ],
     "aer-designing-code": [
       "boundaries.md",
-      "contract.md",
       "decision-making.md",
       "design-checkpoint.md",
       "errors-and-side-effects.md",
       "observability.md",
       "performance.md",
       "principles.md",
-      "security.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "web-ui.md"
+      "types-and-state.md"
     ],
     "aer-building-web-ui": [
-      "boundaries.md",
-      "contract.md",
-      "performance.md",
-      "principles.md",
-      "types-and-state.md",
       "typescript-react.md",
       "ui-styling.md",
       "web-ui.md"
     ],
     "aer-refactoring-code": [
       "boundaries.md",
-      "contract.md",
-      "design-checkpoint.md",
-      "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
       "principles.md",
-      "review-ledger.md",
-      "security.md",
-      "skeptic-pass.md",
       "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "types-and-state.md"
     ],
     "aer-changing-data": [
-      "boundaries.md",
-      "contract.md",
       "database-migrations.md",
-      "design-checkpoint.md",
-      "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
       "security.md",
-      "skeptic-pass.md",
-      "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "testing.md"
     ],
     "aer-reviewing-security": [
-      "boundaries.md",
-      "contract.md",
-      "orchestration.md",
-      "performance.md",
       "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
-      "security.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "web-ui.md"
+      "security.md"
     ],
     "aer-verifying-work": [
-      "boundaries.md",
-      "contract.md",
-      "design-checkpoint.md",
-      "implementation.md",
-      "orchestration.md",
-      "performance.md",
-      "pr-review.md",
-      "principles.md",
-      "review-ledger.md",
-      "security.md",
       "skeptic-pass.md",
       "testing.md",
-      "types-and-state.md",
-      "typescript-react.md",
-      "ui-styling.md",
-      "verification.md",
-      "web-ui.md"
+      "verification.md"
     ]
   }
 }

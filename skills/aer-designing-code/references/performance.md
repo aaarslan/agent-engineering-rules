@@ -1,7 +1,7 @@
 <!-- Generated from source/shared/performance.md by tools/render-v6.mjs -->
 # Performance
 
-Correct and clear first. Performance work requires measurement under the [universal contract](contract.md); a violated requirement makes the fix a correctness matter, not speculative optimization.
+Correct and clear first. Performance claims require a baseline and measured comparison; a violated requirement makes the fix a correctness matter, not speculative optimization.
 
 ## Rules
 

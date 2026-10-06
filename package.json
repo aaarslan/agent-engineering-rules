@@ -1,6 +1,6 @@
 {
   "name": "@aaarslan/aer",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Independent engineering skills, a compact contract, and safe explicit client installation",
   "keywords": [
     "ai-agents",
@@ -49,7 +49,8 @@
     "test:packed": "node tools/packed-install-smoke.mjs",
     "validate": "node tools/validate-public-content.mjs && node tools/validate-v6.mjs && node tools/validate-links.mjs",
     "validate:research": "node tools/validate-corpus.mjs && node tools/validate-evals.mjs && node tools/validate-runtime-loads.mjs",
-    "release:check": "npm test && npm run validate && npm run validate:research && npm run test:legacy && npm run test:packed",
-    "prepublishOnly": "npm run release:check"
+    "release:check": "npm run release:runtime && npm run validate:research",
+    "prepublishOnly": "npm run release:check",
+    "release:runtime": "npm test && npm run validate && npm run test:legacy && npm run test:packed"
   }
 }

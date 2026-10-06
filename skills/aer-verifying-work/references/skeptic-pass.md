@@ -12,7 +12,7 @@ Do not invoke it solely because a task is non-trivial or ending. For a localized
 
 ## Method
 
-Try to falsify the risky or uncertain claims. Inspect the affected diff and its callers or consumers; re-read the full diff only when the trigger is cross-cutting. If independence is required, follow [orchestration](orchestration.md) instead of spawning a verifier to repeat work already evidenced by tests and tools.
+Try to falsify the risky or uncertain claims. Inspect the affected diff and its callers or consumers; re-read the full diff only when the trigger is cross-cutting. If independence is required, give an authorized reviewer a bounded independent charter, tools and budget instead of spawning a verifier to repeat work already evidenced by tests and tools.
 
 ## Hunt list
 
@@ -36,5 +36,5 @@ Try to falsify the risky or uncertain claims. Inspect the affected diff and its 
 ## Rules
 
 - Apply only the hunt items relevant to the trigger; this is not a checklist ceremony.
-- Anything found goes back through [implementation](implementation.md) and [verification](verification.md); do not hand-wave a late fix.
+- Repair findings at the affected owner and recheck the changed behavior; do not hand-wave a late fix.
 - Record the trigger, inspected surface, evidence, and outcome. Do not claim a skeptic review when none was warranted or performed.

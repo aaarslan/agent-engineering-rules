@@ -14,7 +14,7 @@ Use the cheapest check that resolves the current uncertainty: direct execution, 
 - Run relevant established regressions and repository-required gates. Use broader checks when the integration risk warrants them; preserve valid prior results.
 - Build when the changed deliverable requires it; inspect the declared output. A development server is not evidence of a completed production build.
 - Regenerate changed schemas, contracts, and generated artifacts; inspect their consumers and final diffs.
-- New permanent tests follow [testing](testing.md), independently of the need to verify behavior now.
+- Choose permanent tests by contract stability, exposure, regression value and failure cost, independently of the need to verify behavior now.
 
 Use the repository's actual commands. Record component exit status and material output; later success cannot hide earlier failure. Keep pass, failure, advisory, not-applicable, and unavailable distinct.
 
@@ -32,4 +32,4 @@ Inspect the final diff and repository state, including authored untracked files,
 
 Map each completion claim to relevant observed evidence and its limitations. Report substantive results, permanent coverage added, existing checks rerun, material omitted checks and why, and unresolved risk. No fixed report layout is required.
 
-Use [skeptic review](skeptic-pass.md) only for an actual material-risk or uncertainty trigger; it should settle a claim, not repeat successful deterministic commands.
+Falsify remaining claims only for an actual material-risk or uncertainty trigger; it should settle a claim, not repeat successful deterministic commands.

@@ -1,3 +1,10 @@
-# Sanitized notes task fixture
+# aer-building-web-ui development fixture
 
-Copy this directory to a disposable directory before any implementation. Run `node --test baseline.test.mjs` for the known starting behavior. No credentials, network, dependencies or production data are used. Serve index.html with an available local static server only for browser tasks. Remove the disposable copy after collecting artifacts. Baseline passing proves fixture setup, not task acceptance.
+Copy this directory to a disposable workspace. Read `contract.md`, run
+`node --test baseline.test.mjs`, then apply one case prompt. The baseline
+confirms the seeded starting state; it is not an acceptance test.
+
+These are disclosed development tasks, not model results or secret holdouts.
+For a blinded study, freeze grader material separately before dispatch and keep
+it out of the candidate workspace. Retain the diff, commands and observed
+outcomes. Delete only the disposable workspace after retaining evidence.

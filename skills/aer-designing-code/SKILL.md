@@ -1,6 +1,6 @@
 ---
 name: "aer-designing-code"
-description: "Design consequential code structure, boundaries or persistent state. Use for material architectural decisions; exclude routine edits and speculative redesign."
+description: "Resolve an explicitly requested architectural decision or a consequential unresolved ownership, boundary or state design. Exclude routine feature edits."
 ---
 
 <!-- aer:shared-safety:start -->

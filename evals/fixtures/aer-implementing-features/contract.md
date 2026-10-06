@@ -1,0 +1,3 @@
+# Acceptance contract
+
+The store is a Map keyed by nonempty string IDs. Preserve saveNote(store,id,value), note fields and unrelated records. setFavorite(store,id,boolean) must persist the requested flag and return the updated note; malformed IDs/flags raise TypeError and missing IDs raise Error('not found'). archiveMany(store,ids) validates every ID before writing; an invalid batch changes nothing. Add undo(store,id) for the most recent successful favorite/archive change to that note, preserving every other note; no history raises Error('nothing to undo'). No external services or new dependencies are needed.

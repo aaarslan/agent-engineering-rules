@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-05",
+  "package": "@aaarslan/aer@6.0.1",
+  "branch": "feature/aer-6-0-1",
+  "baseRevision": "18154758f82f2f2631770442a1678b8e80bd4db2",
+  "sourceIdentity": "2cf01e39573251bd0b0bcb7a6cfaeaf5fd4cba3b8a07f1200ea3450602f3f74d",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "24.21.0",
+  "checks": [
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm run validate",
+      "exitCode": 0,
+      "checks": [
+        "fresh rendering/inventory",
+        "standalone links",
+        "package/schema/physical-line/byte budgets",
+        "public paths"
+      ]
+    },
+    {
+      "command": "npm run validate:research",
+      "exitCode": 0,
+      "directives": 26,
+      "grievances": 110,
+      "frozenFiles": 37,
+      "routingCases": 140,
+      "behaviorCases": 39,
+      "fixtureBaselines": 13,
+      "calibratedSeedChecks": 18,
+      "loadScenarios": 54,
+      "modelTrials": 0
+    },
+    {
+      "command": "npm run test:legacy",
+      "exitCode": 0,
+      "passed": 77,
+      "failed": 0,
+      "skipped": 0,
+      "disposableCopy": true
+    },
+    {
+      "command": "npm run test:packed",
+      "exitCode": 0,
+      "artifact": {
+        "package": "@aaarslan/aer@6.0.1",
+        "node": "24.21.0",
+        "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+        "platform": "darwin",
+        "arch": "arm64",
+        "files": 87,
+        "unpackedBytes": 465224,
+        "integrity": "sha512-6YerLq6+ZBN/KnDw87jOeYqZRJwlWxUfXFCEgS2r1Mot88lxpHrjXZgGna0SBAN3a83uyaCvU7YOd4BZn38q/Q==",
+        "sha256": "7ae6ed5a4d69658e0470a1de3e0d9aaf22904e760835094c27825a163910ec73",
+        "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+        "checks": [
+          "complete inventory",
+          "isolated npm prefix",
+          "preview/install/check/idempotence",
+          "selection/instruction/destination moves",
+          "collision/drift refusal",
+          "packed interruption/resume",
+          "uninstall preservation",
+          "pinned packed v5 exit"
+        ]
+      }
+    },
+    {
+      "command": "exact captured 6.0.0 package install -> 6.0.1 upgrade -> uninstall",
+      "exitCode": 0,
+      "record": "6.0.1-upgrade.json",
+      "profiles": 3,
+      "representationsPerProfile": 3
+    }
+  ],
+  "limits": [
+    "Local macOS arm64 mechanical checks only; 6.0.1 Linux/Windows CI has not run in this work session.",
+    "Final-client control probes remain those recorded for 6.0.0; no new plugin/browser/model trial claim.",
+    "Provider/model trials require exact provider/model and spend authorization; none dispatched.",
+    "Package prepared locally; not published."
+  ],
+  "exactMinimumRuntime": {
+    "node": "24.11.1",
+    "command": "npm exec --yes --package=node@24.11.1 -- npm run release:check",
+    "exitCode": 0,
+    "passedActiveTests": 38,
+    "passedLegacyTests": 77,
+    "artifact": {
+      "package": "@aaarslan/aer@6.0.1",
+      "node": "24.11.1",
+      "npm": "npm/11.19.0 node/v24.21.0 darwin arm64 workspaces/false",
+      "platform": "darwin",
+      "arch": "arm64",
+      "files": 87,
+      "unpackedBytes": 465224,
+      "integrity": "sha512-6YerLq6+ZBN/KnDw87jOeYqZRJwlWxUfXFCEgS2r1Mot88lxpHrjXZgGna0SBAN3a83uyaCvU7YOd4BZn38q/Q==",
+      "sha256": "7ae6ed5a4d69658e0470a1de3e0d9aaf22904e760835094c27825a163910ec73",
+      "v5Integrity": "sha512-4pOinb0Lvec9y1OR0r+bjTVxRcP3/zimA862k3ACrRKghP5iSqdKSv51ebu118khAi0ZAM+K/FzDut3AyQ6/hQ==",
+      "checks": [
+        "complete inventory",
+        "isolated npm prefix",
+        "preview/install/check/idempotence",
+        "selection/instruction/destination moves",
+        "collision/drift refusal",
+        "packed interruption/resume",
+        "uninstall preservation",
+        "pinned packed v5 exit"
+      ]
+    }
+  },
+  "releaseAuthorization": "Maintainer requested the complete release cycle, PR/merge, GitHub profile README update and existing website update on 2026-10-05."
+}

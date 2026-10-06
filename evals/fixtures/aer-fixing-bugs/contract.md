@@ -1,0 +1,3 @@
+# Acceptance contract
+
+Editor owns an in-memory notes Map. edit(id) selects an existing note; change(text) sets its draft. save(write) calls the supplied async write(id,text) once. Rejection must retain that draft for retry and preserve saved notes. A successful save commits the ID/text captured when that save began even if another note is selected while write is pending; preserve the newly selected note's draft. cancel() returns the current editor to its saved value without deleting any note. Preserve the public methods and error propagation. The supplied write boundary is the complete fixture contract, not evidence of a live service.

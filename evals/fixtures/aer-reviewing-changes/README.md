@@ -1,3 +1,3 @@
-# Sanitized notes task fixture
+# aer-reviewing-changes fixture
 
-Copy this directory to a disposable directory before any implementation. Run `node --test baseline.test.mjs` for the known starting behavior. No credentials, network, dependencies or production data are used. Serve index.html with an available local static server only for browser tasks. Remove the disposable copy after collecting artifacts. Baseline passing proves fixture setup, not task acceptance.
+Copy this directory to a disposable workspace. `node --test baseline.test.mjs` checks its known starting behavior, including seeded failures where present; it is not task acceptance. The [contract](contract.md) discloses interfaces and required behavior. Third cases remain future development holdouts, not secret inputs. No network, credentials or production data are needed. Retain artifacts before removing the disposable copy.

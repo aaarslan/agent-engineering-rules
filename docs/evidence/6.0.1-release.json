@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-05",
+  "package": "@aaarslan/aer@6.0.1",
+  "sourceIdentity": "2cf01e39573251bd0b0bcb7a6cfaeaf5fd4cba3b8a07f1200ea3450602f3f74d",
+  "localRecord": "6.0.1-local-release.json",
+  "upgradeRecord": "6.0.1-upgrade.json",
+  "preMergeCI": {
+    "conclusion": "success",
+    "headSha": "2e11f467d60a2a10e8a3f60caadcf1eb7d0f6b34",
+    "jobs": [
+      {
+        "completedAt": "2026-10-06T00:50:17Z",
+        "conclusion": "success",
+        "databaseId": 112051953970,
+        "name": "release-linux-runtime (24.11.1)",
+        "startedAt": "2026-10-06T00:49:30Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:49:31Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:32Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 2,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:37Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 3,
+            "startedAt": "2026-10-06T00:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:37Z",
+            "conclusion": "success",
+            "name": "Diagnose filesystem metadata on the claimed runtime",
+            "number": 4,
+            "startedAt": "2026-10-06T00:49:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:15Z",
+            "conclusion": "success",
+            "name": "Validate package, lifecycle and preserved regressions",
+            "number": 5,
+            "startedAt": "2026-10-06T00:49:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:15Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 9,
+            "startedAt": "2026-10-06T00:50:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:15Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 10,
+            "startedAt": "2026-10-06T00:50:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:15Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T00:50:15Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112051953970"
+      },
+      {
+        "completedAt": "2026-10-06T00:51:29Z",
+        "conclusion": "success",
+        "databaseId": 112051954162,
+        "name": "release-windows-runtime (24.x)",
+        "startedAt": "2026-10-06T00:49:30Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:49:31Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:41Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 2,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:46Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 3,
+            "startedAt": "2026-10-06T00:49:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:46Z",
+            "conclusion": "success",
+            "name": "Diagnose filesystem metadata on the claimed runtime",
+            "number": 4,
+            "startedAt": "2026-10-06T00:49:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:25Z",
+            "conclusion": "success",
+            "name": "Validate package, lifecycle and preserved regressions",
+            "number": 5,
+            "startedAt": "2026-10-06T00:49:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:25Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 9,
+            "startedAt": "2026-10-06T00:51:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:27Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 10,
+            "startedAt": "2026-10-06T00:51:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:27Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T00:51:27Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112051954162"
+      },
+      {
+        "completedAt": "2026-10-06T00:49:38Z",
+        "conclusion": "success",
+        "databaseId": 112051954291,
+        "name": "research-preflight",
+        "startedAt": "2026-10-06T00:49:30Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:49:32Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:33Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 2,
+            "startedAt": "2026-10-06T00:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:33Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 3,
+            "startedAt": "2026-10-06T00:49:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:36Z",
+            "conclusion": "success",
+            "name": "Validate corpus, frozen history, and instruction loads without providers",
+            "number": 4,
+            "startedAt": "2026-10-06T00:49:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:36Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 7,
+            "startedAt": "2026-10-06T00:49:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:36Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 8,
+            "startedAt": "2026-10-06T00:49:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:36Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 9,
+            "startedAt": "2026-10-06T00:49:36Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112051954291"
+      },
+      {
+        "completedAt": "2026-10-06T00:50:09Z",
+        "conclusion": "success",
+        "databaseId": 112051954312,
+        "name": "release-linux-runtime (24.x)",
+        "startedAt": "2026-10-06T00:49:30Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:49:33Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:34Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 2,
+            "startedAt": "2026-10-06T00:49:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:34Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 3,
+            "startedAt": "2026-10-06T00:49:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:34Z",
+            "conclusion": "success",
+            "name": "Diagnose filesystem metadata on the claimed runtime",
+            "number": 4,
+            "startedAt": "2026-10-06T00:49:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:07Z",
+            "conclusion": "success",
+            "name": "Validate package, lifecycle and preserved regressions",
+            "number": 5,
+            "startedAt": "2026-10-06T00:49:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:07Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 9,
+            "startedAt": "2026-10-06T00:50:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:07Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 10,
+            "startedAt": "2026-10-06T00:50:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:07Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T00:50:07Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112051954312"
+      },
+      {
+        "completedAt": "2026-10-06T00:50:54Z",
+        "conclusion": "success",
+        "databaseId": 112051954363,
+        "name": "release-windows-runtime (24.11.1)",
+        "startedAt": "2026-10-06T00:49:31Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:49:32Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:39Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 2,
+            "startedAt": "2026-10-06T00:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:50Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 3,
+            "startedAt": "2026-10-06T00:49:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:49:50Z",
+            "conclusion": "success",
+            "name": "Diagnose filesystem metadata on the claimed runtime",
+            "number": 4,
+            "startedAt": "2026-10-06T00:49:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:50Z",
+            "conclusion": "success",
+            "name": "Validate package, lifecycle and preserved regressions",
+            "number": 5,
+            "startedAt": "2026-10-06T00:49:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:50Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+            "number": 9,
+            "startedAt": "2026-10-06T00:50:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:52Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "number": 10,
+            "startedAt": "2026-10-06T00:50:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:52Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T00:50:52Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112051954363"
+      },
+      {
+        "completedAt": "2026-10-06T00:50:24Z",
+        "conclusion": "success",
+        "databaseId": 112052207024,
+        "name": "release-linux",
+        "startedAt": "2026-10-06T00:50:20Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:50:21Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:50:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:21Z",
+            "conclusion": "success",
+            "name": "Require every Linux runtime cell",
+            "number": 2,
+            "startedAt": "2026-10-06T00:50:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:50:21Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-06T00:50:21Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112052207024"
+      },
+      {
+        "completedAt": "2026-10-06T00:51:36Z",
+        "conclusion": "success",
+        "databaseId": 112052549544,
+        "name": "release-windows",
+        "startedAt": "2026-10-06T00:51:32Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T00:51:33Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T00:51:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:33Z",
+            "conclusion": "success",
+            "name": "Require every Windows runtime cell",
+            "number": 2,
+            "startedAt": "2026-10-06T00:51:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T00:51:34Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-06T00:51:34Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752/job/112052549544"
+      }
+    ],
+    "url": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395994752"
+  },
+  "codeQL": {
+    "run": "https://github.com/aaarslan/agent-engineering-rules/actions/runs/37395992478",
+    "conclusion": "success",
+    "analyzedHead": "2e11f467d60a2a10e8a3f60caadcf1eb7d0f6b34"
+  },
+  "clientControlEvidence": "6.0.0-client-controls.json; no new final-client probe or live model result",
+  "publication": "Authorized; publication receipt belongs to the GitHub release assets."
+}

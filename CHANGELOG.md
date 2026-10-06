@@ -1,5 +1,38 @@
 # Changelog
 
+## 6.0.1 - 2026-10-05
+
+### Source corpus
+
+Reduce copied references from 170 to 38 by making directly named resources
+self-contained; retire the redundant Local Safety reference while retaining
+standalone inline safety. Clarify skill selection and portable manual invocation,
+and make the unchanged kernel obligations easier to read. Start adoption docs
+with behavior and a concrete skill example. No efficacy or cost-saving claim is made.
+
+### Claude distribution
+
+Preserve native manual invocation and the restricted reviewer. Document the
+existing owned `.claude/rules/aer.md` destination, fallback/import requirements,
+review-packet preparation and optional forced plugin output-style tradeoffs.
+These documentation updates do not establish new final-client execution evidence.
+
+### Codex distribution
+
+Preserve native invocation sidecars and AGENTS delivery. Document generic portable
+skill installation and its native-control limits; clarify task risk within the
+repository profile default.
+
+### Runtime, package and research
+
+Bump to 6.0.1, format runtime code, safely retire obsolete generated copies and
+recognize the captured 6.0.0 payload for upgrade/uninstall. Retain ownership,
+interruption recovery, Node support and v5 assertions. Run research checks once
+in CI; archive dormant model hypotheses. Replace repeated evaluation seeds with
+13 distinct fixtures, disclosed contracts and 18 calibrated defect checks.
+Live model trials, routing efficacy and kernel ablations remain unmeasured.
+[Decision](docs/decisions/6.0.1-compatible-improvements.md).
+
 ## 6.0.0 - 2026-10-03
 
 ### Source corpus

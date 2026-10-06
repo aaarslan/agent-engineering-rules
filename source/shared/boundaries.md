@@ -24,7 +24,7 @@ Prefer dependency inversion at these meaningful boundaries: domain defines the i
 - [ ] You can name its responsibility in one sentence
 - [ ] It exists for a current need, not a hypothetical one
 
-A boundary failing this checklist is speculative. See the abstraction test in [principles](principles.md).
+A boundary failing this checklist is speculative. It must serve a current named responsibility and improve the code today.
 
 ## Smell checks
 

@@ -1,0 +1,3 @@
+# Acceptance contract
+
+preview and reserve are existing consumers of the same stock/price decision. Orders have a string sku and positive integer quantity and unitCents, validated by callers. Inventory is an existing Map dependency. preview never mutates it; reserve deducts exactly once after validation. Insufficient stock throws Error('stock') without mutation. Preserve exports and result fields. Resolve shared decision ownership and explain the smallest useful boundary; avoid a speculative service container, persistence system or new transport. Functional tests protect behavior; human review grades ownership and justified tradeoffs.

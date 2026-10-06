@@ -2,8 +2,20 @@
 
 V6 prepares [140 competing-catalog routing contracts](../evals/routing/catalog-cases.json)
 and [39 behavioral cases](../evals/behavior/cases.json) over thirteen runnable,
-sanitized fixture directories. Offline baseline tests prove setup only. Third
-cases are future holdouts; all grading requirements are disclosed. The
+sanitized fixture directories. The 6.0.1 fixture revision uses distinct task
+projects, including file-backed migration/retry, checkpointed delivery, trusted
+workspace authorization, real loopback HTTP and a browser editing lifecycle.
+Each case names its complete contract and intended directive coverage. Offline
+baselines prove setup only; 18 selected acceptance checks must detect their seeded
+defects in disposable copies. This calibration proves those checks discriminate
+the starting defect, not that a model can solve the task or that AER helps.
+
+Third cases are public prospective holdout candidates, not hidden tasks. All
+grading requirements are disclosed. A future blinded run must freeze evaluator
+checks separately and keep grader material out of candidate workspaces. The
+browser cases require actual focus/selection and responsive observations;
+architecture, review and documentation cases also require artifact grading.
+These development fixtures do not establish production-repository validity. The
 [rubric](../evals/behavior/rubric.json) separates harmful failures, behavior,
 delivery/routing and costs. No model activation rates or outcomes were measured.
 

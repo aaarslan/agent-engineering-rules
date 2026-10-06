@@ -1,6 +1,6 @@
 # Design Principles
 
-Applied judgment, not ceremony. Every principle below yields to the [universal contract](contract.md).
+Applied judgment, not ceremony. Apply these principles within the requested scope and applicable user, repository and client instructions.
 
 - **KISS.** Prefer the simplest solution that satisfies the real requirement. Boring beats clever.
 - **YAGNI.** Do not build extensibility, abstraction, configuration, or infrastructure for hypothetical future needs. Build for the requirement in front of you.
@@ -10,7 +10,7 @@ Applied judgment, not ceremony. Every principle below yields to the [universal c
 - **Explicit dependencies.** Pass dependencies in; avoid hidden globals, singletons, and ambient state.
 - **DRY, carefully.** One business rule has one owning home. Unify duplicated knowledge across consumers; incidental code similarity needs proven shared meaning before abstraction.
 - **Optimize for the reader.** Readability and maintenance over cleverness. If a comment is needed to explain what code does, first try making the code clearer.
-- **No premature optimization.** Correct and clear first; optimize with measurements. See [performance](performance.md).
+- **No premature optimization.** Correct and clear first; optimize with measurements.
 - **Replacement is an option.** Compare patch, refactor, and replacement against real behavior, maintenance, migration, and recovery needs. Choose the coherent result; neither preserving a broken abstraction nor speculative rebuilding earns credit for its diff size.
 
 ## Abstraction test

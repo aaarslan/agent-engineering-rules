@@ -1,13 +1,14 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+export function preview(order, inventory) {
+  const available = inventory.get(order.sku) ?? 0;
+  if (order.quantity > available) throw new Error('stock');
+  return { totalCents: order.quantity * order.unitCents, available };
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
+export function reserve(order, inventory) {
+  const available = inventory.get(order.sku) ?? 0;
+  if (order.quantity > available) throw new Error('stock');
+  inventory.set(order.sku, available - order.quantity);
+  return {
+    totalCents: order.quantity * order.unitCents,
+    available: available - order.quantity,
+  };
 }
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
-}
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }

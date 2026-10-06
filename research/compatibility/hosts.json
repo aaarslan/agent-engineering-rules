@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "reviewed": "2026-10-02",
-  "revalidate_after": "2027-01-02",
+  "reviewed": "2026-10-05",
+  "revalidate_after": "2027-01-05",
   "supported_hosts": {
     "claude": {
-      "instruction_entry": "AGENTS.md (fallback) or explicit CLAUDE.md import",
+      "instruction_entry": "AGENTS.md fallback only without ancestor CLAUDE.md variants; explicit CLAUDE import or owned .claude/rules/aer.md destination",
       "always_on": [
         "selected instructions file managed block"
       ],
-      "path_scoped": "none; relevant standalone references",
+      "path_scoped": "Claude documents paths rules triggered by matching Read/Write/Edit operations; AER keeps the browser-conditional kernel clause",
       "skills": ".claude/skills/<name>/SKILL.md",
       "protected_native_entrypoints": [
         "security-review",
@@ -19,7 +19,10 @@
       "sources": [
         "https://code.claude.com/docs/en/memory",
         "https://code.claude.com/docs/en/skills",
-        "https://code.claude.com/docs/en/sub-agents"
+        "https://code.claude.com/docs/en/sub-agents",
+        "https://code.claude.com/docs/en/plugins",
+        "https://code.claude.com/docs/en/output-styles",
+        "https://code.claude.com/docs/en/permissions"
       ]
     },
     "codex": {
@@ -42,5 +45,5 @@
     "gemini": "Not supported until discovery, policy, installation, and load-plan fixtures exist.",
     "cursor": "Not supported until discovery, policy, installation, and load-plan fixtures exist."
   },
-  "plugin_policy": "v6 direct install: format/installability verified offline; plugins deferred. Discovery/invocation need final-client evidence."
+  "plugin_policy": "Direct installation remains supported. Claude forced plugin output styles are a documented persistent instruction path with user-style override/conflict costs; no AER plugin artifact or final-client plugin evidence."
 }

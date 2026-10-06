@@ -1,5 +1,7 @@
 # Decisions
 
+- [6.0.1 compatible improvements](6.0.1-compatible-improvements.md): reference reduction, routing, readability, delivery options, distinct evaluation fixtures and retained safety contracts.
+
 - [V6 execution record](6.0.0-plan.md): baseline, state machine, scope mapping and release evidence.
 
 

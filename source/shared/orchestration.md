@@ -26,6 +26,6 @@ Give each specialist core plus only its concern files:
 
 ## Contract
 
-Specialists use the [PR-review finding format](pr-review.md) and add open questions only when missing evidence changes the conclusion. Findings without evidence are discarded.
+Specialists report evidence, reachable failure, impact, severity, bounded correction, verification and confidence; add open questions only when missing evidence changes the conclusion. Findings without evidence are discarded.
 
-Give every specialist a narrow charter and bounded file ownership. The coordinator resolves contradictory findings against evidence and the [ledger](review-ledger.md); request a targeted independent review only when the conflict meets the material-risk threshold above. The coordinator's plan and authority boundaries govern integration; specialist suggestions do not bypass them.
+Give every specialist a narrow charter and bounded file ownership. The coordinator resolves contradictory findings against evidence and recorded decisions; request a targeted independent review only when the conflict meets the material-risk threshold above. The coordinator's plan and authority boundaries govern integration; specialist suggestions do not bypass them.

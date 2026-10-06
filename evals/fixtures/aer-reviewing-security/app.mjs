@@ -1,13 +1,10 @@
-export function save(store, id, value) {
-  if (typeof id !== 'string' || !id) throw new TypeError('id');
-  store.set(id, {value, archived:false}); return store.get(id);
+import path from 'node:path';
+export function readInvoice(invoices, actor, id) {
+  return invoices.get(id);
 }
-export function toggle(store,id) {
-  const note=store.get(id); if(!note) throw new Error('not found');
-  store.set(id,{value:note.value,archived:!note.archived}); return store.get(id);
+export function downloadPath(root, userPath) {
+  return path.resolve(root, userPath);
 }
-export function readNote(store,actor,id) {
-  // Deliberate review fixture: object authorization is absent.
-  return store.get(id);
+export function refreshSession(session, now) {
+  return { ...session, expiresAt: now + 60000 };
 }
-export function migrate(rows) { return rows.map(r=>({...r,archived:Boolean(r.archived)})); }
