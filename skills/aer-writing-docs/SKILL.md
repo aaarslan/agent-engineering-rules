@@ -12,7 +12,7 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 - Treat documentation as a contract: verify commands, flags, paths, versions, examples, and behavior before writing them.
 - Use current repository evidence for local claims and current authoritative primary sources for platform or compatibility claims; date unstable claims.
 - Separate current behavior from proposals, limitations, and pending work. Never promote an assumption or unavailable check into fact.
-- Keep examples public and repository-relative; do not commit personal paths, credentials, private hosts, or machine-specific output.
+- Match examples to the audience: portable public examples or authorized internal runbooks. Exclude credentials and inappropriate private disclosure; disclose material execution limitations.
 
 Finish when shown commands and links resolve, factual claims have applicable evidence, and generated or related docs agree.
 

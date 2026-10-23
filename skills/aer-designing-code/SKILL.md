@@ -9,7 +9,7 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 
 # Designing Code
 
-Establish affected owners, contracts and material tradeoffs. Compare a small number of viable repository-native designs; prefer explicit boundaries and singular rules. Prototype decisive uncertainties, then implement the chosen design when requested. Do not create layers solely for hypothetical future use.
+Establish affected owners, contracts and material tradeoffs. Use existing evidence when it settles the choice. For a material unresolved decision, compare viable repository-native alternatives; prototype only when it can resolve a consequential uncertainty. Prefer clear ownership and useful boundaries, then implement the chosen design when requested. Do not manufacture options or create layers solely for hypothetical future use.
 
 Load relevant local detail only:
 - [design-checkpoint](references/design-checkpoint.md)

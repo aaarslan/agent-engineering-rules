@@ -6,8 +6,8 @@ Verification establishes current behavior. Permanent tests protect stable behavi
 ## Choose the investment
 
 - Scale effort with project maturity, expected lifespan, real users and exposure, contract stability, regression/security/privacy/data risk, and failure cost.
-- Demos, experiments, single-use tools, and changing prototypes need a complete working path first. Add permanent tests only when requested, materially risk-reducing, or faster than direct development and verification.
-- For durable features, finish the real vertical behavior and stabilize its user/caller contract before investing in end-to-end or boundary regression coverage. High-consequence behavior warrants earlier checks.
+- Use a reproducer, acceptance example or focused test before or during implementation when it clarifies the contract or catches a defect cheaply. Retain meaningful regression protection according to stability and failure cost. Defer broad test architecture until it serves stable behavior; do not impose a universal test-first or test-last sequence.
+- Demos, experiments and single-use tools need a complete working path. Add permanent tests when requested, materially risk-reducing, or faster than direct development and verification.
 - When extending existing production behavior, run relevant established coverage to protect current customers alongside the new behavior.
 - Do not construct test architecture around substantially changing behavior. Tests added are not progress toward an unfinished feature.
 

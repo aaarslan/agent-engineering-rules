@@ -1,6 +1,6 @@
 ---
 name: "aer-building-backend-apis"
-description: "Build or change backend endpoint contracts and failure behavior. Use for routes, handlers or services; preserve authorization, validation and durable effects without inventing external capabilities."
+description: "Build or change backend endpoint contracts and failure behavior. Use for exposed API contracts, authorization boundaries or durable request effects; preserve authorization, validation and durable effects without inventing external capabilities."
 ---
 
 <!-- aer:shared-safety:start -->

@@ -1,5 +1,7 @@
 # Decisions
 
+- [Skill guidance refinement](skill-guidance-refinement.md): bounded audit reconciliation, diagnostic contracts, upgrade preservation and a deferred research split.
+
 - [6.0.1 compatible improvements](6.0.1-compatible-improvements.md): reference reduction, routing, readability, delivery options, distinct evaluation fixtures and retained safety contracts.
 
 - [V6 execution record](6.0.0-plan.md): baseline, state machine, scope mapping and release evidence.

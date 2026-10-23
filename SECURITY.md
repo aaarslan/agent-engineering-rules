@@ -1,11 +1,11 @@
 # Security policy
 
-Maintainers target 6.x for security fixes. No support commitment is made for
-retired majors. V5 is retained only as a pinned exit and
-regression fixture. Report the exact installed package/revision and protocol
+6.1.0 is the final planned maintenance release, with public archival planned
+after release verification. No ongoing maintenance, security fixes or support
+are promised. V5 is retained only as a pinned exit and regression fixture. Report the exact installed package/revision and protocol
 schema, runtime/platform, representation, selections and a sanitized reproduction.
 
-Use GitHub's [private vulnerability reporting form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new).
+While available, use GitHub's [private vulnerability reporting form](https://github.com/aaarslan/agent-engineering-rules/security/advisories/new).
 Do not disclose credentials, private prompts, customer data or proprietary code
 in public issues. Allow triage before public disclosure.
 

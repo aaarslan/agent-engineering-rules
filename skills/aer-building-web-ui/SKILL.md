@@ -7,7 +7,7 @@ description: "Build or change browser interfaces, interaction states and accessi
 Honor the requested scope and applicable repository/client instructions. Preserve unrelated work, protect secrets and require authority for consequential external effects. Use available evidence honestly; unavailable checks are limitations. This skill works without an AER kernel or other skill.
 <!-- aer:shared-safety:end -->
 
-# UI Styling
+# Browser UI
 
 Follow the repository's design system and tokens when they exist; do not overlay a second visual language.
 
@@ -19,10 +19,10 @@ Evaluate these independent dimensions without a prescribed report layout:
 
 State the strongest demonstrated results and material defects. Framework choice, file count, LOC, ARIA quantity, and validation volume are not quality verdicts. Report honestly when one dimension improves while another regresses.
 
-Read `references/ui-styling.md` and `references/web-ui.md` only for an actual UI surface. Report usable evidence for each applicable dimension; heuristic output is review input, not proof.
+Use the relevant local details below for the actual surface and stack. Report usable evidence for applicable dimensions; heuristic output is review input, not proof.
 
 <!-- aer:ui:start -->
-**UI-01 Interaction.** For changed browser UI only, MUST keyboard-exercise changed UI actions through their resulting state; activation alone is insufficient. Preserve unaffected drafts and focus/caret/selection across rendering; if a focused control disappears, focus its trigger or a logical neighbor. Verify visible focus and continued keyboard use; give controls item-specific accessible names.
+**UI-01 Interaction.** For changed browser UI only, keyboard-exercise changed actions through their resulting state with authorized tools; activation alone is insufficient. Reuse evidence for equivalent layouts; report unavailable execution as unverified. Preserve unaffected drafts and focus/caret/selection across rendering; if a focused control disappears, focus its trigger or a logical neighbor. Verify visible focus and continued keyboard use; give controls item-specific accessible names.
 <!-- aer:ui:end -->
 
 Load relevant local detail only:
@@ -30,4 +30,4 @@ Load relevant local detail only:
 - [typescript-react](references/typescript-react.md)
 - [ui-styling](references/ui-styling.md)
 
-Optional scripts require an available Node 24 runtime. Resolve paths from the loaded skill’s actual root and quote paths with spaces. From that root, run only a relevant `node "scripts/contrast-check.mjs" --help` to inspect its input contract. Without Node, use repository tools or manual evidence and report the limitation. Scripts never run on discovery or installation.
+Optional scripts require an available Node 24 runtime. Resolve paths from the loaded skill’s actual root and quote paths with spaces. Use the absolute script path, such as `node "<skill-root>/scripts/contrast-check.mjs" --help`, to inspect a relevant input contract. Run from the actual project directory so target paths resolve there. Without Node, use repository tools or manual evidence and report the limitation. Scripts never run on discovery or installation.

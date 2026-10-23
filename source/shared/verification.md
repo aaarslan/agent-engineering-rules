@@ -27,7 +27,7 @@ After repair, rerun the failed check and checks whose evidence the repair invali
 
 ## Completion
 
-Inspect the final diff and repository state, including authored untracked files, consumers, generated artifacts, docs, duplicate/superseded/dead paths, scaffolds, unsafe defaults, side effects, and self-introduced regressions.
+Inspect the affected final diff and task-authored repository state, including authored untracked files, consumers, generated artifacts, docs, duplicate/superseded/dead paths, scaffolds, unsafe defaults, side effects, and self-introduced regressions.
 
 Map each completion claim to relevant observed evidence and its limitations. Report substantive results, permanent coverage added, existing checks rerun, material omitted checks and why, and unresolved risk. No fixed report layout is required.
 

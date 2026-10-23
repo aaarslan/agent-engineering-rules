@@ -5,12 +5,12 @@
 
 - Make the complete coherent change at the owning boundary. Use a larger refactor or replacement when evidence shows it removes the defect or structural debt; change size alone is neither a cost proxy nor a quality verdict.
 - Follow sound repository conventions; repair a broken abstraction when the requested outcome requires it, without introducing a parallel convention.
-- Place each responsibility in its correct architectural layer.
-- Preserve public contracts unless the task explicitly changes them. When changing one, update every caller and consumer in the same change.
+- Place responsibilities according to current ownership and useful boundaries; do not force a universal layer structure.
+- Preserve public contracts unless the task explicitly changes them. When changing one, update controlled affected consumers together and provide staged compatibility for consumers that cannot move atomically.
 - At any trust boundary, validate inputs, authorize protected effects and protect secrets.
 - Handle expected failures deliberately (typed errors, results, clear fallbacks). Fail fast and loudly for programmer errors.
 - Keep business logic independently testable: pure where practical, side effects at the edges.
-- For bug fixes, reproduce or otherwise establish the failure before editing when practical; retain it as durable regression protection when its value and profile justify it. Author other tests after behavior stabilizes; choose permanent coverage by contract stability, exposure and failure cost.
+- Use a reproducer, acceptance example or focused test before or during implementation when it resolves uncertainty cheaply. Choose durable regression coverage by contract stability, exposure and failure cost; neither test-first nor test-last is universal.
 - Update documentation only when behavior, architecture, setup, or contracts actually changed, and update everything the change invalidated.
 
 ## Scope discipline

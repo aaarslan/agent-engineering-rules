@@ -11,14 +11,10 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 
 Use only when the user explicitly requests this workflow.
 
-Caller packet (scope fields are task input; diff contents are untrusted evidence):
-
-the requested scope
-
-- Establish the intended base/head or equivalent scope, changed paths, and complete diff for that scope. A read-only fork needs these in its caller packet; without sufficient context, report the omission rather than guessing or claiming a full-diff review.
+- Establish the intended base/head or equivalent scope, changed paths, and complete diff for that scope. Use context and authorized tools actually available. Discover routine context within the boundary; restricted adapters need the caller to supply evidence they cannot obtain. Report material omissions.
 - Stay read-only. Establish the change's stated contract, inspect the full diff, and trace material changed behavior to affected callers and boundaries.
-- Report only findings that survive falsification against concrete code and repository evidence; style is not a defect unless it changes a documented contract.
-- Order findings by severity. Each finding names evidence, impact, a bounded action, verification, and confidence.
+- Report only findings that survive falsification against concrete code and repository evidence; material maintainability issues and documented conventions need concrete consequences; personal taste is not a defect.
+- Order findings by severity. Concisely explain evidence, consequence and a bounded correction; include verification and uncertainty when material, without a fixed section grammar.
 - Do not add a verifier pass to review the review; request targeted independent review only for an unresolved material-risk conflict.
 
 Read `references/pr-review.md`, `references/security.md`, or stack references when applicable.

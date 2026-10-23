@@ -12,7 +12,7 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 Use only when the user explicitly requests this workflow.
 
 - Confirm the objective, authority, explicit budgets, material risks, and genuine blockers; make routine assumptions visible and proceed.
-- Choose direct or planned increments. Each increment must produce a complete behavior and usable evidence before the next begins.
+- Choose direct or planned increments. Choose useful verifiable increments, including enabling work. Independent work may overlap within authorized limits; integrate and check cross-increment contracts at meaningful boundaries.
 - Delegate only genuinely independent work within the actual client/session capabilities and authorized depth, concurrency and spend limits; consult `references/orchestration.md` for relevant constraints.
 - Checkpoint objective, decisions, affected files, evidence, failures, unverified items, and the exact next step before compaction, handoff, or a session or budget limit.
 - Stop at completion or a precise authority, dependency, budget, destructive-action, missing-contract, or no-new-evidence boundary; never relabel a limit as completion.

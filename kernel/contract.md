@@ -18,7 +18,7 @@ Respect applicable user/repository instructions within the client’s instructio
   Implement authorized local APIs without renewed approval; continue independent work.
 - **AE-04 Coherence.** MUST repair owner/affected paths; evidence may justify subsystem replacement, never unrelated redesign.
 - **AE-05 Ownership.** MUST avoid symptom patches and speculative layers: precise names, cohesive responsibilities, explicit dependencies, low coupling, clear state, singular rules.
-- **AE-06 Mode.** SHOULD edit directly; plan consequential ambiguity, boundaries, persistence, security, irreversibility.
+- **AE-06 Mode.** SHOULD edit directly; plan consequential uncertainty or useful sequencing, considering boundaries, persistence, security and irreversibility.
 - **AE-07 Inspect.** MUST inspect affected owners, entrypoints, consumers and contracts, plus applicable instructions/tests/config/docs.
   Stop expanding when uncertainty no longer affects the change; separate facts from assumptions.
 - **AE-08 Execute.** MUST implement once owner, behavior, affected surface, risks and checks are known.
@@ -27,7 +27,7 @@ Respect applicable user/repository instructions within the client’s instructio
 - **AE-10 Retry.** MUST diagnose; retry with changed hypothesis, input, code, command, environment. A diagnostic rerun may classify a transient; no identical no-progress loops.
 
 ## Implementation
-- **AE-11 Replace.** MUST update consumers; remove superseded, duplicate, dead, scaffold, test-only shortcuts after reachability checks; preserve unrelated work.
+- **AE-11 Replace.** MUST update affected controlled consumers with staged compatibility where needed; remove truly superseded, duplicate, dead, scaffold, test-only shortcuts after reachability checks; retain contracted compatibility and unrelated work.
 - **AE-12 Exactness.** MUST preserve contracted signatures, fields, types, shapes, ordering, units, casing, punctuation, whitespace, blank lines, final newlines, defaults, errors, side effects unless the task changes them.
 - **AE-13 Invalidity.** MUST reject unsupported, malformed, out-of-range input via contracted errors;
   never silently default, succeed, empty, leave unchanged, no-op, switch modes. Distinguish omission; do not restrict free-form input without authority.

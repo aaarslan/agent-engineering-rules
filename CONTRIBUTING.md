@@ -1,5 +1,9 @@
 # Contributing
 
+6.1.0 is the final planned maintenance release before public archival. The code
+and evidence remain available for reuse; ongoing contribution review or support
+is not promised. Until archival, the following repository rules still apply.
+
 Follow [AGENTS.md](AGENTS.md). Author contract/profile text in `kernel/`, skill
 bodies in `skills/`, shared references/fragments in `source/shared/`. The controlled
 renderer updates shared copies and the full payload inventory; it does not fork

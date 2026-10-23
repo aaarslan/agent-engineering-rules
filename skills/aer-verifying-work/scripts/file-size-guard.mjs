@@ -45,8 +45,8 @@ async function runtimeThresholds() {
 function thresholdFromEnvironment(configuredThreshold) {
   const raw = process.env.FILE_SIZE_GUARD_THRESHOLD;
   if (raw === undefined || raw === '') return configuredThreshold;
-  if (!/^[1-9]\d*$/.test(raw)) {
-    throw new InputError('FILE_SIZE_GUARD_THRESHOLD must be a positive integer');
+  if (!/^[1-9]\d*$/.test(raw) || !Number.isSafeInteger(Number(raw))) {
+    throw new InputError('FILE_SIZE_GUARD_THRESHOLD must be a positive safe integer');
   }
   return Number(raw);
 }
@@ -117,6 +117,7 @@ function metricFields(result) {
     `named-unit-hints=${value.namedUnits}`,
     `decision-hints=${value.decisionHints}`,
     `head-lines=${baseline}`,
+    `baseline=${result.baselineState}`,
   ].join(' ');
 }
 
@@ -154,22 +155,24 @@ async function gitHeadLines(file, thresholds) {
   const directory = path.dirname(file);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => ['path','systemroot','systemdrive','comspec','temp','tmp'].includes(key.toLowerCase())));
   Object.assign(env, { GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: process.platform === 'win32' ? 'NUL' : '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0', LC_ALL: 'C' });
+  const unavailable = { state: 'unavailable', lines: null };
+  const options = {
+    cwd: directory, env, windowsHide: true,
+    timeout: thresholds.gitTimeoutMs, maxBuffer: thresholds.gitMaxBufferBytes,
+  };
   try {
-    const { stdout } = await execFile(GIT_COMMAND, ['rev-parse', '--is-inside-work-tree'], {
-      cwd: directory, env, encoding: 'utf8', windowsHide: true, timeout: thresholds.gitTimeoutMs, maxBuffer: thresholds.gitMaxBufferBytes,
-    });
-    if (stdout.trim() !== 'true') return null;
+    // An empty successful tree listing proves absence. A failed show does not.
+    const { stdout: tree } = await execFile(GIT_COMMAND,
+      ['--literal-pathspecs', 'ls-tree', '-z', 'HEAD', '--', path.basename(file)],
+      { ...options, encoding: 'utf8' });
+    if (!tree) return { state: 'absent', lines: 0 };
+    const entry = tree.match(/^100(?:644|755) blob ([a-f0-9]+)\t/);
+    if (!entry) return unavailable;
+    const { stdout } = await execFile(GIT_COMMAND, ['show', entry[1]],
+      { ...options, encoding: 'buffer' });
+    return { state: 'known', lines: physicalLines(stdout.toString('utf8')) };
   } catch {
-    return null;
-  }
-  try {
-    const { stdout } = await execFile(GIT_COMMAND, ['show', `HEAD:./${path.basename(file)}`], {
-      cwd: directory, env, encoding: 'buffer', windowsHide: true,
-      timeout: thresholds.gitTimeoutMs, maxBuffer: thresholds.gitMaxBufferBytes,
-    });
-    return physicalLines(stdout.toString('utf8'));
-  } catch {
-    return 0;
+    return unavailable;
   }
 }
 
@@ -203,7 +206,9 @@ async function inspectFile(file, { threshold, thresholds, scopeRoot }) {
   if (generated) return { status: 'NOT-APPLICABLE', file: shown, reason: generated };
 
   const metrics = metricsFor(text);
-  const baseline = await gitHeadLines(absolute, thresholds);
+  const head = await gitHeadLines(absolute, thresholds);
+  const baseline = head.lines;
+  const baselineState = head.state;
   const overLines = metrics.lines > threshold;
   const dense = metrics.bytes >= thresholds.denseMinBytes
     && metrics.bytesPerLine >= thresholds.denseBytesPerLine;
@@ -229,10 +234,10 @@ async function inspectFile(file, { threshold, thresholds, scopeRoot }) {
     const reason = overLines && baseline !== null && baseline > threshold
       ? `pre-existing large file has not grown by max(${thresholds.renotifyMinLines} lines, ${growthPercent}%) from its ${baseline}-line Git baseline`
       : 'physical size and formatting-resistant density signals are below advisory conditions';
-    return { status: 'APPLICABLE-PASS', file: shown, reason, metrics, baseline };
+    return { status: 'APPLICABLE-PASS', file: shown, reason, metrics, baseline, baselineState };
   }
 
-  return { status: 'ADVISORY', file: shown, reason: reasons.join('; '), metrics, baseline };
+  return { status: 'ADVISORY', file: shown, reason: reasons.join('; '), metrics, baseline, baselineState };
 }
 
 function parseCli(arguments_) {
@@ -272,7 +277,9 @@ The density signal uses authored UTF-8 bytes and an approximate four-bytes-per-
 token metric; declaration and decision counts are lexical hints, not complexity
 measurements. Generated, bundled, vendor/build, and non-source declarative files
 are not applicable. Git HEAD supplies the baseline; FILE_SIZE_GUARD_THRESHOLD is
-the repository/CI override. No strict mode is enabled by default.
+a positive safe-integer repository/CI override. Baselines distinguish known counts,
+confirmed absence at HEAD and unavailable Git evidence. Unavailable evidence never
+means growth from zero. No strict mode is enabled by default.
 Unchanged retries add no evidence; rerun after an edit or a changed hypothesis.`;
 }
 

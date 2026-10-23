@@ -59,11 +59,13 @@ and build artifacts, plus custom payload destinations declared in a local AER
 ledger. This is scope selection, not ledger authentication. An excluded root, file, or glob is scanned when directly
 targeted.
 
-Output distinguishes DETERMINISTIC-FINDING, HEURISTIC-WARNING, MANUAL-REVIEW,
+Output distinguishes PATTERN-MATCH, HEURISTIC-WARNING, MANUAL-REVIEW,
 APPLICABLE-PASS, NOT-APPLICABLE, and ERROR with category, stable fingerprint,
 file:line evidence, and full-root or partial-selector scope.
-Exit 0 is a complete applicable scan with no findings; 1 means findings or a
-partial selector scope require review;
+Exit 0 means no configured patterns matched in applicable selected files;
+1 means pattern matches or other advisory findings require inspection.
+Unavailable project-wide categories and scope exclusions are informational;
+do not widen a focused scan just to obtain exit 0;
 2 is input/tool failure; 3 means no supported authored input was applicable.
 This lexical scan can report false positives and does not prove that completion
 improved quality, that a sink is exploitable, or that absent findings are safe.
@@ -359,8 +361,8 @@ function scan(records, { fullProjectScan }) {
     addLineFindings(
       findings, record,
       /\b(?:innerHTML|outerHTML|insertAdjacentHTML|document\.write|dangerouslySetInnerHTML)\b/g,
-      'DETERMINISTIC-FINDING', 'unsafe-html-sink',
-      'Trace untrusted data to the sink; prefer text APIs or framework escaping.',
+      'PATTERN-MATCH', 'html-sink-reference',
+      'Lexical HTML sink name only. Comments, static literals and sanitized HTML are not proven unsafe. Trace provenance and sanitizer context before reporting a defect.',
     );
     addLineFindings(
       findings, record,
@@ -421,7 +423,7 @@ function scan(records, { fullProjectScan }) {
     }
   }
 
-  const order = new Map([['DETERMINISTIC-FINDING', 0], ['HEURISTIC-WARNING', 1], ['MANUAL-REVIEW', 2]]);
+  const order = new Map([['PATTERN-MATCH', 0], ['HEURISTIC-WARNING', 1], ['MANUAL-REVIEW', 2]]);
   const sorted = findings.sort((left, right) => left.file.localeCompare(right.file)
     || left.line - right.line
     || order.get(left.severity) - order.get(right.severity)
@@ -476,20 +478,16 @@ async function main() {
     console.log(`NOT-APPLICABLE category=project-wide-reference-checks scope=${applicable.scope} reason=${quote(reason)}`);
   }
   for (const finding of findings) console.log(findingOutput(finding));
-  const deterministic = findings.filter((finding) => finding.severity === 'DETERMINISTIC-FINDING').length;
+  const patterns = findings.filter((finding) => finding.severity === 'PATTERN-MATCH').length;
   const heuristic = findings.filter((finding) => finding.severity === 'HEURISTIC-WARNING').length;
   const manual = findings.filter((finding) => finding.severity === 'MANUAL-REVIEW').length;
-  if (findings.length || partial) {
-    const reason = findings.length
-      ? partial
-        ? 'findings and not-applicable project-wide checks require disposition; scan completion is not proof of quality'
-        : 'findings require disposition; scan completion is not proof of quality'
-      : 'not-applicable project-wide checks require disposition; scan completion is not proof of quality';
+  if (findings.length) {
+    const reason = 'lexical patterns and advisory findings require inspection; scan completion is not proof of quality';
     const notApplicableCategories = applicable.notices.length + (applicable.fullProjectScan ? 0 : 1);
-    console.log(`ADVISORY summary files=${applicable.records.length} scope=${applicable.scope} excluded=${applicable.excluded} deterministic-findings=${deterministic} heuristic-warnings=${heuristic} manual-review=${manual} not-applicable-categories=${notApplicableCategories} reason=${quote(reason)}`);
+    console.log(`ADVISORY summary files=${applicable.records.length} scope=${applicable.scope} excluded=${applicable.excluded} pattern-matches=${patterns} heuristic-warnings=${heuristic} manual-review=${manual} not-applicable-categories=${notApplicableCategories} reason=${quote(reason)}`);
     return 1;
   }
-  console.log(`APPLICABLE-PASS summary files=${applicable.records.length} scope=${applicable.scope} excluded=${applicable.excluded} deterministic-findings=0 heuristic-warnings=0 manual-review=0 reason="supported authored files were scanned and no configured pattern matched"`);
+  console.log(`APPLICABLE-PASS summary files=${applicable.records.length} scope=${applicable.scope} excluded=${applicable.excluded} pattern-matches=0 heuristic-warnings=0 manual-review=0 reason="supported authored files were scanned and no configured pattern matched"`);
   return 0;
 }
 

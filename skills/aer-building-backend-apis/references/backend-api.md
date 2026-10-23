@@ -6,19 +6,19 @@ Server-specific guidance for the affected endpoints, authorization and data cont
 ## Boundaries
 
 - Validate all input at the boundary; pass typed, validated values inward. Enforce authorization server-side per endpoint and per object.
-- Keep route handlers thin: validate, authorize, call domain logic, map the result to a response.
+- Follow repository ownership for validation, authorization and response mapping. Extract domain logic when it improves cohesion or verification; a small cohesive handler needs no forwarding layer.
 - Use consistent error formats across the API, following the repo's existing shape. Map expected failures to correct status codes; never leak stack traces or internals to clients.
 
 ## Data
 
-- Use parameterized queries, always.
+- Bind SQL data values. Select identifiers and keywords through controlled mappings or engine-supported quoting; they generally cannot be bind parameters.
 - Wrap multi-write operations that must stay consistent in a transaction. Ask of every handler: if this dies halfway, is stored state still valid?
 - Bound resource use according to data volume and the endpoint contract; address measured N+1 behavior through batching or joins. Add pagination when the contract and scale warrant it, not to bounded finite lists by habit.
 
 ## External calls
 
 - Every external call gets a timeout. No unbounded waits inside a request.
-- Retry only when safe, bounded, and with backoff plus jitter. Anything retried must be idempotent; give state-changing operations idempotency keys where the pattern exists.
+- Retry with bounded attempts and evidence that replay is safe: idempotence, deduplication, or proof the original attempt did not apply. Treat ambiguous outcomes as potentially applied. Follow the provider's retry contract, including appropriate backoff and jitter.
 - Decide deliberately what happens when a dependency is down: fail, degrade, or queue. Do not let the default be "hang".
 
 ## Compatibility

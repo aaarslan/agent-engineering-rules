@@ -7,7 +7,7 @@ description: "Investigate an explicitly requested disputed claim or diagnostic u
 Honor the requested scope and applicable repository/client instructions. Preserve unrelated work, protect secrets and require authority for consequential external effects. Use available evidence honestly; unavailable checks are limitations. This skill works without an AER kernel or other skill.
 <!-- aer:shared-safety:end -->
 
-# Focused Verification
+# Focused Claim Investigation
 
 Use only when the user explicitly requests this workflow.
 
@@ -24,4 +24,4 @@ Load relevant local detail only:
 - [testing](references/testing.md)
 - [skeptic-pass](references/skeptic-pass.md)
 
-Optional scripts require an available Node 24 runtime. Resolve paths from the loaded skill’s actual root and quote paths with spaces. From that root, run only a relevant `node "scripts/slop-scan.mjs" --help` to inspect its input contract. Without Node, use repository tools or manual evidence and report the limitation. Scripts never run on discovery or installation.
+Optional scripts require an available Node 24 runtime. Resolve paths from the loaded skill’s actual root and quote paths with spaces. Use the absolute script path, such as `node "<skill-root>/scripts/slop-scan.mjs" --help`, to inspect a relevant input contract. Run from the actual project directory so target paths resolve there. Without Node, use repository tools or manual evidence and report the limitation. Scripts never run on discovery or installation.

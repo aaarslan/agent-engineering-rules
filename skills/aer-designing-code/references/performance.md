@@ -7,14 +7,14 @@ Correct and clear first. Performance claims require a baseline and measured comp
 
 - No premature optimization. Do not complicate code for speed without a measurement showing the cost and a requirement it violates.
 - Measure before and after. An optimization without a benchmark, profile, or production metric is a guess; report the numbers.
-- Fix the algorithm and the I/O pattern before micro-tuning. Eliminating an O(n²) loop or a query-per-item beats any amount of caching cleverness.
+- Fix the algorithm and the I/O pattern before micro-tuning. Choose algorithm and I/O changes against the measured bottleneck before adding caching complexity.
 
-## Cheap habits that are always worth it
+## Resource and access patterns
 
-These are not premature optimization; they are avoiding known pathologies:
+Choose patterns according to the engine, workload and contract:
 
-- No N+1 queries: batch or join instead of querying inside a loop.
-- No unbounded work: bound every collection you return or process (paginate, cap, or stream).
+- Avoid costly query-per-item round trips; batch or join when beneficial. Many small in-process SQLite queries can be appropriate. Measure the actual engine and workload.
+- Bound resource exposure with limits, pagination, batching or streaming as the contract permits. Preserve complete requested results; never silently truncate to satisfy a size rule.
 - Do not fetch data you discard: select needed columns, filter at the source.
 - Keep heavy work off hot paths (request handling, render loops, interrupt handlers): precompute, defer, or batch when the repo has a place for it.
 
