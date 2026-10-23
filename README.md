@@ -21,6 +21,14 @@ this public repository after release verification, preserving the code and
 historical evidence. No ongoing updates, compatibility work or support are promised.
 Archiving remains a separate maintainer action.
 
+## Optional working-principles example
+
+The maintainer's [portable AGENTS.md example](https://github.com/aaarslan/agent-engineering-rules/blob/main/docs/examples/AGENTS.example.md)
+contains general working preferences you can adapt. It is documentation, not active
+repository instructions or an installed AER resource. This additive example was
+prepared after the 6.1.0 tag; the tagged package remains unchanged. It is also
+attached separately to the 6.1.0 release.
+
 ## Install the project contract and skills
 
 The CLI requires Node 24.11.1 or newer and has no runtime dependencies. Preview
