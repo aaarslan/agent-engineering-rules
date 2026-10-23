@@ -9,6 +9,7 @@ import { install,uninstall } from '../src/install.mjs';
 import { check } from '../src/check.mjs';
 import { schemaErrors } from '../tools/schema.mjs';
 const cli=path.join(ROOT,'src/cli.mjs');
+const packageMetadata=JSON.parse(await readFile(path.join(ROOT,'package.json'),'utf8'));
 async function temp(t){const d=await realpath(await mkdtemp(path.join(tmpdir(),'aer-cli-test-')));t.after(()=>rm(d,{recursive:true,force:true}));return d;}
 function run(args){return spawnSync(process.execPath,[cli,...args],{encoding:'utf8',windowsHide:true});}
 test('three commands, strict options and one versioned JSON object for every exit family',async t=>{
@@ -19,13 +20,13 @@ test('three commands, strict options and one versioned JSON object for every exi
  await writeFile(path.join(target,'AGENTS.md'),'drift');let r=run(['install','--target',target,'--json']);assert.equal(r.status,3);assert.equal(JSON.parse(r.stdout).status,'refused');
  await writeFile(path.join(target,'aer.lock.json'),'{}');r=run(['check','--target',target,'--json']);assert.equal(r.status,4);assert.equal(JSON.parse(r.stdout).status,'invalid');
  const absent=await temp(t);r=run(['check','--target',absent,'--json']);assert.equal(r.status,1);assert.equal(JSON.parse(r.stdout).status,'not-installed');
- assert.equal(run(['--version']).stdout.trim(),'6.0.1');assert.match(run(['--help']).stdout,/explicit representation|destination/);
+ assert.equal(run(['--version']).stdout.trim(),packageMetadata.version);assert.match(run(['--help']).stdout,/explicit representation|destination/);
 });
 test('recognized package upgrades/downgrades use package-supplied prior inventories; unsupported identities refuse',async t=>{
  const oldRoot=await temp(t),newRoot=await temp(t);
  for(const root of [oldRoot,newRoot])for(const p of ['package.json','kernel','skills','integrations','src','schemas'])await cp(path.join(ROOT,p),path.join(root,p),{recursive:true});
  const newKernel=path.join(newRoot,'kernel/contract.md');await writeFile(newKernel,(await readFile(newKernel,'utf8'))+'\nNew version fixture: preserve consumer contracts.\n');
- const packageFile=path.join(newRoot,'package.json'),p=JSON.parse(await readFile(packageFile,'utf8'));p.version='6.1.0';await writeFile(packageFile,JSON.stringify(p));
+ const packageFile=path.join(newRoot,'package.json'),p=JSON.parse(await readFile(packageFile,'utf8'));p.version=`${Number(p.version.split('.')[0])+1}.0.0`;await writeFile(packageFile,JSON.stringify(p));
  const oldPkg=await readPackage(oldRoot,{inventory:false}),newPkg=await readPackage(newRoot,{inventory:false});
  for(const [root,prior] of [[oldRoot,newPkg],[newRoot,oldPkg]]) {
   await writeFile(path.join(root,'integrations/payload-history.json'),JSON.stringify({schemaVersion:1,payloads:[historyRecord(prior)]},null,2)+'\n');

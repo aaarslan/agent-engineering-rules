@@ -101,7 +101,11 @@ packed fixture. Plugin channels are deferred. See the execution record for
 verification, limitations and material decisions.
 
 
-## Unreleased
+## Historical post-5.0.0 repository evidence
+
+This block preserves the repository-only changes recorded after 5.0.0. Its
+unchanged-payload statement describes that historical change, not the current
+Unreleased work.
 
 Source corpus, Claude distribution, and Codex distribution:
 

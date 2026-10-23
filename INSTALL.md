@@ -14,7 +14,7 @@ To reproduce package checks from the AER checkout in disposable directories:
 npm run build
 npm run release:check
 npm pack --ignore-scripts --pack-destination /path/to/disposable-artifacts
-npm install --global --prefix /path/to/disposable-prefix --ignore-scripts --no-audit --no-fund /path/to/disposable-artifacts/aaarslan-aer-6.0.1.tgz
+npm install --global --prefix /path/to/disposable-prefix --ignore-scripts --no-audit --no-fund /path/to/disposable-artifacts/aaarslan-aer-6.1.0.tgz
 ```
 
 Use the prefix's `bin/aer` on POSIX or `aer.cmd` on Windows. The packed smoke also
