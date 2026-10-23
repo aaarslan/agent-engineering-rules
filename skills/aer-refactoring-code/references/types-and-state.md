@@ -1,20 +1,10 @@
 <!-- Generated from source/shared/types-and-state.md by tools/render-v6.mjs -->
 # Types and State
 
-Make invalid states difficult or impossible to represent. The type system is the cheapest test suite you will ever write.
+Use types to expose important contracts and rule out invalid combinations where the language supports it. Runtime input, mutation and concurrency still need appropriate checks.
 
-## Rules
-
-- Use strong types instead of string conventions and loose objects. A `UserId` and an `OrderId` should not be interchangeable just because both are strings.
-- Model mutually exclusive states as a discriminated union, enum, or explicit state machine. Never as a pile of booleans (`isLoading`, `isError`, `isSuccess`) that permits impossible combinations.
-- Prefer clear domain models over generic bags of fields. A type named after a domain concept with exactly its required fields beats a generic string-keyed map or a struct of optionals.
-- Make required data required. A field that is only optional because "sometimes we don't have it yet" usually indicates two distinct states that deserve two distinct types.
-- Parse, don't validate: convert untrusted input into a well-typed value once at the boundary, then pass the typed value inward. Do not re-check the same invariant at every layer.
-- Encode units and formats in names or types (`timeoutMs`, `amountCents`, `Iso8601Date`), never leave them implied.
-
-## Checklist
-
-- [ ] Can this type represent a state the business considers impossible? Restructure.
-- [ ] Do two or more booleans encode one underlying state? Union them.
-- [ ] Is a string carrying structure (IDs, enums, JSON)? Give it a type.
-- [ ] Is `null`/`undefined` carrying meaning (not-found, failed, empty)? Name that meaning explicitly.
+- Model mutually exclusive states explicitly when independent flags permit impossible combinations. Keep genuinely independent booleans independent.
+- Use domain models, units in names, or wrappers when they prevent a concrete confusion. Ordinary strings, maps and optional fields are valid when their meaning is clear. TypeScript aliases alone do not create nominal separation.
+- Parse untrusted input at the boundary and pass the validated result inward. Recheck an invariant when mutation, a new trust boundary or concurrent state can invalidate it; static types do not validate external bytes.
+- Distinguish absent, not-found, empty and failed results when callers need different behavior. An explicit optional-result contract can be sufficient.
+- Prefer the least complex representation that preserves the actual invariants. Introduce a state machine or branded type for a current benefit, not as a universal requirement.

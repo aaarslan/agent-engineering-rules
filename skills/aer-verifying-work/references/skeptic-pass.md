@@ -36,5 +36,5 @@ Try to falsify the risky or uncertain claims. Inspect the affected diff and its 
 ## Rules
 
 - Apply only the hunt items relevant to the trigger; this is not a checklist ceremony.
-- Repair findings at the affected owner and recheck the changed behavior; do not hand-wave a late fix.
+- When implementation is authorized, repair findings at the affected owner and recheck changed behavior. Read-only inspection alone does not authorize remediation; report findings for an authorized implementation step.
 - Record the trigger, inspected surface, evidence, and outcome. Do not claim a skeptic review when none was warranted or performed.

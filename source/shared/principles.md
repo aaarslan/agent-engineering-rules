@@ -1,22 +1,11 @@
 # Design Principles
 
-Applied judgment, not ceremony. Apply these principles within the requested scope and applicable user, repository and client instructions.
+Choose the simplest complete solution within the requested scope and applicable instructions.
 
-- **KISS.** Prefer the simplest solution that satisfies the real requirement. Boring beats clever.
-- **YAGNI.** Do not build extensibility, abstraction, configuration, or infrastructure for hypothetical future needs. Build for the requirement in front of you.
-- **SOLID, selectively.** Apply single responsibility and dependency inversion where they earn their keep at real boundaries. Do not scaffold interfaces, factories, or hierarchies ceremonially.
-- **High cohesion, low coupling.** Code that changes together lives together; code that changes independently stays independent.
-- **Composition over inheritance.** Reach for inheritance only for genuine is-a relationships with stable base behavior.
-- **Explicit dependencies.** Pass dependencies in; avoid hidden globals, singletons, and ambient state.
-- **DRY, carefully.** One business rule has one owning home. Unify duplicated knowledge across consumers; incidental code similarity needs proven shared meaning before abstraction.
-- **Optimize for the reader.** Readability and maintenance over cleverness. If a comment is needed to explain what code does, first try making the code clearer.
-- **No premature optimization.** Correct and clear first; optimize with measurements.
-- **Replacement is an option.** Compare patch, refactor, and replacement against real behavior, maintenance, migration, and recovery needs. Choose the coherent result; neither preserving a broken abstraction nor speculative rebuilding earns credit for its diff size.
+- Does each abstraction serve a named responsibility or real boundary now? Avoid hypothetical extensibility and pass-through wrappers.
+- Does code that changes together have clear ownership? Unify duplicated knowledge with shared meaning, while leaving incidental similarity alone.
+- Are dependencies and effects visible enough for callers to reason about them? Use the repository's established patterns where sound.
+- Can a reader understand the decision and its failure behavior without reconstructing hidden state?
+- Would a patch, refactor or replacement best preserve the required behavior? Compare maintenance, migration and recovery costs; diff size alone does not settle the choice.
 
-## Abstraction test
-
-Before introducing an interface, base class, wrapper, or layer, it must pass all three:
-
-1. It has a concrete responsibility you can name in one sentence.
-2. It has a real reason to exist now (second consumer, genuine boundary, testability need), not a projected one.
-3. Removing it would make the code worse today.
+Prefer clarity and cohesion over reciting design acronyms. Optimize performance against a requirement and evidence, not speculation.

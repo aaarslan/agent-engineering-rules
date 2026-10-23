@@ -8,7 +8,7 @@ Proceed directly when desired behavior and the owning boundary are clear and rev
 
 ## Plan path
 
-Write a concise plan when the change crosses components or contracts, changes state or persistence, introduces a dependency or boundary, has irreversible or security-sensitive effects, carries meaningful ambiguity, or needs multiple independently verifiable increments.
+Write a concise plan when consequential uncertainty or useful sequencing needs it. Consider unresolved contracts, compatibility, persistence, security and irreversible effects; crossing a component or changing state alone does not require a plan.
 
 Include only applicable decisions:
 

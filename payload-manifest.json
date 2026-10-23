@@ -17,14 +17,14 @@
     {
       "path": "integrations/payload-history.json",
       "normalization": "utf8-lf",
-      "sha256": "35fbba64d2dcb96cf18225740b99ded0f1c734b7592270f1bce3f8e4e71c4ce4",
-      "bytes": 168542
+      "sha256": "b715e1a8eb81a8bca579c416c1c7c3e5b0bbca40d8a567e6a500466023ddf9ac",
+      "bytes": 221407
     },
     {
       "path": "integrations/reviewer.md",
       "normalization": "utf8-lf",
-      "sha256": "7ba9438bc616c9525c8060c17c4aced5169106da7b12057260f8687dc3bde146",
-      "bytes": 1371
+      "sha256": "668cede3801696ba601ad846186c0fbc5f31ae306d2acb56e14aa8dcf6607978",
+      "bytes": 1318
     },
     {
       "path": "kernel/block.md",
@@ -35,14 +35,14 @@
     {
       "path": "kernel/clauses/ui-interaction.md",
       "normalization": "utf8-lf",
-      "sha256": "bcf1b20bcc789a4237b64063aa9baf4344631b5f33242b269265b3deab5fe253",
-      "bytes": 399
+      "sha256": "30f17cfdf7547a35b98a10cd045befdd0c641b690138024013306af9ee61d9ab",
+      "bytes": 496
     },
     {
       "path": "kernel/contract.md",
       "normalization": "utf8-lf",
-      "sha256": "b56a571297fc5328f194e007b35f3e64ccd48b82b0bdbb4956f33b45a021742b",
-      "bytes": 5480
+      "sha256": "65f72fc286f49d43908c3bfc5245134348e67c181476b8bfa2cc225ce7410441",
+      "bytes": 5610
     },
     {
       "path": "kernel/profiles/high-assurance.md",
@@ -89,26 +89,26 @@
     {
       "path": "skills/aer-building-backend-apis/references/backend-api.md",
       "normalization": "utf8-lf",
-      "sha256": "bd0e94bfcee02c28794d739903deed417b2fea0edd149985f1b2ebf7fe80984b",
-      "bytes": 1876
+      "sha256": "93f60082648981db6431b39a276b74662b7d33da2d1cab9ffd5352333d188276",
+      "bytes": 2186
     },
     {
       "path": "skills/aer-building-backend-apis/references/security.md",
       "normalization": "utf8-lf",
-      "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
-      "bytes": 2186
+      "sha256": "bed412c952d9b19ff8bc58dc8591f3a4aa52fda5d9e84863f021a38cfced2628",
+      "bytes": 2626
     },
     {
       "path": "skills/aer-building-backend-apis/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "ca6621ae2fe1230ff2327e717f953569091d86e8d532197b770b0921dea1a09b",
-      "bytes": 1075
+      "sha256": "c87bd62bfe202a25bb8946ae7d517aa8a019ff39278129b6dfa430a61c1387c3",
+      "bytes": 1121
     },
     {
       "path": "skills/aer-building-web-ui/references/typescript-react.md",
       "normalization": "utf8-lf",
-      "sha256": "e030ad8ae316bdaeb8219bf9638ade26a716bb8807ada9448a74ea7abc1f6906",
-      "bytes": 1975
+      "sha256": "e18cd0c3c53ec7cd2e201e036c03e43358a12c5a9d4b4d7d344c454a1aa675d6",
+      "bytes": 2202
     },
     {
       "path": "skills/aer-building-web-ui/references/ui-styling.md",
@@ -119,38 +119,38 @@
     {
       "path": "skills/aer-building-web-ui/references/web-ui.md",
       "normalization": "utf8-lf",
-      "sha256": "fe1fda671db4528490919b3d8639c511dbb688356c6fcc8287b7e7d6f875d420",
-      "bytes": 4640
+      "sha256": "c5a64dbe96e1fb51f074d25f73fc2dbfb70d8a89cca5e05aa8d6d7345c728d54",
+      "bytes": 5171
     },
     {
       "path": "skills/aer-building-web-ui/scripts/contrast-check.mjs",
       "normalization": "utf8-lf",
-      "sha256": "c914a7beb45a61dd1e8dbd4ff40986fe8e36efde0f9a3d2987aad031ca0285bb",
-      "bytes": 11069
+      "sha256": "05c5349cffe78c81f27dd762b4f362d62340f7faab208ee40f1ac56ec68b9616",
+      "bytes": 11678
     },
     {
       "path": "skills/aer-building-web-ui/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "2b933627284e55360aacbed97db11dde975df8cbee025b21c1f667bc315fb583",
-      "bytes": 2533
+      "sha256": "6b85ae7986678b2a3442a6c59feddd2f6c32cdcc4ddb04ce9084df17a23f5615",
+      "bytes": 2699
     },
     {
       "path": "skills/aer-changing-data/references/database-migrations.md",
       "normalization": "utf8-lf",
-      "sha256": "7c7ed2f4473841dfa830c343533e9e6892e8c613aed5763bb138ddabf5f3e6ec",
-      "bytes": 1913
+      "sha256": "b9e3b46230b9a568adedce0ec4a798ad07490ae55002eb891e98250c5f07ff22",
+      "bytes": 2644
     },
     {
       "path": "skills/aer-changing-data/references/security.md",
       "normalization": "utf8-lf",
-      "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
-      "bytes": 2186
+      "sha256": "bed412c952d9b19ff8bc58dc8591f3a4aa52fda5d9e84863f021a38cfced2628",
+      "bytes": 2626
     },
     {
       "path": "skills/aer-changing-data/references/testing.md",
       "normalization": "utf8-lf",
-      "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
-      "bytes": 3005
+      "sha256": "b1ced563390d3ee94e44c5ed5adb6e9035a826ae16288ed2c60737e841722a87",
+      "bytes": 3111
     },
     {
       "path": "skills/aer-changing-data/SKILL.md",
@@ -161,8 +161,8 @@
     {
       "path": "skills/aer-designing-code/references/boundaries.md",
       "normalization": "utf8-lf",
-      "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
-      "bytes": 2136
+      "sha256": "5c27338c9a2f227f5dfd3b7330e7958d2938d8e7c95c3f7a1e208ff02273b118",
+      "bytes": 1272
     },
     {
       "path": "skills/aer-designing-code/references/decision-making.md",
@@ -173,38 +173,38 @@
     {
       "path": "skills/aer-designing-code/references/design-checkpoint.md",
       "normalization": "utf8-lf",
-      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
-      "bytes": 1544
+      "sha256": "a5d8d6109956bc30f0ad65933387b0819cb1081a2d1aa4d7b90be74c034143db",
+      "bytes": 1521
     },
     {
       "path": "skills/aer-designing-code/references/errors-and-side-effects.md",
       "normalization": "utf8-lf",
-      "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
-      "bytes": 2025
+      "sha256": "dc13f69a1dc8f379353105a8ed99d1e508e8c99b127f26e7be7eff3f527c8412",
+      "bytes": 2163
     },
     {
       "path": "skills/aer-designing-code/references/observability.md",
       "normalization": "utf8-lf",
-      "sha256": "670c23ba21669c2ce395e1b0de8243ea59d0961ff70c6ae812a92253e99cdff2",
-      "bytes": 1487
+      "sha256": "7c554f22a74a4fb936f6545e7879f53d42405c40b4866c4dc9e1a351f9e35249",
+      "bytes": 1482
     },
     {
       "path": "skills/aer-designing-code/references/performance.md",
       "normalization": "utf8-lf",
-      "sha256": "90abdc8d32f692a2fb4480562a54de8b7405a8e3fd7795050ac3471beb3ac5f1",
-      "bytes": 1587
+      "sha256": "7cd1ef3b377307bee3fc182282452ea1284ec615c5322aef860b9e769a1f962a",
+      "bytes": 1772
     },
     {
       "path": "skills/aer-designing-code/references/principles.md",
       "normalization": "utf8-lf",
-      "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
-      "bytes": 2077
+      "sha256": "9ea25b8c777b00377568ca9a1dc403a47a5f1e099df5d15647f7600be8e02f35",
+      "bytes": 1016
     },
     {
       "path": "skills/aer-designing-code/references/types-and-state.md",
       "normalization": "utf8-lf",
-      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
-      "bytes": 1589
+      "sha256": "b34f082494921b35b1451b6eb9b873d7fa063a93e539233ea9e0a7bc2fc4eef0",
+      "bytes": 1204
     },
     {
       "path": "skills/aer-designing-code/SKILL.md",
@@ -215,146 +215,146 @@
     {
       "path": "skills/aer-fixing-bugs/references/errors-and-side-effects.md",
       "normalization": "utf8-lf",
-      "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
-      "bytes": 2025
+      "sha256": "dc13f69a1dc8f379353105a8ed99d1e508e8c99b127f26e7be7eff3f527c8412",
+      "bytes": 2163
     },
     {
       "path": "skills/aer-fixing-bugs/references/testing.md",
       "normalization": "utf8-lf",
-      "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
-      "bytes": 3005
+      "sha256": "b1ced563390d3ee94e44c5ed5adb6e9035a826ae16288ed2c60737e841722a87",
+      "bytes": 3111
     },
     {
       "path": "skills/aer-fixing-bugs/references/verification.md",
       "normalization": "utf8-lf",
-      "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
-      "bytes": 3180
+      "sha256": "069895656b360437cbd87fb2695eaf50e653cb6949c8db6d9946ad29c6ba46a0",
+      "bytes": 3203
     },
     {
       "path": "skills/aer-fixing-bugs/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "e14c3eade1e0cf14bb7aa940edaff8ce08cac34ea58feb591c57dc6914906c90",
-      "bytes": 1476
+      "sha256": "6887e0679e7f2158ed3971d802ce1b4053474d3b14860a453ec66d954b4a2903",
+      "bytes": 1757
     },
     {
       "path": "skills/aer-implementing-features/references/design-checkpoint.md",
       "normalization": "utf8-lf",
-      "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
-      "bytes": 1544
+      "sha256": "a5d8d6109956bc30f0ad65933387b0819cb1081a2d1aa4d7b90be74c034143db",
+      "bytes": 1521
     },
     {
       "path": "skills/aer-implementing-features/references/implementation.md",
       "normalization": "utf8-lf",
-      "sha256": "a356ccfa178a262dba2ca56a0a2d51090d230a743ab0619853aa58db7ee59242",
-      "bytes": 2019
+      "sha256": "248da33d996a348f0cb9e4a19ffc16bb6216f46b0cd1c48b82a3717421f5bf1a",
+      "bytes": 2105
     },
     {
       "path": "skills/aer-implementing-features/references/verification.md",
       "normalization": "utf8-lf",
-      "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
-      "bytes": 3180
+      "sha256": "069895656b360437cbd87fb2695eaf50e653cb6949c8db6d9946ad29c6ba46a0",
+      "bytes": 3203
     },
     {
       "path": "skills/aer-implementing-features/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "546723386a1b646b87a346580c57bd1096cf175130497fb99605c2d302c78c8c",
-      "bytes": 2284
+      "sha256": "8decbf05b713bc68746dff22837238a653eea6459a4da590e932f72203940091",
+      "bytes": 2421
     },
     {
       "path": "skills/aer-refactoring-code/references/boundaries.md",
       "normalization": "utf8-lf",
-      "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
-      "bytes": 2136
+      "sha256": "5c27338c9a2f227f5dfd3b7330e7958d2938d8e7c95c3f7a1e208ff02273b118",
+      "bytes": 1272
     },
     {
       "path": "skills/aer-refactoring-code/references/principles.md",
       "normalization": "utf8-lf",
-      "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
-      "bytes": 2077
+      "sha256": "9ea25b8c777b00377568ca9a1dc403a47a5f1e099df5d15647f7600be8e02f35",
+      "bytes": 1016
     },
     {
       "path": "skills/aer-refactoring-code/references/testing.md",
       "normalization": "utf8-lf",
-      "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
-      "bytes": 3005
+      "sha256": "b1ced563390d3ee94e44c5ed5adb6e9035a826ae16288ed2c60737e841722a87",
+      "bytes": 3111
     },
     {
       "path": "skills/aer-refactoring-code/references/types-and-state.md",
       "normalization": "utf8-lf",
-      "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
-      "bytes": 1589
+      "sha256": "b34f082494921b35b1451b6eb9b873d7fa063a93e539233ea9e0a7bc2fc4eef0",
+      "bytes": 1204
     },
     {
       "path": "skills/aer-refactoring-code/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "99e34e132379ab28904e9e2f3b7cf18e113403954eccf00b78aa68f295501fcf",
-      "bytes": 1562
+      "sha256": "ebb8044ea75f9a3cb70aefb2f64d27430111b60a971dcd5ca3710ea2068266ae",
+      "bytes": 1720
     },
     {
       "path": "skills/aer-reviewing-changes/references/pr-review.md",
       "normalization": "utf8-lf",
-      "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
-      "bytes": 2149
+      "sha256": "4c037d28bfbaaead6e506c47ceedf5e3f986fa675d5cd0e667d80b7573fb6ebc",
+      "bytes": 1994
     },
     {
       "path": "skills/aer-reviewing-changes/references/review-ledger.md",
       "normalization": "utf8-lf",
-      "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
-      "bytes": 1429
+      "sha256": "19db8794f884f89a37736c8a6c979767d1ce825bf4293110a435f569dab063bd",
+      "bytes": 882
     },
     {
       "path": "skills/aer-reviewing-changes/references/security.md",
       "normalization": "utf8-lf",
-      "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
-      "bytes": 2186
+      "sha256": "bed412c952d9b19ff8bc58dc8591f3a4aa52fda5d9e84863f021a38cfced2628",
+      "bytes": 2626
     },
     {
       "path": "skills/aer-reviewing-changes/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "adbd732c9d6d4b69d9ec0c1cf25d001ced4dde0cde0400b32f23b405043b19b3",
-      "bytes": 1855
+      "sha256": "3d211157cc289cccb63da69272af5467456c3feaa57a002c6ad55b4dc46a254b",
+      "bytes": 1921
     },
     {
       "path": "skills/aer-reviewing-security/references/pr-review.md",
       "normalization": "utf8-lf",
-      "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
-      "bytes": 2149
+      "sha256": "4c037d28bfbaaead6e506c47ceedf5e3f986fa675d5cd0e667d80b7573fb6ebc",
+      "bytes": 1994
     },
     {
       "path": "skills/aer-reviewing-security/references/security.md",
       "normalization": "utf8-lf",
-      "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
-      "bytes": 2186
+      "sha256": "bed412c952d9b19ff8bc58dc8591f3a4aa52fda5d9e84863f021a38cfced2628",
+      "bytes": 2626
     },
     {
       "path": "skills/aer-reviewing-security/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "a5bc2f1ce20a5c5de97106f560902d53319c1cb53e26d76641c84b9b8a12572f",
-      "bytes": 1889
+      "sha256": "cbbd6cda06a30c9a73d4b78830b1faca4c1adb55f083018f76c0661bb1bfddf0",
+      "bytes": 2064
     },
     {
       "path": "skills/aer-running-long-tasks/references/autonomous-execution.md",
       "normalization": "utf8-lf",
-      "sha256": "e15c548868d5639ea3c61a5754d0644812902b31c937cddaad3e52e1cafb5367",
-      "bytes": 2584
+      "sha256": "e64ecb9a682fdf99e7a48775d71ee7c7c0d4371ce6dc2dc4cacd17782041418d",
+      "bytes": 2916
     },
     {
       "path": "skills/aer-running-long-tasks/references/orchestration.md",
       "normalization": "utf8-lf",
-      "sha256": "aded676c912c69aca0cea23824805788ae053c908b01dacd1f6609fd2e0cd1a6",
-      "bytes": 2706
+      "sha256": "e7b18474bf8f5fdad2339957dc7054ccd61b450f4360c2361a3901ff16c446f6",
+      "bytes": 1469
     },
     {
       "path": "skills/aer-running-long-tasks/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "94129154fc331b2e510ae065a6a66e3b1bc893b5b9e44b3bc634865981e8f78a",
-      "bytes": 1662
+      "sha256": "98d414d16750a5b4baf243b2eb019b430ec23c1de0ee535997710284349ef500",
+      "bytes": 1759
     },
     {
       "path": "skills/aer-securing-code/references/security.md",
       "normalization": "utf8-lf",
-      "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
-      "bytes": 2186
+      "sha256": "bed412c952d9b19ff8bc58dc8591f3a4aa52fda5d9e84863f021a38cfced2628",
+      "bytes": 2626
     },
     {
       "path": "skills/aer-securing-code/SKILL.md",
@@ -365,20 +365,20 @@
     {
       "path": "skills/aer-verifying-work/references/skeptic-pass.md",
       "normalization": "utf8-lf",
-      "sha256": "6afb0b45442d4fbe8e7e6069049770814bd30a0462762cabfb0bfc1d0c7c2d01",
-      "bytes": 2727
+      "sha256": "b81df627784ba69ff2c63105947a8c13cbf508211cd44a1f4ca88c5052e2592e",
+      "bytes": 2843
     },
     {
       "path": "skills/aer-verifying-work/references/testing.md",
       "normalization": "utf8-lf",
-      "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
-      "bytes": 3005
+      "sha256": "b1ced563390d3ee94e44c5ed5adb6e9035a826ae16288ed2c60737e841722a87",
+      "bytes": 3111
     },
     {
       "path": "skills/aer-verifying-work/references/verification.md",
       "normalization": "utf8-lf",
-      "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
-      "bytes": 3180
+      "sha256": "069895656b360437cbd87fb2695eaf50e653cb6949c8db6d9946ad29c6ba46a0",
+      "bytes": 3203
     },
     {
       "path": "skills/aer-verifying-work/scripts/config/thresholds.json",
@@ -389,8 +389,8 @@
     {
       "path": "skills/aer-verifying-work/scripts/file-size-guard.mjs",
       "normalization": "utf8-lf",
-      "sha256": "0e36b98b28995afe50a94ee5b97f0f2a2d1c109bd68a023994bbd6dc556e59e1",
-      "bytes": 13554
+      "sha256": "a4a3bc6dfb51a32d1360a27acfc0ca2133e2c37c8c6ee0ff24251ed2779e499d",
+      "bytes": 14092
     },
     {
       "path": "skills/aer-verifying-work/scripts/lib/thresholds.mjs",
@@ -401,26 +401,26 @@
     {
       "path": "skills/aer-verifying-work/scripts/slop-scan.mjs",
       "normalization": "utf8-lf",
-      "sha256": "dd06f0928f7e17d223663725c94b7ee8cd5a8d68c83c161f5f05dc01a9ab5393",
-      "bytes": 23052
+      "sha256": "ab75441f97ab54f0f2bcec3452e701ddbf60ad0f25ea73857f0803efd8381c0a",
+      "bytes": 22993
     },
     {
       "path": "skills/aer-verifying-work/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "346d01fa66db12efb93a5310152a738c985a958b7732a4afc6a19f9e039f3c52",
-      "bytes": 2012
+      "sha256": "7f417a284d404fd818bf897d6764dcd6d8e960ae8e02339e4476bf1b591ee1ae",
+      "bytes": 2111
     },
     {
       "path": "skills/aer-writing-docs/references/documentation.md",
       "normalization": "utf8-lf",
-      "sha256": "1e9d87598feb82d613f4b37e4b81a5f8b6458b329d412a59195821cbbb66dc5e",
-      "bytes": 1533
+      "sha256": "39851e89b6209ea9ac54616fab73d72f62032b2af04d58195725257485e94709",
+      "bytes": 1360
     },
     {
       "path": "skills/aer-writing-docs/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "58553501ba80020b7e3634b5d38dd49b2941ba8989131ed987b5248ce7851c25",
-      "bytes": 1355
+      "sha256": "d0802c0543c9d52a9138f0d0a4a209a2d447e156e48ea6a5afdb148175ef2f22",
+      "bytes": 1412
     },
     {
       "path": "src/block.mjs",
@@ -477,5 +477,5 @@
       "bytes": 414
     }
   ],
-  "sourceIdentity": "2cf01e39573251bd0b0bcb7a6cfaeaf5fd4cba3b8a07f1200ea3450602f3f74d"
+  "sourceIdentity": "328754dfa3da3441b4733f7797ec79d56a6fed4141aa374e8700f1fe6f024dbb"
 }

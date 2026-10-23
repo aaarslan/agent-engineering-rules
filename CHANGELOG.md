@@ -1,5 +1,36 @@
 # Changelog
 
+## Unreleased
+
+### Source corpus
+
+Remove mandatory review ledgers and universal test ordering; scope planning,
+architecture, state types and performance advice to actual decisions. Correct
+NOT NULL/default, migration history, retry and portable reviewer assumptions.
+Retain accessibility, data integrity, exact requested completion, standalone
+resources, permission boundaries and proportional evidence reuse. No efficacy,
+certification or OpenAI endorsement claim is made.
+
+### Claude and Codex distributions
+
+Regenerate canonical references and the UI clause; retain stable skill/directive
+identifiers, native manual invocation, Codex sidecars and the restricted Claude
+reviewer. Adapter-specific tool/context limits remain in the Claude adapter.
+
+### Diagnostics and compatibility
+
+Distinguish known, absent and unavailable Git size baselines; reject unsafe
+numeric overrides and out-of-sRGB OKLCH instead of silently clipping. Contrast
+failures are `TEXT-CONTRAST-FAIL` for selected SC 1.4.3 text pairs, not page
+accessibility verdicts. HTML leads use `PATTERN-MATCH` / `html-sink-reference`
+and `pattern-matches` counts; HTML fingerprints consequently change. Other
+categories retain their identities. Focused scans with no patterns now exit 0;
+excluded project-wide checks remain informational (1 findings, 2 error, 3 no
+applicable input). No general analyzer or installer redesign is introduced.
+
+Capture exact released 6.0.1 ownership history before changing payload identity.
+[Correction and repository-boundary decision](docs/decisions/skill-guidance-refinement.md).
+
 ## 6.0.1 - 2026-10-05
 
 ### Source corpus

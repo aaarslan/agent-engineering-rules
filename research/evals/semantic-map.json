@@ -40,9 +40,9 @@
     },
     {
       "id": "AE-06",
-      "status": "preserved",
+      "status": "guidance-refined-unreleased",
       "before": "- **AE-06 Mode.** SHOULD edit directly; plan consequential ambiguity, boundaries, persistence, security, irreversibility.",
-      "after": "- **AE-06 Mode.** SHOULD edit directly; plan consequential ambiguity, boundaries, persistence, security, irreversibility.",
+      "after": "- **AE-06 Mode.** SHOULD edit directly; plan consequential uncertainty or useful sequencing, considering boundaries, persistence, security and irreversibility.",
       "counterexampleSource": "research/evals/directives.json"
     },
     {
@@ -75,9 +75,9 @@
     },
     {
       "id": "AE-11",
-      "status": "preserved",
+      "status": "guidance-refined-unreleased",
       "before": "- **AE-11 Replace.** MUST update consumers; remove superseded, duplicate, dead, scaffold, test-only shortcuts after reachability checks; preserve unrelated work.",
-      "after": "- **AE-11 Replace.** MUST update consumers; remove superseded, duplicate, dead, scaffold, test-only shortcuts after reachability checks; preserve unrelated work.",
+      "after": "- **AE-11 Replace.** MUST update affected controlled consumers with staged compatibility where needed; remove truly superseded, duplicate, dead, scaffold, test-only shortcuts after reachability checks; retain contracted compatibility and unrelated work.",
       "counterexampleSource": "research/evals/directives.json"
     },
     {
@@ -190,7 +190,7 @@
     "id": "UI-01",
     "source": "kernel/clauses/ui-interaction.md",
     "placement": "same source in every kernel selection, including skills none, and standalone web skill",
-    "meaning": "explicitly conditional on changed browser UI; keyboard resulting state, drafts, focus/caret/selection and accessible names preserved"
+    "meaning": "conditional on changed browser UI; keyboard resulting state, drafts, focus/caret/selection and accessible names preserved; equivalent-layout evidence reused and unavailable authorized execution reported unverified"
   },
   "referenceEdits": [
     {

@@ -1,33 +1,10 @@
 # Architectural Boundaries
 
-Business rules live in one layer, close to the domain. Not scattered across UI components, route handlers, and database queries.
+Keep business rules under clear ownership and follow sound framework-native repository conventions. A small handler or cohesive framework model can own a complete operation; do not create forwarding layers merely to keep entrypoints thin.
 
-## Layer responsibilities
+- Separate transport, policy and persistence when doing so improves comprehension, verification, ownership or independent change today.
+- Enforce authorization and validation at the relevant trust boundaries. One authoritative rule may require enforcement in multiple places; do not remove storage integrity constraints or server checks to eliminate apparent duplication.
+- Put external systems behind an interface when it isolates a real concern or improves testability or replaceability. Otherwise call them directly.
+- Use dependency inversion where it serves a current boundary; framework and ORM types are not automatically a design defect.
 
-- **UI components** render and delegate. No hidden business policy in components, templates, or styles.
-- **Controllers and route handlers** validate, authorize, and orchestrate. They stay thin; they do not contain domain decisions.
-- **Domain logic** depends on nothing about transport, UI, persistence, or framework. It can be tested with plain function calls.
-- **Database queries** fetch and persist. Put integrity constraints at the authoritative storage boundary where appropriate; callers translate violations without duplicating the business rule.
-
-The same split holds outside web apps: CLI commands, message consumers, and interrupt or RPC entry points play the controller role.
-
-## Infrastructure
-
-Put external systems (APIs, queues, databases, auth providers, payment providers) behind a clear boundary when the boundary improves at least one of: testability, ownership, replaceability, comprehension. Otherwise call them directly; a pass-through wrapper is noise.
-
-Prefer dependency inversion at these meaningful boundaries: domain defines the interface it needs, infrastructure implements it.
-
-## When to introduce a boundary
-
-- [ ] It isolates a real external system or a genuinely separate concern
-- [ ] It makes code testable without excessive mocking
-- [ ] You can name its responsibility in one sentence
-- [ ] It exists for a current need, not a hypothetical one
-
-A boundary failing this checklist is speculative. It must serve a current named responsibility and improve the code today.
-
-## Smell checks
-
-- A business rule you must change in two places is in the wrong place.
-- A domain module importing framework, ORM or HTTP types may leak a boundary. Treat this as a diagnostic; respect framework-native repository conventions and established ownership.
-- A component fetching data, transforming it, and deciding policy is three responsibilities in one.
+Before adding a layer, name its responsibility and explain what becomes harder without it. Before merging responsibilities, check their lifecycles, authority and callers. Repeated policy edits across unrelated owners suggest drift; shared syntax alone does not justify abstraction.

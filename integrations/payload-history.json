@@ -3484,6 +3484,1114 @@
         "standard": "bccc1243fc36ba8178c3e6429eade9e89ccfd596f8483e70670c736ca9f9f76e",
         "high-assurance": "7472f8ae18a5cf584419c9b9dbfb892db77d63e9c088552200840bea51d74756"
       }
+    },
+    {
+      "sourceIdentity": "2cf01e39573251bd0b0bcb7a6cfaeaf5fd4cba3b8a07f1200ea3450602f3f74d",
+      "representations": {
+        "portable": {
+          "skills/aer-building-backend-apis/SKILL.md": {
+            "sha256": "ca6621ae2fe1230ff2327e717f953569091d86e8d532197b770b0921dea1a09b",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-backend-apis/references/backend-api.md": {
+            "sha256": "bd0e94bfcee02c28794d739903deed417b2fea0edd149985f1b2ebf7fe80984b",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-backend-apis/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-web-ui/SKILL.md": {
+            "sha256": "2b933627284e55360aacbed97db11dde975df8cbee025b21c1f667bc315fb583",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-web-ui/references/typescript-react.md": {
+            "sha256": "e030ad8ae316bdaeb8219bf9638ade26a716bb8807ada9448a74ea7abc1f6906",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-web-ui/references/ui-styling.md": {
+            "sha256": "f0a70bed992eb5737419611dffa6b43cadebacd2248ac6ce4c1ff2c7bb1227aa",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-web-ui/references/web-ui.md": {
+            "sha256": "fe1fda671db4528490919b3d8639c511dbb688356c6fcc8287b7e7d6f875d420",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-building-web-ui/scripts/contrast-check.mjs": {
+            "sha256": "c914a7beb45a61dd1e8dbd4ff40986fe8e36efde0f9a3d2987aad031ca0285bb",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-changing-data/SKILL.md": {
+            "sha256": "ab34289571cb3f90fd7a0b065974c32f3dcbc6759870a981c2355dd8cc963339",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-changing-data/references/database-migrations.md": {
+            "sha256": "7c7ed2f4473841dfa830c343533e9e6892e8c613aed5763bb138ddabf5f3e6ec",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-changing-data/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-changing-data/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/SKILL.md": {
+            "sha256": "0cb872bc45c109fb31507f54b2afc844bc4fc94da37a884be3328eb9c987be75",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/decision-making.md": {
+            "sha256": "f2b0116260994f2b43217c21dcf6c2d2a30ca5d88452a2282d2b5c1fd9923212",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/observability.md": {
+            "sha256": "670c23ba21669c2ce395e1b0de8243ea59d0961ff70c6ae812a92253e99cdff2",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/performance.md": {
+            "sha256": "90abdc8d32f692a2fb4480562a54de8b7405a8e3fd7795050ac3471beb3ac5f1",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-designing-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-fixing-bugs/SKILL.md": {
+            "sha256": "e14c3eade1e0cf14bb7aa940edaff8ce08cac34ea58feb591c57dc6914906c90",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-fixing-bugs/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-fixing-bugs/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-fixing-bugs/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-implementing-features/SKILL.md": {
+            "sha256": "546723386a1b646b87a346580c57bd1096cf175130497fb99605c2d302c78c8c",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-implementing-features/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-implementing-features/references/implementation.md": {
+            "sha256": "a356ccfa178a262dba2ca56a0a2d51090d230a743ab0619853aa58db7ee59242",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-implementing-features/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-refactoring-code/SKILL.md": {
+            "sha256": "99e34e132379ab28904e9e2f3b7cf18e113403954eccf00b78aa68f295501fcf",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-refactoring-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-refactoring-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-refactoring-code/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-refactoring-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-changes/SKILL.md": {
+            "sha256": "adbd732c9d6d4b69d9ec0c1cf25d001ced4dde0cde0400b32f23b405043b19b3",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-changes/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-changes/references/review-ledger.md": {
+            "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-changes/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-security/SKILL.md": {
+            "sha256": "a5bc2f1ce20a5c5de97106f560902d53319c1cb53e26d76641c84b9b8a12572f",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-security/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-reviewing-security/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-running-long-tasks/SKILL.md": {
+            "sha256": "94129154fc331b2e510ae065a6a66e3b1bc893b5b9e44b3bc634865981e8f78a",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-running-long-tasks/references/autonomous-execution.md": {
+            "sha256": "e15c548868d5639ea3c61a5754d0644812902b31c937cddaad3e52e1cafb5367",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-running-long-tasks/references/orchestration.md": {
+            "sha256": "aded676c912c69aca0cea23824805788ae053c908b01dacd1f6609fd2e0cd1a6",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-securing-code/SKILL.md": {
+            "sha256": "8f0586d1c535602cda764a8bccd9b51d0c3a434ce7ebd9fcff7ad452e9f6eb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-securing-code/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/SKILL.md": {
+            "sha256": "346d01fa66db12efb93a5310152a738c985a958b7732a4afc6a19f9e039f3c52",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/references/skeptic-pass.md": {
+            "sha256": "6afb0b45442d4fbe8e7e6069049770814bd30a0462762cabfb0bfc1d0c7c2d01",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/scripts/config/thresholds.json": {
+            "sha256": "4f6aaa6355b445ed49f3b9b1f41bca0aa78873ee12e785badf8ee3c0a809d106",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/scripts/file-size-guard.mjs": {
+            "sha256": "0e36b98b28995afe50a94ee5b97f0f2a2d1c109bd68a023994bbd6dc556e59e1",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/scripts/lib/thresholds.mjs": {
+            "sha256": "8aa7e4d7d33bdc24908131f35acafdb9541a0571e1022abddea0b11751ed2f68",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-verifying-work/scripts/slop-scan.mjs": {
+            "sha256": "dd06f0928f7e17d223663725c94b7ee8cd5a8d68c83c161f5f05dc01a9ab5393",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-writing-docs/SKILL.md": {
+            "sha256": "58553501ba80020b7e3634b5d38dd49b2941ba8989131ed987b5248ce7851c25",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          },
+          "skills/aer-writing-docs/references/documentation.md": {
+            "sha256": "1e9d87598feb82d613f4b37e4b81a5f8b6458b329d412a59195821cbbb66dc5e",
+            "normalization": "utf8-lf",
+            "representation": "portable",
+            "renderer": "portable-v1"
+          }
+        },
+        "codex": {
+          "skills/aer-building-backend-apis/SKILL.md": {
+            "sha256": "ca6621ae2fe1230ff2327e717f953569091d86e8d532197b770b0921dea1a09b",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-backend-apis/references/backend-api.md": {
+            "sha256": "bd0e94bfcee02c28794d739903deed417b2fea0edd149985f1b2ebf7fe80984b",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-backend-apis/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-backend-apis/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/SKILL.md": {
+            "sha256": "2b933627284e55360aacbed97db11dde975df8cbee025b21c1f667bc315fb583",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/references/typescript-react.md": {
+            "sha256": "e030ad8ae316bdaeb8219bf9638ade26a716bb8807ada9448a74ea7abc1f6906",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/references/ui-styling.md": {
+            "sha256": "f0a70bed992eb5737419611dffa6b43cadebacd2248ac6ce4c1ff2c7bb1227aa",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/references/web-ui.md": {
+            "sha256": "fe1fda671db4528490919b3d8639c511dbb688356c6fcc8287b7e7d6f875d420",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/scripts/contrast-check.mjs": {
+            "sha256": "c914a7beb45a61dd1e8dbd4ff40986fe8e36efde0f9a3d2987aad031ca0285bb",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-building-web-ui/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-changing-data/SKILL.md": {
+            "sha256": "ab34289571cb3f90fd7a0b065974c32f3dcbc6759870a981c2355dd8cc963339",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-changing-data/references/database-migrations.md": {
+            "sha256": "7c7ed2f4473841dfa830c343533e9e6892e8c613aed5763bb138ddabf5f3e6ec",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-changing-data/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-changing-data/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-changing-data/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/SKILL.md": {
+            "sha256": "0cb872bc45c109fb31507f54b2afc844bc4fc94da37a884be3328eb9c987be75",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/decision-making.md": {
+            "sha256": "f2b0116260994f2b43217c21dcf6c2d2a30ca5d88452a2282d2b5c1fd9923212",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/observability.md": {
+            "sha256": "670c23ba21669c2ce395e1b0de8243ea59d0961ff70c6ae812a92253e99cdff2",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/performance.md": {
+            "sha256": "90abdc8d32f692a2fb4480562a54de8b7405a8e3fd7795050ac3471beb3ac5f1",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-designing-code/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-fixing-bugs/SKILL.md": {
+            "sha256": "e14c3eade1e0cf14bb7aa940edaff8ce08cac34ea58feb591c57dc6914906c90",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-fixing-bugs/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-fixing-bugs/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-fixing-bugs/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-fixing-bugs/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-implementing-features/SKILL.md": {
+            "sha256": "546723386a1b646b87a346580c57bd1096cf175130497fb99605c2d302c78c8c",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-implementing-features/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-implementing-features/references/implementation.md": {
+            "sha256": "a356ccfa178a262dba2ca56a0a2d51090d230a743ab0619853aa58db7ee59242",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-implementing-features/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-implementing-features/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/SKILL.md": {
+            "sha256": "99e34e132379ab28904e9e2f3b7cf18e113403954eccf00b78aa68f295501fcf",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-refactoring-code/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-changes/SKILL.md": {
+            "sha256": "adbd732c9d6d4b69d9ec0c1cf25d001ced4dde0cde0400b32f23b405043b19b3",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-changes/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-changes/references/review-ledger.md": {
+            "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-changes/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-changes/agents/openai.yaml": {
+            "sha256": "d29905bc91d1156af32e500887afd90d35991c38b8ff753578ff6514443242e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-security/SKILL.md": {
+            "sha256": "a5bc2f1ce20a5c5de97106f560902d53319c1cb53e26d76641c84b9b8a12572f",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-security/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-security/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-reviewing-security/agents/openai.yaml": {
+            "sha256": "d29905bc91d1156af32e500887afd90d35991c38b8ff753578ff6514443242e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-running-long-tasks/SKILL.md": {
+            "sha256": "94129154fc331b2e510ae065a6a66e3b1bc893b5b9e44b3bc634865981e8f78a",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-running-long-tasks/references/autonomous-execution.md": {
+            "sha256": "e15c548868d5639ea3c61a5754d0644812902b31c937cddaad3e52e1cafb5367",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-running-long-tasks/references/orchestration.md": {
+            "sha256": "aded676c912c69aca0cea23824805788ae053c908b01dacd1f6609fd2e0cd1a6",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-running-long-tasks/agents/openai.yaml": {
+            "sha256": "d29905bc91d1156af32e500887afd90d35991c38b8ff753578ff6514443242e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-securing-code/SKILL.md": {
+            "sha256": "8f0586d1c535602cda764a8bccd9b51d0c3a434ce7ebd9fcff7ad452e9f6eb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-securing-code/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-securing-code/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/SKILL.md": {
+            "sha256": "346d01fa66db12efb93a5310152a738c985a958b7732a4afc6a19f9e039f3c52",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/references/skeptic-pass.md": {
+            "sha256": "6afb0b45442d4fbe8e7e6069049770814bd30a0462762cabfb0bfc1d0c7c2d01",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/scripts/config/thresholds.json": {
+            "sha256": "4f6aaa6355b445ed49f3b9b1f41bca0aa78873ee12e785badf8ee3c0a809d106",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/scripts/file-size-guard.mjs": {
+            "sha256": "0e36b98b28995afe50a94ee5b97f0f2a2d1c109bd68a023994bbd6dc556e59e1",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/scripts/lib/thresholds.mjs": {
+            "sha256": "8aa7e4d7d33bdc24908131f35acafdb9541a0571e1022abddea0b11751ed2f68",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/scripts/slop-scan.mjs": {
+            "sha256": "dd06f0928f7e17d223663725c94b7ee8cd5a8d68c83c161f5f05dc01a9ab5393",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-verifying-work/agents/openai.yaml": {
+            "sha256": "d29905bc91d1156af32e500887afd90d35991c38b8ff753578ff6514443242e4",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-writing-docs/SKILL.md": {
+            "sha256": "58553501ba80020b7e3634b5d38dd49b2941ba8989131ed987b5248ce7851c25",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-writing-docs/references/documentation.md": {
+            "sha256": "1e9d87598feb82d613f4b37e4b81a5f8b6458b329d412a59195821cbbb66dc5e",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          },
+          "skills/aer-writing-docs/agents/openai.yaml": {
+            "sha256": "e7f33aef5c718faac84dd030c1b3a104319a3e5d4036952c1a7fcb39be26ea27",
+            "normalization": "utf8-lf",
+            "representation": "codex",
+            "renderer": "codex-v1"
+          }
+        },
+        "claude-code": {
+          "skills/aer-building-backend-apis/SKILL.md": {
+            "sha256": "ca6621ae2fe1230ff2327e717f953569091d86e8d532197b770b0921dea1a09b",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-backend-apis/references/backend-api.md": {
+            "sha256": "bd0e94bfcee02c28794d739903deed417b2fea0edd149985f1b2ebf7fe80984b",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-backend-apis/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-web-ui/SKILL.md": {
+            "sha256": "2b933627284e55360aacbed97db11dde975df8cbee025b21c1f667bc315fb583",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-web-ui/references/typescript-react.md": {
+            "sha256": "e030ad8ae316bdaeb8219bf9638ade26a716bb8807ada9448a74ea7abc1f6906",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-web-ui/references/ui-styling.md": {
+            "sha256": "f0a70bed992eb5737419611dffa6b43cadebacd2248ac6ce4c1ff2c7bb1227aa",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-web-ui/references/web-ui.md": {
+            "sha256": "fe1fda671db4528490919b3d8639c511dbb688356c6fcc8287b7e7d6f875d420",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-building-web-ui/scripts/contrast-check.mjs": {
+            "sha256": "c914a7beb45a61dd1e8dbd4ff40986fe8e36efde0f9a3d2987aad031ca0285bb",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-changing-data/SKILL.md": {
+            "sha256": "ab34289571cb3f90fd7a0b065974c32f3dcbc6759870a981c2355dd8cc963339",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-changing-data/references/database-migrations.md": {
+            "sha256": "7c7ed2f4473841dfa830c343533e9e6892e8c613aed5763bb138ddabf5f3e6ec",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-changing-data/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-changing-data/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/SKILL.md": {
+            "sha256": "0cb872bc45c109fb31507f54b2afc844bc4fc94da37a884be3328eb9c987be75",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/decision-making.md": {
+            "sha256": "f2b0116260994f2b43217c21dcf6c2d2a30ca5d88452a2282d2b5c1fd9923212",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/observability.md": {
+            "sha256": "670c23ba21669c2ce395e1b0de8243ea59d0961ff70c6ae812a92253e99cdff2",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/performance.md": {
+            "sha256": "90abdc8d32f692a2fb4480562a54de8b7405a8e3fd7795050ac3471beb3ac5f1",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-designing-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-fixing-bugs/SKILL.md": {
+            "sha256": "e14c3eade1e0cf14bb7aa940edaff8ce08cac34ea58feb591c57dc6914906c90",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-fixing-bugs/references/errors-and-side-effects.md": {
+            "sha256": "5ca456174a989076514c18c0ff493d1bc37ba286a268f623fb6f3b5b1997de90",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-fixing-bugs/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-fixing-bugs/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-implementing-features/SKILL.md": {
+            "sha256": "546723386a1b646b87a346580c57bd1096cf175130497fb99605c2d302c78c8c",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-implementing-features/references/design-checkpoint.md": {
+            "sha256": "520dcd75b1e9b98f17effc31c7462a91ddfc51b6b52c25489986e9658e294db6",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-implementing-features/references/implementation.md": {
+            "sha256": "a356ccfa178a262dba2ca56a0a2d51090d230a743ab0619853aa58db7ee59242",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-implementing-features/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-refactoring-code/SKILL.md": {
+            "sha256": "99e34e132379ab28904e9e2f3b7cf18e113403954eccf00b78aa68f295501fcf",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-refactoring-code/references/boundaries.md": {
+            "sha256": "494474f2cd3439dea4719a03774ae36d10eeec075b8831567710e05f5ab0e7e4",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-refactoring-code/references/principles.md": {
+            "sha256": "add6905b083acdb533364a59e307837ab552cd0310bed0bdfc46e758e7da428a",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-refactoring-code/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-refactoring-code/references/types-and-state.md": {
+            "sha256": "74c1dd899332924d5e42e838fdd9e7b4970234c9cdfc27d632d56d60a163f702",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-changes/SKILL.md": {
+            "sha256": "6541f56a2d8acc4bb9228c2065165b95cca02632bee1168ddfab152053c2bb5d",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-changes/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-changes/references/review-ledger.md": {
+            "sha256": "6c1d38ad582cd431a3e587ba0064cc5bd21e87e9583a73028731545fa08fd6df",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-changes/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-security/SKILL.md": {
+            "sha256": "6206320888b41bd5866038ddb279688b23e0a888b77fd7d9b078923a43af9fe0",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-security/references/pr-review.md": {
+            "sha256": "d95157ae65466484eb4eb4dc6d886998d67eca8a1944e8e99534dace9250e42b",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-reviewing-security/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-running-long-tasks/SKILL.md": {
+            "sha256": "199a5e7bc4afe05508bfa7a4b311b5ce5d33457dea63ce3a2d897fbd38ee0600",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-running-long-tasks/references/autonomous-execution.md": {
+            "sha256": "e15c548868d5639ea3c61a5754d0644812902b31c937cddaad3e52e1cafb5367",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-running-long-tasks/references/orchestration.md": {
+            "sha256": "aded676c912c69aca0cea23824805788ae053c908b01dacd1f6609fd2e0cd1a6",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-securing-code/SKILL.md": {
+            "sha256": "8f0586d1c535602cda764a8bccd9b51d0c3a434ce7ebd9fcff7ad452e9f6eb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-securing-code/references/security.md": {
+            "sha256": "7807eebf5e16353d7a53fd6e6d12a514e1c6108aa8e880e3fc0e4ff151bdeb35",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/SKILL.md": {
+            "sha256": "4af07a380f396e8c1197d65af98d95238afd12bd8e30408ec07cc56d846f913f",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/references/skeptic-pass.md": {
+            "sha256": "6afb0b45442d4fbe8e7e6069049770814bd30a0462762cabfb0bfc1d0c7c2d01",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/references/testing.md": {
+            "sha256": "ae74e638ad787881fa3401888eec0cfd3f223439e4dc07449a210d6b264e455d",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/references/verification.md": {
+            "sha256": "6cef4d2e28d2f8c5f98082212183315b84fcbe11760825abd570332b384008b8",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/scripts/config/thresholds.json": {
+            "sha256": "4f6aaa6355b445ed49f3b9b1f41bca0aa78873ee12e785badf8ee3c0a809d106",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/scripts/file-size-guard.mjs": {
+            "sha256": "0e36b98b28995afe50a94ee5b97f0f2a2d1c109bd68a023994bbd6dc556e59e1",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/scripts/lib/thresholds.mjs": {
+            "sha256": "8aa7e4d7d33bdc24908131f35acafdb9541a0571e1022abddea0b11751ed2f68",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-verifying-work/scripts/slop-scan.mjs": {
+            "sha256": "dd06f0928f7e17d223663725c94b7ee8cd5a8d68c83c161f5f05dc01a9ab5393",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-writing-docs/SKILL.md": {
+            "sha256": "58553501ba80020b7e3634b5d38dd49b2941ba8989131ed987b5248ce7851c25",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          "skills/aer-writing-docs/references/documentation.md": {
+            "sha256": "1e9d87598feb82d613f4b37e4b81a5f8b6458b329d412a59195821cbbb66dc5e",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          },
+          ".claude/agents/aer-code-reviewer.md": {
+            "sha256": "fcc2305edc017fa0fad132ead8dee4799409e4f6250a89229080e59acc8c4c48",
+            "normalization": "utf8-lf",
+            "representation": "claude-code",
+            "renderer": "claude-code-v1"
+          }
+        }
+      },
+      "blockHashes": {
+        "prototype": "6e905d4355fed20b8adc138bbecccc980332ead8195225a6d2d75acbeebe57e3",
+        "standard": "a62aeb44d3b9103f58732aaaf536c5d539707b6ce78dc8f65a8a851f8d98f072",
+        "high-assurance": "bb12c78c3cd3b6bf3ee04d4ed885bfb767127d1512240a7c549630fef61eb418"
+      }
     }
   ]
 }

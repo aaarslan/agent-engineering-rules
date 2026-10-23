@@ -4,7 +4,7 @@
 
 - Handle expected failures (not found, validation, conflict, timeout) with typed errors or results the caller can act on. Fail fast on programmer errors such as broken invariants; do not hide them with defaults.
 - Do not suppress material failures without explanation. Handle, propagate or expose them with actionable context. Deliberately ignored nonmaterial cleanup or optional failures may be justified by the contract.
-- Never return bare `null`/`undefined` to signal a meaningful domain failure. Name the failure.
+- Use an explicit optional-result contract for ordinary absence when appropriate; distinguish material failure from absence when callers must react differently.
 - Use one consistent error shape per surface (API responses, CLI exits, thrown types). Follow the repo's existing pattern.
 - Attach operation, safe input identity, and cause when propagating. "Error: failed" is not actionable.
 
@@ -17,6 +17,6 @@
 
 - Keep deterministic business logic pure where practical. Push network, storage, clock, randomness, logging, and external services to explicit edge call sites.
 - Separate decisions from I/O when it clarifies responsibility or permits decisive verification; do not split a cohesive operation solely to add a layer or mock seam.
-- Make side effects visible in the signature or name. No hidden writes, hidden network calls, or mutation of arguments.
+- Make side effects visible in the signature or name. No hidden writes or network calls. In-place argument mutation is valid when documented by the API contract and expected by callers.
 
-Verify that every failure is handled or deliberately propagated, expected failures are testable, core decisions run without mocks, and no signature hides a write or external call.
+Verify that every failure is handled or deliberately propagated, expected failures are testable, core decisions have useful verification, and no signature hides a write or external call.

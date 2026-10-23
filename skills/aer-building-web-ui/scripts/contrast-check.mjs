@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // WCAG AA contrast for selected opaque hex, rgb(), and oklch() pairs.
-// Exit: 0 all pairs pass, 1 one or more accessibility failures, 2 input error.
+// Exit: 0 selected text pairs pass, 1 selected text contrast failure, 2 input error.
 
 import { readFile } from 'node:fs/promises';
 
@@ -67,8 +67,14 @@ function oklch(input) {
     4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
     -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
     -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
-  ].map((part) => Math.min(1, Math.max(0, part)));
-  return linear.map((part) => part <= 0.0031308 ? part * 12.92 : 1.055 * part ** (1 / 2.4) - 0.055);
+  ];
+  // Tolerate conversion roundoff only, not out-of-gamut CSS colors.
+  const tolerance = 1e-7;
+  if (linear.some((part) => !Number.isFinite(part) || part < -tolerance || part > 1 + tolerance)) {
+    throw new InputError('out-of-sRGB-gamut oklch is unsupported; supply the actual resolved opaque sRGB pair');
+  }
+  const bounded = linear.map((part) => Math.min(1, Math.max(0, part)));
+  return bounded.map((part) => part <= 0.0031308 ? part * 12.92 : 1.055 * part ** (1 / 2.4) - 0.055);
 }
 
 function color(input) {
@@ -128,7 +134,7 @@ function evaluate(pair) {
 }
 
 function pairOutput(result) {
-  const status = result.pass ? 'PASS' : 'ACCESSIBILITY-FAIL';
+  const status = result.pass ? 'PASS' : 'TEXT-CONTRAST-FAIL';
   const fields = [
     `pair=${JSON.stringify(result.name)}`,
     `foreground=${JSON.stringify(result.foreground)}`,
@@ -139,7 +145,7 @@ function pairOutput(result) {
     `threshold=${result.threshold}:1`,
     `text-size=${result.large ? 'large' : 'normal'}`,
   ];
-  if (!result.pass) fields.push('guidance="Edit the colors, then rerun this exact named pair."');
+  if (!result.pass) fields.push('guidance="Check SC 1.4.3 applicability and exemptions; if applicable edit the colors and rerun this named pair."');
   return `${status} ${fields.join(' ')}`;
 }
 
@@ -162,8 +168,11 @@ Alternate APIs:
 Batch input is a non-empty JSON array of named objects:
   [{"name":"muted label","foreground":"#667085","background":"#fff","fontSize":14,"fontWeight":400}]
 
-Exit 0 means every selected pair passes AA; exit 1 means at least one valid
-pair fails accessibility contrast; exit 2 means input error. Stylesheet paths,
+Exit 0 means selected pairs meet the SC 1.4.3 AA text-contrast threshold;
+exit 1 means a selected pair is below it; exit 2 means input error.
+Applicability, exemptions and non-text contrast require separate assessment.
+OKLCH must convert to in-gamut sRGB (linear-channel tolerance 1e-7); wider-gamut
+colors are rejected, not clipped or gamut-mapped. Stylesheet paths,
 alpha/transparency, gradients, and compositing are not parsed. Supply selected
 opaque foreground/background pairs only. A pass does not establish whole-page
 accessibility, computed backgrounds, alpha compositing, gradients, hover/focus
@@ -226,7 +235,7 @@ async function main() {
     const results = parsed.pairs.map(evaluate);
     for (const result of results) console.log(pairOutput(result));
     const failures = results.filter((result) => !result.pass).length;
-    const status = failures ? 'ACCESSIBILITY-FAIL' : 'PASS';
+    const status = failures ? 'TEXT-CONTRAST-FAIL' : 'PASS';
     console.log(`${status} summary checked=${results.length} passed=${results.length - failures} failed=${failures}${failures ? ' guidance="Rerun failed named pairs after editing."' : ''}`);
     return failures ? 1 : 0;
   } catch (error) {

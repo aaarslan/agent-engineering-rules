@@ -11,8 +11,8 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 
 - Establish behavior and contracts to preserve; use a runnable baseline when available, otherwise state the gap and choose decisive characterization or contract evidence.
 - Improve a named problem in ownership, coupling, state, types, boundaries, or comprehension without inventing product behavior.
-- Update affected consumers and remove superseded affected paths so one implementation remains.
-- Compare the relevant real behavior before and after, then run applicable repository gates.
+- Update affected in-scope consumers and remove truly superseded paths. Retain compatibility or staged-migration paths when the preserved contract requires them; remove accidental duplicate ownership.
+- Compare relevant behavior before and after with the strongest available evidence, state preservation gaps, and run applicable repository gates.
 
 Read `references/principles.md`, `references/boundaries.md`, `references/types-and-state.md`, or `references/testing.md` when applicable.
 

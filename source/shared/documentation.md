@@ -1,28 +1,11 @@
 # Documentation
 
-Documentation is a claim about the system. Wrong docs are worse than no docs.
+Verify changed and material claims against the evidence appropriate to them: current artifacts for local behavior, supported-version official documentation for platform behavior, and observed execution for demonstrated outcomes. A source file or command existing does not prove successful execution.
 
-## Verifying claims
+- Distinguish current behavior, plans, contradictions, ambiguity and unavailable evidence where it matters. No per-sentence status ledger is required.
+- Check commands, flags, paths, environment variables and versions against their authoritative sources. Execute where practical; disclose relevant execution limitations.
+- Write for the reader's task, in order, with the failure modes they will encounter. Follow language and repository docstring conventions; use multiple paragraphs when the contract needs them.
+- Update documentation invalidated by the change and keep related generated artifacts coherent.
+- Match the audience: public examples should be portable and free of private details; authorized internal runbooks may need internal hosts or paths. Never disclose credentials or unrelated private data.
 
-Check every factual claim against the current code, config, schemas, tests, package scripts, and primary docs. When auditing, label each claim:
-
-- **Verified**: confirmed against a cited file
-- **Outdated**: contradicted by current code; include the correction and evidence
-- **Unsupported**: nothing in the repo confirms or denies it
-- **Ambiguous**: multiple readings; surface it rather than guessing
-
-Never document aspirational behavior as implemented behavior. If a feature is planned, say planned.
-
-## Writing docs
-
-- Commands, flags, paths, env vars, and version numbers must be copied from the repo, not reconstructed from memory. Run commands where practical to confirm they work.
-- Write for the reader's task: what they need to do, in order, with the failure modes they will actually hit.
-- Prefer prose and short lists. Add a diagram or table only when it clarifies the real system better than a sentence would.
-- Update docs in the same change that invalidates them; a behavior change with stale docs is an incomplete change.
-- Public surfaces get one tight docstring paragraph: what it does, its contract, its failure modes. Not an essay.
-
-## Checklist
-
-- [ ] Every command shown was executed or verified against repo scripts
-- [ ] Every claim maps to a current file, not memory
-- [ ] Nothing aspirational is stated as fact
+Finish when material claims have applicable support and commands and links have the strongest practical checks, with unresolved limitations explicit.

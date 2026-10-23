@@ -1,6 +1,6 @@
 ---
 name: "aer-fixing-bugs"
-description: "Fix a reproducible symptom by tracing the owning cause and proving the correction. Use for incorrect behavior, regressions or failures; exclude behavior-preserving restructuring."
+description: "Fix an observed or well-evidenced intermittent defect by tracing the owning cause and proving the correction. Use for incorrect behavior, regressions or failures; exclude behavior-preserving restructuring."
 ---
 
 <!-- aer:shared-safety:start -->
@@ -9,15 +9,16 @@ Honor the requested scope and applicable repository/client instructions. Preserv
 
 # Bug Fix
 
-- Reproduce or otherwise establish the defect when practical, then trace it to the owning cause before editing.
-- Repair the failure class rather than only the visible instance; inspect affected callers and parallel entrypoints without redesigning unrelated architecture.
+- Establish expected versus observed behavior and the strongest practical reproducer or causal evidence. When unclear, use a focused discriminating check or reversible diagnostic change rather than speculative fixes.
+- Repair the failure class across affected in-scope paths rather than only the visible instance; inspect affected callers and parallel entrypoints without redesigning unrelated architecture.
 - Preserve exact contracts outside the authorized correction and remove only paths the fix supersedes or makes unreachable.
-- Keep the reproduction as durable regression protection when its value and the active profile justify it.
+- Keep the reproduction as durable regression protection when task lifespan, exposure, failure cost and repository requirements justify its future value.
 
-Read `references/testing.md`, `references/errors-and-side-effects.md`, or a stack reference only when implicated.
+Load the local references below only when implicated; use other stack guidance when identified by the actual project.
 
 Finish when evidence connects symptom, cause, correction, and usable checks; state any reproduction limitation or unresolved sibling-path risk.
 
 Load relevant local detail only:
+- [errors-and-side-effects](references/errors-and-side-effects.md)
 - [verification](references/verification.md)
 - [testing](references/testing.md)

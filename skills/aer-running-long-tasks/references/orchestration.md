@@ -1,32 +1,12 @@
 <!-- Generated from source/shared/orchestration.md by tools/render-v6.mjs -->
 # Agent Orchestration
 
-Delegate when independent workstreams reduce wall time or context pressure; do not split work whose coordination costs more than it saves. Inspect returned artifacts and evidence; rerun only to resolve a gap or invalidated result.
+Delegate when independent work reduces wall time or context pressure enough to justify coordination. Follow actual host, user and repository limits for tools, depth, concurrency and spend; delegation grants no additional authority.
 
-Use an independent reviewer only for material correctness, security, integrity, compatibility, or accountable-assurance risk; an explicit high-assurance request; or a consequential conflict the coordinator cannot resolve from existing evidence. Do not spawn one for generic confidence or to repeat the coordinator's diff reading.
+Give each specialist the relevant objective, current repository evidence, instructions, owned files and requested deliverable. Isolate independent writers, preserve unrelated work, and keep one writer per working tree. Use role names only when they clarify the task; do not copy undefined core context or create a second coordinator ledger.
 
-## Roles
+Specialists return the requested artifact or result, evidence, material limitations and an exact next step if blocked. Reviewers additionally substantiate concrete failure paths and consequences; implementation and documentation deliverables need no finding-shaped report.
 
-Give each specialist core plus only its concern files:
+Inspect returned artifacts and reuse valid evidence. Rerun only for a gap, invalidated result or required gate. Integrate and check cross-increment contracts at meaningful boundaries. Reuse one checkpoint for consequential decisions and resumption.
 
-- **Repo Scout:** code paths, dependencies, conventions, affected files
-- **Design Reviewer:** only the design files for boundaries, state, errors, or abstractions actually reviewed
-- **Security Reviewer:** security plus contexts for inspected trust boundaries
-- **Contract Reviewer:** backend/API or database contexts as relevant
-- **Test Reviewer:** testing
-- **Documentation Reviewer:** documentation
-- **Risk Reviewer:** one material risk or unresolved claim; attempts to falsify it without repeating deterministic gates
-- **Coordinator:** priorities and review ledger; deduplicates and resolves conflicts
-
-## Boundaries
-
-- Follow host, user, and repository authorization for delegation depth and concurrency; never create more agents than independent useful workstreams.
-- Give each specialist a bounded deliverable, owned files, allowed tools, and a time, token, or tool-use cap when the host supports one. A specialist stops at its cap and returns partial evidence; it cannot extend its own budget.
-- Do not incur external-service spend without authorization. If spend or paid credits are authorized, share the approved budget across specialists. Delegation never grants authority to publish or mutate shared or production systems.
-- Use one independent review pass unless new evidence changes the risk. Do not create chains of reviewers reviewing reviewers.
-
-## Contract
-
-Specialists report evidence, reachable failure, impact, severity, bounded correction, verification and confidence; add open questions only when missing evidence changes the conclusion. Findings without evidence are discarded.
-
-Give every specialist a narrow charter and bounded file ownership. The coordinator resolves contradictory findings against evidence and recorded decisions; request a targeted independent review only when the conflict meets the material-risk threshold above. The coordinator's plan and authority boundaries govern integration; specialist suggestions do not bypass them.
+Use independent review for a material correctness, security, integrity, compatibility or assurance concern, an explicit requirement, or an unresolved consequential conflict. Keep it bounded; no recursive review-of-review chain or review solely for generic reassurance.
