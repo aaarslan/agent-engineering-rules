@@ -209,8 +209,8 @@
     {
       "path": "skills/aer-designing-code/SKILL.md",
       "normalization": "utf8-lf",
-      "sha256": "0cb872bc45c109fb31507f54b2afc844bc4fc94da37a884be3328eb9c987be75",
-      "bytes": 1321
+      "sha256": "d530a29042bba7f9926d775537c05e6263f58966941d098d35511b5731a3dbf0",
+      "bytes": 1446
     },
     {
       "path": "skills/aer-fixing-bugs/references/errors-and-side-effects.md",
@@ -477,5 +477,5 @@
       "bytes": 414
     }
   ],
-  "sourceIdentity": "328754dfa3da3441b4733f7797ec79d56a6fed4141aa374e8700f1fe6f024dbb"
+  "sourceIdentity": "4b000737f5dd3685c1505d1c1507e08cd1c8d3686b23e52f5d7d81fa42013a3e"
 }
