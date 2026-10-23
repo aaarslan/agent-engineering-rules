@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 6.1.0 - 2026-10-23
 
 ### Source corpus
 
@@ -30,6 +30,14 @@ applicable input). No general analyzer or installer redesign is introduced.
 
 Capture exact released 6.0.1 ownership history before changing payload identity.
 [Correction and repository-boundary decision](docs/decisions/skill-guidance-refinement.md).
+
+### Release and maintenance
+
+Synchronize package/lock metadata and version-aware release checks. Update pinned
+installation examples and citation metadata. This is the final planned maintenance
+release; the maintainer intends to archive the public repository after release
+verification. Code and historical evidence remain available, with no ongoing
+maintenance or support commitment. The repository is not yet archived.
 
 ## 6.0.1 - 2026-10-05
 
@@ -104,8 +112,8 @@ verification, limitations and material decisions.
 ## Historical post-5.0.0 repository evidence
 
 This block preserves the repository-only changes recorded after 5.0.0. Its
-unchanged-payload statement describes that historical change, not the current
-Unreleased work.
+unchanged-payload statement describes that historical change, not the 6.1.0
+release.
 
 Source corpus, Claude distribution, and Codex distribution:
 

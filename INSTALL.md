@@ -5,7 +5,7 @@
 With Node 24.11.1 or newer:
 
 ```sh
-npm install --global @aaarslan/aer@6.0.1
+npm install --global @aaarslan/aer@6.1.0
 ```
 
 To reproduce package checks from the AER checkout in disposable directories:
@@ -129,8 +129,8 @@ Resolve conflicting edits by backing them up and deliberately restoring owned
 bytes, or use the supported uninstall retention path. Outside instruction edits
 are preserved during recovery. Unknown prior inventory identities require their
 pinned package; a hash in an edited ledger cannot authorize arbitrary deletion.
-Recognized package history enables tested upgrades: 6.0.1 includes the released
-6.0.0 inventory. A prior package cannot recognize a future release, so downgrades
+Recognized package history enables tested upgrades: 6.1.0 includes the released
+6.0.0 and 6.0.1 inventories. A prior package cannot recognize a future release, so downgrades
 require uninstalling with the installed version first. Unknown inventories refuse
 safely rather than trusting ledger hashes as deletion authority.
 

@@ -14,13 +14,20 @@ repair its owning code, preserve affected contracts, and exercise the correction
 It does not ask for a new framework, an unrelated redesign, or a routine verifier
 chain. In Codex, use `$aer-fixing-bugs`; in Claude Code, use `/aer-fixing-bugs`.
 
+## Maintenance status
+
+6.1.0 is the final planned maintenance release. The maintainer intends to archive
+this public repository after release verification, preserving the code and
+historical evidence. No ongoing updates, compatibility work or support are promised.
+Archiving remains a separate maintainer action.
+
 ## Install the project contract and skills
 
 The CLI requires Node 24.11.1 or newer and has no runtime dependencies. Preview
 changes in the consumer project, then apply the same command:
 
 ```sh
-npm install --global @aaarslan/aer@6.0.1
+npm install --global @aaarslan/aer@6.1.0
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills --dry-run
 aer install --destination codex:.agents/skills --destination claude-code:.claude/skills
 aer check
@@ -81,8 +88,9 @@ risk within the repository profile; correctness and integrity always apply.
 ## Update, inspect and remove
 
 Rerun `aer install` to update an existing installation. Omitted selections retain
-the recorded profile, skills, destinations and instruction path. Version 6.0.1
-recognizes the released 6.0.0 inventory and retires its unused reference copies.
+the recorded profile, skills, destinations and instruction path. Version 6.1.0
+recognizes the released 6.0.0 and 6.0.1 inventories and retires obsolete owned
+resources when appropriate.
 Modified owned files and unowned collisions refuse changes; inspect and preserve
 consumer edits before resolving them.
 
